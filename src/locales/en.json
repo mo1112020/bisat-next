@@ -1,0 +1,185 @@
+{
+  "nav": {
+    "home": "Home",
+    "ourStory": "Our Story",
+    "collections": "Collections",
+    "orderTracking": "Order Tracking",
+    "journal": "Journal",
+    "contact": "Contact",
+    "search": "Search",
+    "wishlist": "Wishlist",
+    "account": "Account",
+    "bag": "Bag"
+  },
+  "product": {
+    "categories": {
+      "Handmade": "Handmade",
+      "Vintage": "Vintage",
+      "Machine": "Machine-Woven",
+      "Kilim": "Kilim"
+    },
+    "soldOut": "Sold Out",
+    "quickAdd": "Quick Add",
+    "viewDetails": "View Details",
+    "recentlyViewed": "Recently Viewed",
+    "yourJourney": "Your Journey"
+  },
+  "aiRoom": {
+    "badge": "AI ROOM PREVIEW",
+    "beta": "BETA FEATURE",
+    "title": "See It In Your Space",
+    "description": "Upload a photo of your room and let our AI show you how any rug looks in your home before you buy.",
+    "button": "TRY ROOM PREVIEW",
+    "upload": "UPLOAD ROOM PHOTO",
+    "processing": "PROCESSING..."
+  },
+  "home": {
+    "hero": {
+      "title": "Timeless Anatolian Heritage",
+      "subtitle": "Heritage",
+      "description": "Discover the soul of Turkish weaving traditions. Our curated collection of handmade and vintage rugs brings centuries of artistry into the modern home, each piece telling a unique story of culture, craft, and enduring beauty.",
+      "cta": "Shop Collection",
+      "secondary": "About Bisāṭ"
+    },
+    "trust": {
+      "authenticity": {
+        "title": "Authenticity Guaranteed",
+        "desc": "Every piece is hand-selected and verified for its historical and artistic value."
+      },
+      "artisan": {
+        "title": "Artisan Direct",
+        "desc": "We work directly with weaving communities to ensure fair trade and cultural preservation."
+      },
+      "global": {
+        "title": "Global Heritage",
+        "desc": "Secure worldwide shipping for our curated collection of Anatolian masterpieces."
+      }
+    },
+    "collections": {
+      "title": "Our Collections",
+      "description": "Explore our diverse range of styles, from ancient Anatolian patterns to contemporary minimalist designs.",
+      "cta": "See All Collections",
+      "items": {
+        "handmade": { "title": "Handmade Heritage", "desc": "One-of-a-kind silk and wool rugs" },
+        "vintage": { "title": "Vintage Revival", "desc": "Carefully restored antique pieces" },
+        "modern": { "title": "Modern Nomad", "desc": "Contemporary designs for today's home" }
+      }
+    },
+    "rooms": {
+      "badge": "Curated Spaces",
+      "title": "Shop by Room",
+      "description": "Find the perfect rug for every corner of your sanctuary.",
+      "cta": "See All Rooms",
+      "items": {
+        "livingRoom": { "name": "Living Room", "count": "{{count}} Products" },
+        "bedroom": { "name": "Bedroom", "count": "{{count}} Products" },
+        "diningRoom": { "name": "Dining Room", "count": "{{count}} Products" },
+        "office": { "name": "Office", "count": "{{count}} Products" }
+      }
+    },
+    "newArrivals": {
+      "title": "New Arrivals",
+      "description": "Hand-picked masterpieces recently added to our global inventory.",
+      "cta": "See All Products"
+    },
+    "philosophy": {
+      "badge": "Our Philosophy",
+      "title": "The Art of Slow Living",
+      "description": "In an era of fleeting trends, we stand for permanence. Our rugs are not just floor coverings; they are heirlooms, woven with stories of resilience and beauty that deepen with time.",
+      "cta": "Discover Our Process",
+      "items": {
+        "ethical": { "title": "Ethical Sourcing", "desc": "Ensuring fair wages and safe environments for our master weavers." },
+        "dyes": { "title": "Natural Dyes", "desc": "Utilizing ancient techniques with madder root, indigo, and pomegranate." },
+        "sustainable": { "title": "Sustainable Fiber", "desc": "Hand-spun wool and organic silk that lasts for generations." },
+        "preservation": { "title": "Cultural Preservation", "desc": "Keeping centuries-old Anatolian patterns alive in the modern world." }
+      }
+    },
+    "reviews": {
+      "badge": "Testimonials",
+      "title": "Kind Words",
+      "cta": "See All Reviews",
+      "readMore": "Read More"
+    },
+    "heritage": {
+      "badge": "The Bisāṭ Legacy",
+      "title": "Artistry in Every Thread",
+      "cta": "Begin Your Journey"
+    },
+    "blog": {
+      "badge": "The Journal",
+      "title": "Artisanal Stories",
+      "cta": "Explore All Stories",
+      "by": "By",
+      "readMore": "Read Story"
+    },
+    "faq": {
+      "title": "Common Questions",
+      "description": "Everything you need to know about our rugs and process.",
+      "cta": "See All Questions"
+    },
+    "faqItems": [
+      { "q": "How do I care for my handmade rug?", "a": "We recommend regular vacuuming without a beater bar and professional cleaning every 3-5 years. For spills, blot immediately with a clean, dry cloth." },
+      { "q": "Do you offer international shipping?", "a": "Yes, we ship our curated collection worldwide. Shipping costs and delivery times vary by location and will be calculated at checkout." },
+      { "q": "Can I return a rug if it doesn't fit my space?", "a": "We offer a 14-day return policy for all our rugs. The item must be in its original condition. Please contact our support for return instructions." },
+      { "q": "Are your rugs ethically sourced?", "a": "Absolutely. We work directly with artisan communities and vintage collectors to ensure fair trade practices and the preservation of traditional weaving techniques." }
+    ],
+    "reviewItems": [
+      { "name": "Sarah Jenkins", "location": "London, UK", "title": "Handmade Silk Rug review", "text": "The quality of the vintage Oushak I received is breathtaking. It completely transformed my client's living space. The colors are even more vibrant in person.", "date": "October 21, 2025", "rating": 5 },
+      { "name": "Michael Chen", "location": "New York, USA", "title": "Vintage Oushak review", "text": "A truly authentic piece of Anatolian history. The service was impeccable and the rug arrived perfectly packaged. Highly recommended for collectors.", "date": "November 12, 2025", "rating": 5 },
+      { "name": "Emma Thompson", "location": "Sydney, AU", "title": "Modern Nomad review", "text": "I spent months looking for the right rug. Bisāṭ made it easy to find a piece that feels like it was made for our home. The texture is incredible.", "date": "December 05, 2025", "rating": 5 }
+    ]
+  },
+  "kvkk": {
+    "badge": "Legal",
+    "title": "KVKK Personal Data Protection Law",
+    "intro": "In accordance with the Personal Data Protection Law (KVKK), your personal data is secured under our quality and service standards.",
+    "s1_t": "1. Data Controller",
+    "s1_c": "As Bisāṭ ('Company'), we attach great importance to the processing and protection of personal data belonging to our customers, suppliers, and website visitors in accordance with the Law No. 6698 on the Protection of Personal Data ('KVKK').",
+    "s2_t": "2. Purpose of Processing Personal Data",
+    "s2_c": "Your collected personal data is processed for the purposes of enabling our business units to carry out the necessary work to benefit you from the products and services offered by our company, managing order processes, and improving customer experience.",
+    "s3_t": "3. To Whom and For What Purpose the Processed Personal Data Can Be Transferred",
+    "s3_c": "Your collected personal data may be transferred to our business partners, suppliers, legally authorized public institutions, and private individuals or organizations in line with the realization of the purposes stated above.",
+    "s4_t": "4. Contact",
+    "s4_c": "To exercise your rights under KVKK and to get detailed information, you can contact us via "
+  },
+  "privacy": {
+    "badge": "Legal",
+    "title": "Privacy Policy",
+    "intro": "Your privacy is very important to us. This policy outlines how Bisāṭ collects, uses, and protects your personal information.",
+    "s1_t": "1. Data Collection",
+    "s1_c": "We collect information you provide directly to us when making a purchase, creating an account, or subscribing to our newsletter.",
+    "s2_t": "2. Use of Information",
+    "s2_c": "The information we collect is used to process your orders, improve your shopping experience, and communicate with you about products, services, and promotions.",
+    "s3_t": "3. Contact Us",
+    "s3_c": "If you have any questions about this Privacy Policy, please contact us at "
+  },
+  "terms": {
+    "badge": "Legal",
+    "title": "Terms of Service",
+    "intro": "Welcome to Bisāṭ. By using our website and purchasing our products, you agree to these Terms of Service.",
+    "s1_t": "1. Acceptance of Terms",
+    "s1_c": "By accessing this website, we assume you accept these terms and conditions. Do not continue to use Bisāṭ if you do not agree to all of the terms and conditions stated on this page.",
+    "s2_t": "2. Products and Pricing",
+    "s2_c": "We reserve the right to modify or discontinue any product or service without notice at any time. Prices for our products are subject to change without notice.",
+    "s3_t": "3. Contact Information",
+    "s3_c": "Questions about the Terms of Service should be sent to us at "
+  },
+  "footer": {
+    "desc": "Curating the world's finest hand-woven rugs and carpets. Each piece tells a story of heritage, craftsmanship, and timeless beauty.",
+    "shop": "Shop",
+    "shop_l1": "Persian Rugs",
+    "shop_l2": "Modern Collection",
+    "shop_l3": "Vintage Pieces",
+    "shop_l4": "Kilims & Flatweaves",
+    "company": "Company",
+    "comp_l1": "Our Story",
+    "comp_l2": "Craftsmanship",
+    "comp_l3": "Track Order",
+    "comp_l4": "Global Shipping",
+    "comp_l5": "Contact Us",
+    "newsletter": "Newsletter",
+    "news_desc": "Join our list for exclusive previews of new arrivals and artisanal stories.",
+    "placeholder": "Email Address",
+    "rights": "© 2026 Bisāṭ. All Rights Reserved."
+  }
+}

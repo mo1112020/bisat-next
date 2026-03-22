@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <url>
+    <loc>https://bisat-store.com/blog/1</loc>
+    <lastmod>2026-03-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://placehold.co/1200x800</image:loc>
+      <image:title>The Art of the Persian Knot: A History</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://bisat-store.com/blog/2</loc>
+    <lastmod>2026-03-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://placehold.co/1200x800</image:loc>
+      <image:title>How to Choose the Perfect Rug for Your Living Room</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://bisat-store.com/blog/3</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://placehold.co/1200x800</image:loc>
+      <image:title>Sustainable Weaving: The Future of Artisanal Rugs</image:title>
+    </image:image>
+  </url>
+
+</urlset>

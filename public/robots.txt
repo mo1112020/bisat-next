@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Private / utility pages – no indexing needed
+Disallow: /cart
+Disallow: /wishlist
+Disallow: /account
+Disallow: /checkout
+
+# Sitemap index
+Sitemap: https://bisat-store.com/sitemap-index.xml

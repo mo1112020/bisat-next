@@ -1,0 +1,258 @@
+"use client";
+import React, { createContext, useContext, useState, useEffect } from 'react';
+
+type Language = 'en' | 'ar';
+
+interface LanguageContextType {
+  language: Language;
+  setLanguage: (lang: Language) => void;
+  t: (key: string) => string;
+  isRTL: boolean;
+}
+
+const translations: Record<Language, Record<string, string>> = {
+  en: {
+    'nav.shop': 'Shop',
+    'nav.blog': 'Blog',
+    'nav.about': 'About',
+    'nav.wishlist': 'Wishlist',
+    'nav.cart': 'Cart',
+    'hero.title': 'Timeless Anatolian Heritage',
+    'hero.subtitle': 'Discover the soul of Turkish weaving traditions. Our curated collection of handmade and vintage rugs brings centuries of artistry into the modern home.',
+    'hero.cta': 'Shop Collection',
+    'hero.story': "The Weaver's Story",
+    'collections.title': 'Curated Masterpieces',
+    'collections.subtitle': 'Collections',
+    'collections.explore': 'Explore All Collections',
+    'collections.handmade': 'Handmade Silk',
+    'collections.vintage': 'Vintage Oushak',
+    'rooms.title': 'Shop by Room',
+    'rooms.subtitle': 'Curated Spaces',
+    'rooms.living_room': 'Living Room',
+    'rooms.bedroom': 'Bedroom',
+    'rooms.dining_room': 'Dining Room',
+    'rooms.office': 'Office',
+    'testimonials.quote': '"The Hereke silk rug I purchased is truly the centerpiece of our home. The craftsmanship is unlike anything I\'ve ever seen."',
+    'testimonials.author': 'Eleanor Vance, London',
+    'arrivals.title': 'New Arrivals',
+    'arrivals.subtitle': 'Hand-picked masterpieces recently added to our global inventory.',
+    'philosophy.title': 'The Art of Slow Living',
+    'philosophy.subtitle': 'Our Philosophy',
+    'philosophy.desc': 'In a world of mass production, we celebrate the imperfections of the human hand. Every knot is a testament to patience, skill, and a lineage of artistry passed down through generations.',
+    'philosophy.cta': 'Discover Our Process',
+    'philosophy.ethical': 'Ethical',
+    'philosophy.ethical_desc': 'Direct support for artisan communities',
+    'philosophy.natural': 'Natural',
+    'philosophy.natural_desc': 'Traditional vegetable-based dyes',
+    'philosophy.organic': 'Organic',
+    'philosophy.organic_desc': 'Ethically sourced natural fibers',
+    'philosophy.eternal': 'Eternal',
+    'philosophy.eternal_desc': 'Lifetime durability guarantee',
+    'shop.title': 'Shop Collection',
+    'shop.subtitle': 'Collections',
+    'shop.desc': 'Browse our exclusive collection of hand-woven masterpieces, each telling a unique story of heritage and craft.',
+    'shop.search_placeholder': 'Search by room, style, or name...',
+    'shop.filter_style': 'Filter by Style',
+    'shop.filter_space': 'Filter by Space',
+    'shop.sort_by': 'Sort by',
+    'shop.sort_newest': 'Newest Arrivals',
+    'shop.sort_price_low': 'Price: Low to High',
+    'shop.sort_price_high': 'Price: High to Low',
+    'shop.no_results': 'No pieces found in this collection.',
+    'shop.clear_filters': 'Clear Filters',
+    'common.all': 'All',
+    'common.handmade': 'Handmade',
+    'common.vintage': 'Vintage',
+    'common.machine': 'Machine',
+    'common.kilim': 'Kilim',
+    'common.living_room': 'Living Room',
+    'common.bedroom': 'Bedroom',
+    'common.dining_room': 'Dining Room',
+    'common.hallway': 'Hallway',
+    'product.not_found': 'Product not found',
+    'product.back_to_shop': 'Back to Shop',
+    'product.back': 'Back',
+    'product.hover_zoom': 'Hover to inspect detail',
+    'product.sold_out': 'Sold Out',
+    'product.new': 'New',
+    'product.reviews_count': 'Reviews',
+    'product.dimensions': 'Dimensions',
+    'product.material': 'Material',
+    'product.add_to_collection': 'Add to Collection',
+    'product.shipping_title': 'Global Shipping',
+    'product.shipping_desc': 'Insured worldwide delivery within 7-14 business days.',
+    'product.auth_title': 'Authenticity Guaranteed',
+    'product.auth_desc': 'Each piece comes with a certificate of origin.',
+    'product.returns_title': '30-Day Returns',
+    'product.returns_desc': 'Return it easily for a full refund if not perfect.',
+    'product.share_thoughts': 'Share your thoughts',
+    'product.share_desc': 'Have you welcomed this piece into your home? We\'d love to hear your story.',
+    'product.your_name': 'Your Name',
+    'product.rating': 'Rating',
+    'product.review_label': 'Review',
+    'product.review_placeholder': 'Tell us about the texture, color, and how it feels in your space...',
+    'product.post_review': 'Post Review',
+    'product.sharing': 'Sharing...',
+    'product.customer_stories': 'Customer Stories',
+    'product.be_first': 'Be the first to share your story.',
+    'product.curated': 'Curated for you',
+    'product.more_from': 'More from',
+    'cart.empty_title': 'Your collection is empty',
+    'cart.empty_desc': 'Discover unique hand-woven pieces to add character and heritage to your space.',
+    'cart.explore': 'Explore Collection',
+    'cart.shopping_bag': 'Shopping Bag',
+    'cart.title': 'Your Collection',
+    'cart.total_items': 'Total Items',
+    'cart.pieces': 'Pieces',
+    'cart.remove': 'Remove',
+    'cart.order_summary': 'Order Summary',
+    'cart.subtotal': 'Subtotal',
+    'cart.shipping': 'Shipping',
+    'cart.complimentary': 'Complimentary',
+    'cart.estimated_tax': 'Estimated Tax',
+    'cart.tax_calc': 'Calculated at checkout',
+    'cart.total': 'Total',
+    'cart.checkout': 'Proceed to Checkout',
+    'cart.secure': 'Secure Checkout',
+  },
+  ar: {
+    'nav.shop': 'المتجر',
+    'nav.blog': 'المدونة',
+    'nav.about': 'عن بساط',
+    'nav.wishlist': 'قائمة الأمنيات',
+    'nav.cart': 'السلة',
+    'hero.title': 'تراث أناضولي خالد',
+    'hero.subtitle': 'اكتشف روح تقاليد النسيج التركية. مجموعتنا المختارة من السجاد اليدوي والعتيق تجلب قرونًا من الفن إلى المنزل العصري.',
+    'hero.cta': 'تسوق المجموعة',
+    'hero.story': 'قصة النساج',
+    'collections.title': 'روائع مختارة',
+    'collections.subtitle': 'المجموعات',
+    'collections.explore': 'استكشف جميع المجموعات',
+    'collections.handmade': 'حرير يدوي',
+    'collections.vintage': 'أوشاك عتيق',
+    'rooms.title': 'تسوق حسب الغرفة',
+    'rooms.subtitle': 'مساحات مختارة',
+    'rooms.living_room': 'غرفة المعيشة',
+    'rooms.bedroom': 'غرفة النوم',
+    'rooms.dining_room': 'غرفة الطعام',
+    'rooms.office': 'المكتب',
+    'testimonials.quote': '"سجادة الحرير الهركي التي اشتريتها هي حقاً حجر الزاوية في منزلنا. الحرفية لا تشبه أي شيء رأيته من قبل."',
+    'testimonials.author': 'إليانور فانس، لندن',
+    'arrivals.title': 'وصل حديثاً',
+    'arrivals.subtitle': 'روائع مختارة يدوياً تمت إضافتها مؤخراً إلى مخزوننا العالمي.',
+    'philosophy.title': 'فن الحياة الهادئة',
+    'philosophy.subtitle': 'فلسفتنا',
+    'philosophy.desc': 'في عالم من الإنتاج الضخم، نحتفل بعيوب اليد البشرية. كل عقدة هي شهادة على الصبر والمهارة وسلالة من الفن المتوارث عبر الأجيال.',
+    'philosophy.cta': 'اكتشف عمليتنا',
+    'philosophy.ethical': 'أخلاقي',
+    'philosophy.ethical_desc': 'دعم مباشر لمجتمعات الحرفيين',
+    'philosophy.natural': 'طبيعي',
+    'philosophy.natural_desc': 'أصباغ نباتية تقليدية',
+    'philosophy.organic': 'عضوي',
+    'philosophy.organic_desc': 'ألياف طبيعية من مصادر أخلاقية',
+    'philosophy.eternal': 'أبدي',
+    'philosophy.eternal_desc': 'ضمان المتانة مدى الحياة',
+    'shop.title': 'تسوق المجموعة',
+    'shop.subtitle': 'المجموعات',
+    'shop.desc': 'تصفح مجموعتنا الحصرية من الروائع المنسوجة يدوياً، كل منها يحكي قصة فريدة من التراث والحرفة.',
+    'shop.search_placeholder': 'البحث حسب الغرفة، الأسلوب، أو الاسم...',
+    'shop.filter_style': 'تصفية حسب الأسلوب',
+    'shop.filter_space': 'تصفية حسب المساحة',
+    'shop.sort_by': 'ترتيب حسب',
+    'shop.sort_newest': 'أحدث الوصول',
+    'shop.sort_price_low': 'السعر: من الأقل إلى الأعلى',
+    'shop.sort_price_high': 'السعر: من الأعلى إلى الأقل',
+    'shop.no_results': 'لم يتم العثور على قطع في هذه المجموعة.',
+    'shop.clear_filters': 'مسح التصفية',
+    'common.all': 'الكل',
+    'common.handmade': 'يدوي',
+    'common.vintage': 'عتيق',
+    'common.machine': 'آلي',
+    'common.kilim': 'كيليم',
+    'common.living_room': 'غرفة المعيشة',
+    'common.bedroom': 'غرفة النوم',
+    'common.dining_room': 'غرفة الطعام',
+    'common.hallway': 'الممر',
+    'common.office': 'المكتب',
+    'product.not_found': 'المنتج غير موجود',
+    'product.back_to_shop': 'العودة إلى المتجر',
+    'product.back': 'رجوع',
+    'product.hover_zoom': 'مرر الماوس لمعاينة التفاصيل',
+    'product.sold_out': 'نفذت الكمية',
+    'product.new': 'جديد',
+    'product.reviews_count': 'مراجعات',
+    'product.dimensions': 'الأبعاد',
+    'product.material': 'المادة',
+    'product.add_to_collection': 'أضف إلى المجموعة',
+    'product.shipping_title': 'شحن عالمي',
+    'product.shipping_desc': 'توصيل عالمي مؤمن خلال 7-14 يوم عمل.',
+    'product.auth_title': 'أصالة مضمونة',
+    'product.auth_desc': 'تأتي كل قطعة مع شهادة منشأ.',
+    'product.returns_title': 'إرجاع خلال 30 يومًا',
+    'product.returns_desc': 'أعدها بسهولة لاسترداد كامل المبلغ إذا لم تكن مثالية.',
+    'product.share_thoughts': 'شاركنا أفكارك',
+    'product.share_desc': 'هل رحبت بهذه القطعة في منزلك؟ نود أن نسمع قصتك.',
+    'product.your_name': 'اسمك',
+    'product.rating': 'التقييم',
+    'product.review_label': 'المراجعة',
+    'product.review_placeholder': 'أخبرنا عن الملمس، اللون، وكيف تشعر بها في مساحتك...',
+    'product.post_review': 'نشر المراجعة',
+    'product.sharing': 'جاري المشاركة...',
+    'product.customer_stories': 'قصص العملاء',
+    'product.be_first': 'كن أول من يشارك قصته.',
+    'product.curated': 'منسق لك',
+    'product.more_from': 'المزيد من',
+    'product.view_all': 'عرض كل المجموعة',
+    'cart.empty_title': 'مجموعتك فارغة',
+    'cart.empty_desc': 'اكتشف قطعاً فريدة منسوجة يدوياً لتضيف طابعاً وتراثاً إلى مساحتك.',
+    'cart.explore': 'استكشف المجموعة',
+    'cart.shopping_bag': 'حقيبة التسوق',
+    'cart.title': 'مجموعتك',
+    'cart.total_items': 'إجمالي القطع',
+    'cart.pieces': 'قطع',
+    'cart.remove': 'إزالة',
+    'cart.order_summary': 'ملخص الطلب',
+    'cart.subtotal': 'المجموع الفرعي',
+    'cart.shipping': 'الشحن',
+    'cart.complimentary': 'مجاني',
+    'cart.estimated_tax': 'الضريبة التقديرية',
+    'cart.tax_calc': 'تحسب عند الدفع',
+    'cart.total': 'الإجمالي',
+    'cart.checkout': 'المتابعة للدفع',
+    'cart.secure': 'دفع آمن',
+    'common.search': 'بحث',
+  }
+};
+
+const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+
+export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [language, setLanguage] = useState<Language>('en');
+
+  useEffect(() => {
+    document.documentElement.lang = language;
+    document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
+  }, [language]);
+
+  const t = (key: string) => {
+    return translations[language][key] || key;
+  };
+
+  const isRTL = language === 'ar';
+
+  return (
+    <LanguageContext.Provider value={{ language, setLanguage, t, isRTL }}>
+      <div className={isRTL ? 'font-arabic' : ''}>
+        {children}
+      </div>
+    </LanguageContext.Provider>
+  );
+};
+
+export const useLanguage = () => {
+  const context = useContext(LanguageContext);
+  if (!context) {
+    throw new Error('useLanguage must be used within a LanguageProvider');
+  }
+  return context;
+};

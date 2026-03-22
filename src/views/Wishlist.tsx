@@ -1,0 +1,63 @@
+"use client";
+import React from 'react';
+import { useWishlist } from '../context/WishlistContext';
+import { ProductCard } from '../components/ProductCard';
+import { motion } from 'motion/react';
+import Link from 'next/link';
+import { ArrowLeft, Heart } from 'lucide-react';
+import { PageHeader } from '../components/PageHeader';
+import { Meta } from '../components/Meta';
+
+export const Wishlist: React.FC = () => {
+  const { wishlist } = useWishlist();
+
+  return (
+    <div className="pb-16 bg-bisat-cream min-h-screen">
+      <Meta
+        title="My Wishlist"
+        description="Your saved rugs and carpets at Bisāṭ."
+        robots="noindex, nofollow"
+      />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+        <PageHeader
+          badge="Saved Items"
+          title="Your Wishlist"
+          description={`${wishlist.length} ${wishlist.length === 1 ? 'piece' : 'pieces'} saved`}
+        />
+
+      {wishlist.length === 0 ? (
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center py-20 bg-bisat-cream/30 rounded-3xl border border-bisat-sand/20"
+        >
+          <Heart size={48} className="mx-auto mb-6 text-bisat-sand/40" />
+          <h2 className="text-2xl font-serif mb-4">Your wishlist is empty</h2>
+          <p className="text-bisat-warm-gray mb-8 max-w-md mx-auto">
+            Save your favorite Turkish masterpieces to view them later or share with others.
+          </p>
+          <Link 
+            href="/shop" 
+            className="bg-bisat-gold text-white px-8 py-4 rounded-full text-xs uppercase tracking-widest font-bold hover:bg-bisat-black transition-colors inline-block"
+          >
+            Explore Collection
+          </Link>
+        </motion.div>
+      ) : (
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
+          {wishlist.map((product, index) => (
+            <motion.div
+              key={product.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+            >
+              <ProductCard product={product} />
+            </motion.div>
+          ))}
+        </div>
+      )}
+      </div>
+    </div>
+  );
+};

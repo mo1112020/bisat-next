@@ -1,0 +1,27 @@
+# Dependencies
+node_modules
+
+# Build output
+.next
+out
+dist
+build
+
+# Version control
+.git
+.gitignore
+
+# Env files (inject at runtime via docker run -e or compose)
+.env
+.env.local
+.env.*.local
+
+# Dev / editor
+.DS_Store
+*.log
+.vscode
+.idea
+
+# Docker itself
+Dockerfile
+.dockerignore
