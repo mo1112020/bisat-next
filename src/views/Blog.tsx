@@ -1,13 +1,20 @@
 "use client";
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { PageHeader } from '../components/PageHeader';
 import { motion } from 'motion/react';
 import { Meta } from '../components/Meta';
 import Link from 'next/link';
 import { Calendar, User, ArrowRight } from 'lucide-react';
-import { BLOG_POSTS } from '../data/blogPosts';
+import { BlogPostData } from '../data/blogPosts';
+import { getBlogPosts } from '../lib/db';
 
 export const Blog = () => {
+  const [posts, setPosts] = useState<BlogPostData[]>([]);
+
+  useEffect(() => {
+    getBlogPosts().then(setPosts);
+  }, []);
+
   return (
     <div className="pb-16 bg-bisat-cream min-h-screen">
       <Meta 
@@ -23,7 +30,7 @@ export const Blog = () => {
         />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
-          {BLOG_POSTS.map((post, i) => (
+          {posts.map((post, i) => (
             <motion.article 
               key={post.id}
               initial={{ opacity: 0, y: 30 }}

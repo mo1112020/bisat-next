@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
-import { products, Review } from '../data/products';
+import { Product, Review } from '../data/products';
+import { getProduct, getRelatedProducts, addProductReview } from '../lib/db';
 import { useCart } from '../context/CartContext';
 import { useRecentlyViewed } from '../context/RecentlyViewedContext';
 import { useWishlist } from '../context/WishlistContext';
@@ -25,7 +26,9 @@ export const ProductDetail = () => {
   const { addView } = useRecentlyViewed();
   const { toggleWishlist, isInWishlist } = useWishlist();
 
-  const product = products.find(p => p.id === id);
+  const [product, setProduct] = useState<Product | null>(null);
+  const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
   const [activeImage, setActiveImage] = useState(0);
   const [qty, setQty] = useState(1);
   const [added, setAdded] = useState(false);
@@ -46,8 +49,26 @@ export const ProductDetail = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    if (product) { setLocalReviews(product.reviews); addView(product); }
-  }, [product, addView]);
+    if (!id) return;
+    setLoading(true);
+    getProduct(id as string).then(data => {
+      if (data) {
+        setProduct(data);
+        setLocalReviews(data.reviews);
+        addView(data);
+        getRelatedProducts(data.category, data.id).then(setRelatedProducts);
+      }
+      setLoading(false);
+    });
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="pt-32 pb-24 text-center min-h-screen flex flex-col items-center justify-center">
+        <p className="text-bisat-black/30 text-lg font-serif">Loading…</p>
+      </div>
+    );
+  }
 
   if (!product) {
     return (
@@ -62,7 +83,6 @@ export const ProductDetail = () => {
   const avgRating = localReviews.length
     ? (localReviews.reduce((a, r) => a + r.rating, 0) / localReviews.length).toFixed(1)
     : null;
-  const relatedProducts = products.filter(p => p.category === product.category && p.id !== product.id).slice(0, 4);
 
   const handleAddToCart = () => {
     for (let i = 0; i < qty; i++) addToCart(product);
@@ -70,19 +90,19 @@ export const ProductDetail = () => {
     setTimeout(() => setAdded(false), 2000);
   };
 
-  const handleReviewSubmit = (e: React.FormEvent) => {
+  const handleReviewSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!reviewName || !reviewComment) return;
     setIsSubmitting(true);
-    setTimeout(() => {
-      setLocalReviews(prev => [{
-        id: `r-${Date.now()}`, userName: reviewName,
-        rating: reviewRating, comment: reviewComment,
-        date: new Date().toISOString().split('T')[0]
-      }, ...prev]);
-      setReviewName(''); setReviewRating(5); setReviewComment('');
-      setIsSubmitting(false);
-    }, 600);
+    const newReview = { userName: reviewName, rating: reviewRating, comment: reviewComment };
+    await addProductReview(product.id, newReview);
+    setLocalReviews(prev => [{
+      id: `r-${Date.now()}`,
+      date: new Date().toISOString().split('T')[0],
+      ...newReview,
+    }, ...prev]);
+    setReviewName(''); setReviewRating(5); setReviewComment('');
+    setIsSubmitting(false);
   };
 
   return (

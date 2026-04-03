@@ -1,79 +1,22 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PageHeader } from '../components/PageHeader';
 import { motion, AnimatePresence } from 'motion/react';
 import { Star, Filter, ArrowRight, MessageSquare, ThumbsUp } from 'lucide-react';
 import { Meta } from '../components/Meta';
-
-const reviews = [
-  { 
-    id: 1,
-    name: 'Sarah Jenkins', 
-    location: 'London, UK', 
-    title: 'Handmade Silk Rug review', 
-    text: 'The quality of the vintage Oushak I received is breathtaking. It completely transformed my client\'s living space. The colors are even more vibrant in person. The craftsmanship is truly world-class.', 
-    date: 'October 21, 2025', 
-    rating: 5,
-    category: 'Handmade'
-  },
-  { 
-    id: 2,
-    name: 'Michael Chen', 
-    location: 'New York, USA', 
-    title: 'Vintage Oushak review', 
-    text: 'A truly authentic piece of Anatolian history. The service was impeccable and the rug arrived perfectly packaged. Highly recommended for collectors who value heritage and quality.', 
-    date: 'November 12, 2025', 
-    rating: 5,
-    category: 'Vintage'
-  },
-  { 
-    id: 3,
-    name: 'Emma Thompson', 
-    location: 'Sydney, AU', 
-    title: 'Modern Nomad review', 
-    text: 'I spent months looking for the right rug. Bisāṭ made it easy to find a piece that feels like it was made for our home. The texture is incredible and it feels so soft underfoot.', 
-    date: 'December 05, 2025', 
-    rating: 5,
-    category: 'Modern'
-  },
-  { 
-    id: 4,
-    name: 'David Miller', 
-    location: 'Berlin, DE', 
-    title: 'Handmade Silk Rug review', 
-    text: 'The attention to detail is remarkable. You can tell this rug was made with love and patience. It\'s not just a rug, it\'s a piece of art that we will cherish for years.', 
-    date: 'January 15, 2026', 
-    rating: 4,
-    category: 'Handmade'
-  },
-  { 
-    id: 5,
-    name: 'Elena Rossi', 
-    location: 'Milan, IT', 
-    title: 'Vintage Revival review', 
-    text: 'I was hesitant to buy such a large item online, but the team was so helpful with extra photos and videos. The rug is perfect and fits my space beautifully.', 
-    date: 'February 02, 2026', 
-    rating: 5,
-    category: 'Vintage'
-  },
-  { 
-    id: 6,
-    name: 'James Wilson', 
-    location: 'Toronto, CA', 
-    title: 'Modern Nomad review', 
-    text: 'Excellent quality and fast shipping. The rug arrived in perfect condition. I love the minimalist design and the natural materials used.', 
-    date: 'March 10, 2026', 
-    rating: 5,
-    category: 'Modern'
-  }
-];
+import { getTestimonials } from '../lib/db';
 
 export const Reviews = () => {
   const [filter, setFilter] = useState('All');
+  const [reviews, setReviews] = useState<Awaited<ReturnType<typeof getTestimonials>>>([]);
   const categories = ['All', 'Handmade', 'Vintage', 'Modern'];
 
-  const filteredReviews = filter === 'All' 
-    ? reviews 
+  useEffect(() => {
+    getTestimonials().then(setReviews);
+  }, []);
+
+  const filteredReviews = filter === 'All'
+    ? reviews
     : reviews.filter(r => r.category === filter);
 
   return (

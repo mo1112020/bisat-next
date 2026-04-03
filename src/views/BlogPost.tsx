@@ -1,16 +1,31 @@
 "use client";
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { motion } from 'motion/react';
 import { Meta } from '../components/Meta';
 import { Schema, getBlogPostingSchema, getBreadcrumbSchema } from '../components/Schema';
 import { Calendar, User, ArrowLeft, Share2, Bookmark } from 'lucide-react';
-import { BLOG_POSTS } from '../data/blogPosts';
+import { BlogPostData } from '../data/blogPosts';
+import { getBlogPost } from '../lib/db';
 
 export const BlogPost = () => {
   const { id } = useParams();
-  const post = BLOG_POSTS.find(p => p.id === id);
+  const [post, setPost] = useState<BlogPostData | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!id) return;
+    getBlogPost(id as string).then(data => { setPost(data); setLoading(false); });
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="pb-16 text-center pt-32">
+        <p className="text-bisat-black/30 text-lg font-serif">Loading…</p>
+      </div>
+    );
+  }
 
   if (!post) {
     return (
@@ -35,20 +50,20 @@ export const BlogPost = () => {
         { name: 'Journal', path: '/blog' },
         { name: post.title, path: `/blog/${post.id}` },
       ])} />
-      
+
       {/* Hero Section */}
       <div className="relative h-[80vh] w-full overflow-hidden">
-        <motion.img 
+        <motion.img
           initial={{ scale: 1.1 }}
           animate={{ scale: 1 }}
           transition={{ duration: 1.5, ease: "easeOut" }}
-          src={post.image} 
-          alt={post.title} 
+          src={post.image}
+          alt={post.title}
           className="w-full h-full object-cover"
           referrerPolicy="no-referrer"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-bisat-black via-bisat-black/20 to-transparent" />
-        
+
         <div className="absolute inset-0 flex items-end pb-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
             <motion.div
@@ -62,7 +77,7 @@ export const BlogPost = () => {
               <h1 className="text-5xl md:text-8xl font-serif text-bisat-ivory leading-[0.9] mb-12 tracking-tight">
                 {post.title}
               </h1>
-              
+
               <div className="flex flex-wrap items-center gap-12 text-bisat-ivory/60 text-[10px] uppercase tracking-[0.2em] font-bold">
                 <div className="flex items-center">
                   <Calendar size={14} className="mr-3 text-bisat-gold" />
@@ -87,7 +102,7 @@ export const BlogPost = () => {
                 <ArrowLeft size={14} className="mr-4 group-hover:-translate-x-2 transition-transform" />
                 Back to Journal
               </Link>
-              
+
               <div className="pt-12 border-t border-bisat-black/5">
                 <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-bisat-black/60 mb-8 block">Share Story</span>
                 <div className="flex space-x-6">
@@ -109,13 +124,13 @@ export const BlogPost = () => {
 
           {/* Content */}
           <main className="lg:w-3/4 order-1 lg:order-2">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.8, duration: 1 }}
               className="prose prose-brand max-w-none"
             >
-              <div 
+              <div
                 className="text-bisat-black/90 text-xl leading-[1.8] space-y-12 font-light first-letter:text-7xl first-letter:font-serif first-letter:mr-4 first-letter:float-left first-letter:text-bisat-gold"
                 dangerouslySetInnerHTML={{ __html: post.content }}
               />

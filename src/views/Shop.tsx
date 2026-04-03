@@ -1,8 +1,9 @@
 "use client";
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
-import { products } from '../data/products';
+import { Product } from '../data/products';
+import { getProducts } from '../lib/db';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronDown, Search, X, SlidersHorizontal } from 'lucide-react';
 import { Meta } from '../components/Meta';
@@ -34,10 +35,17 @@ export const Shop = () => {
 
   const clearAll = () => router.push(pathname, { scroll: false });
 
+  const [allProducts, setAllProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    getProducts().then(data => { setAllProducts(data); setIsLoading(false); });
+  }, []);
+
   const activeCount = [categoryFilter, roomFilter, sizeFilter].filter(Boolean).length;
 
   const filteredProducts = useMemo(() => {
-    let result = [...products];
+    let result = [...allProducts];
     if (searchTerm) {
       const term = searchTerm.toLowerCase();
       result = result.filter(p =>
@@ -53,7 +61,7 @@ export const Shop = () => {
     if (sortBy === 'price-low') result.sort((a, b) => a.price - b.price);
     if (sortBy === 'price-high') result.sort((a, b) => b.price - a.price);
     return result;
-  }, [categoryFilter, roomFilter, sizeFilter, sortBy, searchTerm]);
+  }, [allProducts, categoryFilter, roomFilter, sizeFilter, sortBy, searchTerm]);
 
   return (
     <div className="min-h-screen bg-bisat-ivory">
@@ -215,7 +223,11 @@ export const Shop = () => {
 
       {/* Product grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        {filteredProducts.length > 0 ? (
+        {isLoading ? (
+          <div className="py-24 text-center">
+            <p className="text-bisat-black/30 text-lg font-serif">Loading collection…</p>
+          </div>
+        ) : filteredProducts.length > 0 ? (
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-x-3 sm:gap-x-8 gap-y-6 sm:gap-y-12">
             <AnimatePresence mode="popLayout">
               {filteredProducts.map(product => (

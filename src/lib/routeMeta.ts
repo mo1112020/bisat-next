@@ -1,6 +1,3 @@
-import { products } from '../data/products';
-import { BLOG_POSTS } from '../data/blogPosts';
-
 interface RouteMeta {
   title: string;
   description: string;
@@ -13,28 +10,12 @@ const DEFAULT_DESC =
 export function getMetaForRoute(url: string): RouteMeta {
   const path = url.split('?')[0].replace(/\/$/, '') || '/';
 
-  // Dynamic product pages
-  const productMatch = path.match(/^\/product\/(.+)$/);
-  if (productMatch) {
-    const product = products.find((p) => p.id === productMatch[1]);
-    if (product) {
-      return {
-        title: `${product.name} | Bisāṭ`,
-        description: `${product.description.slice(0, 155)}… Hand-woven in ${product.origin}.`,
-      };
-    }
+  // Dynamic pages — metadata is handled by each page's generateMetadata
+  if (path.match(/^\/product\//)) {
+    return { title: 'Rug Details | Bisāṭ', description: DEFAULT_DESC };
   }
-
-  // Dynamic blog post pages
-  const blogMatch = path.match(/^\/blog\/(.+)$/);
-  if (blogMatch) {
-    const post = BLOG_POSTS.find((p) => p.id === blogMatch[1]);
-    if (post) {
-      return {
-        title: `${post.title} | Bisāṭ Journal`,
-        description: post.metaDescription || post.excerpt,
-      };
-    }
+  if (path.match(/^\/blog\//)) {
+    return { title: 'Journal | Bisāṭ', description: DEFAULT_DESC };
   }
 
   const staticRoutes: Record<string, RouteMeta> = {

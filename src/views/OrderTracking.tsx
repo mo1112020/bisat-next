@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Search, Package, Truck, CheckCircle, Clock, MapPin, ArrowRight, AlertCircle } from 'lucide-react';
 import { Meta } from '../components/Meta';
 import { PageHeader } from '../components/PageHeader';
+import { getOrder } from '../lib/db';
 
 interface OrderStatus {
   id: string;
@@ -14,40 +15,13 @@ interface OrderStatus {
   location: string;
 }
 
-const DUMMY_ORDERS: Record<string, OrderStatus> = {
-  'ORD-12345': {
-    id: 'ORD-12345',
-    status: 'shipped',
-    date: '2026-03-15',
-    items: ['Tabriz Heritage Rug', 'Silk Road Runner'],
-    estimatedDelivery: '2026-03-22',
-    location: 'In transit - Istanbul Hub'
-  },
-  'ORD-67890': {
-    id: 'ORD-67890',
-    status: 'delivered',
-    date: '2026-03-10',
-    items: ['Modern Minimalist Grey'],
-    estimatedDelivery: '2026-03-14',
-    location: 'Delivered - Front Porch'
-  },
-  'ORD-55555': {
-    id: 'ORD-55555',
-    status: 'processing',
-    date: '2026-03-19',
-    items: ['Kilim Geometric Blue'],
-    estimatedDelivery: '2026-03-26',
-    location: 'Preparing for shipment - Artisan Workshop'
-  }
-};
-
 export const OrderTracking = () => {
   const [orderId, setOrderId] = useState('');
   const [trackingResult, setTrackingResult] = useState<OrderStatus | null>(null);
   const [error, setError] = useState('');
   const [isSearching, setIsSearching] = useState(false);
 
-  const handleTrack = (e: React.FormEvent) => {
+  const handleTrack = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!orderId.trim()) return;
 
@@ -55,16 +29,13 @@ export const OrderTracking = () => {
     setError('');
     setTrackingResult(null);
 
-    // Simulate API delay
-    setTimeout(() => {
-      const result = DUMMY_ORDERS[orderId.toUpperCase()];
-      if (result) {
-        setTrackingResult(result);
-      } else {
-        setError('Order not found. Please check your ID and try again.');
-      }
-      setIsSearching(false);
-    }, 800);
+    const result = await getOrder(orderId.trim());
+    if (result) {
+      setTrackingResult(result as OrderStatus);
+    } else {
+      setError('Order not found. Please check your ID and try again.');
+    }
+    setIsSearching(false);
   };
 
   const getStatusStep = (status: string) => {
