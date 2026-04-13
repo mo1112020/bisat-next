@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Instagram, Mail, ArrowRight, MapPin, Phone } from 'lucide-react';
+import { Instagram, Mail, Check, ArrowRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 const PinterestIcon = () => (
@@ -16,10 +16,7 @@ const TikTokIcon = () => (
   </svg>
 );
 
-interface CollectionLink {
-  label: string;
-  href: string;
-}
+interface CollectionLink { label: string; href: string; }
 
 export const Footer = () => {
   const { t } = useTranslation();
@@ -31,20 +28,16 @@ export const Footer = () => {
     { label: 'Kilim',         href: '/shop?category=Kilim' },
     { label: 'Machine Woven', href: '/shop?category=Machine' },
   ]);
-  const [footerShippingTitle, setFooterShippingTitle] = useState('Free Worldwide Shipping');
-  const [footerShippingDesc, setFooterShippingDesc] = useState('Every rug is hand-packed and insured for complimentary delivery.');
-  const [address, setAddress] = useState('Grand Bazaar Quarter, Istanbul, Turkey');
-  const [phone, setPhone] = useState('+90 212 000 0000');
   const [instagramUrl, setInstagramUrl] = useState('https://www.instagram.com/bisat.store/');
   const [pinterestUrl, setPinterestUrl] = useState('https://tr.pinterest.com/bisattstore/');
-  const [tiktokUrl, setTiktokUrl] = useState('https://www.tiktok.com/@bisattstore');
+  const [tiktokUrl, setTiktokUrl]       = useState('https://www.tiktok.com/@bisattstore');
 
   useEffect(() => {
     fetch('/api/store-config')
       .then(r => r.json())
       .then(data => {
         if (data.categories?.length) {
-          setCollections((data.categories as string[]).map(name => ({
+          setCollections((data.categories as string[]).map((name: string) => ({
             label: name + ' Rugs',
             href: '/shop?category=' + encodeURIComponent(name),
           })));
@@ -55,13 +48,9 @@ export const Footer = () => {
     fetch('/api/site-settings-public')
       .then(r => r.json())
       .then(data => {
-        if (data.footer_shipping_title) setFooterShippingTitle(data.footer_shipping_title as string);
-        if (data.footer_shipping_desc) setFooterShippingDesc(data.footer_shipping_desc as string);
-        if (data.contact_address) setAddress(data.contact_address as string);
-        if (data.contact_phone) setPhone(data.contact_phone as string);
         if (data.social_instagram) setInstagramUrl(data.social_instagram as string);
         if (data.social_pinterest) setPinterestUrl(data.social_pinterest as string);
-        if (data.social_tiktok) setTiktokUrl(data.social_tiktok as string);
+        if (data.social_tiktok)    setTiktokUrl(data.social_tiktok as string);
       })
       .catch(() => {});
   }, []);
@@ -73,69 +62,121 @@ export const Footer = () => {
     setEmail('');
   };
 
+  const socials = [
+    { href: instagramUrl, label: 'Instagram', icon: <Instagram size={15} /> },
+    { href: pinterestUrl, label: 'Pinterest',  icon: <PinterestIcon /> },
+    { href: tiktokUrl,    label: 'TikTok',     icon: <TikTokIcon /> },
+  ];
+
+  const companyLinks = [
+    { label: t('footer.comp_l1'), href: '/about' },
+    { label: t('footer.comp_l2'), href: '/craftsmanship' },
+    { label: 'Journal',            href: '/blog' },
+    { label: 'Reviews',            href: '/reviews' },
+    { label: t('footer.comp_l5'), href: '/contact' },
+  ];
+
+  const supportLinks = [
+    { label: t('footer.comp_l3'), href: '/track-order' },
+    { label: t('footer.comp_l4'), href: '/shipping' },
+    { label: 'FAQ',                href: '/faq' },
+    { label: 'Privacy Policy',     href: '/privacy' },
+    { label: 'Terms of Service',   href: '/terms' },
+  ];
+
   return (
-    <footer className="bg-bisat-black text-bisat-ivory">
-      {/* Top bar CTA */}
-      <div className="border-b border-bisat-cream/5">
-        <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 py-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-6">
-          <div>
-            <p className="text-bisat-gold text-[10px] uppercase tracking-[0.3em] font-bold mb-1">{footerShippingTitle}</p>
-            <p className="text-bisat-cream/50 text-sm">{footerShippingDesc}</p>
+    <footer className="bg-[#0E0E0C] text-bisat-ivory">
+
+      {/* ── Newsletter band ───────────────────────────────────────── */}
+      <div className="border-b border-white/[0.06]">
+        <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 py-12 sm:py-16">
+          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+            <div className="max-w-md">
+              <p className="text-[9px] uppercase tracking-[0.35em] font-bold text-bisat-gold mb-3">The Inner Circle</p>
+              <h2 className="text-2xl sm:text-3xl font-serif leading-snug text-bisat-ivory mb-2">
+                Stories, drops & exclusives<br className="hidden sm:block" /> — straight to your inbox.
+              </h2>
+              <p className="text-bisat-ivory/35 text-sm font-light leading-relaxed">
+                {t('footer.news_desc')}
+              </p>
+            </div>
+
+            <div className="w-full lg:w-auto lg:min-w-[380px]">
+              {subscribed ? (
+                <div className="flex items-center gap-3 bg-white/5 border border-bisat-gold/20 rounded-2xl px-6 py-5">
+                  <span className="w-8 h-8 rounded-full bg-bisat-gold/15 flex items-center justify-center flex-shrink-0">
+                    <Check size={14} className="text-bisat-gold" />
+                  </span>
+                  <div>
+                    <p className="text-sm font-semibold text-bisat-ivory">You're in.</p>
+                    <p className="text-xs text-bisat-ivory/40 font-light">Watch your inbox for something special.</p>
+                  </div>
+                </div>
+              ) : (
+                <form onSubmit={handleSubscribe} className="flex gap-2 bg-white/5 border border-white/8 rounded-2xl p-2">
+                  <input
+                    type="email"
+                    required
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    placeholder={t('footer.placeholder')}
+                    className="flex-1 bg-transparent px-4 py-3 text-sm text-bisat-ivory placeholder:text-bisat-ivory/25 focus:outline-none min-w-0"
+                  />
+                  <button
+                    type="submit"
+                    className="flex-shrink-0 bg-bisat-gold text-white px-6 py-3 rounded-xl text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-bisat-gold/85 transition-colors flex items-center gap-2 group whitespace-nowrap"
+                  >
+                    Subscribe
+                    <Mail size={12} className="group-hover:scale-110 transition-transform" />
+                  </button>
+                </form>
+              )}
+            </div>
           </div>
-          <Link
-            href="/shop"
-            className="group flex items-center gap-3 bg-bisat-gold/10 hover:bg-bisat-gold px-8 py-3.5 rounded-full text-[10px] uppercase tracking-[0.2em] font-bold text-bisat-gold hover:text-white transition-all duration-400 border border-bisat-gold/20 hover:border-bisat-gold flex-shrink-0"
-          >
-            Shop the Collection
-            <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform" />
-          </Link>
         </div>
       </div>
 
-      {/* Main grid */}
-      <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 pt-10 pb-8 sm:pt-16 sm:pb-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 sm:gap-10 mb-10 sm:mb-14">
+      {/* ── Main columns ──────────────────────────────────────────── */}
+      <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 py-14 sm:py-20">
+        <div className="grid grid-cols-2 md:grid-cols-12 gap-10 sm:gap-12 mb-14 sm:mb-20">
 
-          {/* Brand */}
-          <div className="col-span-2 md:col-span-4 lg:col-span-2">
-            <Link href="/" className="font-sans text-3xl font-bold tracking-tight mb-6 block text-bisat-ivory hover:text-bisat-gold transition-colors duration-300">
+          {/* Brand column */}
+          <div className="col-span-2 md:col-span-4">
+            <Link href="/" className="font-display text-[2rem] font-bold tracking-tight text-bisat-ivory hover:text-bisat-gold transition-colors duration-300 block mb-5">
               Bisāṭ
             </Link>
-            <p className="text-bisat-ivory/50 text-sm leading-relaxed mb-8 max-w-xs font-light">
+            <p className="text-bisat-ivory/40 text-sm leading-relaxed font-light max-w-[260px] mb-8">
               {t('footer.desc')}
             </p>
-            <div className="flex items-center gap-2 text-bisat-ivory/30 text-sm mb-2">
-              <MapPin size={14} className="flex-shrink-0" />
-              <span>{address}</span>
-            </div>
-            <div className="flex items-center gap-2 text-bisat-ivory/30 text-sm mb-8">
-              <Phone size={14} className="flex-shrink-0" />
-              <span>{phone}</span>
-            </div>
-            <div className="flex items-center gap-3">
-              <a href={instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="w-9 h-9 rounded-full border border-bisat-ivory/10 flex items-center justify-center text-bisat-ivory/30 hover:text-bisat-gold hover:border-bisat-gold transition-all duration-300">
-                <Instagram size={15} />
-              </a>
-              <a href={pinterestUrl} target="_blank" rel="noopener noreferrer" aria-label="Pinterest" className="w-9 h-9 rounded-full border border-bisat-ivory/10 flex items-center justify-center text-bisat-ivory/30 hover:text-bisat-gold hover:border-bisat-gold transition-all duration-300">
-                <PinterestIcon />
-              </a>
-              <a href={tiktokUrl} target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="w-9 h-9 rounded-full border border-bisat-ivory/10 flex items-center justify-center text-bisat-ivory/30 hover:text-bisat-gold hover:border-bisat-gold transition-all duration-300">
-                <TikTokIcon />
-              </a>
+
+            {/* Social icons */}
+            <div className="flex items-center gap-2.5">
+              {socials.map(s => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                  className="w-9 h-9 rounded-xl border border-white/8 flex items-center justify-center text-bisat-ivory/30 hover:text-bisat-gold hover:border-bisat-gold/40 hover:bg-bisat-gold/5 transition-all duration-300"
+                >
+                  {s.icon}
+                </a>
+              ))}
             </div>
           </div>
 
-          {/* Shop */}
-          <div>
-            <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-bisat-ivory/40 mb-6">Collections</h4>
-            <ul className="space-y-3.5">
+          {/* Collections */}
+          <div className="col-span-1 md:col-span-2 md:col-start-6">
+            <h4 className="text-[9px] uppercase tracking-[0.3em] font-bold text-bisat-ivory/30 mb-6">Collections</h4>
+            <ul className="space-y-3">
               {[
                 ...collections,
                 { label: 'New Arrivals', href: '/shop' },
-                { label: 'Sale', href: '/shop' },
+                { label: 'On Sale',      href: '/shop?sale=true' },
               ].map(link => (
                 <li key={link.label}>
-                  <Link href={link.href} className="text-bisat-ivory/50 text-sm font-light hover:text-bisat-gold transition-colors duration-300">
+                  <Link href={link.href} className="text-bisat-ivory/55 text-sm font-light hover:text-bisat-gold transition-colors duration-200 hover:translate-x-0.5 inline-block">
                     {link.label}
                   </Link>
                 </li>
@@ -144,20 +185,12 @@ export const Footer = () => {
           </div>
 
           {/* Company */}
-          <div>
-            <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-bisat-ivory/40 mb-6">Company</h4>
-            <ul className="space-y-3.5">
-              {[
-                { label: t('footer.comp_l1'), href: '/about' },
-                { label: t('footer.comp_l2'), href: '/craftsmanship' },
-                { label: 'Journal', href: '/blog' },
-                { label: 'Reviews', href: '/reviews' },
-                { label: t('footer.comp_l5'), href: '/contact' },
-                { label: t('footer.comp_l3'), href: '/track-order' },
-                { label: t('footer.comp_l4'), href: '/shipping' },
-              ].map(link => (
+          <div className="col-span-1 md:col-span-2">
+            <h4 className="text-[9px] uppercase tracking-[0.3em] font-bold text-bisat-ivory/30 mb-6">Company</h4>
+            <ul className="space-y-3">
+              {companyLinks.map(link => (
                 <li key={link.label}>
-                  <Link href={link.href} className="text-bisat-ivory/50 text-sm font-light hover:text-bisat-gold transition-colors duration-300">
+                  <Link href={link.href} className="text-bisat-ivory/55 text-sm font-light hover:text-bisat-gold transition-colors duration-200 hover:translate-x-0.5 inline-block">
                     {link.label}
                   </Link>
                 </li>
@@ -165,50 +198,34 @@ export const Footer = () => {
             </ul>
           </div>
 
-          {/* Newsletter */}
-          <div className="col-span-2 md:col-span-2 lg:col-span-1">
-            <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-bisat-ivory/40 mb-6">Newsletter</h4>
-            <p className="text-bisat-ivory/40 text-sm font-light mb-6 leading-relaxed">
-              {t('footer.news_desc')}
-            </p>
-            {subscribed ? (
-              <div className="flex items-center gap-2 text-bisat-gold">
-                <span className="w-5 h-5 rounded-full bg-bisat-gold/20 flex items-center justify-center">
-                  <span className="text-[10px]">✓</span>
-                </span>
-                <span className="text-sm font-medium">You're subscribed!</span>
-              </div>
-            ) : (
-              <form onSubmit={handleSubscribe} className="space-y-3">
-                <input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
-                  placeholder={t('footer.placeholder')}
-                  className="w-full bg-white/5 border border-bisat-ivory/10 rounded-xl px-4 py-3 text-sm text-bisat-ivory placeholder:text-bisat-ivory/25 focus:outline-none focus:border-bisat-gold/50 transition-colors"
-                />
-                <button
-                  type="submit"
-                  className="w-full bg-bisat-gold text-white py-3 rounded-xl text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-bisat-gold/80 transition-colors flex items-center justify-center gap-2 group"
-                >
-                  Subscribe
-                  <Mail size={13} />
-                </button>
-              </form>
-            )}
+          {/* Support */}
+          <div className="col-span-1 md:col-span-2">
+            <h4 className="text-[9px] uppercase tracking-[0.3em] font-bold text-bisat-ivory/30 mb-6">Support</h4>
+            <ul className="space-y-3">
+              {supportLinks.map(link => (
+                <li key={link.label}>
+                  <Link href={link.href} className="text-bisat-ivory/55 text-sm font-light hover:text-bisat-gold transition-colors duration-200 hover:translate-x-0.5 inline-block">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
+
         </div>
 
-        {/* Bottom bar */}
-        <div className="border-t border-bisat-ivory/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] uppercase tracking-[0.25em] text-bisat-ivory/25 font-medium">
-          <p>{t('footer.rights')}</p>
-          <div className="flex items-center gap-8">
-            <Link href="/kvkk" className="hover:text-bisat-gold transition-colors duration-300">KVKK</Link>
-            <Link href="/privacy" className="hover:text-bisat-gold transition-colors duration-300">Privacy</Link>
-            <Link href="/terms" className="hover:text-bisat-gold transition-colors duration-300">Terms</Link>
-            <Link href="/faq" className="hover:text-bisat-gold transition-colors duration-300">FAQ</Link>
-          </div>
+        {/* ── Divider + bottom bar ──────────────────────────────── */}
+        <div className="border-t border-white/[0.06] pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-[10px] text-bisat-ivory/20 tracking-[0.2em] uppercase font-medium">
+            {t('footer.rights')}
+          </p>
+          <Link
+            href="/shop"
+            className="group flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] font-bold text-bisat-ivory/25 hover:text-bisat-gold transition-colors duration-300"
+          >
+            Shop All Rugs
+            <ArrowRight size={11} className="group-hover:translate-x-0.5 transition-transform" />
+          </Link>
         </div>
       </div>
     </footer>

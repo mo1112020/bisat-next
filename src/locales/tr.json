@@ -1,15 +1,15 @@
 {
   "nav": {
-    "home": "Anasayfa",
+    "home": "Ana Sayfa",
     "ourStory": "Hikayemiz",
     "collections": "Koleksiyonlar",
     "orderTracking": "Sipariş Takibi",
     "journal": "Dergi",
     "contact": "İletişim",
     "search": "Ara",
-    "wishlist": "Favoriler",
-    "account": "Hesap",
-    "bag": "Çanta"
+    "wishlist": "İstek Listesi",
+    "account": "Hesabım",
+    "bag": "Çantam"
   },
   "product": {
     "categories": {
@@ -19,56 +19,75 @@
       "Kilim": "Kilim"
     },
     "soldOut": "Tükendi",
-    "quickAdd": "Hızlı Ekle",
+    "quickAdd": "Çantaya Ekle",
     "viewDetails": "Detayları Gör",
     "recentlyViewed": "Son Görüntülenenler",
-    "yourJourney": "Yolculuğunuz"
+    "yourJourney": "Gezinme Geçmişiniz"
+  },
+  "cart": {
+    "title": "Alışveriş Çantam",
+    "shopping_bag": "Çantam",
+    "total_items": "Toplam Ürün",
+    "pieces": "adet",
+    "order_summary": "Sipariş Özeti",
+    "subtotal": "Ara Toplam",
+    "shipping": "Kargo",
+    "complimentary": "Ücretsiz",
+    "estimated_tax": "Tahmini Vergi",
+    "tax_calc": "Teslimatta hesaplanır",
+    "total": "Toplam",
+    "checkout": "Ödemeye Geç",
+    "secure": "Güvenli ve Şifreli Ödeme",
+    "remove": "Kaldır",
+    "empty_title": "Çantanız boş",
+    "empty_desc": "El dokuması şaheserlerimizi keşfedin ve yaşam alanınız için mükemmel parçayı bulun.",
+    "explore": "Koleksiyonu Keşfet"
   },
   "aiRoom": {
     "badge": "Yapay Zeka Oda Önizleme",
     "beta": "Beta Özelliği",
     "title": "Kendi Alanınızda Görün",
-    "description": "Odanızın bir fotoğrafını yükleyin ve yapay zekamızın herhangi bir halının satın almadan önce evinizde nasıl göründüğünü size göstermesine izin verin.",
-    "button": "ODA ÖNİZLEMEYİ DENE",
-    "upload": "ODA FOTOĞRAFI YÜKLE",
-    "processing": "İŞLENİYOR..."
+    "description": "Odanızın fotoğrafını yükleyin; yapay zekamız seçtiğiniz halının evinizde nasıl görüneceğini satın almadan önce göstersin.",
+    "button": "Oda Önizlemeyi Dene",
+    "upload": "Oda Fotoğrafı Yükle",
+    "processing": "İşleniyor..."
   },
   "home": {
     "hero": {
       "title": "Zamansız Anadolu Mirası",
       "subtitle": "Miras",
-      "description": "Türk dokuma geleneklerinin ruhunu keşfedin. El yapımı ve vintage halılardan oluşan küratörlüğümüz, yüzyılların sanatını modern eve taşıyor; her parça kültür, zanaat ve kalıcı güzelliğin eşsiz bir hikayesini anlatıyor.",
-      "cta": "Koleksiyonu İncele",
+      "description": "Türk dokuma geleneğinin ruhunu keşfedin. El yapımı ve vintage halılardan oluşan özenle seçilmiş koleksiyonumuz, yüzyılların sanatını modern yaşama taşıyor; her parça kültür, zanaat ve kalıcı güzelliğin eşsiz hikayesini anlatıyor.",
+      "cta": "Koleksiyonu Keşfet",
       "secondary": "Bisāṭ Hakkında"
     },
     "trust": {
       "authenticity": {
-        "title": "Orijinallik Garantili",
-        "desc": "Her parça tarihi ve sanatsal değeri açısından elle seçilir ve doğrulanır."
+        "title": "Özgünlük Garantili",
+        "desc": "Her parça tarihi ve sanatsal değeri yönünden tek tek seçilir ve doğrulanır."
       },
       "artisan": {
-        "title": "Doğrudan Zanaatkardan",
-        "desc": "Adil ticaret ve kültürel koruma sağlamak için dokuma topluluklarıyla doğrudan çalışıyoruz."
+        "title": "Doğrudan Ustadan",
+        "desc": "Adil ticaret ve kültürel miras koruması için dokuma topluluklarıyla birebir çalışıyoruz."
       },
       "global": {
         "title": "Küresel Miras",
-        "desc": "Anadolu şaheserlerinden oluşan küratörlüğümüz için dünya çapında güvenli sevkiyat."
+        "desc": "Anadolu şaheserlerinden oluşan koleksiyonumuz için güvenli dünya geneli teslimat."
       }
     },
     "collections": {
       "title": "Koleksiyonlarımız",
-      "description": "Antik Anadolu desenlerinden çağdaş minimalist tasarımlara kadar geniş stil yelpazemizi keşfedin.",
+      "description": "Antik Anadolu desenlerinden çağdaş minimalist tasarımlara uzanan geniş stil yelpazesini keşfedin.",
       "cta": "Tüm Koleksiyonları Gör",
       "items": {
-        "handmade": { "title": "El Yapımı Miras", "desc": "Eşi benzeri olmayan ipek ve yün halılar" },
-        "vintage": { "title": "Vintage Canlanma", "desc": "Özenle restore edilmiş antika parçalar" },
+        "handmade": { "title": "El Yapımı Miras", "desc": "Eşi olmayan ipek ve yün halılar" },
+        "vintage": { "title": "Vintage Yeniden Doğuş", "desc": "Özenle restore edilmiş antika parçalar" },
         "modern": { "title": "Modern Nomad", "desc": "Günümüz evi için çağdaş tasarımlar" }
       }
     },
     "rooms": {
-      "badge": "Küratörlü Alanlar",
+      "badge": "Özenle Seçilmiş Mekanlar",
       "title": "Odaya Göre Alışveriş",
-      "description": "Sığınağınızın her köşesi için mükemmel halıyı bulun.",
+      "description": "Evinizin her köşesi için mükemmel halıyı bulun.",
       "cta": "Tüm Odaları Gör",
       "items": {
         "livingRoom": { "name": "Oturma Odası", "count": "{{count}} Ürün" },
@@ -79,26 +98,26 @@
     },
     "newArrivals": {
       "title": "Yeni Gelenler",
-      "description": "Küresel envanterimize yeni eklenen, elle seçilmiş şaheserler.",
+      "description": "Küresel envanterimize yeni eklenen, özenle seçilmiş şaheserler.",
       "cta": "Tüm Ürünleri Gör"
     },
     "philosophy": {
       "badge": "Felsefemiz",
       "title": "Yavaş Yaşam Sanatı",
-      "description": "Gelip geçici trendler çağında, biz kalıcılığın yanındayız. Halılarımız sadece zemin kaplaması değildir; zamanla derinleşen direnç ve güzellik hikayeleriyle dokunmuş yadigarlardır.",
+      "description": "Geçici trendlerin hakim olduğu bu çağda biz kalıcılığın yanındayız. Halılarımız yalnızca zemin kaplaması değil; zamanla derinleşen dayanıklılık ve güzellik hikayelerinin dokunduğu birer yadigardır.",
       "cta": "Sürecimizi Keşfedin",
       "items": {
-        "ethical": { "title": "Etik Kaynak Kullanımı", "desc": "Usta dokumacılarımız için adil ücretler ve güvenli ortamlar sağlamak." },
-        "dyes": { "title": "Doğal Boyalar", "desc": "Kök boya, çivit otu ve nar ile antik teknikleri kullanmak." },
-        "sustainable": { "title": "Sürdürülebilir Lif", "desc": "Nesiller boyu süren el eğirmesi yün ve organik ipek." },
-        "preservation": { "title": "Kültürel Koruma", "desc": "Yüzyıllık Anadolu desenlerini modern dünyada canlı tutmak." }
+        "ethical": { "title": "Etik Tedarik", "desc": "Usta dokumacılarımız için adil ücret ve güvenli çalışma ortamı sağlamak." },
+        "dyes": { "title": "Doğal Boyalar", "desc": "Kökboya, çivit otu ve nar ile aktarılan kadim boyama teknikleri." },
+        "sustainable": { "title": "Sürdürülebilir Lif", "desc": "Nesiller boyu dayanan el eğirmesi yün ve organik ipek." },
+        "preservation": { "title": "Kültürel Koruma", "desc": "Yüzyıllık Anadolu desenlerini çağdaş dünyada yaşatmak." }
       }
     },
     "reviews": {
-      "badge": "Referanslar",
+      "badge": "Müşteri Yorumları",
       "title": "Güzel Sözler",
       "cta": "Tüm Yorumları Gör",
-      "readMore": "Daha Fazla Oku"
+      "readMore": "Devamını Oku"
     },
     "heritage": {
       "badge": "Bisāṭ Mirası",
@@ -106,80 +125,62 @@
       "cta": "Yolculuğunuza Başlayın"
     },
     "blog": {
-      "badge": "Günlük",
+      "badge": "Dergi",
       "title": "Zanaatkar Hikayeleri",
-      "cta": "Tüm Hikayeleri Keşfedin",
-      "by": "Tarafından",
+      "cta": "Tüm Hikayeleri Keşfet",
+      "by": "Yazan",
       "readMore": "Hikayeyi Oku"
     },
     "faq": {
       "title": "Sıkça Sorulan Sorular",
-      "description": "Halılarımız ve sürecimiz hakkında bilmeniz gereken her şey.",
+      "description": "Halılarımız ve sürecimiz hakkında merak ettiğiniz her şey.",
       "cta": "Tüm Soruları Gör"
-    },
-    "faqItems": [
-      { "q": "El yapımı halımın bakımını nasıl yapmalıyım?", "a": "Dövücü çubuğu olmayan düzenli vakumlama ve her 3-5 yılda bir profesyonel temizlik öneririz. Dökülmeler için hemen temiz, kuru bir bezle tampon yapın." },
-      { "q": "Uluslararası nakliye sunuyor musunuz?", "a": "Evet, küratörlüğünü yaptığımız koleksiyonu dünya çapında gönderiyoruz. Nakliye masrafları ve teslimat süreleri konuma göre değişir ve ödeme sırasında hesaplanır." },
-      { "q": "Halı alanıma uymazsa iade edebilir miyim?", "a": "Tüm halılarımız için 14 günlük iade politikası sunuyoruz. Ürün orijinal durumunda olmalıdır. İade talimatları için lütfen desteğimizle iletişime geçin." },
-      { "q": "Halılarınız etik kaynaklı mı?", "a": "Kesinlikle. Adil ticaret uygulamalarını ve geleneksel dokuma tekniklerinin korunmasını sağlamak için zanaatkar toplulukları ve vintage koleksiyoncularla doğrudan çalışıyoruz." }
-    ],
-    "reviewItems": [
-      { "name": "Sarah Jenkins", "location": "Londra, İngiltere", "title": "El Yapımı İpek Halı incelemesi", "text": "Aldığım vintage Uşak halısının kalitesi nefes kesici. Müşterimin yaşam alanını tamamen değiştirdi. Renkler canlı olarak daha da etkileyici.", "date": "21 Ekim 2025", "rating": 5 },
-      { "name": "Michael Chen", "location": "New York, ABD", "title": "Vintage Uşak incelemesi", "text": "Anadolu tarihinin gerçekten otantik bir parçası. Hizmet kusursuzdu ve halı mükemmel şekilde paketlenmiş olarak geldi. Koleksiyoncular için şiddetle tavsiye edilir.", "date": "12 Kasım 2025", "rating": 5 },
-      { "name": "Emma Thompson", "location": "Sidney, Avustralya", "title": "Modern Nomad incelemesi", "text": "Doğru halıyı aramak için aylar harcadım. Bisāṭ, evimiz için yapılmış gibi hissettiren bir parça bulmayı kolaylaştırdı. Dokusu inanılmaz.", "date": "05 Aralık 2025", "rating": 5 }
-    ]
-   },
+    }
+  },
   "kvkk": {
     "badge": "Yasal",
     "title": "KVKK Aydınlatma Metni",
-    "intro": "Kişisel Verilerin Korunması Kanunu (KVKK) uyarınca kişisel verileriniz kalite ve hizmet standartlarımız gereği güvence altındadır.",
+    "intro": "Kişisel Verilerin Korunması Kanunu (KVKK) uyarınca kişisel verileriniz kalite ve hizmet standartlarımız çerçevesinde güvence altındadır.",
     "s1_t": "1. Veri Sorumlusu",
-    "s1_c": "Bisāṭ ('Şirket') olarak, müşterilerimize, tedarikçilerimize ve web sitesi ziyaretçilerimize ait kişisel verilerin 6698 sayılı Kişisel Verilerin Korunması Kanunu'na ('KVKK') uygun olarak işlenmesine ve korunmasına büyük önem veriyoruz.",
+    "s1_c": "Bisāṭ ('Şirket') olarak, müşterilerimize, tedarikçilerimize ve web sitesi ziyaretçilerimize ait kişisel verilerin 6698 sayılı Kişisel Verilerin Korunması Kanunu'na uygun biçimde işlenmesine ve korunmasına büyük önem veriyoruz.",
     "s2_t": "2. Kişisel Verilerin İşlenme Amacı",
-    "s2_c": "Toplanan kişisel verileriniz, şirketimiz tarafından sunulan ürün ve hizmetlerden sizleri faydalandırmak için gerekli çalışmaların iş birimlerimiz tarafından yapılması, sipariş süreçlerinin yürütülmesi ve müşteri deneyiminin iyileştirilmesi amaçlarıyla işlenmektedir.",
-    "s3_t": "3. İşlenen Kişisel Verilerin Kimlere ve Hangi Amaçla Aktarılabileceği",
-    "s3_c": "Toplanan kişisel verileriniz; yukarıda belirtilen amaçların gerçekleştirilmesi doğrultusunda, iş ortaklarımıza, tedarikçilerimize, kanunen yetkili kamu kurumlarına ve özel kişi veya kuruluşlara aktarılabilecektir.",
+    "s2_c": "Toplanan kişisel verileriniz; şirketimizin sunduğu ürün ve hizmetlerden yararlanmanızı sağlamak, sipariş süreçlerini yönetmek ve müşteri deneyimini geliştirmek amacıyla işlenmektedir.",
+    "s3_t": "3. Kişisel Verilerin Aktarımı",
+    "s3_c": "Toplanan kişisel verileriniz; yukarıda belirtilen amaçlar doğrultusunda iş ortaklarımıza, tedarikçilerimize, kanunen yetkili kamu kurumlarına ve özel kişi ya da kuruluşlara aktarılabilecektir.",
     "s4_t": "4. İletişim",
-    "s4_c": "KVKK kapsamındaki haklarınızı kullanmak ve detaylı bilgi almak için bizimle şu adres üzerinden iletişime geçebilirsiniz: "
+    "s4_c": "KVKK kapsamındaki haklarınızı kullanmak ve ayrıntılı bilgi almak için bize şu adres üzerinden ulaşabilirsiniz: "
   },
   "privacy": {
     "badge": "Yasal",
     "title": "Gizlilik Politikası",
-    "intro": "Gizliliğiniz bizim için çok önemlidir. Bu politika, Bisāṭ'ın kişisel bilgilerinizi nasıl topladığını, kullandığını ve koruduğunu özetlemektedir.",
+    "intro": "Gizliliğiniz bizim için son derece önemlidir. Bu politika, Bisāṭ'ın kişisel bilgilerinizi nasıl topladığını, kullandığını ve koruduğunu açıklamaktadır.",
     "s1_t": "1. Veri Toplama",
-    "s1_c": "Satın alma işlemi yaparken, hesap oluştururken veya bültenimize abone olurken bize doğrudan sağladığınız bilgileri topluyoruz.",
+    "s1_c": "Satın alma, hesap oluşturma veya bülten aboneliği sırasında bize doğrudan sağladığınız bilgileri topluyoruz.",
     "s2_t": "2. Bilgilerin Kullanımı",
-    "s2_c": "Topladığımız bilgiler siparişlerinizi işlemek, alışveriş deneyiminizi geliştirmek ve ürünler, hizmetler ile promosyonlar hakkında sizinle iletişim kurmak için kullanılır.",
+    "s2_c": "Topladığımız bilgiler; siparişlerinizi işlemek, alışveriş deneyiminizi geliştirmek ve ürünler, hizmetler ile kampanyalar hakkında sizinle iletişim kurmak amacıyla kullanılır.",
     "s3_t": "3. Bize Ulaşın",
-    "s3_c": "Bu Gizlilik Politikası hakkında herhangi bir sorunuz varsa, lütfen şu adresten bizimle iletişime geçin: "
+    "s3_c": "Gizlilik Politikamız hakkında sorularınız için lütfen şu adresten bizimle iletişime geçin: "
   },
   "terms": {
     "badge": "Yasal",
-    "title": "Hizmet Şartları",
-    "intro": "Bisāṭ'a hoş geldiniz. Web sitemizi kullanarak ve ürünlerimizi satın alarak, bu Hizmet Şartlarını kabul etmiş olursunuz.",
-    "s1_t": "1. Şartların Kabulü",
-    "s1_c": "Bu web sitesine erişerek bu şartları ve koşulları kabul ettiğinizi varsayıyoruz. Bu sayfada belirtilen tüm şartları ve koşulları kabul etmiyorsanız Bisāṭ'ı kullanmaya devam etmeyin.",
+    "title": "Hizmet Koşulları",
+    "intro": "Bisāṭ'a hoş geldiniz. Web sitemizi kullanarak ve ürünlerimizi satın alarak bu Hizmet Koşulları'nı kabul etmiş sayılırsınız.",
+    "s1_t": "1. Koşulların Kabulü",
+    "s1_c": "Bu web sitesine erişmekle söz konusu şart ve koşulları kabul ettiğinizi varsayıyoruz. Bu sayfadaki koşulların tamamını kabul etmiyorsanız Bisāṭ'ı kullanmaya devam etmeyiniz.",
     "s2_t": "2. Ürünler ve Fiyatlandırma",
-    "s2_c": "Herhangi bir ürünü veya hizmeti önceden haber vermeksizin herhangi bir zamanda değiştirme veya sonlandırma hakkımızı saklı tutuyoruz. Ürünlerimizin fiyatları önceden haber verilmeksizin değiştirilebilir.",
-    "s3_t": "3. İletişim Bilgileri",
-    "s3_c": "Hizmet Şartları hakkındaki sorularınız için bize şu adresten ulaşabilirsiniz: "
+    "s2_c": "Herhangi bir ürün veya hizmeti önceden bildirimde bulunmaksızın değiştirme ya da sonlandırma hakkını saklı tutarız. Ürün fiyatları önceden haber verilmeksizin değiştirilebilir.",
+    "s3_t": "3. İletişim",
+    "s3_c": "Hizmet Koşulları'na ilişkin sorularınız için bize şu adresten ulaşabilirsiniz: "
   },
   "footer": {
-    "desc": "Dünyanın en iyi el dokuması halılarını ve kilimlerini titizlikle seçiyoruz. Her parça mirasın, işçiliğin ve zamansız güzelliğin bir hikayesini anlatıyor.",
-    "shop": "Mağaza",
-    "shop_l1": "İran Halıları",
-    "shop_l2": "Modern Koleksiyon",
-    "shop_l3": "Vintage Parçalar",
-    "shop_l4": "Kilimler ve Düz Dokuma",
-    "company": "Şirket",
+    "desc": "Dünyanın en seçkin el dokuması halı ve kilimlerini titizlikle bir araya getiriyoruz. Her parça; mirasın, ustalığın ve zamansız güzelliğin hikayesini taşır.",
     "comp_l1": "Hikayemiz",
-    "comp_l2": "İşçilik",
+    "comp_l2": "Zanaatkarlık",
     "comp_l3": "Sipariş Takibi",
-    "comp_l4": "Küresel Gönderim",
+    "comp_l4": "Küresel Teslimat",
     "comp_l5": "İletişim",
-    "newsletter": "Bülten",
-    "news_desc": "Yeni gelenlerin ve zanaatkar hikayelerinin özel önizlemeleri için listemize katılın.",
-    "placeholder": "E-posta Adresi",
+    "news_desc": "Yeni koleksiyonların özel önizlemeleri ve zanaatkar hikayeleri için listemize katılın.",
+    "placeholder": "E-posta Adresiniz",
     "rights": "© 2026 Bisāṭ. Tüm Hakları Saklıdır."
   }
 }

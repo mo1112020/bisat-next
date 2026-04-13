@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { Mail, Phone, MapPin, Send, ArrowRight, Instagram } from 'lucide-react';
+import { Mail, Send, Clock, Instagram } from 'lucide-react';
 
 const PinterestIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
@@ -49,21 +49,8 @@ export const Contact = () => {
           <div className="lg:col-span-4">
             <div className="space-y-10">
               <div>
-                <h3 className="text-xl font-serif mb-6">Our Studio</h3>
+                <h3 className="text-xl font-serif mb-6">Get in Touch</h3>
                 <div className="space-y-6">
-                  <div className="flex items-start gap-4 group">
-                    <div className="p-3 bg-bisat-ivory rounded-xl text-bisat-gold group-hover:bg-bisat-gold group-hover:text-white transition-all duration-300">
-                      <MapPin size={20} />
-                    </div>
-                    <div>
-                      <p className="font-bold text-sm uppercase tracking-widest mb-1">Address</p>
-                      <p className="text-bisat-black/60 leading-relaxed">
-                        Galata Tower Square, No: 12<br />
-                        Beyoğlu, Istanbul, Turkiye
-                      </p>
-                    </div>
-                  </div>
-                  
                   <div className="flex items-start gap-4 group">
                     <div className="p-3 bg-bisat-ivory rounded-xl text-bisat-gold group-hover:bg-bisat-gold group-hover:text-white transition-all duration-300">
                       <Mail size={20} />
@@ -76,11 +63,11 @@ export const Contact = () => {
 
                   <div className="flex items-start gap-4 group">
                     <div className="p-3 bg-bisat-ivory rounded-xl text-bisat-gold group-hover:bg-bisat-gold group-hover:text-white transition-all duration-300">
-                      <Phone size={20} />
+                      <Clock size={20} />
                     </div>
                     <div>
-                      <p className="font-bold text-sm uppercase tracking-widest mb-1">Phone</p>
-                      <p className="text-bisat-black/60">+90 (212) 555 0123</p>
+                      <p className="font-bold text-sm uppercase tracking-widest mb-1">Response Time</p>
+                      <p className="text-bisat-black/60">We reply within 24 hours,<br />Mon – Sat</p>
                     </div>
                   </div>
                 </div>

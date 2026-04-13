@@ -210,7 +210,7 @@ export const Shop = () => {
   );
 
   return (
-    <div className="min-h-screen bg-bisat-ivory">
+    <div className="min-h-screen bg-[#F5F4F1]">
       <Meta
         title={categoryFilter ? `${categoryFilter} Rugs | Bisāṭ` : 'Shop All Rugs & Carpets | Bisāṭ'}
         description="Browse our collection of hand-woven Turkish rugs. Handmade, vintage, kilim and machine-woven carpets shipped worldwide."

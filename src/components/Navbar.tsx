@@ -125,10 +125,6 @@ export const Navbar = () => {
                 <DesktopNavItem id="shop" label="Shop" hasDropdown activeDropdown={activeDropdown} onOpen={openDropdown} onClose={closeDropdown} />
                 {/* Rooms */}
                 <DesktopNavItem id="rooms" label="Rooms" hasDropdown activeDropdown={activeDropdown} onOpen={openDropdown} onClose={closeDropdown} />
-                <Link href="/shop?category=Vintage" className="nav-link text-[10px] uppercase tracking-[0.22em] font-semibold text-bisat-black/65 hover:text-bisat-black relative group">
-                  Vintage
-                  <span className="absolute -bottom-1 left-0 h-[1px] bg-bisat-gold w-0 group-hover:w-full transition-all duration-300" />
-                </Link>
                 <Link href="/blog" className={`nav-link text-[10px] uppercase tracking-[0.22em] font-semibold relative group ${pathname === '/blog' ? 'text-bisat-gold' : 'text-bisat-black/65 hover:text-bisat-black'}`}>
                   Journal
                   <span className={`absolute -bottom-1 left-0 h-[1px] bg-bisat-gold transition-all duration-300 ${pathname === '/blog' ? 'w-full' : 'w-0 group-hover:w-full'}`} />
@@ -344,10 +340,9 @@ export const Navbar = () => {
 
               {/* Direct links */}
               {[
-                { label: 'Vintage Rugs',  href: '/shop?category=Vintage' },
-                { label: 'Journal',        href: '/blog' },
-                { label: 'Our Story',      href: '/about' },
-                { label: 'Contact',        href: '/contact' },
+                { label: 'Journal',   href: '/blog' },
+                { label: 'Our Story', href: '/about' },
+                { label: 'Contact',   href: '/contact' },
               ].map(link => (
                 <Link key={link.href} href={link.href} onClick={() => setIsOpen(false)}
                   className="flex items-center justify-between py-4 text-2xl font-serif border-b border-bisat-black/6 text-bisat-black hover:text-bisat-gold transition-colors">

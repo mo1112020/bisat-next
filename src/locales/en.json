@@ -24,6 +24,25 @@
     "recentlyViewed": "Recently Viewed",
     "yourJourney": "Your Journey"
   },
+  "cart": {
+    "title": "Your Bag",
+    "shopping_bag": "Shopping Bag",
+    "total_items": "Total Items",
+    "pieces": "pieces",
+    "order_summary": "Order Summary",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "complimentary": "Complimentary",
+    "estimated_tax": "Estimated Tax",
+    "tax_calc": "Calculated at delivery",
+    "total": "Total",
+    "checkout": "Proceed to Checkout",
+    "secure": "Secure & Encrypted Checkout",
+    "remove": "Remove",
+    "empty_title": "Your bag is empty",
+    "empty_desc": "Discover our curated collection of hand-woven masterpieces and find the perfect piece for your space.",
+    "explore": "Explore Collection"
+  },
   "aiRoom": {
     "badge": "AI ROOM PREVIEW",
     "beta": "BETA FEATURE",
@@ -116,18 +135,7 @@
       "title": "Common Questions",
       "description": "Everything you need to know about our rugs and process.",
       "cta": "See All Questions"
-    },
-    "faqItems": [
-      { "q": "How do I care for my handmade rug?", "a": "We recommend regular vacuuming without a beater bar and professional cleaning every 3-5 years. For spills, blot immediately with a clean, dry cloth." },
-      { "q": "Do you offer international shipping?", "a": "Yes, we ship our curated collection worldwide. Shipping costs and delivery times vary by location and will be calculated at checkout." },
-      { "q": "Can I return a rug if it doesn't fit my space?", "a": "We offer a 14-day return policy for all our rugs. The item must be in its original condition. Please contact our support for return instructions." },
-      { "q": "Are your rugs ethically sourced?", "a": "Absolutely. We work directly with artisan communities and vintage collectors to ensure fair trade practices and the preservation of traditional weaving techniques." }
-    ],
-    "reviewItems": [
-      { "name": "Sarah Jenkins", "location": "London, UK", "title": "Handmade Silk Rug review", "text": "The quality of the vintage Oushak I received is breathtaking. It completely transformed my client's living space. The colors are even more vibrant in person.", "date": "October 21, 2025", "rating": 5 },
-      { "name": "Michael Chen", "location": "New York, USA", "title": "Vintage Oushak review", "text": "A truly authentic piece of Anatolian history. The service was impeccable and the rug arrived perfectly packaged. Highly recommended for collectors.", "date": "November 12, 2025", "rating": 5 },
-      { "name": "Emma Thompson", "location": "Sydney, AU", "title": "Modern Nomad review", "text": "I spent months looking for the right rug. Bisāṭ made it easy to find a piece that feels like it was made for our home. The texture is incredible.", "date": "December 05, 2025", "rating": 5 }
-    ]
+    }
   },
   "kvkk": {
     "badge": "Legal",
@@ -166,18 +174,11 @@
   },
   "footer": {
     "desc": "Curating the world's finest hand-woven rugs and carpets. Each piece tells a story of heritage, craftsmanship, and timeless beauty.",
-    "shop": "Shop",
-    "shop_l1": "Persian Rugs",
-    "shop_l2": "Modern Collection",
-    "shop_l3": "Vintage Pieces",
-    "shop_l4": "Kilims & Flatweaves",
-    "company": "Company",
     "comp_l1": "Our Story",
     "comp_l2": "Craftsmanship",
     "comp_l3": "Track Order",
     "comp_l4": "Global Shipping",
     "comp_l5": "Contact Us",
-    "newsletter": "Newsletter",
     "news_desc": "Join our list for exclusive previews of new arrivals and artisanal stories.",
     "placeholder": "Email Address",
     "rights": "© 2026 Bisāṭ. All Rights Reserved."

@@ -40,7 +40,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
       {/* ── Image block ─────────────────────────────────────────── */}
       <Link
         href={`/product/${product.id}`}
-        className="relative block overflow-hidden bg-[#F9F9F8] aspect-[4/5] sm:aspect-square shadow-[0_2px_10px_rgba(0,0,0,0.02)] group-hover:shadow-[0_10px_30px_rgba(0,0,0,0.06)] transition-all duration-500"
+        className="relative block overflow-hidden bg-[#F9F9F8] aspect-[4/5] sm:aspect-square rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] group-hover:shadow-[0_12px_32px_rgba(0,0,0,0.08)] transition-all duration-500"
       >
         {/* Primary image */}
         <Image
@@ -95,11 +95,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
         </button>
 
         {/* Add to bag — Full width absolute bottom bar */}
-        <div className="absolute bottom-0 left-0 right-0 z-10 translate-y-full group-hover:translate-y-0 transition-transform duration-[400ms] ease-[cubic-bezier(0.2,0.8,0.2,1)]">
+        <div className="absolute bottom-0 left-0 right-0 z-10 translate-y-full group-hover:translate-y-0 transition-transform duration-[400ms] ease-[cubic-bezier(0.2,0.8,0.2,1)] px-2 pb-2">
           <button
             onClick={handleAdd}
             disabled={isSoldOut}
-            className={`w-full py-4 text-[9px] uppercase tracking-[0.3em] font-bold flex items-center justify-center gap-2.5 transition-colors duration-300 ${
+            className={`w-full py-3.5 text-[9px] uppercase tracking-[0.3em] font-bold flex items-center justify-center gap-2.5 transition-colors duration-300 rounded-xl ${
               justAdded
                 ? 'bg-green-700/95 backdrop-blur-md text-white'
                 : isSoldOut
