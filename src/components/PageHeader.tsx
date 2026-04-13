@@ -9,17 +9,17 @@ interface PageHeaderProps {
 
 export const PageHeader: React.FC<PageHeaderProps> = ({ badge, title, description, children }) => {
   return (
-    <div className="mb-10">
+    <div className="mb-12 pt-8">
       {badge && (
-        <p className="text-bisat-gold text-[10px] uppercase tracking-[0.35em] font-bold mb-3">
+        <p className="text-[9px] uppercase tracking-[0.3em] font-semibold text-bisat-black/30 mb-4">
           {badge}
         </p>
       )}
-      <h1 className="text-3xl md:text-4xl font-serif tracking-tight text-bisat-black mb-3">
+      <h1 className="text-3xl md:text-4xl font-light text-bisat-black mb-4 leading-tight">
         {title}
       </h1>
       {description && (
-        <p className="text-bisat-black/50 text-sm leading-relaxed max-w-2xl">
+        <p className="text-bisat-black/50 text-sm leading-relaxed max-w-2xl font-light">
           {description}
         </p>
       )}

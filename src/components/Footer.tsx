@@ -71,6 +71,7 @@ export const Footer = () => {
   const companyLinks = [
     { label: t('footer.comp_l1'), href: '/about' },
     { label: t('footer.comp_l2'), href: '/craftsmanship' },
+    { label: 'Lookbook',           href: '/lookbook' },
     { label: 'Journal',            href: '/blog' },
     { label: 'Reviews',            href: '/reviews' },
     { label: t('footer.comp_l5'), href: '/contact' },
@@ -79,52 +80,53 @@ export const Footer = () => {
   const supportLinks = [
     { label: t('footer.comp_l3'), href: '/track-order' },
     { label: t('footer.comp_l4'), href: '/shipping' },
+    { label: 'Size Guide',         href: '/size-guide' },
     { label: 'FAQ',                href: '/faq' },
     { label: 'Privacy Policy',     href: '/privacy' },
     { label: 'Terms of Service',   href: '/terms' },
   ];
 
   return (
-    <footer className="bg-[#0E0E0C] text-bisat-ivory">
+    <footer className="bg-bisat-footer text-bisat-black">
 
       {/* ── Newsletter band ───────────────────────────────────────── */}
-      <div className="border-b border-white/[0.06]">
+      <div className="border-b border-bisat-black/8">
         <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 py-12 sm:py-16">
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
             <div className="max-w-md">
               <p className="text-[9px] uppercase tracking-[0.35em] font-bold text-bisat-gold mb-3">The Inner Circle</p>
-              <h2 className="text-2xl sm:text-3xl font-serif leading-snug text-bisat-ivory mb-2">
+              <h2 className="text-2xl sm:text-3xl font-serif leading-snug text-bisat-black mb-2">
                 Stories, drops & exclusives<br className="hidden sm:block" /> — straight to your inbox.
               </h2>
-              <p className="text-bisat-ivory/35 text-sm font-light leading-relaxed">
+              <p className="text-bisat-black/50 text-sm font-light leading-relaxed">
                 {t('footer.news_desc')}
               </p>
             </div>
 
             <div className="w-full lg:w-auto lg:min-w-[380px]">
               {subscribed ? (
-                <div className="flex items-center gap-3 bg-white/5 border border-bisat-gold/20 rounded-2xl px-6 py-5">
+                <div className="flex items-center gap-3 bg-white/60 border border-bisat-gold/30 rounded-2xl px-6 py-5">
                   <span className="w-8 h-8 rounded-full bg-bisat-gold/15 flex items-center justify-center flex-shrink-0">
                     <Check size={14} className="text-bisat-gold" />
                   </span>
                   <div>
-                    <p className="text-sm font-semibold text-bisat-ivory">You're in.</p>
-                    <p className="text-xs text-bisat-ivory/40 font-light">Watch your inbox for something special.</p>
+                    <p className="text-sm font-semibold text-bisat-black">You're in.</p>
+                    <p className="text-xs text-bisat-black/50 font-light">Watch your inbox for something special.</p>
                   </div>
                 </div>
               ) : (
-                <form onSubmit={handleSubscribe} className="flex gap-2 bg-white/5 border border-white/8 rounded-2xl p-2">
+                <form onSubmit={handleSubscribe} className="flex gap-2 bg-white/60 border border-bisat-black/10 rounded-2xl p-2">
                   <input
                     type="email"
                     required
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                     placeholder={t('footer.placeholder')}
-                    className="flex-1 bg-transparent px-4 py-3 text-sm text-bisat-ivory placeholder:text-bisat-ivory/25 focus:outline-none min-w-0"
+                    className="flex-1 bg-transparent px-4 py-3 text-sm text-bisat-black placeholder:text-bisat-black/30 focus:outline-none min-w-0"
                   />
                   <button
                     type="submit"
-                    className="flex-shrink-0 bg-bisat-gold text-white px-6 py-3 rounded-xl text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-bisat-gold/85 transition-colors flex items-center gap-2 group whitespace-nowrap"
+                    className="flex-shrink-0 bg-bisat-black text-white px-6 py-3 rounded-xl text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-bisat-charcoal transition-colors flex items-center gap-2 group whitespace-nowrap"
                   >
                     Subscribe
                     <Mail size={12} className="group-hover:scale-110 transition-transform" />
@@ -142,10 +144,10 @@ export const Footer = () => {
 
           {/* Brand column */}
           <div className="col-span-2 md:col-span-4">
-            <Link href="/" className="font-display text-[2rem] font-bold tracking-tight text-bisat-ivory hover:text-bisat-gold transition-colors duration-300 block mb-5">
+            <Link href="/" className="font-display text-[2rem] font-bold tracking-tight text-bisat-black hover:text-bisat-gold transition-colors duration-300 block mb-5">
               Bisāṭ
             </Link>
-            <p className="text-bisat-ivory/40 text-sm leading-relaxed font-light max-w-[260px] mb-8">
+            <p className="text-bisat-black/50 text-sm leading-relaxed font-light max-w-[260px] mb-8">
               {t('footer.desc')}
             </p>
 
@@ -158,7 +160,7 @@ export const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={s.label}
-                  className="w-9 h-9 rounded-xl border border-white/8 flex items-center justify-center text-bisat-ivory/30 hover:text-bisat-gold hover:border-bisat-gold/40 hover:bg-bisat-gold/5 transition-all duration-300"
+                  className="w-9 h-9 rounded-xl border border-bisat-black/12 flex items-center justify-center text-bisat-black/40 hover:text-bisat-gold hover:border-bisat-gold/50 hover:bg-bisat-gold/8 transition-all duration-300"
                 >
                   {s.icon}
                 </a>
@@ -168,7 +170,7 @@ export const Footer = () => {
 
           {/* Collections */}
           <div className="col-span-1 md:col-span-2 md:col-start-6">
-            <h4 className="text-[9px] uppercase tracking-[0.3em] font-bold text-bisat-ivory/30 mb-6">Collections</h4>
+            <h4 className="text-[9px] uppercase tracking-[0.3em] font-bold text-bisat-black/35 mb-6">Collections</h4>
             <ul className="space-y-3">
               {[
                 ...collections,
@@ -176,7 +178,7 @@ export const Footer = () => {
                 { label: 'On Sale',      href: '/shop?sale=true' },
               ].map(link => (
                 <li key={link.label}>
-                  <Link href={link.href} className="text-bisat-ivory/55 text-sm font-light hover:text-bisat-gold transition-colors duration-200 hover:translate-x-0.5 inline-block">
+                  <Link href={link.href} className="text-bisat-black/60 text-sm font-light hover:text-bisat-gold transition-colors duration-200 hover:translate-x-0.5 inline-block">
                     {link.label}
                   </Link>
                 </li>
@@ -186,11 +188,11 @@ export const Footer = () => {
 
           {/* Company */}
           <div className="col-span-1 md:col-span-2">
-            <h4 className="text-[9px] uppercase tracking-[0.3em] font-bold text-bisat-ivory/30 mb-6">Company</h4>
+            <h4 className="text-[9px] uppercase tracking-[0.3em] font-bold text-bisat-black/35 mb-6">Company</h4>
             <ul className="space-y-3">
               {companyLinks.map(link => (
                 <li key={link.label}>
-                  <Link href={link.href} className="text-bisat-ivory/55 text-sm font-light hover:text-bisat-gold transition-colors duration-200 hover:translate-x-0.5 inline-block">
+                  <Link href={link.href} className="text-bisat-black/60 text-sm font-light hover:text-bisat-gold transition-colors duration-200 hover:translate-x-0.5 inline-block">
                     {link.label}
                   </Link>
                 </li>
@@ -200,11 +202,11 @@ export const Footer = () => {
 
           {/* Support */}
           <div className="col-span-1 md:col-span-2">
-            <h4 className="text-[9px] uppercase tracking-[0.3em] font-bold text-bisat-ivory/30 mb-6">Support</h4>
+            <h4 className="text-[9px] uppercase tracking-[0.3em] font-bold text-bisat-black/35 mb-6">Support</h4>
             <ul className="space-y-3">
               {supportLinks.map(link => (
                 <li key={link.label}>
-                  <Link href={link.href} className="text-bisat-ivory/55 text-sm font-light hover:text-bisat-gold transition-colors duration-200 hover:translate-x-0.5 inline-block">
+                  <Link href={link.href} className="text-bisat-black/60 text-sm font-light hover:text-bisat-gold transition-colors duration-200 hover:translate-x-0.5 inline-block">
                     {link.label}
                   </Link>
                 </li>
@@ -215,13 +217,13 @@ export const Footer = () => {
         </div>
 
         {/* ── Divider + bottom bar ──────────────────────────────── */}
-        <div className="border-t border-white/[0.06] pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-[10px] text-bisat-ivory/20 tracking-[0.2em] uppercase font-medium">
+        <div className="border-t border-bisat-black/8 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-[10px] text-bisat-black/30 tracking-[0.2em] uppercase font-medium">
             {t('footer.rights')}
           </p>
           <Link
             href="/shop"
-            className="group flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] font-bold text-bisat-ivory/25 hover:text-bisat-gold transition-colors duration-300"
+            className="group flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] font-bold text-bisat-black/40 hover:text-bisat-gold transition-colors duration-300"
           >
             Shop All Rugs
             <ArrowRight size={11} className="group-hover:translate-x-0.5 transition-transform" />

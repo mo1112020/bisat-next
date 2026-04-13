@@ -40,9 +40,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
       {/* ── Image block ─────────────────────────────────────────── */}
       <Link
         href={`/product/${product.id}`}
-        className="relative block overflow-hidden bg-[#F9F9F8] aspect-[4/5] sm:aspect-square rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] group-hover:shadow-[0_12px_32px_rgba(0,0,0,0.08)] transition-all duration-500"
+        className="relative block overflow-hidden bg-[#F5F2EC] aspect-[4/5] sm:aspect-square transition-all duration-500"
       >
-        {/* Primary image */}
         <Image
           src={product.images[0]}
           alt={product.name}
@@ -52,9 +51,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
           priority={priority}
         />
 
-        {/* Swap image on hover */}
         {product.images[1] && (
-          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-in-out bg-[#F9F9F8]">
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-in-out bg-[#F5F2EC]">
             <Image
               src={product.images[1]}
               alt=""
@@ -65,17 +63,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
           </div>
         )}
 
-        {/* Scrim for text visibility on hover */}
-        <div className="absolute inset-0 bg-gradient-to-t from-bisat-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-
         {/* Badge — top-left */}
-        <div className="absolute top-4 left-4 z-10 flex flex-col gap-2">
+        <div className="absolute top-3 left-3 z-10 flex flex-col gap-1.5">
           {isSoldOut ? (
-            <span className="text-[8px] uppercase tracking-[0.25em] font-bold text-white bg-bisat-black px-3 py-1.5 shadow-sm">
+            <span className="text-[8px] uppercase tracking-[0.25em] font-semibold text-white bg-bisat-black px-2.5 py-1">
               Sold Out
             </span>
           ) : isOnSale ? (
-            <span className="text-[8px] uppercase tracking-[0.25em] font-bold text-white bg-bisat-deep-red px-3 py-1.5 shadow-sm">
+            <span className="text-[8px] uppercase tracking-[0.25em] font-semibold text-white bg-bisat-terracotta px-2.5 py-1">
               Sale
             </span>
           ) : null}
@@ -85,47 +80,44 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
         <button
           onClick={handleWishlist}
           aria-label={isFavorite ? 'Remove from wishlist' : 'Save to wishlist'}
-          className={`absolute top-4 right-4 z-10 flex items-center justify-center transition-all duration-300 ${
+          className={`absolute top-3 right-3 z-10 flex items-center justify-center transition-all duration-300 ${
             isFavorite
-              ? 'opacity-100 text-bisat-deep-red'
-              : 'opacity-0 group-hover:opacity-100 text-white hover:text-bisat-gold drop-shadow-md'
+              ? 'opacity-100 text-bisat-terracotta'
+              : 'opacity-0 group-hover:opacity-100 text-white'
           }`}
         >
-          <Heart size={20} className={isFavorite ? "fill-current" : ""} fill={isFavorite ? 'currentColor' : 'none'} strokeWidth={isFavorite ? 0 : 1.5} />
+          <Heart size={18} fill={isFavorite ? 'currentColor' : 'none'} strokeWidth={isFavorite ? 0 : 1.5} />
         </button>
 
-        {/* Add to bag — Full width absolute bottom bar */}
-        <div className="absolute bottom-0 left-0 right-0 z-10 translate-y-full group-hover:translate-y-0 transition-transform duration-[400ms] ease-[cubic-bezier(0.2,0.8,0.2,1)] px-2 pb-2">
+        {/* Add to bag — slides up from bottom */}
+        <div className="absolute bottom-0 left-0 right-0 z-10 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out">
           <button
             onClick={handleAdd}
             disabled={isSoldOut}
-            className={`w-full py-3.5 text-[9px] uppercase tracking-[0.3em] font-bold flex items-center justify-center gap-2.5 transition-colors duration-300 rounded-xl ${
+            className={`w-full py-3 text-[9px] uppercase tracking-[0.3em] font-semibold flex items-center justify-center gap-2 transition-colors duration-200 ${
               justAdded
-                ? 'bg-green-700/95 backdrop-blur-md text-white'
+                ? 'bg-bisat-black/90 text-white'
                 : isSoldOut
-                ? 'bg-bisat-black/80 backdrop-blur-md text-white cursor-not-allowed'
-                : 'bg-white/95 backdrop-blur-md text-bisat-black hover:bg-bisat-black hover:text-white'
+                ? 'bg-bisat-black/70 text-white cursor-not-allowed'
+                : 'bg-white text-bisat-black hover:bg-bisat-black hover:text-white'
             }`}
           >
-            <ShoppingBag size={14} strokeWidth={1.5} />
+            <ShoppingBag size={13} strokeWidth={1.5} />
             {justAdded ? 'Added to Bag' : isSoldOut ? 'Unavailable' : 'Quick Add'}
           </button>
         </div>
       </Link>
 
       {/* ── Text block ──────────────────────────────────────────── */}
-      <div className="pt-4 pb-2 px-1 flex flex-col flex-grow">
-        <div className="flex justify-between items-start gap-4 mb-1">
-          {/* Name */}
+      <div className="pt-3 pb-2 flex flex-col flex-grow">
+        <div className="flex justify-between items-start gap-3 mb-1">
           <Link href={`/product/${product.id}`} className="block flex-grow">
-            <h3 className="font-serif text-[1.1rem] text-bisat-black leading-snug hover:text-bisat-gold transition-colors duration-300 line-clamp-2">
+            <h3 className="text-[0.95rem] font-normal text-bisat-black leading-snug hover:text-bisat-gold transition-colors duration-200 line-clamp-2">
               {product.name}
             </h3>
           </Link>
-          
-          {/* Price — Aligned right */}
           <div className="flex flex-col items-end text-right flex-shrink-0 pt-0.5">
-            <span className={`font-serif text-[1.05rem] font-medium leading-none ${isOnSale ? 'text-bisat-deep-red' : 'text-bisat-black'}`}>
+            <span className={`text-[0.95rem] font-normal leading-none ${isOnSale ? 'text-bisat-terracotta' : 'text-bisat-black'}`}>
               ${displayPrice.toLocaleString()}
             </span>
             {isOnSale && (
@@ -136,12 +128,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
           </div>
         </div>
 
-        {/* Details row (Origin, Category, Dimensions) */}
-        <div className="mt-auto pt-3 flex flex-col gap-1 border-t border-bisat-black/5">
-          <p className="text-[9px] uppercase tracking-[0.25em] text-bisat-black/40 font-medium">
-            {product.origin.split(',')[0]} &middot; {product.category}
+        <div className="mt-auto pt-2.5 flex flex-col gap-0.5 border-t border-bisat-border">
+          <p className="text-[9px] uppercase tracking-[0.25em] text-bisat-black/35 font-medium">
+            {product.origin.split(',')[0]} · {product.category}
           </p>
-          <p className="text-[10px] text-bisat-black/30 font-light tracking-wide">{product.dimensions}</p>
+          <p className="text-[10px] text-bisat-black/30 font-light">{product.dimensions}</p>
         </div>
       </div>
     </div>

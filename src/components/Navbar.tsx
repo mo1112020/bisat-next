@@ -109,7 +109,7 @@ export const Navbar = () => {
   return (
     <>
       {/* ── Main bar ───────────────────────────────────────────────────────── */}
-      <nav className={`relative h-[4.5rem] transition-all duration-300 border-b z-40 ${scrolled ? 'bg-white/95 backdrop-blur-xl shadow-md border-bisat-black/8' : 'bg-white border-bisat-black/6'}`}>
+      <nav className={`relative h-[4.5rem] transition-all duration-300 border-b z-40 ${scrolled ? 'bg-bisat-ivory/98 backdrop-blur-xl shadow-sm border-bisat-border' : 'bg-bisat-ivory border-bisat-border'}`}>
         <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 h-full">
           <div className="relative flex items-center justify-between h-full">
 
@@ -125,13 +125,17 @@ export const Navbar = () => {
                 <DesktopNavItem id="shop" label="Shop" hasDropdown activeDropdown={activeDropdown} onOpen={openDropdown} onClose={closeDropdown} />
                 {/* Rooms */}
                 <DesktopNavItem id="rooms" label="Rooms" hasDropdown activeDropdown={activeDropdown} onOpen={openDropdown} onClose={closeDropdown} />
-                <Link href="/blog" className={`nav-link text-[10px] uppercase tracking-[0.22em] font-semibold relative group ${pathname === '/blog' ? 'text-bisat-gold' : 'text-bisat-black/65 hover:text-bisat-black'}`}>
-                  Journal
-                  <span className={`absolute -bottom-1 left-0 h-[1px] bg-bisat-gold transition-all duration-300 ${pathname === '/blog' ? 'w-full' : 'w-0 group-hover:w-full'}`} />
+                <Link href="/lookbook" className={`nav-link text-[10px] uppercase tracking-[0.22em] font-semibold relative group ${pathname === '/lookbook' ? 'text-bisat-black' : 'text-bisat-black/65 hover:text-bisat-black'}`}>
+                  Lookbook
+                  <span className={`absolute -bottom-1 left-0 h-[1px] bg-bisat-black transition-all duration-300 ${pathname === '/lookbook' ? 'w-full' : 'w-0 group-hover:w-full'}`} />
                 </Link>
-                <Link href="/about" className={`nav-link text-[10px] uppercase tracking-[0.22em] font-semibold relative group ${pathname === '/about' ? 'text-bisat-gold' : 'text-bisat-black/65 hover:text-bisat-black'}`}>
+                <Link href="/blog" className={`nav-link text-[10px] uppercase tracking-[0.22em] font-semibold relative group ${pathname === '/blog' ? 'text-bisat-black' : 'text-bisat-black/65 hover:text-bisat-black'}`}>
+                  Journal
+                  <span className={`absolute -bottom-1 left-0 h-[1px] bg-bisat-black transition-all duration-300 ${pathname === '/blog' ? 'w-full' : 'w-0 group-hover:w-full'}`} />
+                </Link>
+                <Link href="/about" className={`nav-link text-[10px] uppercase tracking-[0.22em] font-semibold relative group ${pathname === '/about' ? 'text-bisat-black' : 'text-bisat-black/65 hover:text-bisat-black'}`}>
                   Our Story
-                  <span className={`absolute -bottom-1 left-0 h-[1px] bg-bisat-gold transition-all duration-300 ${pathname === '/about' ? 'w-full' : 'w-0 group-hover:w-full'}`} />
+                  <span className={`absolute -bottom-1 left-0 h-[1px] bg-bisat-black transition-all duration-300 ${pathname === '/about' ? 'w-full' : 'w-0 group-hover:w-full'}`} />
                 </Link>
               </div>
             </div>
@@ -147,7 +151,7 @@ export const Navbar = () => {
                 <AnimatePresence>
                   {langOpen && (
                     <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 6 }} transition={{ duration: 0.15 }}
-                      className="absolute right-0 mt-1 w-36 bg-white shadow-xl rounded-2xl border border-bisat-black/5 overflow-hidden py-2 z-50">
+                      className="absolute right-0 mt-1 w-36 bg-bisat-ivory shadow-xl rounded-2xl border border-bisat-border overflow-hidden py-2 z-50">
                       {LANGUAGES.map(lang => (
                         <button key={lang.code} onClick={() => changeLanguage(lang.code)}
                           className={`w-full text-left px-4 py-2.5 text-[10px] uppercase tracking-widest font-bold hover:bg-bisat-cream transition-colors ${i18n.language.startsWith(lang.code) ? 'text-bisat-gold' : 'text-bisat-black/55'}`}>
@@ -196,7 +200,7 @@ export const Navbar = () => {
         <AnimatePresence>
           {searchOpen && (
             <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.2 }}
-              className="absolute left-0 right-0 bg-white border-t border-bisat-black/6 shadow-lg overflow-hidden z-50">
+              className="absolute left-0 right-0 bg-bisat-ivory border-t border-bisat-border shadow-lg overflow-hidden z-50">
               <form onSubmit={handleSearch} className="max-w-2xl mx-auto px-4 py-3 flex items-center gap-3">
                 <Search size={18} className="text-bisat-black/30 flex-shrink-0" />
                 <input ref={searchRef} value={searchQuery} onChange={e => setSearchQuery(e.target.value)}
@@ -204,7 +208,7 @@ export const Navbar = () => {
                   className="flex-1 text-sm text-bisat-black placeholder:text-bisat-black/30 focus:outline-none bg-transparent"
                 />
                 {searchQuery && (
-                  <button type="submit" className="flex-shrink-0 bg-bisat-gold text-white text-[10px] uppercase tracking-widest font-bold px-4 py-2 rounded-lg hover:bg-bisat-black transition-colors">
+                  <button type="submit" className="flex-shrink-0 bg-bisat-black text-white text-[10px] uppercase tracking-widest font-bold px-4 py-2 rounded-lg hover:bg-bisat-charcoal transition-colors">
                     Search
                   </button>
                 )}
@@ -219,35 +223,58 @@ export const Navbar = () => {
         {/* ── Shop mega dropdown ─────────────────────────────────────────── */}
         <AnimatePresence>
           {activeDropdown === 'shop' && (
-            <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.18 }}
-              className="hidden md:block absolute left-0 right-0 bg-white border-t border-bisat-black/6 shadow-2xl z-50"
-              onMouseEnter={() => openDropdown('shop')} onMouseLeave={closeDropdown}>
-              <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 py-8">
-                <div className={`grid gap-10 ${shopMega.length === 3 ? 'grid-cols-3' : 'grid-cols-4'}`}>
-                  {shopMega.map(col => (
-                    <div key={col.title}>
-                      <p className="text-[9px] uppercase tracking-[0.2em] font-bold text-bisat-gold mb-4">{col.title}</p>
-                      {col.links.map(link => (
-                        <Link key={link.href + link.label} href={link.href} onClick={closeAll}
-                          className={`block py-1.5 text-[12px] font-light transition-colors duration-150 hover:text-bisat-gold ${link.highlight ? 'text-bisat-gold font-semibold' : 'text-bisat-charcoal/80'}`}>
-                          {link.label}
-                        </Link>
-                      ))}
+            <motion.div
+              initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }}
+              transition={{ duration: 0.15, ease: 'easeOut' }}
+              className="hidden md:block absolute left-0 right-0 bg-bisat-ivory border-t border-bisat-border z-50"
+              style={{ boxShadow: '0 4px 12px rgba(0,0,0,0.06)' }}
+              onMouseEnter={() => openDropdown('shop')} onMouseLeave={closeDropdown}
+            >
+              <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 py-10">
+                <div className={`grid divide-x divide-bisat-border ${shopMega.length === 3 ? 'grid-cols-3' : 'grid-cols-4'}`}>
+                  {shopMega.map((col, colIdx) => (
+                    <div key={col.title} className={colIdx > 0 ? 'pl-10' : 'pr-10'}>
+                      <p className="text-[9px] uppercase tracking-[0.25em] font-semibold text-bisat-black/30 mb-5">
+                        {col.title}
+                      </p>
+                      <ul className="space-y-0">
+                        {col.links.map(link => (
+                          <li key={link.href + link.label}>
+                            <Link
+                              href={link.href}
+                              onClick={closeAll}
+                              className="group flex items-center gap-0 py-[9px] text-[13px] font-light text-bisat-black/65 hover:text-bisat-black transition-colors duration-150 border-b border-bisat-border/60 last:border-0"
+                            >
+                              <span className="w-0 overflow-hidden group-hover:w-4 transition-all duration-200 ease-out opacity-0 group-hover:opacity-100 flex-shrink-0">
+                                <ArrowRight size={10} className="text-bisat-gold" />
+                              </span>
+                              <span className={link.highlight ? 'font-medium text-bisat-black' : ''}>{link.label}</span>
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   ))}
 
-                  {/* Quick category visual cards */}
                   {config.categories.length > 0 && (
-                    <div>
-                      <p className="text-[9px] uppercase tracking-[0.2em] font-bold text-bisat-gold mb-4">Browse</p>
-                      <div className="grid grid-cols-2 gap-2">
-                        {config.categories.slice(0, 4).map(cat => (
-                          <Link key={cat} href={`/shop?category=${encodeURIComponent(cat)}`} onClick={closeAll}
-                            className="block text-[11px] font-semibold text-bisat-black/60 hover:text-bisat-gold bg-bisat-cream/50 hover:bg-bisat-cream rounded-xl px-3 py-2 transition-all text-center">
-                            {cat}
-                          </Link>
+                    <div className="pl-10">
+                      <p className="text-[9px] uppercase tracking-[0.25em] font-semibold text-bisat-black/30 mb-5">Browse</p>
+                      <ul className="space-y-0">
+                        {[...config.categories, 'View All'].map((cat, i) => (
+                          <li key={cat}>
+                            <Link
+                              href={i === config.categories.length ? '/shop' : `/shop?category=${encodeURIComponent(cat)}`}
+                              onClick={closeAll}
+                              className="group flex items-center gap-0 py-[9px] text-[13px] font-light text-bisat-black/65 hover:text-bisat-black transition-colors duration-150 border-b border-bisat-border/60 last:border-0"
+                            >
+                              <span className="w-0 overflow-hidden group-hover:w-4 transition-all duration-200 ease-out opacity-0 group-hover:opacity-100 flex-shrink-0">
+                                <ArrowRight size={10} className="text-bisat-gold" />
+                              </span>
+                              <span className={i === config.categories.length ? 'font-medium text-bisat-black' : ''}>{cat}</span>
+                            </Link>
+                          </li>
                         ))}
-                      </div>
+                      </ul>
                     </div>
                   )}
                 </div>
@@ -259,22 +286,42 @@ export const Navbar = () => {
         {/* ── Rooms dropdown ─────────────────────────────────────────────── */}
         <AnimatePresence>
           {activeDropdown === 'rooms' && (
-            <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.18 }}
-              className="hidden md:block absolute left-0 right-0 bg-white border-t border-bisat-black/6 shadow-2xl z-50"
-              onMouseEnter={() => openDropdown('rooms')} onMouseLeave={closeDropdown}>
-              <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 py-8">
-                <p className="text-[9px] uppercase tracking-[0.2em] font-bold text-bisat-gold mb-4">Shop by Room</p>
-                <div className="grid grid-cols-4 gap-3">
-                  {(config.rooms.length ? config.rooms : ['Living Room','Bedroom','Dining Room','Hallway','Office']).map(room => (
-                    <Link key={room} href={`/shop?room=${encodeURIComponent(room)}`} onClick={closeAll}
-                      className="group flex items-center gap-2 py-2 text-[12px] font-light text-bisat-charcoal/80 hover:text-bisat-gold transition-colors">
-                      <ArrowRight size={10} className="text-bisat-gold/40 group-hover:translate-x-0.5 transition-transform" />
-                      {room}
-                    </Link>
+            <motion.div
+              initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }}
+              transition={{ duration: 0.15, ease: 'easeOut' }}
+              className="hidden md:block absolute left-0 right-0 bg-bisat-ivory border-t border-bisat-border z-50"
+              style={{ boxShadow: '0 4px 12px rgba(0,0,0,0.06)' }}
+              onMouseEnter={() => openDropdown('rooms')} onMouseLeave={closeDropdown}
+            >
+              <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 py-10">
+                <p className="text-[9px] uppercase tracking-[0.25em] font-semibold text-bisat-black/30 mb-5">Shop by Room</p>
+                <div className="grid grid-cols-5 divide-x divide-bisat-border">
+                  {(config.rooms.length ? config.rooms : ['Living Room','Bedroom','Dining Room','Hallway','Office']).map((room, i) => (
+                    <div key={room} className={i > 0 ? 'pl-8' : 'pr-8'}>
+                      <Link
+                        href={`/shop?room=${encodeURIComponent(room)}`}
+                        onClick={closeAll}
+                        className="group flex items-center gap-0 py-[9px] text-[13px] font-light text-bisat-black/65 hover:text-bisat-black transition-colors duration-150"
+                      >
+                        <span className="w-0 overflow-hidden group-hover:w-4 transition-all duration-200 ease-out opacity-0 group-hover:opacity-100 flex-shrink-0">
+                          <ArrowRight size={10} className="text-bisat-gold" />
+                        </span>
+                        {room}
+                      </Link>
+                    </div>
                   ))}
-                  <Link href="/shop" onClick={closeAll} className="flex items-center gap-2 py-2 text-[12px] font-semibold text-bisat-gold hover:text-bisat-black transition-colors">
-                    <ArrowRight size={10} />All Rooms
-                  </Link>
+                  <div className="pl-8">
+                    <Link
+                      href="/shop"
+                      onClick={closeAll}
+                      className="group flex items-center gap-0 py-[9px] text-[13px] font-medium text-bisat-black hover:text-bisat-gold transition-colors duration-150"
+                    >
+                      <span className="w-0 overflow-hidden group-hover:w-4 transition-all duration-200 ease-out opacity-0 group-hover:opacity-100 flex-shrink-0">
+                        <ArrowRight size={10} className="text-bisat-gold" />
+                      </span>
+                      All Rooms
+                    </Link>
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -287,11 +334,11 @@ export const Navbar = () => {
         {isOpen && (
           <motion.div initial={{ opacity: 0, x: '100%' }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: '100%' }}
             transition={{ type: 'spring', damping: 28, stiffness: 220 }}
-            className="md:hidden fixed inset-0 bg-white z-40 overflow-y-auto" style={{ top: 64 }}>
+            className="md:hidden fixed inset-0 bg-bisat-ivory z-40 overflow-y-auto" style={{ top: 64 }}>
             <div className="px-6 pt-4 pb-20">
 
               {/* Mobile search */}
-              <form onSubmit={handleSearch} className="flex items-center gap-2 bg-bisat-cream/60 rounded-2xl px-4 py-3 mb-6">
+              <form onSubmit={handleSearch} className="flex items-center gap-2 bg-bisat-cream rounded-2xl px-4 py-3 mb-6">
                 <Search size={16} className="text-bisat-black/30 flex-shrink-0" />
                 <input value={searchQuery} onChange={e => setSearchQuery(e.target.value)}
                   placeholder="Search rugs…"
@@ -340,6 +387,7 @@ export const Navbar = () => {
 
               {/* Direct links */}
               {[
+                { label: 'Lookbook',  href: '/lookbook' },
                 { label: 'Journal',   href: '/blog' },
                 { label: 'Our Story', href: '/about' },
                 { label: 'Contact',   href: '/contact' },
@@ -357,7 +405,7 @@ export const Navbar = () => {
                   Cart {totalItems > 0 && `(${totalItems})`}
                 </Link>
                 <Link href="/track-order" onClick={() => setIsOpen(false)}
-                  className="flex items-center justify-center gap-2 bg-bisat-cream text-bisat-black rounded-2xl py-4 text-sm font-bold">
+                  className="flex items-center justify-center gap-2 bg-bisat-cream border border-bisat-border text-bisat-black rounded-2xl py-4 text-sm font-bold">
                   Track Order
                 </Link>
               </div>
@@ -379,16 +427,16 @@ const DesktopNavItem: React.FC<{
     return (
       <Link href={href} className="text-[10px] uppercase tracking-[0.22em] font-semibold text-bisat-black/65 hover:text-bisat-black relative group transition-colors">
         {label}
-        <span className="absolute -bottom-1 left-0 h-[1px] bg-bisat-gold w-0 group-hover:w-full transition-all duration-300" />
+        <span className="absolute -bottom-1 left-0 h-[1px] bg-bisat-black w-0 group-hover:w-full transition-all duration-300" />
       </Link>
     );
   }
   return (
     <div className="relative" onMouseEnter={() => onOpen(id)} onMouseLeave={onClose}>
-      <button className={`flex items-center gap-1 text-[10px] uppercase tracking-[0.22em] font-semibold transition-colors relative group ${isDropOpen ? 'text-bisat-gold' : 'text-bisat-black/65 hover:text-bisat-black'}`}>
+      <button className={`flex items-center gap-1 text-[10px] uppercase tracking-[0.22em] font-semibold transition-colors relative group ${isDropOpen ? 'text-bisat-black' : 'text-bisat-black/65 hover:text-bisat-black'}`}>
         {label}
         <ChevronDown size={11} strokeWidth={2.5} className={`transition-transform duration-200 ${isDropOpen ? 'rotate-180' : ''}`} />
-        <span className={`absolute -bottom-1 left-0 h-[1px] bg-bisat-gold transition-all duration-300 ${isDropOpen ? 'w-full' : 'w-0 group-hover:w-full'}`} />
+        <span className={`absolute -bottom-1 left-0 h-[1px] bg-bisat-black transition-all duration-300 ${isDropOpen ? 'w-full' : 'w-0 group-hover:w-full'}`} />
       </button>
     </div>
   );
