@@ -25,6 +25,7 @@
 @layer base {
   body {
     @apply bg-bisat-ivory text-bisat-black font-sans antialiased selection:bg-bisat-gold/20 selection:text-bisat-gold;
+    scrollbar-gutter: stable;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -76,13 +77,14 @@
 /* ── Scroll-reveal animation (IntersectionObserver driven) ─────────────────── */
 .scroll-animate {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(30px) scale(0.98);
+  transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
 }
 .scroll-animate-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
 }
 
 /* ── Hero load animation (CSS keyframe, plays immediately on load) ─────────── */

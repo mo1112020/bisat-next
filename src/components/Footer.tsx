@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Instagram, Mail, ArrowRight, MapPin, Phone } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -16,10 +16,55 @@ const TikTokIcon = () => (
   </svg>
 );
 
+interface CollectionLink {
+  label: string;
+  href: string;
+}
+
 export const Footer = () => {
   const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
+  const [collections, setCollections] = useState<CollectionLink[]>([
+    { label: 'Handmade Rugs', href: '/shop?category=Handmade' },
+    { label: 'Vintage Rugs',  href: '/shop?category=Vintage' },
+    { label: 'Kilim',         href: '/shop?category=Kilim' },
+    { label: 'Machine Woven', href: '/shop?category=Machine' },
+  ]);
+  const [footerShippingTitle, setFooterShippingTitle] = useState('Free Worldwide Shipping');
+  const [footerShippingDesc, setFooterShippingDesc] = useState('Every rug is hand-packed and insured for complimentary delivery.');
+  const [address, setAddress] = useState('Grand Bazaar Quarter, Istanbul, Turkey');
+  const [phone, setPhone] = useState('+90 212 000 0000');
+  const [instagramUrl, setInstagramUrl] = useState('https://www.instagram.com/bisat.store/');
+  const [pinterestUrl, setPinterestUrl] = useState('https://tr.pinterest.com/bisattstore/');
+  const [tiktokUrl, setTiktokUrl] = useState('https://www.tiktok.com/@bisattstore');
+
+  useEffect(() => {
+    fetch('/api/store-config')
+      .then(r => r.json())
+      .then(data => {
+        if (data.categories?.length) {
+          setCollections((data.categories as string[]).map(name => ({
+            label: name + ' Rugs',
+            href: '/shop?category=' + encodeURIComponent(name),
+          })));
+        }
+      })
+      .catch(() => {});
+
+    fetch('/api/site-settings-public')
+      .then(r => r.json())
+      .then(data => {
+        if (data.footer_shipping_title) setFooterShippingTitle(data.footer_shipping_title as string);
+        if (data.footer_shipping_desc) setFooterShippingDesc(data.footer_shipping_desc as string);
+        if (data.contact_address) setAddress(data.contact_address as string);
+        if (data.contact_phone) setPhone(data.contact_phone as string);
+        if (data.social_instagram) setInstagramUrl(data.social_instagram as string);
+        if (data.social_pinterest) setPinterestUrl(data.social_pinterest as string);
+        if (data.social_tiktok) setTiktokUrl(data.social_tiktok as string);
+      })
+      .catch(() => {});
+  }, []);
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,10 +77,10 @@ export const Footer = () => {
     <footer className="bg-bisat-black text-bisat-ivory">
       {/* Top bar CTA */}
       <div className="border-b border-bisat-cream/5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-6">
+        <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 py-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-6">
           <div>
-            <p className="text-bisat-gold text-[10px] uppercase tracking-[0.3em] font-bold mb-1">Free Worldwide Shipping</p>
-            <p className="text-bisat-cream/50 text-sm">Every rug is hand-packed and insured for complimentary delivery.</p>
+            <p className="text-bisat-gold text-[10px] uppercase tracking-[0.3em] font-bold mb-1">{footerShippingTitle}</p>
+            <p className="text-bisat-cream/50 text-sm">{footerShippingDesc}</p>
           </div>
           <Link
             href="/shop"
@@ -48,7 +93,7 @@ export const Footer = () => {
       </div>
 
       {/* Main grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-8 sm:pt-16 sm:pb-12">
+      <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 pt-10 pb-8 sm:pt-16 sm:pb-12">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 sm:gap-10 mb-10 sm:mb-14">
 
           {/* Brand */}
@@ -61,20 +106,20 @@ export const Footer = () => {
             </p>
             <div className="flex items-center gap-2 text-bisat-ivory/30 text-sm mb-2">
               <MapPin size={14} className="flex-shrink-0" />
-              <span>Grand Bazaar Quarter, Istanbul, Turkey</span>
+              <span>{address}</span>
             </div>
             <div className="flex items-center gap-2 text-bisat-ivory/30 text-sm mb-8">
               <Phone size={14} className="flex-shrink-0" />
-              <span>+90 212 000 0000</span>
+              <span>{phone}</span>
             </div>
             <div className="flex items-center gap-3">
-              <a href="https://www.instagram.com/bisat.store/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="w-9 h-9 rounded-full border border-bisat-ivory/10 flex items-center justify-center text-bisat-ivory/30 hover:text-bisat-gold hover:border-bisat-gold transition-all duration-300">
+              <a href={instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="w-9 h-9 rounded-full border border-bisat-ivory/10 flex items-center justify-center text-bisat-ivory/30 hover:text-bisat-gold hover:border-bisat-gold transition-all duration-300">
                 <Instagram size={15} />
               </a>
-              <a href="https://tr.pinterest.com/bisattstore/" target="_blank" rel="noopener noreferrer" aria-label="Pinterest" className="w-9 h-9 rounded-full border border-bisat-ivory/10 flex items-center justify-center text-bisat-ivory/30 hover:text-bisat-gold hover:border-bisat-gold transition-all duration-300">
+              <a href={pinterestUrl} target="_blank" rel="noopener noreferrer" aria-label="Pinterest" className="w-9 h-9 rounded-full border border-bisat-ivory/10 flex items-center justify-center text-bisat-ivory/30 hover:text-bisat-gold hover:border-bisat-gold transition-all duration-300">
                 <PinterestIcon />
               </a>
-              <a href="https://www.tiktok.com/@bisattstore" target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="w-9 h-9 rounded-full border border-bisat-ivory/10 flex items-center justify-center text-bisat-ivory/30 hover:text-bisat-gold hover:border-bisat-gold transition-all duration-300">
+              <a href={tiktokUrl} target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="w-9 h-9 rounded-full border border-bisat-ivory/10 flex items-center justify-center text-bisat-ivory/30 hover:text-bisat-gold hover:border-bisat-gold transition-all duration-300">
                 <TikTokIcon />
               </a>
             </div>
@@ -85,10 +130,7 @@ export const Footer = () => {
             <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-bisat-ivory/40 mb-6">Collections</h4>
             <ul className="space-y-3.5">
               {[
-                { label: 'Handmade Rugs', href: '/shop?category=Handmade' },
-                { label: 'Vintage Rugs', href: '/shop?category=Vintage' },
-                { label: 'Kilim', href: '/shop?category=Kilim' },
-                { label: 'Machine Woven', href: '/shop?category=Machine' },
+                ...collections,
                 { label: 'New Arrivals', href: '/shop' },
                 { label: 'Sale', href: '/shop' },
               ].map(link => (

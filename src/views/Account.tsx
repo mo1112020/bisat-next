@@ -27,7 +27,7 @@ export const Account = () => {
     <div className="pb-16 bg-bisat-cream min-h-screen">
       <Meta title="My Account" description="Manage your Bisāṭ account, orders, and preferences." />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+      <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 pt-6">
         <PageHeader
           badge="My Account"
           title="Welcome back, Leila"

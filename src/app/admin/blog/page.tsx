@@ -1,8 +1,9 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { Plus, Pencil, Trash2, X } from 'lucide-react';
-import { getBlogPosts, adminCreateBlogPost, adminUpdateBlogPost, adminDeleteBlogPost } from '@/src/lib/db';
+import { getBlogPosts, adminCreateBlogPost, adminUpdateBlogPost, adminDeleteBlogPost } from '@/src/lib/db-browser';
 import { BlogPostData } from '@/src/data/blogPosts';
+import { CdnImagePicker } from '@/src/components/CdnImagePicker';
 
 const EMPTY_FORM = { title: '', excerpt: '', content: '', image: '', date: '', author: '', category: '', metaDescription: '' };
 
@@ -107,7 +108,14 @@ export default function AdminBlogPage() {
                 {field('author', 'Author')}
                 {field('category', 'Category')}
                 {field('date', 'Date', { placeholder: 'e.g. March 15, 2026' })}
-                {field('image', 'Image URL', { placeholder: 'https://...' })}
+                <div className="col-span-2">
+                  <CdnImagePicker
+                    label="Cover Image"
+                    value={form.image}
+                    onChange={url => setForm(f => ({ ...f, image: url }))}
+                    placeholder="Pick cover image from CDN…"
+                  />
+                </div>
                 {field('excerpt', 'Excerpt', { colSpan: true, multiline: true, rows: 2 })}
                 {field('content', 'Content (HTML)', { colSpan: true, multiline: true, rows: 6 })}
                 {field('metaDescription', 'Meta Description', { colSpan: true, multiline: true, rows: 2 })}

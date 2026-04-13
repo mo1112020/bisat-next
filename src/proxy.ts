@@ -3,7 +3,7 @@ import type { NextRequest } from 'next/server';
 
 const ADMIN_TOKEN = 'bisat_admin_secret_2026';
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   if (pathname.startsWith('/admin')) {

@@ -1,12 +1,18 @@
 'use client';
 import React from 'react';
+import Image from 'next/image';
 import { motion } from 'motion/react';
 import { Meta } from '../components/Meta';
 import { Schema, getOrganizationSchema } from '../components/Schema';
 import { ArrowRight, Globe, Heart, ShieldCheck, Users } from 'lucide-react';
 import { PageHeader } from '../components/PageHeader';
 
-export const About = () => {
+interface AboutProps {
+  artisanImage?: string;
+}
+
+export const About = ({ artisanImage }: AboutProps) => {
+  const artisanSrc = artisanImage || 'https://images.unsplash.com/photo-1528360983277-13d401cdc186';
   return (
     <div className="pb-16 bg-bisat-cream min-h-screen">
       <Meta 
@@ -16,7 +22,7 @@ export const About = () => {
       <Schema data={getOrganizationSchema()} />
 
       {/* Hero Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+      <section className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 pt-4">
         <PageHeader
           badge="Our Heritage"
           title={<>Weaving Stories <span className="italic text-bisat-gold">Across Borders</span></>}
@@ -42,7 +48,7 @@ export const About = () => {
         <div className="absolute top-0 right-0 w-96 h-96 bg-bisat-gold/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-[120px]" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-bisat-teal/10 rounded-full translate-y-1/2 -translate-x-1/2 blur-[120px]" />
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <span className="text-bisat-gold uppercase tracking-[0.3em] text-[10px] font-bold mb-6 block">Our Purpose</span>
             <h2 className="text-3xl lg:text-4xl font-serif mb-6 leading-tight">Preserving the Art of the Hand</h2>
@@ -89,7 +95,7 @@ export const About = () => {
       </section>
 
       {/* Artisans Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+      <section className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 mb-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
@@ -98,11 +104,12 @@ export const About = () => {
             transition={{ duration: 1 }}
             className="order-2 lg:order-1 lg:col-span-6 relative h-[400px] rounded-3xl overflow-hidden shadow-2xl shadow-bisat-black/5"
           >
-            <img 
-              src="https://placehold.co/1200x800"
-              alt="Artisan workshop" 
-              className="w-full h-full object-cover"
-              referrerPolicy="no-referrer"
+            <Image
+              src={artisanSrc}
+              alt="Artisan weaving a traditional rug"
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover"
             />
             <div className="absolute inset-0 bg-bisat-gold/10 mix-blend-overlay" />
           </motion.div>
@@ -144,7 +151,7 @@ export const About = () => {
       </section>
 
       {/* Origin Story */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pb-16">
+      <section className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 text-center pb-16">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

@@ -83,7 +83,7 @@ export const Checkout = () => {
     <div className="min-h-screen bg-bisat-cream pb-16 sm:pb-24">
       <Meta title="Checkout" description="Complete your Bisāṭ order securely." />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+      <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 pt-8">
 
         {/* Header */}
         <div className="mb-6 sm:mb-10">

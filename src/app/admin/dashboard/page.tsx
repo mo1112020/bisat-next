@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { Package, FileText, ShoppingBag, Star, MessageSquare } from 'lucide-react';
-import { getDashboardStats, adminGetOrders } from '@/src/lib/db';
+import { getDashboardStats, adminGetOrders } from '@/src/lib/db-browser';
 
 export default function DashboardPage() {
   const [stats, setStats] = useState({ products: 0, orders: 0, reviews: 0, blogPosts: 0, testimonials: 0 });

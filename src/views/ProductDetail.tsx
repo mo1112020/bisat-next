@@ -1,6 +1,7 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
 import { Product, Review } from '../data/products';
 import { getProduct, getRelatedProducts, addProductReview } from '../lib/db';
@@ -10,13 +11,15 @@ import { useWishlist } from '../context/WishlistContext';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   ShoppingBag, Truck, ShieldCheck, RotateCcw,
-  Star, Plus, Minus, Heart, ChevronRight, Check,
+  Star, Plus, Minus, Heart, ChevronRight, Check, Mail,
 } from 'lucide-react';
 import { Meta } from '../components/Meta';
 import { Schema, getProductSchema, getBreadcrumbSchema } from '../components/Schema';
 import { ProductCard } from '../components/ProductCard';
 import { RecentlyViewed } from '../components/RecentlyViewed';
 import { useLanguage } from '../context/LanguageContext';
+import { StickyAtcBar } from '../components/StickyAtcBar';
+import { SizeGuide } from '../components/SizeGuide';
 
 export const ProductDetail = () => {
   const { t } = useLanguage();
@@ -33,6 +36,9 @@ export const ProductDetail = () => {
   const [qty, setQty] = useState(1);
   const [added, setAdded] = useState(false);
   const [localReviews, setLocalReviews] = useState<Review[]>([]);
+  const [waitlistEmail, setWaitlistEmail] = useState('');
+  const [waitlistSent, setWaitlistSent] = useState(false);
+  const atcRef = useRef<HTMLButtonElement>(null);
 
   // Zoom
   const [zoomPos, setZoomPos] = useState({ x: 50, y: 50 });
@@ -47,6 +53,14 @@ export const ProductDetail = () => {
   const [reviewRating, setReviewRating] = useState(5);
   const [reviewComment, setReviewComment] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Must be declared before any early returns — hooks must run unconditionally
+  const handleAddToCart = useCallback(() => {
+    if (!product) return;
+    for (let i = 0; i < qty; i++) addToCart(product);
+    setAdded(true);
+    setTimeout(() => setAdded(false), 2000);
+  }, [qty, product, addToCart]);
 
   useEffect(() => {
     if (!id) return;
@@ -84,12 +98,6 @@ export const ProductDetail = () => {
     ? (localReviews.reduce((a, r) => a + r.rating, 0) / localReviews.length).toFixed(1)
     : null;
 
-  const handleAddToCart = () => {
-    for (let i = 0; i < qty; i++) addToCart(product);
-    setAdded(true);
-    setTimeout(() => setAdded(false), 2000);
-  };
-
   const handleReviewSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!reviewName || !reviewComment) return;
@@ -107,6 +115,7 @@ export const ProductDetail = () => {
 
   return (
     <div className="bg-bisat-ivory min-h-screen">
+      <StickyAtcBar product={product} anchorRef={atcRef} onAddToCart={handleAddToCart} added={added} />
       <Meta title={product.name} description={product.description} image={product.images[0]} type="product" />
       <Schema data={getProductSchema(product)} />
       <Schema data={getBreadcrumbSchema([
@@ -116,7 +125,7 @@ export const ProductDetail = () => {
         { name: product.name, path: `/product/${product.id}` },
       ])} />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 py-8">
 
         {/* Breadcrumb */}
         <nav className="flex items-center gap-1.5 text-[11px] text-bisat-black/40 mb-6 font-medium">
@@ -130,7 +139,7 @@ export const ProductDetail = () => {
         </nav>
 
         {/* Main product area */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 mb-20">
 
           {/* ── Images ── */}
           <div>
@@ -147,7 +156,7 @@ export const ProductDetail = () => {
                         activeImage === i ? 'border-bisat-gold' : 'border-transparent opacity-50 hover:opacity-80'
                       }`}
                     >
-                      <img src={img} alt="" className="w-full h-full object-cover" />
+                      <Image src={img} alt="" fill sizes="64px" className="object-cover" />
                     </button>
                   ))}
                 </div>
@@ -160,10 +169,13 @@ export const ProductDetail = () => {
                 onMouseEnter={() => setIsZoomed(true)}
                 onMouseLeave={() => setIsZoomed(false)}
               >
-                <img
+                <Image
                   src={product.images[activeImage]}
                   alt={product.name}
-                  className="w-full h-full object-cover transition-transform duration-300 ease-out"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover transition-transform duration-300 ease-out"
+                  priority
                   style={{
                     transformOrigin: `${zoomPos.x}% ${zoomPos.y}%`,
                     transform: isZoomed ? 'scale(2.2)' : 'scale(1)',
@@ -191,11 +203,11 @@ export const ProductDetail = () => {
                   <button
                     key={i}
                     onClick={() => setActiveImage(i)}
-                    className={`w-16 h-16 flex-shrink-0 rounded-xl overflow-hidden border-2 transition-all ${
+                    className={`w-16 h-16 flex-shrink-0 rounded-xl overflow-hidden border-2 transition-all relative ${
                       activeImage === i ? 'border-bisat-gold' : 'border-transparent opacity-50'
                     }`}
                   >
-                    <img src={img} alt="" className="w-full h-full object-cover" />
+                    <Image src={img} alt="" fill sizes="64px" className="object-cover" />
                   </button>
                 ))}
               </div>
@@ -250,7 +262,7 @@ export const ProductDetail = () => {
             </p>
 
             {/* Specs grid */}
-            <div className="grid grid-cols-2 gap-3 mb-6">
+            <div className="grid grid-cols-2 gap-3 mb-3">
               {[
                 { label: 'Dimensions', value: product.dimensions },
                 { label: 'Material', value: product.material },
@@ -262,6 +274,9 @@ export const ProductDetail = () => {
                   <p className="text-sm font-medium text-bisat-black">{spec.value}</p>
                 </div>
               ))}
+            </div>
+            <div className="mb-5">
+              <SizeGuide />
             </div>
 
             {/* Stock indicator */}
@@ -310,6 +325,7 @@ export const ProductDetail = () => {
 
               {/* Add to cart — full width */}
               <button
+                ref={atcRef}
                 onClick={handleAddToCart}
                 disabled={product.stock === 0 || added}
                 className={`w-full rounded-xl text-sm font-semibold tracking-wide transition-all duration-300 flex items-center justify-center gap-2.5 py-4 ${
@@ -323,9 +339,39 @@ export const ProductDetail = () => {
                 {added ? (
                   <><Check size={16} /> Added to Cart</>
                 ) : (
-                  <><ShoppingBag size={16} /> {product.stock === 0 ? 'Sold Out' : 'Add to Cart'}</>
+                  <><ShoppingBag size={16} /> {product.stock === 0 ? 'Sold Out' : 'Add to Bag'}</>
                 )}
               </button>
+
+              {/* Waitlist for sold-out */}
+              {product.stock === 0 && !waitlistSent && (
+                <div className="bg-bisat-cream/60 rounded-xl p-4">
+                  <p className="text-[11px] font-bold text-bisat-black/60 uppercase tracking-wider mb-2.5 flex items-center gap-2">
+                    <Mail size={12} /> Notify me when back in stock
+                  </p>
+                  <form
+                    onSubmit={e => { e.preventDefault(); setWaitlistSent(true); }}
+                    className="flex gap-2"
+                  >
+                    <input
+                      type="email" required
+                      value={waitlistEmail}
+                      onChange={e => setWaitlistEmail(e.target.value)}
+                      placeholder="your@email.com"
+                      className="flex-1 bg-white border border-bisat-black/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-bisat-gold/50 transition-all"
+                    />
+                    <button type="submit" className="px-4 py-2 bg-bisat-black text-white rounded-lg text-xs font-bold uppercase tracking-wide hover:bg-bisat-gold transition-colors">
+                      Notify
+                    </button>
+                  </form>
+                </div>
+              )}
+              {waitlistSent && (
+                <div className="flex items-center gap-2 bg-green-50 border border-green-200 rounded-xl px-4 py-3">
+                  <Check size={14} className="text-green-600 flex-shrink-0" />
+                  <p className="text-sm text-green-700 font-medium">You're on the list — we'll email you when it's back.</p>
+                </div>
+              )}
             </div>
 
             {/* Secondary CTA */}

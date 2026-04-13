@@ -1,84 +1,12 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { ShoppingBag, Menu, X, Search, Heart, User, Globe, ChevronDown } from 'lucide-react';
+import { usePathname, useRouter } from 'next/navigation';
+import { ShoppingBag, Menu, X, Search, Heart, User, Globe, ChevronDown, ArrowRight } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
 import { AnimatePresence, motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
-
-// ── Navigation data ──────────────────────────────────────────────────────────
-const SHOP_MEGA = [
-  {
-    title: 'By Craft',
-    links: [
-      { label: 'Hand-knotted', href: '/shop?category=Handmade' },
-      { label: 'Kilims', href: '/shop?category=Kilim' },
-      { label: 'Machine-made', href: '/shop?category=Machine' },
-      { label: 'Vintage', href: '/shop?category=Vintage' },
-      { label: 'Overdyed', href: '/shop?style=Overdyed' },
-      { label: 'Runners', href: '/shop?size=Runner' },
-      { label: 'All Rugs', href: '/shop', highlight: true },
-    ],
-  },
-  {
-    title: 'By Size',
-    links: [
-      { label: 'Small (under 4m²)', href: '/shop?size=Small' },
-      { label: 'Medium (4–8m²)', href: '/shop?size=Medium' },
-      { label: 'Large (8–12m²)', href: '/shop?size=Large' },
-      { label: 'Oversized (12m²+)', href: '/shop?size=Large' },
-      { label: 'Runner', href: '/shop?size=Runner' },
-      { label: 'Round', href: '/shop?style=Round' },
-      { label: 'Custom size', href: '/contact' },
-    ],
-  },
-  {
-    title: 'By Color',
-    links: [
-      { label: 'Red', href: '/shop?color=Red' },
-      { label: 'Blue', href: '/shop?color=Blue' },
-      { label: 'Neutral / Beige', href: '/shop?color=Neutral' },
-      { label: 'Green', href: '/shop?color=Green' },
-      { label: 'Ivory / Cream', href: '/shop?color=Ivory' },
-      { label: 'Multi', href: '/shop?color=Multi' },
-      { label: 'Black', href: '/shop?color=Black' },
-    ],
-  },
-  {
-    title: 'Featured',
-    links: [
-      { label: 'New Arrivals', href: '/shop' },
-      { label: 'Best Sellers', href: '/shop?sort=bestselling' },
-      { label: 'Under $500', href: '/shop?maxPrice=500' },
-      { label: 'Sale', href: '/shop?sale=true' },
-      { label: 'AI Room Preview', href: '/shop', highlight: true },
-    ],
-  },
-];
-
-const COLLECTIONS_LINKS = [
-  { label: 'Oushak', href: '/shop?collection=Oushak' },
-  { label: 'Cappadocia', href: '/shop?collection=Cappadocia' },
-  { label: 'Hereke Silk', href: '/shop?collection=Hereke' },
-  { label: 'Bergama Heritage', href: '/shop?collection=Bergama' },
-  { label: 'Konya Traditional', href: '/shop?collection=Konya' },
-  { label: 'Modern Minimalist', href: '/shop?style=Modern' },
-  { label: 'Bohemian Edit', href: '/shop?style=Bohemian' },
-  { label: 'The Neutral Edit', href: '/shop?color=Neutral' },
-  { label: 'Under $500', href: '/shop?maxPrice=500' },
-];
-
-const ROOMS_LINKS = [
-  { label: 'Living Room', href: '/shop?room=Living+Room' },
-  { label: 'Bedroom', href: '/shop?room=Bedroom' },
-  { label: 'Dining Room', href: '/shop?room=Dining+Room' },
-  { label: 'Kitchen', href: '/shop?room=Kitchen' },
-  { label: 'Hallway & Entryway', href: '/shop?room=Hallway' },
-  { label: 'Office', href: '/shop?room=Office' },
-  { label: 'Outdoor', href: '/shop?room=Outdoor' },
-];
 
 const LANGUAGES = [
   { code: 'en', name: 'English' },
@@ -86,34 +14,52 @@ const LANGUAGES = [
   { code: 'tr', name: 'Türkçe' },
 ];
 
-// ── Sub-components ────────────────────────────────────────────────────────────
-const NavDropdownLink: React.FC<{ href: string; label: string; highlight?: boolean; onClick: () => void }> = ({
-  href, label, highlight, onClick,
-}) => (
-  <Link
-    href={href}
-    onClick={onClick}
-    className={`block py-1.5 text-[12px] font-light transition-colors duration-150 nav-link-hover ${
-      highlight ? 'text-bisat-gold font-semibold' : 'text-bisat-charcoal/80'
-    }`}
-  >
-    {label}
-  </Link>
-);
+const STATIC_SIZE_LINKS = [
+  { label: 'Small (under 4m²)', href: '/shop?size=Small' },
+  { label: 'Medium (4–8m²)',    href: '/shop?size=Medium' },
+  { label: 'Large (8–12m²)',    href: '/shop?size=Large' },
+  { label: 'Runner',            href: '/shop?size=Runner' },
+];
 
-// ── Main component ────────────────────────────────────────────────────────────
+const STATIC_FEATURED = [
+  { label: 'New Arrivals',  href: '/shop',              highlight: false },
+  { label: 'Best Sellers',  href: '/shop',              highlight: false },
+  { label: 'Under $500',    href: '/shop?maxPrice=500', highlight: false },
+  { label: 'Sale',          href: '/shop?sale=true',    highlight: false },
+  { label: 'View All →',    href: '/shop',              highlight: true  },
+];
+
+interface StoreConfig {
+  categories: string[];
+  rooms: string[];
+  sizes: string[];
+}
+
 export const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [isOpen, setIsOpen]       = useState(false);
+  const [scrolled, setScrolled]   = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [mobileAccordion, setMobileAccordion] = useState<string | null>(null);
-  const [langOpen, setLangOpen] = useState(false);
+  const [langOpen, setLangOpen]   = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [config, setConfig]       = useState<StoreConfig>({ categories: [], rooms: [], sizes: [] });
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const searchRef  = useRef<HTMLInputElement>(null);
 
   const { totalItems } = useCart();
-  const { wishlist } = useWishlist();
-  const pathname = usePathname();
-  const { i18n } = useTranslation();
+  const { wishlist }   = useWishlist();
+  const pathname       = usePathname();
+  const router         = useRouter();
+  const { i18n }       = useTranslation();
+
+  // Fetch dynamic categories / rooms / sizes
+  useEffect(() => {
+    fetch('/api/store-config')
+      .then(r => r.json())
+      .then(data => setConfig(data))
+      .catch(() => {});
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -121,136 +67,94 @@ export const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu on route change
-  useEffect(() => { setIsOpen(false); setMobileAccordion(null); }, [pathname]);
+  useEffect(() => { setIsOpen(false); setMobileAccordion(null); setSearchOpen(false); }, [pathname]);
 
-  const openDropdown = (id: string) => {
-    if (closeTimer.current) clearTimeout(closeTimer.current);
-    setActiveDropdown(id);
-  };
+  useEffect(() => {
+    if (searchOpen) setTimeout(() => searchRef.current?.focus(), 80);
+  }, [searchOpen]);
 
-  const closeDropdown = () => {
-    closeTimer.current = setTimeout(() => setActiveDropdown(null), 120);
-  };
+  const openDropdown  = (id: string) => { if (closeTimer.current) clearTimeout(closeTimer.current); setActiveDropdown(id); };
+  const closeDropdown = () => { closeTimer.current = setTimeout(() => setActiveDropdown(null), 120); };
+  const changeLanguage = (lng: string) => { i18n.changeLanguage(lng); setLangOpen(false); document.dir = lng === 'ar' ? 'rtl' : 'ltr'; };
+  const closeAll = () => { setActiveDropdown(null); setIsOpen(false); };
 
-  const changeLanguage = (lng: string) => {
-    i18n.changeLanguage(lng);
-    setLangOpen(false);
-    document.dir = lng === 'ar' ? 'rtl' : 'ltr';
-  };
-
-  const closeAll = () => {
-    setActiveDropdown(null);
-    setIsOpen(false);
-  };
-
-  // ── Desktop nav item ───────────────────────────────────────────────────────
-  const DesktopNavItem: React.FC<{
-    id: string;
-    label: string;
-    href?: string;
-    hasDropdown?: boolean;
-  }> = ({ id, label, href, hasDropdown }) => {
-    const isActive = href ? pathname === href || pathname.startsWith(href + '?') : false;
-    const isDropOpen = activeDropdown === id;
-
-    if (!hasDropdown && href) {
-      return (
-        <Link
-          href={href}
-          className={`text-[10px] uppercase tracking-[0.22em] font-semibold transition-colors duration-200 relative group ${
-            isActive ? 'text-bisat-gold' : 'text-bisat-black/65 hover:text-bisat-black'
-          }`}
-        >
-          {label}
-          <span className={`absolute -bottom-1 left-0 h-[1px] bg-bisat-gold transition-all duration-300 ${isActive ? 'w-full' : 'w-0 group-hover:w-full'}`} />
-        </Link>
-      );
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      router.push(`/shop?q=${encodeURIComponent(searchQuery.trim())}`);
+      setSearchQuery('');
+      setSearchOpen(false);
     }
-
-    return (
-      <div
-        className="relative"
-        onMouseEnter={() => openDropdown(id)}
-        onMouseLeave={closeDropdown}
-      >
-        <button
-          className={`flex items-center gap-1 text-[10px] uppercase tracking-[0.22em] font-semibold transition-colors duration-200 relative group ${
-            isDropOpen ? 'text-bisat-gold' : 'text-bisat-black/65 hover:text-bisat-black'
-          }`}
-        >
-          {label}
-          <ChevronDown
-            size={11}
-            strokeWidth={2.5}
-            className={`transition-transform duration-200 ${isDropOpen ? 'rotate-180' : ''}`}
-          />
-          <span className={`absolute -bottom-1 left-0 h-[1px] bg-bisat-gold transition-all duration-300 ${isDropOpen ? 'w-full' : 'w-0 group-hover:w-full'}`} />
-        </button>
-      </div>
-    );
   };
+
+  // Build dynamic shop mega columns
+  const shopMega = [
+    {
+      title: 'By Category',
+      links: [
+        ...config.categories.map(c => ({ label: c, href: `/shop?category=${encodeURIComponent(c)}`, highlight: false })),
+        { label: 'All Rugs →', href: '/shop', highlight: true },
+      ],
+    },
+    {
+      title: 'By Size',
+      links: STATIC_SIZE_LINKS.map(l => ({ ...l, highlight: false })),
+    },
+    {
+      title: 'Featured',
+      links: STATIC_FEATURED,
+    },
+  ];
 
   return (
     <>
-      {/* ── Desktop navbar bar ────────────────────────────────────────────── */}
-      <nav
-        className={`relative h-16 transition-all duration-300 border-b ${
-          scrolled
-            ? 'bg-white/95 backdrop-blur-xl shadow-md border-bisat-black/8'
-            : 'bg-white border-bisat-black/6'
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
+      {/* ── Main bar ───────────────────────────────────────────────────────── */}
+      <nav className={`relative h-[4.5rem] transition-all duration-300 border-b z-40 ${scrolled ? 'bg-white/95 backdrop-blur-xl shadow-md border-bisat-black/8' : 'bg-white border-bisat-black/6'}`}>
+        <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 h-full">
           <div className="relative flex items-center justify-between h-full">
 
             {/* Logo */}
-            <Link
-              href="/"
-              className="font-display text-2xl md:text-3xl font-bold tracking-tight text-bisat-black hover:text-bisat-gold transition-colors duration-300 flex-shrink-0 z-10"
-            >
+            <Link href="/" className="font-display text-2xl md:text-[1.75rem] font-bold tracking-tight text-bisat-black hover:text-bisat-gold transition-colors duration-300 flex-shrink-0 z-10">
               Bisāṭ
             </Link>
 
-            {/* Desktop nav — absolute center */}
+            {/* Desktop nav — centered */}
             <div className="hidden md:flex absolute inset-0 items-center justify-center pointer-events-none">
               <div className="flex items-center gap-7 pointer-events-auto">
-                <DesktopNavItem id="shop" label="Shop" hasDropdown />
-                <DesktopNavItem id="collections" label="Collections" hasDropdown />
-                <DesktopNavItem id="rooms" label="Rooms" hasDropdown />
-                <DesktopNavItem id="vintage" label="Vintage" href="/shop?category=Vintage" />
-                <DesktopNavItem id="journal" label="Journal" href="/blog" />
+                {/* Shop */}
+                <DesktopNavItem id="shop" label="Shop" hasDropdown activeDropdown={activeDropdown} onOpen={openDropdown} onClose={closeDropdown} />
+                {/* Rooms */}
+                <DesktopNavItem id="rooms" label="Rooms" hasDropdown activeDropdown={activeDropdown} onOpen={openDropdown} onClose={closeDropdown} />
+                <Link href="/shop?category=Vintage" className="nav-link text-[10px] uppercase tracking-[0.22em] font-semibold text-bisat-black/65 hover:text-bisat-black relative group">
+                  Vintage
+                  <span className="absolute -bottom-1 left-0 h-[1px] bg-bisat-gold w-0 group-hover:w-full transition-all duration-300" />
+                </Link>
+                <Link href="/blog" className={`nav-link text-[10px] uppercase tracking-[0.22em] font-semibold relative group ${pathname === '/blog' ? 'text-bisat-gold' : 'text-bisat-black/65 hover:text-bisat-black'}`}>
+                  Journal
+                  <span className={`absolute -bottom-1 left-0 h-[1px] bg-bisat-gold transition-all duration-300 ${pathname === '/blog' ? 'w-full' : 'w-0 group-hover:w-full'}`} />
+                </Link>
+                <Link href="/about" className={`nav-link text-[10px] uppercase tracking-[0.22em] font-semibold relative group ${pathname === '/about' ? 'text-bisat-gold' : 'text-bisat-black/65 hover:text-bisat-black'}`}>
+                  Our Story
+                  <span className={`absolute -bottom-1 left-0 h-[1px] bg-bisat-gold transition-all duration-300 ${pathname === '/about' ? 'w-full' : 'w-0 group-hover:w-full'}`} />
+                </Link>
               </div>
             </div>
 
             {/* Right actions */}
-            <div className="flex items-center gap-1 z-10">
-              {/* Language switcher */}
+            <div className="flex items-center gap-0.5 z-10">
+              {/* Language */}
               <div className="relative hidden sm:block">
-                <button
-                  onClick={() => setLangOpen(!langOpen)}
-                  className="p-2 text-bisat-black/55 hover:text-bisat-black transition-colors flex items-center gap-1"
-                >
+                <button onClick={() => setLangOpen(!langOpen)} className="p-2 text-bisat-black/55 hover:text-bisat-black transition-colors flex items-center gap-1">
                   <Globe size={17} strokeWidth={1.5} />
                   <span className="text-[9px] uppercase font-bold">{i18n.language.split('-')[0]}</span>
                 </button>
                 <AnimatePresence>
                   {langOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 6 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 6 }}
-                      transition={{ duration: 0.15 }}
-                      className="absolute right-0 mt-1 w-36 bg-white shadow-xl rounded-2xl border border-bisat-black/5 overflow-hidden py-2 z-50"
-                    >
+                    <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 6 }} transition={{ duration: 0.15 }}
+                      className="absolute right-0 mt-1 w-36 bg-white shadow-xl rounded-2xl border border-bisat-black/5 overflow-hidden py-2 z-50">
                       {LANGUAGES.map(lang => (
-                        <button
-                          key={lang.code}
-                          onClick={() => changeLanguage(lang.code)}
-                          className={`w-full text-left px-4 py-2.5 text-[10px] uppercase tracking-widest font-bold hover:bg-bisat-cream transition-colors ${
-                            i18n.language.startsWith(lang.code) ? 'text-bisat-gold' : 'text-bisat-black/55'
-                          }`}
-                        >
+                        <button key={lang.code} onClick={() => changeLanguage(lang.code)}
+                          className={`w-full text-left px-4 py-2.5 text-[10px] uppercase tracking-widest font-bold hover:bg-bisat-cream transition-colors ${i18n.language.startsWith(lang.code) ? 'text-bisat-gold' : 'text-bisat-black/55'}`}>
                           {lang.name}
                         </button>
                       ))}
@@ -259,16 +163,16 @@ export const Navbar = () => {
                 </AnimatePresence>
               </div>
 
-              <button className="hidden sm:flex p-2 text-bisat-black/55 hover:text-bisat-black transition-colors">
+              {/* Search */}
+              <button onClick={() => setSearchOpen(s => !s)} className="p-2 text-bisat-black/55 hover:text-bisat-black transition-colors">
                 <Search size={17} strokeWidth={1.5} />
               </button>
 
+              {/* Wishlist */}
               <Link href="/wishlist" className="p-2 text-bisat-black/55 hover:text-bisat-black relative transition-colors">
                 <Heart size={17} strokeWidth={1.5} />
                 {wishlist.length > 0 && (
-                  <span className="absolute top-1 right-1 bg-bisat-gold text-white text-[8px] w-3.5 h-3.5 flex items-center justify-center rounded-full font-bold">
-                    {wishlist.length}
-                  </span>
+                  <span className="absolute top-1 right-1 bg-bisat-gold text-white text-[8px] w-3.5 h-3.5 flex items-center justify-center rounded-full font-bold">{wishlist.length}</span>
                 )}
               </Link>
 
@@ -276,97 +180,105 @@ export const Navbar = () => {
                 <User size={17} strokeWidth={1.5} />
               </Link>
 
+              {/* Cart */}
               <Link href="/cart" className="p-2 text-bisat-black/55 hover:text-bisat-black relative transition-colors">
                 <ShoppingBag size={17} strokeWidth={1.5} />
                 {totalItems > 0 && (
-                  <span className="absolute top-1 right-1 bg-bisat-gold text-white text-[8px] w-3.5 h-3.5 flex items-center justify-center rounded-full font-bold">
-                    {totalItems}
-                  </span>
+                  <span className="absolute top-1 right-1 bg-bisat-gold text-white text-[8px] w-3.5 h-3.5 flex items-center justify-center rounded-full font-bold">{totalItems}</span>
                 )}
               </Link>
 
-              {/* Mobile menu toggle */}
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="md:hidden p-2 text-bisat-black transition-transform active:scale-90"
-                aria-label={isOpen ? 'Close menu' : 'Open menu'}
-              >
+              {/* Mobile menu */}
+              <button onClick={() => setIsOpen(!isOpen)} className="md:hidden p-2 text-bisat-black transition-transform active:scale-90" aria-label={isOpen ? 'Close menu' : 'Open menu'}>
                 {isOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
             </div>
           </div>
         </div>
 
-        {/* ── Desktop dropdown panels (inside nav so hover works) ─────────── */}
-
-        {/* Shop mega-dropdown */}
+        {/* ── Search bar (slides down) ───────────────────────────────────── */}
         <AnimatePresence>
-          {activeDropdown === 'shop' && (
-            <motion.div
-              initial={{ opacity: 0, y: -6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -6 }}
-              transition={{ duration: 0.18 }}
-              className="hidden md:block absolute left-0 right-0 bg-white border-t border-bisat-black/6 shadow-2xl z-50"
-              onMouseEnter={() => openDropdown('shop')}
-              onMouseLeave={closeDropdown}
-            >
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 grid grid-cols-4 gap-10">
-                {SHOP_MEGA.map(col => (
-                  <div key={col.title}>
-                    <p className="text-[9px] uppercase tracking-[0.2em] font-bold text-bisat-gold mb-4">{col.title}</p>
-                    {col.links.map(link => (
-                      <NavDropdownLink key={link.href + link.label} {...link} onClick={closeAll} />
-                    ))}
-                  </div>
-                ))}
-              </div>
+          {searchOpen && (
+            <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.2 }}
+              className="absolute left-0 right-0 bg-white border-t border-bisat-black/6 shadow-lg overflow-hidden z-50">
+              <form onSubmit={handleSearch} className="max-w-2xl mx-auto px-4 py-3 flex items-center gap-3">
+                <Search size={18} className="text-bisat-black/30 flex-shrink-0" />
+                <input ref={searchRef} value={searchQuery} onChange={e => setSearchQuery(e.target.value)}
+                  placeholder="Search rugs by name, material, origin…"
+                  className="flex-1 text-sm text-bisat-black placeholder:text-bisat-black/30 focus:outline-none bg-transparent"
+                />
+                {searchQuery && (
+                  <button type="submit" className="flex-shrink-0 bg-bisat-gold text-white text-[10px] uppercase tracking-widest font-bold px-4 py-2 rounded-lg hover:bg-bisat-black transition-colors">
+                    Search
+                  </button>
+                )}
+                <button type="button" onClick={() => setSearchOpen(false)} className="text-bisat-black/30 hover:text-bisat-black transition-colors flex-shrink-0">
+                  <X size={18} />
+                </button>
+              </form>
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* Collections dropdown */}
+        {/* ── Shop mega dropdown ─────────────────────────────────────────── */}
         <AnimatePresence>
-          {activeDropdown === 'collections' && (
-            <motion.div
-              initial={{ opacity: 0, y: -6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -6 }}
-              transition={{ duration: 0.18 }}
+          {activeDropdown === 'shop' && (
+            <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.18 }}
               className="hidden md:block absolute left-0 right-0 bg-white border-t border-bisat-black/6 shadow-2xl z-50"
-              onMouseEnter={() => openDropdown('collections')}
-              onMouseLeave={closeDropdown}
-            >
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                <p className="text-[9px] uppercase tracking-[0.2em] font-bold text-bisat-gold mb-4">Collections</p>
-                <div className="grid grid-cols-3 gap-x-8">
-                  {COLLECTIONS_LINKS.map(link => (
-                    <NavDropdownLink key={link.href} {...link} onClick={closeAll} />
+              onMouseEnter={() => openDropdown('shop')} onMouseLeave={closeDropdown}>
+              <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 py-8">
+                <div className={`grid gap-10 ${shopMega.length === 3 ? 'grid-cols-3' : 'grid-cols-4'}`}>
+                  {shopMega.map(col => (
+                    <div key={col.title}>
+                      <p className="text-[9px] uppercase tracking-[0.2em] font-bold text-bisat-gold mb-4">{col.title}</p>
+                      {col.links.map(link => (
+                        <Link key={link.href + link.label} href={link.href} onClick={closeAll}
+                          className={`block py-1.5 text-[12px] font-light transition-colors duration-150 hover:text-bisat-gold ${link.highlight ? 'text-bisat-gold font-semibold' : 'text-bisat-charcoal/80'}`}>
+                          {link.label}
+                        </Link>
+                      ))}
+                    </div>
                   ))}
+
+                  {/* Quick category visual cards */}
+                  {config.categories.length > 0 && (
+                    <div>
+                      <p className="text-[9px] uppercase tracking-[0.2em] font-bold text-bisat-gold mb-4">Browse</p>
+                      <div className="grid grid-cols-2 gap-2">
+                        {config.categories.slice(0, 4).map(cat => (
+                          <Link key={cat} href={`/shop?category=${encodeURIComponent(cat)}`} onClick={closeAll}
+                            className="block text-[11px] font-semibold text-bisat-black/60 hover:text-bisat-gold bg-bisat-cream/50 hover:bg-bisat-cream rounded-xl px-3 py-2 transition-all text-center">
+                            {cat}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* Rooms dropdown */}
+        {/* ── Rooms dropdown ─────────────────────────────────────────────── */}
         <AnimatePresence>
           {activeDropdown === 'rooms' && (
-            <motion.div
-              initial={{ opacity: 0, y: -6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -6 }}
-              transition={{ duration: 0.18 }}
+            <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.18 }}
               className="hidden md:block absolute left-0 right-0 bg-white border-t border-bisat-black/6 shadow-2xl z-50"
-              onMouseEnter={() => openDropdown('rooms')}
-              onMouseLeave={closeDropdown}
-            >
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+              onMouseEnter={() => openDropdown('rooms')} onMouseLeave={closeDropdown}>
+              <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 py-8">
                 <p className="text-[9px] uppercase tracking-[0.2em] font-bold text-bisat-gold mb-4">Shop by Room</p>
-                <div className="grid grid-cols-4 gap-x-8">
-                  {ROOMS_LINKS.map(link => (
-                    <NavDropdownLink key={link.href} {...link} onClick={closeAll} />
+                <div className="grid grid-cols-4 gap-3">
+                  {(config.rooms.length ? config.rooms : ['Living Room','Bedroom','Dining Room','Hallway','Office']).map(room => (
+                    <Link key={room} href={`/shop?room=${encodeURIComponent(room)}`} onClick={closeAll}
+                      className="group flex items-center gap-2 py-2 text-[12px] font-light text-bisat-charcoal/80 hover:text-bisat-gold transition-colors">
+                      <ArrowRight size={10} className="text-bisat-gold/40 group-hover:translate-x-0.5 transition-transform" />
+                      {room}
+                    </Link>
                   ))}
+                  <Link href="/shop" onClick={closeAll} className="flex items-center gap-2 py-2 text-[12px] font-semibold text-bisat-gold hover:text-bisat-black transition-colors">
+                    <ArrowRight size={10} />All Rooms
+                  </Link>
                 </div>
               </div>
             </motion.div>
@@ -377,79 +289,54 @@ export const Navbar = () => {
       {/* ── Mobile menu drawer ────────────────────────────────────────────── */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, x: '100%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
+          <motion.div initial={{ opacity: 0, x: '100%' }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: '100%' }}
             transition={{ type: 'spring', damping: 28, stiffness: 220 }}
-            className="md:hidden fixed inset-0 bg-white z-40 overflow-y-auto"
-            style={{ top: 'calc(var(--topbar-h, 2.25rem) + 4rem)' }}
-          >
+            className="md:hidden fixed inset-0 bg-white z-40 overflow-y-auto" style={{ top: 64 }}>
             <div className="px-6 pt-4 pb-20">
 
-              {/* Shop accordion */}
-              <MobileAccordion
-                title="Shop"
-                id="shop"
-                active={mobileAccordion}
-                onToggle={id => setMobileAccordion(mobileAccordion === id ? null : id)}
-              >
-                <div className="grid grid-cols-2 gap-x-4 pb-4">
-                  {SHOP_MEGA.map(col => (
-                    <div key={col.title} className="mb-4">
-                      <p className="text-[9px] uppercase tracking-[0.2em] font-bold text-bisat-gold mb-2">{col.title}</p>
-                      {col.links.map(link => (
-                        <Link
-                          key={link.label}
-                          href={link.href}
-                          onClick={() => setIsOpen(false)}
-                          className={`block py-1.5 text-sm ${link.highlight ? 'text-bisat-gold font-semibold' : 'text-bisat-black/65'}`}
-                        >
-                          {link.label}
-                        </Link>
-                      ))}
-                    </div>
-                  ))}
-                </div>
-              </MobileAccordion>
+              {/* Mobile search */}
+              <form onSubmit={handleSearch} className="flex items-center gap-2 bg-bisat-cream/60 rounded-2xl px-4 py-3 mb-6">
+                <Search size={16} className="text-bisat-black/30 flex-shrink-0" />
+                <input value={searchQuery} onChange={e => setSearchQuery(e.target.value)}
+                  placeholder="Search rugs…"
+                  className="flex-1 text-sm bg-transparent focus:outline-none text-bisat-black placeholder:text-bisat-black/30"
+                />
+              </form>
 
-              {/* Collections accordion */}
-              <MobileAccordion
-                title="Collections"
-                id="collections"
-                active={mobileAccordion}
-                onToggle={id => setMobileAccordion(mobileAccordion === id ? null : id)}
-              >
-                <div className="pb-4 columns-2 gap-x-4">
-                  {COLLECTIONS_LINKS.map(link => (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      onClick={() => setIsOpen(false)}
-                      className="block py-1.5 text-sm text-bisat-black/65 hover:text-bisat-gold transition-colors break-inside-avoid"
-                    >
-                      {link.label}
+              {/* Shop by Category */}
+              <MobileAccordion title="Shop" id="shop" active={mobileAccordion} onToggle={id => setMobileAccordion(mobileAccordion === id ? null : id)}>
+                <div className="pb-4">
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {config.categories.map(cat => (
+                      <Link key={cat} href={`/shop?category=${encodeURIComponent(cat)}`} onClick={() => setIsOpen(false)}
+                        className="px-4 py-2 bg-bisat-cream rounded-xl text-sm font-medium text-bisat-black hover:bg-bisat-gold hover:text-white transition-colors">
+                        {cat}
+                      </Link>
+                    ))}
+                    <Link href="/shop" onClick={() => setIsOpen(false)}
+                      className="px-4 py-2 bg-bisat-gold text-white rounded-xl text-sm font-semibold">
+                      All Rugs
                     </Link>
-                  ))}
+                  </div>
+                  <p className="text-[9px] uppercase tracking-[0.2em] font-bold text-bisat-black/30 mb-2">By Size</p>
+                  <div className="grid grid-cols-2 gap-2">
+                    {STATIC_SIZE_LINKS.map(l => (
+                      <Link key={l.href} href={l.href} onClick={() => setIsOpen(false)}
+                        className="text-sm text-bisat-black/65 hover:text-bisat-gold transition-colors py-1">
+                        {l.label}
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               </MobileAccordion>
 
-              {/* Rooms accordion */}
-              <MobileAccordion
-                title="Rooms"
-                id="rooms"
-                active={mobileAccordion}
-                onToggle={id => setMobileAccordion(mobileAccordion === id ? null : id)}
-              >
-                <div className="pb-4 columns-2 gap-x-4">
-                  {ROOMS_LINKS.map(link => (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      onClick={() => setIsOpen(false)}
-                      className="block py-1.5 text-sm text-bisat-black/65 hover:text-bisat-gold transition-colors break-inside-avoid"
-                    >
-                      {link.label}
+              {/* Rooms */}
+              <MobileAccordion title="Rooms" id="rooms" active={mobileAccordion} onToggle={id => setMobileAccordion(mobileAccordion === id ? null : id)}>
+                <div className="pb-4 grid grid-cols-2 gap-2">
+                  {(config.rooms.length ? config.rooms : ['Living Room','Bedroom','Dining Room','Hallway','Office']).map(room => (
+                    <Link key={room} href={`/shop?room=${encodeURIComponent(room)}`} onClick={() => setIsOpen(false)}
+                      className="text-sm text-bisat-black/65 hover:text-bisat-gold transition-colors py-1.5">
+                      {room}
                     </Link>
                   ))}
                 </div>
@@ -457,36 +344,27 @@ export const Navbar = () => {
 
               {/* Direct links */}
               {[
-                { label: 'Vintage', href: '/shop?category=Vintage' },
-                { label: 'Journal', href: '/blog' },
+                { label: 'Vintage Rugs',  href: '/shop?category=Vintage' },
+                { label: 'Journal',        href: '/blog' },
+                { label: 'Our Story',      href: '/about' },
+                { label: 'Contact',        href: '/contact' },
               ].map(link => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className="flex items-center justify-between py-4 text-2xl font-serif border-b border-bisat-black/6 text-bisat-black hover:text-bisat-gold transition-colors"
-                >
+                <Link key={link.href} href={link.href} onClick={() => setIsOpen(false)}
+                  className="flex items-center justify-between py-4 text-2xl font-serif border-b border-bisat-black/6 text-bisat-black hover:text-bisat-gold transition-colors">
                   {link.label}
                 </Link>
               ))}
 
-              {/* Secondary links */}
-              <div className="pt-8 mt-4 border-t border-bisat-black/8 flex flex-wrap gap-x-6 gap-y-3">
-                {[
-                  { label: 'Track Order', href: '/track-order' },
-                  { label: 'Contact', href: '/contact' },
-                  { label: 'About', href: '/about' },
-                  { label: 'Shipping', href: '/shipping' },
-                ].map(l => (
-                  <Link
-                    key={l.href}
-                    href={l.href}
-                    onClick={() => setIsOpen(false)}
-                    className="text-[11px] uppercase tracking-widest font-bold text-bisat-black/35 hover:text-bisat-gold transition-colors"
-                  >
-                    {l.label}
-                  </Link>
-                ))}
+              <div className="pt-6 grid grid-cols-2 gap-3 mt-4">
+                <Link href="/cart" onClick={() => setIsOpen(false)}
+                  className="flex items-center justify-center gap-2 bg-bisat-black text-white rounded-2xl py-4 text-sm font-bold">
+                  <ShoppingBag size={16} />
+                  Cart {totalItems > 0 && `(${totalItems})`}
+                </Link>
+                <Link href="/track-order" onClick={() => setIsOpen(false)}
+                  className="flex items-center justify-center gap-2 bg-bisat-cream text-bisat-black rounded-2xl py-4 text-sm font-bold">
+                  Track Order
+                </Link>
               </div>
             </div>
           </motion.div>
@@ -496,41 +374,48 @@ export const Navbar = () => {
   );
 };
 
-// ── Mobile accordion helper ───────────────────────────────────────────────────
-const MobileAccordion: React.FC<{
-  title: string;
-  id: string;
-  active: string | null;
-  onToggle: (id: string) => void;
-  children: React.ReactNode;
-}> = ({ title, id, active, onToggle, children }) => {
-  const isOpen = active === id;
+// ── Desktop nav item ───────────────────────────────────────────────────────────
+const DesktopNavItem: React.FC<{
+  id: string; label: string; href?: string; hasDropdown?: boolean;
+  activeDropdown: string | null; onOpen: (id: string) => void; onClose: () => void;
+}> = ({ id, label, href, hasDropdown, activeDropdown, onOpen, onClose }) => {
+  const isDropOpen = activeDropdown === id;
+  if (!hasDropdown && href) {
+    return (
+      <Link href={href} className="text-[10px] uppercase tracking-[0.22em] font-semibold text-bisat-black/65 hover:text-bisat-black relative group transition-colors">
+        {label}
+        <span className="absolute -bottom-1 left-0 h-[1px] bg-bisat-gold w-0 group-hover:w-full transition-all duration-300" />
+      </Link>
+    );
+  }
   return (
-    <div className="border-b border-bisat-black/6">
-      <button
-        onClick={() => onToggle(id)}
-        className="w-full flex items-center justify-between py-4 text-2xl font-serif text-bisat-black"
-      >
-        {title}
-        <ChevronDown
-          size={18}
-          strokeWidth={1.5}
-          className={`text-bisat-black/40 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
-        />
+    <div className="relative" onMouseEnter={() => onOpen(id)} onMouseLeave={onClose}>
+      <button className={`flex items-center gap-1 text-[10px] uppercase tracking-[0.22em] font-semibold transition-colors relative group ${isDropOpen ? 'text-bisat-gold' : 'text-bisat-black/65 hover:text-bisat-black'}`}>
+        {label}
+        <ChevronDown size={11} strokeWidth={2.5} className={`transition-transform duration-200 ${isDropOpen ? 'rotate-180' : ''}`} />
+        <span className={`absolute -bottom-1 left-0 h-[1px] bg-bisat-gold transition-all duration-300 ${isDropOpen ? 'w-full' : 'w-0 group-hover:w-full'}`} />
       </button>
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="overflow-hidden"
-          >
-            {children}
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 };
+
+// ── Mobile accordion ───────────────────────────────────────────────────────────
+const MobileAccordion: React.FC<{ title: string; id: string; active: string | null; onToggle: (id: string) => void; children: React.ReactNode }> =
+  ({ title, id, active, onToggle, children }) => {
+    const isOpen = active === id;
+    return (
+      <div className="border-b border-bisat-black/6">
+        <button onClick={() => onToggle(id)} className="w-full flex items-center justify-between py-4 text-2xl font-serif text-bisat-black">
+          {title}
+          <ChevronDown size={18} strokeWidth={1.5} className={`text-bisat-black/40 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
+        </button>
+        <AnimatePresence initial={false}>
+          {isOpen && (
+            <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.25 }} className="overflow-hidden">
+              {children}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    );
+  };

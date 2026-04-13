@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { Trash2, Star } from 'lucide-react';
-import { adminGetAllReviews, adminDeleteReview } from '@/src/lib/db';
+import { adminGetAllReviews, adminDeleteReview } from '@/src/lib/db-browser';
 
 type Review = Awaited<ReturnType<typeof adminGetAllReviews>>[number];
 

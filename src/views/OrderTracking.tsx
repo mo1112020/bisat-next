@@ -61,7 +61,7 @@ export const OrderTracking = () => {
     <div className="pb-16 bg-bisat-cream min-h-screen">
       <Meta title="Track Your Order" description="Follow your artisanal rug's journey from our looms to your home." />
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+      <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 pt-6">
         <PageHeader
           badge="Logistics & Delivery"
           title="Track Your Heritage"

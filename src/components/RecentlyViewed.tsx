@@ -1,3 +1,4 @@
+"use client";
 import React from 'react';
 import { useRecentlyViewed } from '../context/RecentlyViewedContext';
 import { ProductCard } from './ProductCard';
@@ -12,7 +13,7 @@ export const RecentlyViewed: React.FC = () => {
 
   return (
     <section className="py-12 sm:py-16 bg-white overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12">
         <div className="flex items-start justify-between mb-6 sm:mb-10">
           <div>
             <span className="text-bisat-gold uppercase tracking-[0.2em] text-[10px] font-bold mb-2 block">

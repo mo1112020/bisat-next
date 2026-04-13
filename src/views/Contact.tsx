@@ -24,11 +24,11 @@ export const Contact = () => {
     subject: '',
     message: ''
   });
+  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted:', formState);
+    setSubmitted(true);
   };
 
   return (
@@ -37,7 +37,7 @@ export const Contact = () => {
         title="Contact Us"
         description="Get in touch with the Bisāṭ team for custom orders, care advice, or general inquiries about our artisanal rugs."
       />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+      <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 pt-6">
         <PageHeader
           badge="Get in Touch"
           title="Connect with Our Heritage Experts"

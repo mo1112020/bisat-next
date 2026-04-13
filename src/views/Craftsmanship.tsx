@@ -13,7 +13,7 @@ export const Craftsmanship = () => {
       />
 
       {/* Hero */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+      <section className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 pt-6">
         <PageHeader
           badge="The Art of Weaving"
           title={<>Made by <span className="italic text-bisat-gold">Hand</span></>}
@@ -22,7 +22,7 @@ export const Craftsmanship = () => {
       </section>
 
       {/* Steps */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+      <section className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 mb-24">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {[
             {
@@ -58,7 +58,7 @@ export const Craftsmanship = () => {
       </section>
 
       {/* Quote */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pb-12">
+      <section className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 text-center pb-12">
         <motion.blockquote
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

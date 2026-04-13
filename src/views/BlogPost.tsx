@@ -65,7 +65,7 @@ export const BlogPost = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-bisat-black via-bisat-black/20 to-transparent" />
 
         <div className="absolute inset-0 flex items-end pb-24">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 w-full">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -93,7 +93,7 @@ export const BlogPost = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24">
+      <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 pt-24">
         <div className="flex flex-col lg:flex-row gap-24">
           {/* Sidebar */}
           <aside className="lg:w-1/4 order-2 lg:order-1">

@@ -14,7 +14,7 @@ export const Terms = () => {
         title="Terms & Conditions"
         description="Terms and conditions governing use of the Bisāṭ online store and purchase of artisanal rugs."
       />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+      <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 pt-6">
         <PageHeader badge={t('terms.badge')} title={t('terms.title')} />
         <div className="max-w-4xl">
           <motion.div

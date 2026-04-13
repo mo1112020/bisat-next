@@ -14,7 +14,7 @@ interface MetaProps {
 export const Meta = ({
   title,
   description = 'Premium artisanal rugs and carpets from around the world. Hand-woven heritage for your modern home.',
-  image = 'https://placehold.co/1200x630',
+  image = 'https://bisat-store.com/og-default.jpg',
   type = 'website',
   robots,
   keywords,
@@ -22,7 +22,7 @@ export const Meta = ({
   const location = ({ pathname: usePathname() });
   const siteName = 'Bisāṭ';
   const fullTitle = title.includes('Bisāṭ') ? title : `${title} | ${siteName}`;
-  const origin = typeof window !== 'undefined' ? window.location.origin : '';
+  const origin = typeof window !== 'undefined' ? window.location.origin : 'https://bisat-store.com';
   const canonicalUrl = `${origin}${location.pathname}`;
 
   useEffect(() => {
@@ -48,6 +48,9 @@ export const Meta = ({
     updateMeta('og:type', type, 'property');
     updateMeta('og:url', canonicalUrl, 'property');
     updateMeta('og:image', image, 'property');
+    updateMeta('og:image:width', '1200', 'property');
+    updateMeta('og:image:height', '630', 'property');
+    updateMeta('og:locale', 'en_US', 'property');
     updateMeta('og:site_name', siteName, 'property');
 
     // Twitter

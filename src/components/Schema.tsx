@@ -1,4 +1,4 @@
-import React from 'react';
+import Script from 'next/script';
 import { getSiteUrl } from '../lib/siteUrl';
 
 interface SchemaProps {
@@ -6,7 +6,8 @@ interface SchemaProps {
 }
 
 export const Schema = ({ data }: SchemaProps) => (
-  <script
+  <Script
+    id={`schema-${Math.random().toString(36).substr(2, 9)}`}
     type="application/ld+json"
     dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
   />
@@ -69,7 +70,7 @@ export const getProductSchema = (product: any) => ({
   offers: {
     '@type': 'Offer',
     url: `${getSiteUrl()}/product/${product.id}`,
-    priceCurrency: 'EUR',
+    priceCurrency: 'USD',
     price: product.price,
     availability:
       product.stock > 0

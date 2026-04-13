@@ -1,160 +1,149 @@
 "use client";
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Product } from '../data/products';
-import { motion } from 'motion/react';
-import { Heart, ShoppingBag, Eye, ShoppingCart } from 'lucide-react';
+import { Heart, ShoppingBag } from 'lucide-react';
 import { useWishlist } from '../context/WishlistContext';
 import { useCart } from '../context/CartContext';
-import { useTranslation } from 'react-i18next';
 
 interface ProductCardProps {
   product: Product;
+  priority?: boolean;
 }
 
-export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = false }) => {
   const { toggleWishlist, isInWishlist } = useWishlist();
   const { addToCart } = useCart();
-  const { t } = useTranslation();
   const isFavorite = isInWishlist(product.id);
   const isSoldOut = product.stock === 0;
+  const isOnSale = product.salePrice != null && product.salePrice < product.price;
+  const displayPrice = isOnSale ? product.salePrice! : product.price;
+  const [justAdded, setJustAdded] = useState(false);
 
-  // Let's pretend some products are on sale for that "e-commerce" feel
-  const isOnSale = product.id === '1' || product.id === '3' || product.id === '5';
-  const originalPrice = isOnSale ? Math.floor(product.price * 1.3) : product.price;
-
-  const handleWishlistToggle = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const handleWishlist = (e: React.MouseEvent) => {
+    e.preventDefault(); e.stopPropagation();
     toggleWishlist(product);
   };
 
-  const handleQuickAdd = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (!isSoldOut) addToCart(product);
-  };
-
-  const categoryColor: Record<string, string> = {
-    Handmade: 'bg-bisat-gold text-white',
-    Vintage: 'bg-indigo-900 text-white',
-    Machine: 'bg-bisat-teal text-white',
-    Kilim: 'bg-bisat-terracotta text-white',
+  const handleAdd = (e: React.MouseEvent) => {
+    e.preventDefault(); e.stopPropagation();
+    if (isSoldOut) return;
+    addToCart(product);
+    setJustAdded(true);
+    setTimeout(() => setJustAdded(false), 1800);
   };
 
   return (
-    <motion.div layout className="group flex flex-col h-full bg-white rounded-2xl md:rounded-3xl border border-bisat-black/5 hover:border-bisat-gold/20 hover:shadow-2xl hover:shadow-bisat-gold/5 overflow-hidden transition-all duration-500">
-      <Link href={`/product/${product.id}`} className="block relative aspect-[4/5] overflow-hidden bg-bisat-cream" aria-label={t('product.viewDetails', { name: product.name })}>
-        {/* Main Image */}
-        <img
+    <div className="group flex flex-col h-full">
+
+      {/* ── Image block ─────────────────────────────────────────── */}
+      <Link
+        href={`/product/${product.id}`}
+        className="relative block overflow-hidden bg-[#F9F9F8] aspect-[4/5] sm:aspect-square shadow-[0_2px_10px_rgba(0,0,0,0.02)] group-hover:shadow-[0_10px_30px_rgba(0,0,0,0.06)] transition-all duration-500"
+      >
+        {/* Primary image */}
+        <Image
           src={product.images[0]}
           alt={product.name}
-          className={`w-full h-full object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-[1.05] ${isSoldOut ? 'grayscale-[0.4] opacity-75' : ''}`}
-          referrerPolicy="no-referrer"
+          fill
+          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+          className={`object-cover transition-transform duration-[2s] ease-out group-hover:scale-[1.04] ${isSoldOut ? 'opacity-60 grayscale-[0.3]' : ''}`}
+          priority={priority}
         />
 
-        {/* Hover image (simulated if product had a 2nd image) */}
+        {/* Swap image on hover */}
         {product.images[1] && (
-          <img
-            src={product.images[1]}
-            alt={product.name + " alternate"}
-            className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-in-out"
-            referrerPolicy="no-referrer"
-          />
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-in-out bg-[#F9F9F8]">
+            <Image
+              src={product.images[1]}
+              alt=""
+              fill
+              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+              className="object-cover"
+            />
+          </div>
         )}
 
-        {/* Top Badges */}
-        <div className="absolute top-3 left-3 z-10 flex flex-col gap-1.5">
+        {/* Scrim for text visibility on hover */}
+        <div className="absolute inset-0 bg-gradient-to-t from-bisat-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+        {/* Badge — top-left */}
+        <div className="absolute top-4 left-4 z-10 flex flex-col gap-2">
           {isSoldOut ? (
-            <span className="px-3 py-1 bg-bisat-black text-white text-[10px] uppercase tracking-widest font-bold rounded-sm">
-              {t('product.soldOut')}
+            <span className="text-[8px] uppercase tracking-[0.25em] font-bold text-white bg-bisat-black px-3 py-1.5 shadow-sm">
+              Sold Out
             </span>
           ) : isOnSale ? (
-            <span className="px-3 py-1 bg-[#E43D30] text-white text-[10px] uppercase tracking-widest font-bold rounded-sm shadow-md">
-              SALE
+            <span className="text-[8px] uppercase tracking-[0.25em] font-bold text-white bg-bisat-deep-red px-3 py-1.5 shadow-sm">
+              Sale
             </span>
-          ) : (
-            <span className={`px-3 py-1 text-[10px] uppercase tracking-widest font-bold rounded-sm shadow-sm ${categoryColor[product.category] ?? 'bg-bisat-gold text-white'}`}>
-              {t(`product.categories.${product.category}`)}
-            </span>
-          )}
+          ) : null}
         </div>
 
-        {/* Wishlist Button */}
-        <div className="absolute top-3 right-3 z-10">
-          <motion.button
-            whileTap={{ scale: 0.8 }}
-            onClick={handleWishlistToggle}
-            aria-label="Toggle wishlist"
-            className={`w-8 h-8 flex items-center justify-center rounded-full backdrop-blur-md shadow-sm transition-all duration-300 ${
-              isFavorite
-                ? 'bg-bisat-deep-red text-white scale-110'
-                : 'bg-white/80 text-bisat-black hover:bg-bisat-deep-red hover:text-white'
+        {/* Wishlist — top-right */}
+        <button
+          onClick={handleWishlist}
+          aria-label={isFavorite ? 'Remove from wishlist' : 'Save to wishlist'}
+          className={`absolute top-4 right-4 z-10 flex items-center justify-center transition-all duration-300 ${
+            isFavorite
+              ? 'opacity-100 text-bisat-deep-red'
+              : 'opacity-0 group-hover:opacity-100 text-white hover:text-bisat-gold drop-shadow-md'
+          }`}
+        >
+          <Heart size={20} className={isFavorite ? "fill-current" : ""} fill={isFavorite ? 'currentColor' : 'none'} strokeWidth={isFavorite ? 0 : 1.5} />
+        </button>
+
+        {/* Add to bag — Full width absolute bottom bar */}
+        <div className="absolute bottom-0 left-0 right-0 z-10 translate-y-full group-hover:translate-y-0 transition-transform duration-[400ms] ease-[cubic-bezier(0.2,0.8,0.2,1)]">
+          <button
+            onClick={handleAdd}
+            disabled={isSoldOut}
+            className={`w-full py-4 text-[9px] uppercase tracking-[0.3em] font-bold flex items-center justify-center gap-2.5 transition-colors duration-300 ${
+              justAdded
+                ? 'bg-green-700/95 backdrop-blur-md text-white'
+                : isSoldOut
+                ? 'bg-bisat-black/80 backdrop-blur-md text-white cursor-not-allowed'
+                : 'bg-white/95 backdrop-blur-md text-bisat-black hover:bg-bisat-black hover:text-white'
             }`}
           >
-            <Heart size={14} fill={isFavorite ? 'currentColor' : 'none'} />
-          </motion.button>
+            <ShoppingBag size={14} strokeWidth={1.5} />
+            {justAdded ? 'Added to Bag' : isSoldOut ? 'Unavailable' : 'Quick Add'}
+          </button>
         </div>
       </Link>
 
-      {/* Content & Action */}
-      <div className="p-4 sm:p-5 flex flex-col flex-1">
-        <div className="flex-1">
-          {/* Brand/Origin */}
-          <div className="flex items-center justify-between mb-1.5">
-            <p className="text-bisat-black/40 text-[9px] sm:text-[10px] uppercase tracking-widest font-bold">
-              {product.origin.split(',')[0]}
-            </p>
-            {/* Reviews */}
-            {product.reviews.length > 0 && (
-              <div className="flex items-center gap-1">
-                <span className="text-bisat-gold text-[12px]">★</span>
-                <span className="text-bisat-black/60 text-[10px] font-semibold">
-                  {(product.reviews.reduce((s, r) => s + r.rating, 0) / product.reviews.length).toFixed(1)}
-                </span>
-                <span className="text-bisat-black/30 text-[9px]">({product.reviews.length})</span>
-              </div>
-            )}
-          </div>
-
-          {/* Title */}
-          <Link href={`/product/${product.id}`}>
-            <h3 className="text-sm sm:text-base font-semibold leading-snug mb-1 group-hover:text-bisat-gold transition-colors duration-300 line-clamp-2">
+      {/* ── Text block ──────────────────────────────────────────── */}
+      <div className="pt-4 pb-2 px-1 flex flex-col flex-grow">
+        <div className="flex justify-between items-start gap-4 mb-1">
+          {/* Name */}
+          <Link href={`/product/${product.id}`} className="block flex-grow">
+            <h3 className="font-serif text-[1.1rem] text-bisat-black leading-snug hover:text-bisat-gold transition-colors duration-300 line-clamp-2">
               {product.name}
             </h3>
           </Link>
           
-          {/* Meta */}
-          <p className="text-bisat-black/50 text-[11px] mb-3">
-            {product.dimensions} · {product.material}
-          </p>
-        </div>
-
-        <div>
-          {/* Price */}
-          <div className="flex items-end gap-2 mb-4">
-            <p className={`font-serif text-lg sm:text-xl font-medium ${isOnSale ? 'text-[#E43D30]' : 'text-bisat-black'}`}>
-              ${product.price.toLocaleString()}
-            </p>
+          {/* Price — Aligned right */}
+          <div className="flex flex-col items-end text-right flex-shrink-0 pt-0.5">
+            <span className={`font-serif text-[1.05rem] font-medium leading-none ${isOnSale ? 'text-bisat-deep-red' : 'text-bisat-black'}`}>
+              ${displayPrice.toLocaleString()}
+            </span>
             {isOnSale && (
-              <p className="font-serif text-sm text-bisat-black/30 line-through pb-[2px]">
-                ${originalPrice.toLocaleString()}
-              </p>
+              <span className="text-[10px] text-bisat-black/30 line-through mt-1">
+                ${product.price.toLocaleString()}
+              </span>
             )}
           </div>
+        </div>
 
-          {/* Add to Cart Button */}
-          <motion.button
-            whileTap={{ scale: 0.98 }}
-            onClick={handleQuickAdd}
-            disabled={isSoldOut}
-            className="w-full bg-bisat-black text-white py-3 rounded-lg text-[11px] uppercase tracking-widest font-bold flex items-center justify-center gap-2 hover:bg-bisat-gold transition-colors duration-300 disabled:opacity-40 disabled:cursor-not-allowed group/btn hover:shadow-lg"
-          >
-            <ShoppingCart size={14} className="group-hover/btn:-rotate-12 transition-transform" />
-            {isSoldOut ? t('product.soldOut') : "Add to Cart"}
-          </motion.button>
+        {/* Details row (Origin, Category, Dimensions) */}
+        <div className="mt-auto pt-3 flex flex-col gap-1 border-t border-bisat-black/5">
+          <p className="text-[9px] uppercase tracking-[0.25em] text-bisat-black/40 font-medium">
+            {product.origin.split(',')[0]} &middot; {product.category}
+          </p>
+          <p className="text-[10px] text-bisat-black/30 font-light tracking-wide">{product.dimensions}</p>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };

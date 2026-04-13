@@ -1,15 +1,25 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { PageHeader } from '../components/PageHeader';
 import { motion } from 'motion/react';
 import { Meta } from '../components/Meta';
 import Link from 'next/link';
-import { Calendar, User, ArrowRight } from 'lucide-react';
+import { Calendar, User, ArrowRight, Check } from 'lucide-react';
 import { BlogPostData } from '../data/blogPosts';
 import { getBlogPosts } from '../lib/db';
 
 export const Blog = () => {
   const [posts, setPosts] = useState<BlogPostData[]>([]);
+  const [email, setEmail] = useState('');
+  const [subscribed, setSubscribed] = useState(false);
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+    setSubscribed(true);
+    setEmail('');
+  };
 
   useEffect(() => {
     getBlogPosts().then(setPosts);
@@ -22,7 +32,7 @@ export const Blog = () => {
         description="Explore the world of hand-woven rugs, interior design tips, and stories from our global artisan partners."
       />
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+      <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 pt-6">
         <PageHeader
           badge="The Journal"
           title={<>Artisanal <span className="italic text-bisat-gold">Stories</span></>}
@@ -40,11 +50,12 @@ export const Blog = () => {
               className="group flex flex-col"
             >
               <Link href={`/blog/${post.id}`} className="block aspect-[4/3] overflow-hidden rounded-2xl mb-6 relative shadow-sm border border-bisat-black/5">
-                <img 
-                  src={post.image} 
-                  alt={post.title} 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[1.5s] ease-out"
-                  referrerPolicy="no-referrer"
+                <Image
+                  src={post.image}
+                  alt={post.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover group-hover:scale-110 transition-transform duration-[1.5s] ease-out"
                 />
                 <div className="absolute inset-0 bg-bisat-black/20 group-hover:bg-bisat-black/40 transition-colors duration-500" />
                 <div className="absolute top-6 left-6">
@@ -104,16 +115,31 @@ export const Blog = () => {
             <p className="text-bisat-cream/50 mb-8 leading-relaxed text-base font-light">
               Receive exclusive previews of new collections, artisan interviews, and interior styling guides directly in your inbox.
             </p>
-            <form className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto p-2 bg-white/5 rounded-[2rem] border border-white/10 backdrop-blur-sm">
-              <input 
-                type="email" 
-                placeholder="Email Address" 
-                className="flex-grow bg-transparent border-none rounded-2xl px-6 py-4 text-sm focus:outline-none placeholder:text-bisat-cream/20 text-bisat-cream"
-              />
-              <button className="bg-bisat-gold text-white px-10 py-4 rounded-2xl text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-white hover:text-bisat-black transition-all duration-500 shadow-xl">
-                Subscribe
-              </button>
-            </form>
+            {subscribed ? (
+              <div className="flex items-center justify-center gap-3 text-bisat-gold">
+                <span className="w-8 h-8 rounded-full bg-bisat-gold/20 flex items-center justify-center">
+                  <Check size={16} />
+                </span>
+                <span className="font-medium">You're subscribed — thank you!</span>
+              </div>
+            ) : (
+              <form
+                onSubmit={handleSubscribe}
+                className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto p-2 bg-white/5 rounded-[2rem] border border-white/10 backdrop-blur-sm"
+              >
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                  placeholder="Email Address"
+                  className="flex-grow bg-transparent border-none rounded-2xl px-6 py-4 text-sm focus:outline-none placeholder:text-bisat-cream/20 text-bisat-cream"
+                />
+                <button className="bg-bisat-gold text-white px-10 py-4 rounded-2xl text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-white hover:text-bisat-black transition-all duration-500 shadow-xl">
+                  Subscribe
+                </button>
+              </form>
+            )}
           </div>
           {/* Decorative elements */}
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-bisat-gold/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-[120px]" />

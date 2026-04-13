@@ -4,16 +4,22 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import {
   LayoutDashboard, Package, FileText, ShoppingBag,
-  Star, MessageSquare, LogOut, Menu, X,
+  Star, MessageSquare, LogOut, Menu, X, Images, Globe,
+  Tag, Settings2, Sliders,
 } from 'lucide-react';
 
 const NAV = [
   { href: '/admin/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/admin/products', label: 'Products', icon: Package },
+  { href: '/admin/categories', label: 'Categories', icon: Tag },
+  { href: '/admin/store-config', label: 'Store Config', icon: Settings2 },
   { href: '/admin/blog', label: 'Blog Posts', icon: FileText },
   { href: '/admin/orders', label: 'Orders', icon: ShoppingBag },
   { href: '/admin/reviews', label: 'Reviews', icon: Star },
   { href: '/admin/testimonials', label: 'Testimonials', icon: MessageSquare },
+  { href: '/admin/cdn', label: 'CDN Images', icon: Images },
+  { href: '/admin/site-images', label: 'Site Images', icon: Globe },
+  { href: '/admin/settings', label: 'Site Settings', icon: Sliders },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {

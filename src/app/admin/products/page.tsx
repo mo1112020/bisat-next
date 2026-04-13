@@ -1,17 +1,19 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { Plus, Pencil, Trash2, X } from 'lucide-react';
-import { getProducts, adminCreateProduct, adminUpdateProduct, adminDeleteProduct } from '@/src/lib/db';
+import {
+  getProducts, adminCreateProduct, adminUpdateProduct, adminDeleteProduct,
+  adminGetCategories, adminGetRoomTypes, adminGetSizeCategories,
+  Category, RoomType, SizeCategory,
+} from '@/src/lib/db-browser';
 import { Product } from '@/src/data/products';
+import { CdnImagePicker } from '@/src/components/CdnImagePicker';
 
 const EMPTY_FORM = {
-  name: '', category: 'Handmade', price: 0, description: '',
-  images: '', dimensions: '', sizeCategory: 'Medium', rooms: [] as string[],
+  name: '', category: '', price: 0, description: '',
+  images: [] as string[], dimensions: '', sizeCategory: '', rooms: [] as string[],
   material: '', origin: '', stock: 0,
 };
-const CATEGORIES = ['Handmade', 'Vintage', 'Machine', 'Kilim'];
-const SIZE_CATS = ['Small', 'Medium', 'Large', 'Runner'];
-const ROOM_OPTS = ['Living Room', 'Bedroom', 'Dining Room', 'Hallway', 'Office'];
 
 export default function AdminProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -21,15 +23,47 @@ export default function AdminProductsPage() {
   const [saving, setSaving] = useState(false);
   const [deleting, setDeleting] = useState<string | null>(null);
 
-  const load = () => getProducts().then(setProducts);
-  useEffect(() => { load(); }, []);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [roomTypes, setRoomTypes] = useState<RoomType[]>([]);
+  const [sizeCategories, setSizeCategories] = useState<SizeCategory[]>([]);
+  const [configLoading, setConfigLoading] = useState(true);
 
-  const openNew = () => { setEditing(null); setForm(EMPTY_FORM); setShowModal(true); };
+  const load = () => getProducts().then(setProducts);
+
+  useEffect(() => {
+    load();
+    Promise.all([
+      adminGetCategories(),
+      adminGetRoomTypes(),
+      adminGetSizeCategories(),
+    ]).then(([cats, rooms, sizes]) => {
+      setCategories(cats);
+      setRoomTypes(rooms);
+      setSizeCategories(sizes);
+      // set defaults in EMPTY_FORM from DB
+      setForm(f => ({
+        ...f,
+        category: cats[0]?.name ?? '',
+        sizeCategory: sizes[0]?.name ?? '',
+      }));
+      setConfigLoading(false);
+    });
+  }, []);
+
+  const openNew = () => {
+    setEditing(null);
+    setForm({
+      ...EMPTY_FORM,
+      category: categories[0]?.name ?? '',
+      sizeCategory: sizeCategories[0]?.name ?? '',
+    });
+    setShowModal(true);
+  };
   const openEdit = (p: Product) => {
     setEditing(p);
     setForm({
       name: p.name, category: p.category, price: p.price,
-      description: p.description, images: p.images.join(', '),
+      description: p.description, images: p.images,
       dimensions: p.dimensions, sizeCategory: p.sizeCategory,
       rooms: p.rooms as string[], material: p.material,
       origin: p.origin, stock: p.stock,
@@ -40,12 +74,7 @@ export default function AdminProductsPage() {
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     setSaving(true);
-    const payload = {
-      ...form,
-      price: Number(form.price),
-      stock: Number(form.stock),
-      images: form.images.split(',').map(s => s.trim()).filter(Boolean),
-    };
+    const payload = { ...form, price: Number(form.price), stock: Number(form.stock) };
     if (editing) {
       await adminUpdateProduct(editing.id, payload);
     } else {
@@ -139,13 +168,13 @@ export default function AdminProductsPage() {
                 <div>
                   <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Category</label>
                   <select value={form.category} onChange={e => setForm(f => ({ ...f, category: e.target.value }))} className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-yellow-400">
-                    {CATEGORIES.map(c => <option key={c}>{c}</option>)}
+                    {categories.map(c => <option key={c.id} value={c.name}>{c.name}</option>)}
                   </select>
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Size</label>
                   <select value={form.sizeCategory} onChange={e => setForm(f => ({ ...f, sizeCategory: e.target.value }))} className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-yellow-400">
-                    {SIZE_CATS.map(s => <option key={s}>{s}</option>)}
+                    {sizeCategories.map(s => <option key={s.id} value={s.name}>{s.name}</option>)}
                   </select>
                 </div>
                 <div>
@@ -168,10 +197,18 @@ export default function AdminProductsPage() {
                   <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Origin</label>
                   <input value={form.origin} onChange={e => setForm(f => ({ ...f, origin: e.target.value }))} className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-yellow-400" />
                 </div>
+
+                {/* CDN Image Picker (multi) */}
                 <div className="col-span-2">
-                  <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Image URLs (comma-separated)</label>
-                  <input value={form.images} onChange={e => setForm(f => ({ ...f, images: e.target.value }))} className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-yellow-400" placeholder="https://..., https://..." />
+                  <CdnImagePicker
+                    multiple
+                    label="Product Images"
+                    value={form.images}
+                    onChange={images => setForm(f => ({ ...f, images }))}
+                    placeholder="Pick product images from CDN…"
+                  />
                 </div>
+
                 <div className="col-span-2">
                   <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Description</label>
                   <textarea required value={form.description} onChange={e => setForm(f => ({ ...f, description: e.target.value }))} rows={3} className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-yellow-400 resize-none" />
@@ -179,10 +216,10 @@ export default function AdminProductsPage() {
                 <div className="col-span-2">
                   <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Rooms</label>
                   <div className="flex flex-wrap gap-2">
-                    {ROOM_OPTS.map(room => (
-                      <button key={room} type="button" onClick={() => toggleRoom(room)}
-                        className={`text-xs px-3 py-1.5 rounded-full font-medium transition-colors border ${form.rooms.includes(room) ? 'bg-yellow-500 text-gray-950 border-yellow-500' : 'bg-white text-gray-500 border-gray-200 hover:border-gray-300'}`}>
-                        {room}
+                    {roomTypes.map(room => (
+                      <button key={room.id} type="button" onClick={() => toggleRoom(room.name)}
+                        className={`text-xs px-3 py-1.5 rounded-full font-medium transition-colors border ${form.rooms.includes(room.name) ? 'bg-yellow-500 text-gray-950 border-yellow-500' : 'bg-white text-gray-500 border-gray-200 hover:border-gray-300'}`}>
+                        {room.name}
                       </button>
                     ))}
                   </div>
@@ -190,8 +227,8 @@ export default function AdminProductsPage() {
               </div>
               <div className="flex justify-end gap-3 pt-2">
                 <button type="button" onClick={() => setShowModal(false)} className="px-5 py-2.5 text-sm font-medium text-gray-600 hover:text-gray-800 transition-colors">Cancel</button>
-                <button type="submit" disabled={saving} className="px-6 py-2.5 bg-yellow-500 hover:bg-yellow-400 text-gray-950 font-bold rounded-xl text-sm transition-colors disabled:opacity-50">
-                  {saving ? 'Saving…' : editing ? 'Update' : 'Create'}
+                <button type="submit" disabled={saving || configLoading} className="px-6 py-2.5 bg-yellow-500 hover:bg-yellow-400 text-gray-950 font-bold rounded-xl text-sm transition-colors disabled:opacity-50">
+                  {configLoading ? 'Loading…' : saving ? 'Saving…' : editing ? 'Update' : 'Create'}
                 </button>
               </div>
             </form>

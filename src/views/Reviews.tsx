@@ -19,13 +19,17 @@ export const Reviews = () => {
     ? reviews
     : reviews.filter(r => r.category === filter);
 
+  const avgRating = reviews.length
+    ? (reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length).toFixed(1)
+    : null;
+
   return (
     <div className="pb-16 bg-bisat-ivory min-h-screen">
       <Meta
         title="Customer Reviews"
         description="Read verified reviews from customers around the world who brought a piece of Turkish heritage into their homes with Bisāṭ."
       />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+      <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 pt-6">
         <PageHeader
           badge="Testimonials"
           title="Kind Words from Our Global Community"
@@ -50,23 +54,25 @@ export const Reviews = () => {
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
-          {[
-            { label: 'Average Rating', value: '4.9/5', icon: Star },
-            { label: 'Happy Customers', value: '2,500+', icon: ThumbsUp },
-            { label: 'Total Reviews', value: '1,840', icon: MessageSquare }
-          ].map((stat, i) => (
-            <div key={i} className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-bisat-black/5 flex items-center gap-5">
-              <div className="p-4 bg-bisat-gold/10 rounded-2xl text-bisat-gold">
-                <stat.icon size={28} strokeWidth={1.5} />
+        {reviews.length > 0 && (
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
+            {[
+              { label: 'Average Rating', value: avgRating ? `${avgRating}/5` : '—', icon: Star },
+              { label: 'Total Reviews', value: reviews.length.toLocaleString(), icon: MessageSquare },
+              { label: 'Satisfaction', value: `${Math.round((reviews.filter(r => r.rating >= 4).length / reviews.length) * 100)}%`, icon: ThumbsUp },
+            ].map((stat, i) => (
+              <div key={i} className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-bisat-black/5 flex items-center gap-5">
+                <div className="p-4 bg-bisat-gold/10 rounded-2xl text-bisat-gold">
+                  <stat.icon size={28} strokeWidth={1.5} />
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-bisat-black/40 mb-1">{stat.label}</p>
+                  <p className="text-3xl font-serif text-bisat-black">{stat.value}</p>
+                </div>
               </div>
-              <div>
-                <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-bisat-black/40 mb-1">{stat.label}</p>
-                <p className="text-3xl font-serif text-bisat-black">{stat.value}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
 
         {/* Reviews Grid */}
         <motion.div 

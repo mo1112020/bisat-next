@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { adminGetOrders, adminUpdateOrderStatus } from '@/src/lib/db';
+import { adminGetOrders, adminUpdateOrderStatus } from '@/src/lib/db-browser';
 
 type Order = Awaited<ReturnType<typeof adminGetOrders>>[number];
 

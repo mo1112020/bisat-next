@@ -11,6 +11,7 @@ export interface Product {
   name: string;
   category: 'Handmade' | 'Vintage' | 'Machine' | 'Kilim';
   price: number;
+  salePrice?: number;
   description: string;
   images: string[];
   dimensions: string;

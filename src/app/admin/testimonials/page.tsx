@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { Plus, Trash2, X, Star } from 'lucide-react';
-import { getTestimonials, adminCreateTestimonial, adminDeleteTestimonial } from '@/src/lib/db';
+import { getTestimonials, adminCreateTestimonial, adminDeleteTestimonial } from '@/src/lib/db-browser';
 
 type Testimonial = Awaited<ReturnType<typeof getTestimonials>>[number];
 

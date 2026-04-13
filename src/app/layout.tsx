@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 export const dynamic = 'force-dynamic';
 import { Suspense } from 'react';
 import { headers } from 'next/headers';
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
     type: 'website',
     siteName: 'Bisāṭ',
     locale: 'en_US',
-    images: [{ url: 'https://placehold.co/1200x630', width: 1200, height: 630 }],
+    images: [{ url: 'https://bisat-store.com/og-default.jpg', width: 1200, height: 630, alt: 'Bisāṭ — Premium Turkish Rugs' }],
   },
   twitter: {
     card: 'summary_large_image',
@@ -36,17 +37,17 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <script
+        <Script
+          id="topbar-init"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var d=localStorage.getItem('bisat_topbar_dismissed');if(d==='1'){document.documentElement.style.setProperty('--topbar-h','0px');document.documentElement.classList.add('topbar-dismissed');}else{document.documentElement.style.setProperty('--topbar-h','2.25rem');}}catch(e){}})();`,
           }}
         />
         <link rel="alternate" hrefLang="en" href="https://bisat-store.com" />
-        <link rel="alternate" hrefLang="tr" href="https://bisat-store.com/tr" />
-        <link rel="alternate" hrefLang="ar" href="https://bisat-store.com/ar" />
         <link rel="alternate" hrefLang="x-default" href="https://bisat-store.com" />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         {isAdmin ? (
           <Providers>{children}</Providers>
         ) : (
@@ -66,7 +67,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 <Topbar />
                 <Navbar />
               </header>
-              <div className="flex flex-col min-h-screen" style={{ paddingTop: 'calc(4rem + var(--topbar-h, 2.25rem))' }}>
+              <div className="flex flex-col min-h-screen" style={{ paddingTop: 'calc(4.5rem + var(--topbar-h, 2.25rem))' }}>
                 <main id="main-content" className="flex-grow">
                   {children}
                 </main>

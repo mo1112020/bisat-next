@@ -14,7 +14,7 @@ export const Privacy = () => {
         title="Privacy Policy"
         description="Bisāṭ's privacy policy outlining how we collect, use and protect your personal data."
       />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+      <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 pt-6">
         <PageHeader badge={t('privacy.badge')} title={t('privacy.title')} />
         <div className="max-w-4xl">
           <motion.div

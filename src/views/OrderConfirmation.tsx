@@ -32,7 +32,7 @@ export const OrderConfirmation = () => {
     <div className="min-h-screen bg-bisat-cream pb-24">
       <Meta title="Order Confirmed" description="Your Bisāṭ order has been placed successfully." />
 
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+      <div className="max-w-3xl mx-auto px-5 sm:px-8 lg:px-12 pt-6">
 
         {/* Success Animation */}
         <div className="text-center mb-16">
