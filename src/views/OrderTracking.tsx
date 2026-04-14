@@ -69,7 +69,7 @@ export const OrderTracking = () => {
         />
 
         {/* Search Bar */}
-        <div className="bg-white rounded-2xl p-5 sm:p-8 shadow-sm mb-8">
+        <div className="bg-white border border-bisat-border p-5 sm:p-8 mb-8">
           <form onSubmit={handleTrack} className="flex flex-col sm:flex-row gap-4">
             <div className="relative flex-grow">
               <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-bisat-black/30" size={20} />
@@ -78,13 +78,13 @@ export const OrderTracking = () => {
                 value={orderId}
                 onChange={(e) => setOrderId(e.target.value)}
                 placeholder="e.g. ORD-12345"
-                className="w-full bg-bisat-cream/50 border-none rounded-2xl pl-14 pr-6 py-5 text-sm focus:ring-2 focus:ring-bisat-gold transition-all uppercase tracking-widest"
+                className="w-full bg-bisat-cream border border-bisat-border pl-14 pr-6 py-5 text-sm focus:ring-2 focus:ring-bisat-gold transition-all uppercase tracking-widest"
               />
             </div>
             <button 
               type="submit"
               disabled={isSearching}
-              className="bg-bisat-black text-bisat-cream px-10 py-5 rounded-2xl text-sm uppercase tracking-widest font-bold hover:bg-bisat-teal transition-all disabled:opacity-50"
+              className="bg-bisat-black text-bisat-cream px-10 py-5 text-[10px] uppercase tracking-[0.18em] font-medium hover:bg-bisat-charcoal transition-all disabled:opacity-50"
             >
               {isSearching ? 'Searching...' : 'Track'}
             </button>
@@ -100,7 +100,7 @@ export const OrderTracking = () => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
-              className="flex items-center p-6 bg-red-50 text-red-600 rounded-2xl border border-red-100 mb-8"
+              className="flex items-center p-6 bg-red-50 text-red-600 border border-red-100 mb-8"
             >
               <AlertCircle size={20} className="mr-3 flex-shrink-0" />
               <p className="text-sm font-medium">{error}</p>
@@ -115,7 +115,7 @@ export const OrderTracking = () => {
               className="space-y-8"
             >
               {/* Progress Bar */}
-              <div className="bg-white rounded-[2rem] p-10 shadow-sm">
+              <div className="bg-white border border-bisat-border p-10">
                 <div className="flex justify-between items-center mb-12">
                   <div>
                     <h3 className="text-xl font-serif mb-1">Status: {trackingResult.status.charAt(0).toUpperCase() + trackingResult.status.slice(1)}</h3>
@@ -159,7 +159,7 @@ export const OrderTracking = () => {
 
               {/* Details Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="bg-white rounded-[2rem] p-8 shadow-sm">
+                <div className="bg-white border border-bisat-border p-8">
                   <div className="flex items-center mb-6 text-bisat-gold">
                     <MapPin size={20} className="mr-3" />
                     <h4 className="text-xs uppercase tracking-widest font-bold">Current Location</h4>
@@ -167,7 +167,7 @@ export const OrderTracking = () => {
                   <p className="text-bisat-black font-serif text-lg">{trackingResult.location}</p>
                 </div>
 
-                <div className="bg-white rounded-[2rem] p-8 shadow-sm">
+                <div className="bg-white border border-bisat-border p-8">
                   <div className="flex items-center mb-6 text-bisat-gold">
                     <Package size={20} className="mr-3" />
                     <h4 className="text-xs uppercase tracking-widest font-bold">Items in Shipment</h4>
@@ -190,11 +190,11 @@ export const OrderTracking = () => {
         <div className="mt-24 text-center">
           <h2 className="text-2xl font-serif mb-8">Common Questions</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
-            <div className="p-8 bg-white/50 rounded-3xl border border-bisat-black/5">
+            <div className="p-8 bg-white/50 border border-bisat-border">
               <h4 className="font-bold text-sm mb-2">Where is my order ID?</h4>
               <p className="text-xs text-bisat-black/60 leading-relaxed">You can find your order ID in the confirmation email sent immediately after your purchase.</p>
             </div>
-            <div className="p-8 bg-white/50 rounded-3xl border border-bisat-black/5">
+            <div className="p-8 bg-white/50 border border-bisat-border">
               <h4 className="font-bold text-sm mb-2">International Shipping</h4>
               <p className="text-xs text-bisat-black/60 leading-relaxed">Artisanal pieces may take longer to clear customs. We appreciate your patience as heritage travels.</p>
             </div>

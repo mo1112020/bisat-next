@@ -19,7 +19,7 @@ const COUNTRIES = [
 ];
 
 const inputClass =
-  'w-full bg-white border border-bisat-black/10 rounded-2xl px-5 py-4 text-sm focus:outline-none focus:border-bisat-gold/60 focus:ring-2 focus:ring-bisat-gold/10 transition-all placeholder:text-bisat-black/25 text-bisat-black';
+  'w-full bg-white border border-bisat-border px-5 py-4 text-sm focus:outline-none transition-all placeholder:text-bisat-black/25 text-bisat-black';
 
 const labelClass = 'block text-[10px] uppercase tracking-[0.25em] font-bold text-bisat-black/50 mb-2';
 
@@ -66,7 +66,7 @@ export const Checkout = () => {
     return (
       <div className="pt-40 pb-24 min-h-screen bg-bisat-cream flex flex-col items-center justify-center px-4 text-center">
         <p className="text-3xl font-serif mb-6 text-bisat-black">Your cart is empty</p>
-        <Link href="/shop" className="bg-bisat-gold text-white px-10 py-4 rounded-full text-xs uppercase tracking-[0.2em] font-bold hover:bg-bisat-black transition-all duration-300">
+        <Link href="/shop" className="bg-bisat-black text-white px-10 py-4 text-[10px] uppercase tracking-[0.2em] font-medium hover:bg-bisat-charcoal transition-colors">
           Explore Collection
         </Link>
       </div>
@@ -102,9 +102,9 @@ export const Checkout = () => {
                 onClick={() => s === 'shipping' && setStep('shipping')}
                 className={`flex items-center gap-3 transition-all ${step === s ? 'opacity-100' : step === 'payment' && s === 'shipping' ? 'opacity-60 cursor-pointer' : 'opacity-30 cursor-default'}`}
               >
-                <span className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
-                  step === s ? 'bg-bisat-gold text-white shadow-lg' :
-                  step === 'payment' && s === 'shipping' ? 'bg-bisat-black text-white' : 'bg-bisat-black/10 text-bisat-black/40'
+                <span className={`w-7 h-7 flex items-center justify-center text-[10px] font-medium transition-all border ${
+                  step === s ? 'bg-bisat-black border-bisat-black text-white' :
+                  step === 'payment' && s === 'shipping' ? 'bg-bisat-black border-bisat-black text-white' : 'border-bisat-border text-bisat-black/30'
                 }`}>
                   {step === 'payment' && s === 'shipping' ? <Check size={14} /> : i + 1}
                 </span>
@@ -133,10 +133,10 @@ export const Checkout = () => {
                   className="space-y-8"
                 >
                   {/* Contact */}
-                  <div className="bg-white rounded-3xl p-8 space-y-6">
+                  <div className="bg-white border border-bisat-border p-8 space-y-6">
                     <div className="flex items-center gap-3 mb-2">
-                      <div className="w-8 h-8 rounded-full bg-bisat-gold/10 flex items-center justify-center">
-                        <span className="text-bisat-gold text-xs font-bold">1</span>
+                      <div className="w-7 h-7 border border-bisat-border flex items-center justify-center">
+                        <span className="text-bisat-black/50 text-xs font-medium">1</span>
                       </div>
                       <h2 className="text-xl font-serif">Contact Information</h2>
                     </div>
@@ -165,10 +165,10 @@ export const Checkout = () => {
                   </div>
 
                   {/* Shipping Address */}
-                  <div className="bg-white rounded-3xl p-8 space-y-6">
+                  <div className="bg-white border border-bisat-border p-8 space-y-6">
                     <div className="flex items-center gap-3 mb-2">
-                      <div className="w-8 h-8 rounded-full bg-bisat-gold/10 flex items-center justify-center">
-                        <Truck size={14} className="text-bisat-gold" />
+                      <div className="w-7 h-7 border border-bisat-border flex items-center justify-center">
+                        <Truck size={13} className="text-bisat-black/40" />
                       </div>
                       <h2 className="text-xl font-serif">Shipping Address</h2>
                     </div>
@@ -218,7 +218,7 @@ export const Checkout = () => {
 
                   <button
                     type="submit"
-                    className="w-full bg-bisat-gold text-white py-5 rounded-2xl text-sm uppercase tracking-[0.2em] font-bold hover:bg-bisat-black transition-all duration-400 flex items-center justify-center gap-3 group shadow-lg shadow-bisat-gold/20"
+                    className="w-full bg-bisat-black text-white py-5 text-[11px] uppercase tracking-[0.2em] font-medium hover:bg-bisat-charcoal transition-colors flex items-center justify-center gap-3 group"
                   >
                     Continue to Payment
                     <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
@@ -234,10 +234,10 @@ export const Checkout = () => {
                   onSubmit={handlePaymentSubmit}
                   className="space-y-8"
                 >
-                  <div className="bg-white rounded-3xl p-8 space-y-6">
+                  <div className="bg-white border border-bisat-border p-8 space-y-6">
                     <div className="flex items-center gap-3 mb-2">
-                      <div className="w-8 h-8 rounded-full bg-bisat-gold/10 flex items-center justify-center">
-                        <CreditCard size={14} className="text-bisat-gold" />
+                      <div className="w-7 h-7 border border-bisat-border flex items-center justify-center">
+                        <CreditCard size={13} className="text-bisat-black/40" />
                       </div>
                       <h2 className="text-xl font-serif">Payment Details</h2>
                       <div className="ml-auto flex items-center gap-2">
@@ -287,8 +287,8 @@ export const Checkout = () => {
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-3 bg-bisat-cream/60 rounded-2xl px-5 py-4">
-                      <ShieldCheck size={16} className="text-bisat-gold flex-shrink-0" />
+                    <div className="flex items-center gap-3 bg-bisat-cream border border-bisat-border px-5 py-4">
+                      <ShieldCheck size={15} className="text-bisat-warm-gray flex-shrink-0" />
                       <p className="text-xs text-bisat-black/50 leading-relaxed">
                         Your payment is encrypted with 256-bit SSL. We never store card details.
                       </p>
@@ -299,7 +299,7 @@ export const Checkout = () => {
                     <button
                       type="button"
                       onClick={() => setStep('shipping')}
-                      className="flex items-center gap-2 px-8 py-5 rounded-2xl border border-bisat-black/10 text-sm uppercase tracking-[0.2em] font-bold text-bisat-black/60 hover:border-bisat-black/30 hover:text-bisat-black transition-all group"
+                      className="flex items-center gap-2 px-8 py-5 border border-bisat-border text-[11px] uppercase tracking-[0.2em] font-medium text-bisat-black/50 hover:border-bisat-black hover:text-bisat-black transition-all group"
                     >
                       <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
                       Back
@@ -307,7 +307,7 @@ export const Checkout = () => {
                     <button
                       type="submit"
                       disabled={isPlacing}
-                      className="flex-1 bg-bisat-gold text-white py-5 rounded-2xl text-sm uppercase tracking-[0.2em] font-bold hover:bg-bisat-black transition-all duration-400 flex items-center justify-center gap-3 group shadow-lg shadow-bisat-gold/20 disabled:opacity-70 disabled:cursor-not-allowed"
+                      className="flex-1 bg-bisat-black text-white py-5 text-[11px] uppercase tracking-[0.2em] font-medium hover:bg-bisat-charcoal transition-colors flex items-center justify-center gap-3 group disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {isPlacing ? (
                         <span className="flex items-center gap-3">
@@ -333,16 +333,15 @@ export const Checkout = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.15 }}
-              className="bg-bisat-black text-bisat-cream rounded-3xl p-8 lg:sticky lg:top-28 overflow-hidden"
+              className="bg-bisat-black text-bisat-cream p-8 lg:sticky lg:top-28 overflow-hidden"
             >
-              <div className="absolute top-0 right-0 w-40 h-40 bg-bisat-gold/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl pointer-events-none" />
 
               <h2 className="text-2xl font-serif mb-8 relative z-10">Order Summary</h2>
 
               <div className="space-y-5 mb-8 relative z-10 max-h-64 overflow-y-auto pr-1 scrollbar-hide">
                 {cart.map(item => (
                   <div key={item.id} className="flex gap-4">
-                    <div className="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 bg-bisat-charcoal">
+                    <div className="w-16 h-16 overflow-hidden flex-shrink-0 bg-bisat-charcoal">
                       <img src={item.images[0]} alt={item.name} className="w-full h-full object-cover" />
                     </div>
                     <div className="flex-1 min-w-0">
@@ -377,8 +376,8 @@ export const Checkout = () => {
                 <span className="text-3xl font-serif">${totalPrice.toLocaleString()}</span>
               </div>
 
-              <div className="flex items-center gap-3 bg-white/5 rounded-2xl px-4 py-3 relative z-10">
-                <Truck size={14} className="text-bisat-gold flex-shrink-0" />
+              <div className="flex items-center gap-3 bg-white/5 border border-white/10 px-4 py-3 relative z-10">
+                <Truck size={13} className="text-bisat-cream/50 flex-shrink-0" />
                 <div>
                   <p className="text-[10px] uppercase tracking-widest font-bold text-bisat-cream/60">Estimated Delivery</p>
                   <p className="text-sm mt-0.5">{estimatedDelivery}</p>

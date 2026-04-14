@@ -40,7 +40,7 @@ export const OrderConfirmation = () => {
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ type: 'spring', stiffness: 200, damping: 15 }}
-            className="w-24 h-24 bg-bisat-gold rounded-full flex items-center justify-center mx-auto mb-8 shadow-2xl shadow-bisat-gold/30"
+            className="w-24 h-24 bg-bisat-black flex items-center justify-center mx-auto mb-8"
           >
             <motion.div
               initial={{ opacity: 0, scale: 0 }}
@@ -69,7 +69,7 @@ export const OrderConfirmation = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.55 }}
-          className="bg-white rounded-3xl overflow-hidden shadow-sm border border-bisat-black/5 mb-8"
+          className="bg-white overflow-hidden border border-bisat-border mb-8"
         >
           <div className="bg-bisat-black text-bisat-cream px-8 py-6 flex items-center justify-between">
             <div>
@@ -103,10 +103,10 @@ export const OrderConfirmation = () => {
                     transition={{ delay: 0.6 + i * 0.1 }}
                     className="flex flex-col items-center text-center relative"
                   >
-                    <div className={`w-10 h-10 rounded-full flex items-center justify-center mb-3 z-10 relative transition-all ${
+                    <div className={`w-10 h-10 flex items-center justify-center mb-3 z-10 relative transition-all border ${
                       s.active
-                        ? 'bg-bisat-gold text-white shadow-lg shadow-bisat-gold/30'
-                        : 'bg-bisat-black/5 text-bisat-black/20'
+                        ? 'bg-bisat-black border-bisat-black text-white'
+                        : 'border-bisat-border text-bisat-black/20'
                     }`}>
                       <s.icon size={16} />
                     </div>
@@ -125,7 +125,7 @@ export const OrderConfirmation = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7 }}
-          className="flex items-start gap-4 bg-bisat-gold/8 border border-bisat-gold/20 rounded-2xl px-6 py-5 mb-10"
+          className="flex items-start gap-4 bg-bisat-cream border border-bisat-border px-6 py-5 mb-10"
         >
           <Mail size={18} className="text-bisat-gold mt-0.5 flex-shrink-0" />
           <p className="text-sm text-bisat-black/60 leading-relaxed">
@@ -142,14 +142,14 @@ export const OrderConfirmation = () => {
         >
           <Link
             href="/track-order"
-            className="flex-1 bg-bisat-black text-white py-5 rounded-2xl text-xs uppercase tracking-[0.2em] font-bold hover:bg-bisat-gold transition-all duration-300 flex items-center justify-center gap-3 group"
+            className="flex-1 bg-bisat-black text-white py-5 text-[10px] uppercase tracking-[0.2em] font-medium hover:bg-bisat-charcoal transition-colors flex items-center justify-center gap-3 group"
           >
             <Truck size={14} />
             Track Your Order
           </Link>
           <Link
             href="/shop"
-            className="flex-1 bg-white border border-bisat-black/10 text-bisat-black py-5 rounded-2xl text-xs uppercase tracking-[0.2em] font-bold hover:border-bisat-gold hover:text-bisat-gold transition-all duration-300 flex items-center justify-center gap-3 group"
+            className="flex-1 border border-bisat-border text-bisat-black/60 py-5 text-[10px] uppercase tracking-[0.2em] font-medium hover:border-bisat-black hover:text-bisat-black transition-colors flex items-center justify-center gap-3 group"
           >
             Continue Shopping
             <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />

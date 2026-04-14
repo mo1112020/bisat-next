@@ -98,7 +98,7 @@ export const FAQ = () => {
                     setActiveCategory(cat.category);
                     setOpenIndex(0);
                   }}
-                  className={`w-full text-left px-4 py-3 rounded-xl transition-all duration-300 flex items-center justify-between group ${
+                  className={`w-full text-left px-4 py-3 transition-all duration-200 flex items-center justify-between group ${
                     activeCategory === cat.category 
                     ? 'bg-bisat-black text-white shadow-lg' 
                     : 'bg-white text-bisat-black/60 hover:bg-bisat-cream'
@@ -111,7 +111,7 @@ export const FAQ = () => {
                 </button>
               ))}
 
-              <div className="mt-12 p-8 bg-bisat-gold/10 rounded-3xl border border-bisat-gold/20">
+              <div className="mt-12 p-8 bg-bisat-cream border border-bisat-border">
                 <h4 className="font-serif text-xl mb-4">Still have questions?</h4>
                 <p className="text-sm text-bisat-black/60 mb-6 leading-relaxed">
                   Our heritage experts are available to assist you with any specific inquiries.
@@ -137,7 +137,7 @@ export const FAQ = () => {
                   {faqs.find(f => f.category === activeCategory)?.questions.map((item, idx) => (
                     <div 
                       key={idx}
-                      className="mb-4 bg-white rounded-2xl border border-bisat-black/5 overflow-hidden shadow-sm"
+                      className="mb-4 bg-white border border-bisat-border overflow-hidden"
                     >
                       <button
                         onClick={() => setOpenIndex(openIndex === idx ? null : idx)}

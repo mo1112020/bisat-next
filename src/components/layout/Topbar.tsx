@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 
 const MESSAGES = [
-  <>Free worldwide shipping over <span className="text-bisat-gold font-semibold">$500</span></>,
+  <>Free worldwide shipping over <strong className="font-semibold">$500</strong></>,
   <>Handmade in Turkey — Certificate of Authenticity included</>,
   <>30-day easy returns · No questions asked</>,
   <>Over 100 master artisan partners worldwide</>,
@@ -11,7 +11,7 @@ const MESSAGES = [
 
 const Diamond = () => (
   <span
-    className="inline-block w-[4px] h-[4px] bg-bisat-gold rotate-45 mx-3 shrink-0 opacity-60"
+    className="inline-block w-[3px] h-[3px] bg-bisat-warm-gray rotate-45 mx-4 shrink-0 opacity-50"
     aria-hidden
   />
 );
@@ -19,9 +19,6 @@ const Diamond = () => (
 const STORAGE_KEY = 'bisat_topbar_dismissed';
 
 export const Topbar: React.FC = () => {
-  // Start visible so SSR includes the HTML (trust signals visible on first paint).
-  // The inline script in layout.tsx adds .topbar-dismissed to <html> before paint
-  // for users who already dismissed, so CSS hides it with zero flash.
   const [visible, setVisible] = useState(true);
   const [mobileIdx, setMobileIdx] = useState(0);
 
@@ -31,7 +28,6 @@ export const Topbar: React.FC = () => {
     }
   }, []);
 
-  // Rotate mobile message every 4 seconds
   useEffect(() => {
     if (!visible) return;
     const id = setInterval(() => {
@@ -49,9 +45,9 @@ export const Topbar: React.FC = () => {
   if (!visible) return null;
 
   return (
-    <div id="topbar-bar" className="h-9 bg-bisat-black flex items-center justify-center relative overflow-hidden shrink-0">
+    <div id="topbar-bar" className="h-9 bg-bisat-topbar flex items-center justify-center relative overflow-hidden shrink-0 border-b border-bisat-border">
       {/* Desktop: all messages with separators */}
-      <div className="hidden md:flex items-center text-bisat-sand text-[10px] uppercase tracking-[0.25em] font-medium">
+      <div className="hidden md:flex items-center text-bisat-black/65 text-[10px] uppercase tracking-[0.22em] font-medium">
         {MESSAGES.map((msg, i) => (
           <React.Fragment key={i}>
             <span>{msg}</span>
@@ -61,7 +57,7 @@ export const Topbar: React.FC = () => {
       </div>
 
       {/* Mobile: rotating single message */}
-      <div className="md:hidden text-bisat-sand text-[10px] uppercase tracking-[0.2em] font-medium text-center px-8">
+      <div className="md:hidden text-bisat-black/65 text-[10px] uppercase tracking-[0.18em] font-medium text-center px-8">
         {MESSAGES[mobileIdx]}
       </div>
 
@@ -69,9 +65,9 @@ export const Topbar: React.FC = () => {
       <button
         onClick={dismiss}
         aria-label="Close announcement"
-        className="absolute right-3 top-1/2 -translate-y-1/2 text-bisat-sand/40 hover:text-bisat-sand transition-colors p-1"
+        className="absolute right-3 top-1/2 -translate-y-1/2 text-bisat-black/30 hover:text-bisat-black transition-colors p-1"
       >
-        <X size={12} />
+        <X size={11} />
       </button>
     </div>
   );

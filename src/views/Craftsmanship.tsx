@@ -47,7 +47,7 @@ export const Craftsmanship = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.15, duration: 0.7 }}
-              className="bg-white rounded-[2rem] p-10 border border-bisat-black/[0.04] shadow-sm"
+              className="bg-white border border-bisat-border p-10"
             >
               <span className="text-bisat-gold font-bold text-[10px] uppercase tracking-[0.4em] mb-6 block">{item.step}</span>
               <h3 className="text-2xl font-serif mb-4 text-bisat-black">{item.title}</h3>
@@ -64,7 +64,7 @@ export const Craftsmanship = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="bg-bisat-black text-bisat-ivory rounded-[3rem] px-12 py-20"
+          className="bg-bisat-black text-bisat-ivory px-12 py-20"
         >
           <p className="text-3xl md:text-5xl font-serif italic leading-relaxed mb-8">
             "A rug is never finished — it only begins its life when it enters your home."

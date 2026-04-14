@@ -40,7 +40,7 @@ export const StickyAtcBar = ({ product, anchorRef, onAddToCart, added }: StickyA
         >
           <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 py-3 flex items-center gap-4">
             {/* Thumbnail */}
-            <div className="relative w-12 h-12 rounded-xl overflow-hidden bg-bisat-cream flex-shrink-0 hidden sm:block">
+            <div className="relative w-12 h-12 overflow-hidden bg-[#F6F3EE] flex-shrink-0 hidden sm:block">
               {product.images[0] && (
                 <Image src={product.images[0]} alt={product.name} fill sizes="48px" className="object-cover" />
               )}
@@ -48,20 +48,20 @@ export const StickyAtcBar = ({ product, anchorRef, onAddToCart, added }: StickyA
 
             {/* Name + Price */}
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-semibold text-bisat-black truncate leading-tight">{product.name}</p>
-              <p className="text-bisat-gold font-serif text-base">${displayPrice.toLocaleString()}</p>
+              <p className="text-[13px] font-normal text-bisat-black truncate leading-tight">{product.name}</p>
+              <p className="text-bisat-black/60 text-[13px]">${displayPrice.toLocaleString()}</p>
             </div>
 
             {/* CTA */}
             <button
               onClick={onAddToCart}
               disabled={product.stock === 0 || added}
-              className={`flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold uppercase tracking-wide flex-shrink-0 transition-all duration-300 ${
+              className={`flex items-center gap-2 px-6 py-3 text-[10px] uppercase tracking-[0.18em] font-medium flex-shrink-0 transition-all duration-200 ${
                 added
-                  ? 'bg-green-600 text-white'
+                  ? 'bg-bisat-warm-gray text-white'
                   : product.stock === 0
                   ? 'bg-bisat-black/10 text-bisat-black/30 cursor-not-allowed'
-                  : 'bg-bisat-gold text-white hover:bg-bisat-black shadow-lg shadow-bisat-gold/20'
+                  : 'bg-bisat-black text-white hover:bg-bisat-charcoal'
               }`}
             >
               {added ? <><Check size={15} /> Added</> : <><ShoppingBag size={15} /> Add to Bag</>}

@@ -152,7 +152,7 @@ export const ProductDetail = () => {
                     <button
                       key={i}
                       onClick={() => setActiveImage(i)}
-                      className={`aspect-square rounded-xl overflow-hidden border-2 transition-all ${
+                      className={`aspect-square overflow-hidden border-2 transition-all ${
                         activeImage === i ? 'border-bisat-gold' : 'border-transparent opacity-50 hover:opacity-80'
                       }`}
                     >
@@ -164,7 +164,7 @@ export const ProductDetail = () => {
 
               {/* Main image */}
               <div
-                className="flex-1 aspect-square rounded-2xl overflow-hidden bg-bisat-cream cursor-zoom-in relative"
+                className="flex-1 aspect-square overflow-hidden bg-[#F6F3EE] cursor-zoom-in relative"
                 onMouseMove={handleMouseMove}
                 onMouseEnter={() => setIsZoomed(true)}
                 onMouseLeave={() => setIsZoomed(false)}
@@ -183,12 +183,12 @@ export const ProductDetail = () => {
                 />
                 {product.stock === 0 && (
                   <div className="absolute inset-0 bg-bisat-black/40 flex items-center justify-center">
-                    <span className="bg-white text-bisat-black px-5 py-2 rounded-full text-xs uppercase tracking-widest font-bold">Sold Out</span>
+                    <span className="bg-white text-bisat-black px-5 py-2 text-xs uppercase tracking-[0.2em] font-medium">Sold Out</span>
                   </div>
                 )}
                 <div className="hidden sm:block">
                   {!isZoomed && (
-                    <div className="absolute bottom-3 right-3 bg-white/80 backdrop-blur-sm rounded-lg px-2.5 py-1 text-[9px] uppercase tracking-widest font-bold text-bisat-black/40">
+                    <div className="absolute bottom-3 right-3 bg-white/80 px-2.5 py-1 text-[9px] uppercase tracking-[0.18em] font-medium text-bisat-black/35">
                       Hover to zoom
                     </div>
                   )}
@@ -203,7 +203,7 @@ export const ProductDetail = () => {
                   <button
                     key={i}
                     onClick={() => setActiveImage(i)}
-                    className={`w-16 h-16 flex-shrink-0 rounded-xl overflow-hidden border-2 transition-all relative ${
+                    className={`w-16 h-16 flex-shrink-0 overflow-hidden border-2 transition-all relative ${
                       activeImage === i ? 'border-bisat-gold' : 'border-transparent opacity-50'
                     }`}
                   >
@@ -221,7 +221,7 @@ export const ProductDetail = () => {
             <div className="flex items-center gap-2 mb-3">
               <Link
                 href={`/shop?category=${product.category}`}
-                className="text-[10px] uppercase tracking-[0.25em] font-bold text-white bg-bisat-gold px-3 py-1 rounded-full hover:bg-bisat-black transition-colors"
+                className="text-[9px] uppercase tracking-[0.2em] font-medium text-bisat-black/60 bg-bisat-cream px-3 py-1 border border-bisat-border hover:bg-bisat-black hover:text-white transition-colors"
               >
                 {product.category}
               </Link>
@@ -269,7 +269,7 @@ export const ProductDetail = () => {
                 { label: 'Origin', value: product.origin },
                 { label: 'Rooms', value: product.rooms.slice(0,2).join(', ') },
               ].map(spec => (
-                <div key={spec.label} className="bg-bisat-cream/60 rounded-xl px-4 py-3">
+                <div key={spec.label} className="bg-bisat-cream/60 border border-bisat-border px-4 py-3">
                   <p className="text-[9px] uppercase tracking-[0.25em] font-bold text-bisat-black/35 mb-1">{spec.label}</p>
                   <p className="text-sm font-medium text-bisat-black">{spec.value}</p>
                 </div>
@@ -291,7 +291,7 @@ export const ProductDetail = () => {
               {/* Top row: qty + wishlist */}
               <div className="flex gap-3">
                 {/* Quantity */}
-                <div className="flex items-center border border-bisat-black/10 rounded-xl overflow-hidden bg-white">
+                <div className="flex items-center border border-bisat-border overflow-hidden bg-white">
                   <button
                     onClick={() => setQty(q => Math.max(1, q - 1))}
                     className="px-4 py-3 text-bisat-black/40 hover:text-bisat-black hover:bg-bisat-cream/50 transition-colors"
@@ -312,10 +312,10 @@ export const ProductDetail = () => {
                 <button
                   onClick={() => toggleWishlist(product)}
                   aria-label={isFavorite ? 'Remove from wishlist' : 'Save to wishlist'}
-                  className={`flex-1 rounded-xl border transition-all duration-300 flex items-center justify-center gap-2 text-sm font-semibold ${
+                  className={`flex-1 border transition-all duration-200 flex items-center justify-center gap-2 text-sm font-medium ${
                     isFavorite
-                      ? 'bg-bisat-gold/10 border-bisat-gold text-bisat-gold'
-                      : 'border-bisat-black/10 text-bisat-black/35 hover:border-bisat-gold hover:text-bisat-gold bg-white'
+                      ? 'bg-bisat-cream border-bisat-warm-gray text-bisat-warm-gray'
+                      : 'border-bisat-border text-bisat-black/40 hover:border-bisat-black/30 hover:text-bisat-black bg-white'
                   }`}
                 >
                   <Heart size={16} fill={isFavorite ? 'currentColor' : 'none'} />
@@ -328,12 +328,12 @@ export const ProductDetail = () => {
                 ref={atcRef}
                 onClick={handleAddToCart}
                 disabled={product.stock === 0 || added}
-                className={`w-full rounded-xl text-sm font-semibold tracking-wide transition-all duration-300 flex items-center justify-center gap-2.5 py-4 ${
+                className={`w-full text-[11px] uppercase tracking-[0.2em] font-medium transition-all duration-200 flex items-center justify-center gap-2.5 py-4 ${
                   added
-                    ? 'bg-green-600 text-white'
+                    ? 'bg-bisat-warm-gray text-white'
                     : product.stock === 0
                     ? 'bg-bisat-black/10 text-bisat-black/30 cursor-not-allowed'
-                    : 'bg-bisat-black text-white hover:bg-bisat-gold shadow-md shadow-bisat-black/10'
+                    : 'bg-bisat-black text-white hover:bg-bisat-charcoal'
                 }`}
               >
                 {added ? (
@@ -345,29 +345,29 @@ export const ProductDetail = () => {
 
               {/* Waitlist for sold-out */}
               {product.stock === 0 && !waitlistSent && (
-                <div className="bg-bisat-cream/60 rounded-xl p-4">
-                  <p className="text-[11px] font-bold text-bisat-black/60 uppercase tracking-wider mb-2.5 flex items-center gap-2">
-                    <Mail size={12} /> Notify me when back in stock
+                <div className="bg-bisat-cream border border-bisat-border p-4">
+                  <p className="text-[10px] font-medium text-bisat-black/50 uppercase tracking-[0.18em] mb-2.5 flex items-center gap-2">
+                    <Mail size={11} /> Notify me when back in stock
                   </p>
                   <form
                     onSubmit={e => { e.preventDefault(); setWaitlistSent(true); }}
-                    className="flex gap-2"
+                    className="flex gap-0 border border-bisat-border overflow-hidden"
                   >
                     <input
                       type="email" required
                       value={waitlistEmail}
                       onChange={e => setWaitlistEmail(e.target.value)}
                       placeholder="your@email.com"
-                      className="flex-1 bg-white border border-bisat-black/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-bisat-gold/50 transition-all"
+                      className="flex-1 bg-white px-3 py-2 text-sm focus:outline-none"
                     />
-                    <button type="submit" className="px-4 py-2 bg-bisat-black text-white rounded-lg text-xs font-bold uppercase tracking-wide hover:bg-bisat-gold transition-colors">
+                    <button type="submit" className="px-4 py-2 bg-bisat-black text-white text-[10px] font-medium uppercase tracking-[0.15em] hover:bg-bisat-charcoal transition-colors">
                       Notify
                     </button>
                   </form>
                 </div>
               )}
               {waitlistSent && (
-                <div className="flex items-center gap-2 bg-green-50 border border-green-200 rounded-xl px-4 py-3">
+                <div className="flex items-center gap-2 bg-green-50 border border-green-200 px-4 py-3">
                   <Check size={14} className="text-green-600 flex-shrink-0" />
                   <p className="text-sm text-green-700 font-medium">You're on the list — we'll email you when it's back.</p>
                 </div>
@@ -379,7 +379,7 @@ export const ProductDetail = () => {
               <Link
                 href="/checkout"
                 onClick={() => { for (let i = 0; i < qty; i++) addToCart(product); }}
-                className="w-full border border-bisat-black/15 text-bisat-black rounded-xl py-3.5 text-sm font-semibold text-center hover:border-bisat-gold hover:text-bisat-gold transition-all duration-300 mb-6"
+                className="w-full border border-bisat-border text-bisat-black/60 py-3.5 text-[11px] uppercase tracking-[0.2em] font-medium text-center hover:border-bisat-black hover:text-bisat-black transition-all duration-200 mb-6"
               >
                 Buy Now
               </Link>
@@ -415,7 +415,7 @@ export const ProductDetail = () => {
                   <input
                     type="text" required value={reviewName}
                     onChange={e => setReviewName(e.target.value)}
-                    className="w-full bg-white border border-bisat-black/8 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-bisat-gold/50 transition-all"
+                    className="w-full bg-white border border-bisat-border px-4 py-3 text-sm focus:outline-none transition-all"
                     placeholder="Jane Smith"
                   />
                 </div>
@@ -435,13 +435,13 @@ export const ProductDetail = () => {
                     required value={reviewComment}
                     onChange={e => setReviewComment(e.target.value)}
                     rows={4}
-                    className="w-full bg-white border border-bisat-black/8 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-bisat-gold/50 transition-all resize-none"
+                    className="w-full bg-white border border-bisat-border px-4 py-3 text-sm focus:outline-none transition-all resize-none"
                     placeholder="Tell us about your experience..."
                   />
                 </div>
                 <button
                   type="submit" disabled={isSubmitting}
-                  className="w-full bg-bisat-gold text-white py-3 rounded-xl text-sm font-semibold hover:bg-bisat-black transition-colors disabled:opacity-50"
+                  className="w-full bg-bisat-black text-white py-3 text-[11px] uppercase tracking-[0.2em] font-medium hover:bg-bisat-charcoal transition-colors disabled:opacity-50"
                 >
                   {isSubmitting ? 'Posting…' : 'Post Review'}
                 </button>
@@ -472,7 +472,7 @@ export const ProductDetail = () => {
                       key={review.id}
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="bg-white rounded-2xl p-5 border border-bisat-black/5"
+                      className="bg-white p-5 border border-bisat-border"
                     >
                       <div className="flex items-start justify-between mb-2">
                         <div>
@@ -488,7 +488,7 @@ export const ProductDetail = () => {
                       <p className="text-sm text-bisat-black/60 leading-relaxed mt-2">"{review.comment}"</p>
                     </motion.div>
                   )) : (
-                    <div className="bg-bisat-cream/40 rounded-2xl py-12 text-center border-2 border-dashed border-bisat-black/8">
+                    <div className="bg-bisat-cream/40 py-12 text-center border border-bisat-border">
                       <p className="text-bisat-black/30 text-sm">No reviews yet. Be the first!</p>
                     </div>
                   )}

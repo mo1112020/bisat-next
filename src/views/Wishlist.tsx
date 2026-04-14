@@ -29,7 +29,7 @@ export const Wishlist: React.FC = () => {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center py-20 bg-bisat-cream/30 rounded-3xl border border-bisat-sand/20"
+          className="text-center py-20 bg-bisat-cream/30 border border-bisat-border"
         >
           <Heart size={48} className="mx-auto mb-6 text-bisat-sand/40" />
           <h2 className="text-2xl font-serif mb-4">Your wishlist is empty</h2>
@@ -38,7 +38,7 @@ export const Wishlist: React.FC = () => {
           </p>
           <Link 
             href="/shop" 
-            className="bg-bisat-gold text-white px-8 py-4 rounded-full text-xs uppercase tracking-widest font-bold hover:bg-bisat-black transition-colors inline-block"
+            className="bg-bisat-black text-white px-8 py-4 text-[10px] uppercase tracking-[0.2em] font-medium hover:bg-bisat-charcoal transition-colors inline-block"
           >
             Explore Collection
           </Link>

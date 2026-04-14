@@ -38,8 +38,8 @@ export const Account = () => {
           {/* Sidebar */}
           <div className="lg:col-span-1 space-y-4">
             {/* Avatar Card */}
-            <div className="bg-white rounded-[2rem] p-8 shadow-sm text-center">
-              <div className="w-20 h-20 rounded-full bg-bisat-black flex items-center justify-center mx-auto mb-4">
+            <div className="bg-white border border-bisat-border p-8 text-center">
+              <div className="w-20 h-20 bg-bisat-black flex items-center justify-center mx-auto mb-4">
                 <User size={32} className="text-bisat-cream" strokeWidth={1.5} />
               </div>
               <h3 className="font-serif text-lg">Leila Arslan</h3>
@@ -47,7 +47,7 @@ export const Account = () => {
             </div>
 
             {/* Nav */}
-            <div className="bg-white rounded-[2rem] p-4 shadow-sm">
+            <div className="bg-white border border-bisat-border p-2">
               {TABS.map((tab) => {
                 const icons = { Overview: User, Orders: Package, Addresses: MapPin, Settings: Settings };
                 const Icon = icons[tab as keyof typeof icons];
@@ -55,10 +55,10 @@ export const Account = () => {
                   <button
                     key={tab}
                     onClick={() => setActiveTab(tab)}
-                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold uppercase tracking-widest transition-colors ${
+                    className={`w-full flex items-center gap-3 px-4 py-3 text-[11px] font-medium uppercase tracking-[0.18em] transition-colors ${
                       activeTab === tab
-                        ? 'bg-bisat-black text-bisat-cream'
-                        : 'text-bisat-black/50 hover:text-bisat-black hover:bg-bisat-cream/50'
+                        ? 'bg-bisat-black text-white'
+                        : 'text-bisat-black/45 hover:text-bisat-black hover:bg-bisat-cream/50'
                     }`}
                   >
                     <Icon size={15} />
@@ -88,7 +88,7 @@ export const Account = () => {
                       { label: 'Wishlist Items', value: '5', icon: Heart },
                       { label: 'Loyalty Points', value: '420', icon: CheckCircle },
                     ].map(({ label, value, icon: Icon }) => (
-                      <div key={label} className="bg-white rounded-[2rem] p-8 shadow-sm">
+                      <div key={label} className="bg-white border border-bisat-border p-8">
                         <Icon size={20} className="text-bisat-gold mb-4" />
                         <p className="text-3xl font-serif mb-1">{value}</p>
                         <p className="text-xs text-bisat-black/40 uppercase tracking-widest">{label}</p>
@@ -97,7 +97,7 @@ export const Account = () => {
                   </div>
 
                   {/* Recent Order */}
-                  <div className="bg-white rounded-[2rem] p-8 shadow-sm">
+                  <div className="bg-white border border-bisat-border p-8">
                     <div className="flex items-center justify-between mb-6">
                       <h3 className="font-serif text-xl">Recent Order</h3>
                       <button onClick={() => setActiveTab('Orders')} className="text-xs uppercase tracking-widest font-bold text-bisat-gold flex items-center gap-2 hover:gap-3 transition-all">
@@ -125,14 +125,14 @@ export const Account = () => {
 
                   {/* Quick Links */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <Link href="/wishlist" className="bg-white rounded-[2rem] p-8 shadow-sm flex items-center justify-between group hover:shadow-md transition-shadow">
+                    <Link href="/wishlist" className="bg-white border border-bisat-border p-8 flex items-center justify-between group hover:shadow-md transition-shadow">
                       <div className="flex items-center gap-4">
                         <Heart size={20} className="text-bisat-gold" />
                         <span className="font-bold text-sm uppercase tracking-widest">My Wishlist</span>
                       </div>
                       <ArrowRight size={16} className="text-bisat-black/20 group-hover:translate-x-1 transition-transform" />
                     </Link>
-                    <Link href="/track-order" className="bg-white rounded-[2rem] p-8 shadow-sm flex items-center justify-between group hover:shadow-md transition-shadow">
+                    <Link href="/track-order" className="bg-white border border-bisat-border p-8 flex items-center justify-between group hover:shadow-md transition-shadow">
                       <div className="flex items-center gap-4">
                         <Package size={20} className="text-bisat-gold" />
                         <span className="font-bold text-sm uppercase tracking-widest">Track Order</span>
@@ -147,7 +147,7 @@ export const Account = () => {
               {activeTab === 'Orders' && (
                 <div className="space-y-4">
                   {DUMMY_ORDERS.map((order) => (
-                    <div key={order.id} className="bg-white rounded-[2rem] p-8 shadow-sm">
+                    <div key={order.id} className="bg-white border border-bisat-border p-8">
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                         <div>
                           <p className="text-xs text-bisat-black/40 uppercase tracking-widest mb-1">{order.id} · {order.date}</p>
@@ -171,7 +171,7 @@ export const Account = () => {
               {/* Addresses */}
               {activeTab === 'Addresses' && (
                 <div className="space-y-4">
-                  <div className="bg-white rounded-[2rem] p-8 shadow-sm">
+                  <div className="bg-white border border-bisat-border p-8">
                     <div className="flex items-start justify-between">
                       <div>
                         <div className="flex items-center gap-3 mb-4">
@@ -190,7 +190,7 @@ export const Account = () => {
                       </button>
                     </div>
                   </div>
-                  <button className="w-full bg-white rounded-[2rem] p-6 shadow-sm border-2 border-dashed border-bisat-black/10 text-bisat-black/30 hover:text-bisat-black hover:border-bisat-black/20 transition-colors text-sm uppercase tracking-widest font-bold">
+                  <button className="w-full bg-white border border-dashed border-bisat-border p-6 text-bisat-black/30 hover:text-bisat-black hover:border-bisat-black/20 transition-colors text-sm uppercase tracking-widest font-bold">
                     + Add New Address
                   </button>
                 </div>
@@ -199,7 +199,7 @@ export const Account = () => {
               {/* Settings */}
               {activeTab === 'Settings' && (
                 <div className="space-y-4">
-                  <div className="bg-white rounded-[2rem] p-8 shadow-sm">
+                  <div className="bg-white border border-bisat-border p-8">
                     <h3 className="font-serif text-xl mb-6">Personal Information</h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       {[
@@ -213,17 +213,17 @@ export const Account = () => {
                           <input
                             type={type}
                             defaultValue={value}
-                            className="w-full bg-bisat-cream/50 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-bisat-gold focus:outline-none transition-all"
+                            className="w-full bg-bisat-cream/50 border border-bisat-border px-4 py-3 text-sm focus:outline-none"
                           />
                         </div>
                       ))}
                     </div>
-                    <button className="mt-6 bg-bisat-black text-bisat-cream px-8 py-3 rounded-xl text-xs uppercase tracking-widest font-bold hover:bg-bisat-gold transition-colors">
+                    <button className="mt-6 bg-bisat-black text-bisat-cream px-8 py-3 text-[10px] uppercase tracking-[0.18em] font-medium hover:bg-bisat-charcoal transition-colors">
                       Save Changes
                     </button>
                   </div>
 
-                  <div className="bg-white rounded-[2rem] p-8 shadow-sm">
+                  <div className="bg-white border border-bisat-border p-8">
                     <h3 className="font-serif text-xl mb-6">Notifications</h3>
                     {['Order updates', 'New arrivals', 'Exclusive offers'].map((item) => (
                       <div key={item} className="flex items-center justify-between py-3 border-b border-bisat-black/5 last:border-0">

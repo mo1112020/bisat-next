@@ -54,7 +54,7 @@ export const Shipping = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.7 }}
-              className="bg-white rounded-[2rem] p-10 border border-bisat-black/[0.04] shadow-sm"
+              className="bg-white border border-bisat-border p-10"
             >
               <item.icon size={28} strokeWidth={1.5} className="text-bisat-gold mb-6" />
               <h3 className="text-xl font-serif mb-3 text-bisat-black">{item.title}</h3>
@@ -66,7 +66,7 @@ export const Shipping = () => {
 
       {/* Policy Details */}
       <section className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 mb-24">
-        <div className="bg-white rounded-3xl p-8 md:p-12 border border-bisat-black/[0.04] shadow-sm">
+        <div className="bg-white border border-bisat-border p-8 md:p-12">
           <h2 className="text-3xl font-serif mb-8 text-bisat-black">Shipping Policy</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-bisat-black/60 leading-relaxed font-light">
             <div className="space-y-6">

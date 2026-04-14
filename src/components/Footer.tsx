@@ -94,42 +94,42 @@ export const Footer = () => {
         <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 py-12 sm:py-16">
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
             <div className="max-w-md">
-              <p className="text-[9px] uppercase tracking-[0.35em] font-bold text-bisat-gold mb-3">The Inner Circle</p>
-              <h2 className="text-2xl sm:text-3xl font-serif leading-snug text-bisat-black mb-2">
+              <p className="text-[9px] uppercase tracking-[0.3em] font-medium text-bisat-warm-gray mb-3">The Inner Circle</p>
+              <h2 className="text-2xl sm:text-3xl font-light leading-snug text-bisat-black mb-2">
                 Stories, drops & exclusives<br className="hidden sm:block" /> — straight to your inbox.
               </h2>
-              <p className="text-bisat-black/50 text-sm font-light leading-relaxed">
+              <p className="text-bisat-black/45 text-sm font-light leading-relaxed">
                 {t('footer.news_desc')}
               </p>
             </div>
 
             <div className="w-full lg:w-auto lg:min-w-[380px]">
               {subscribed ? (
-                <div className="flex items-center gap-3 bg-white/60 border border-bisat-gold/30 rounded-2xl px-6 py-5">
-                  <span className="w-8 h-8 rounded-full bg-bisat-gold/15 flex items-center justify-center flex-shrink-0">
-                    <Check size={14} className="text-bisat-gold" />
+                <div className="flex items-center gap-3 bg-white/50 border border-bisat-border px-6 py-5">
+                  <span className="w-7 h-7 border border-bisat-warm-gray/40 flex items-center justify-center flex-shrink-0">
+                    <Check size={12} className="text-bisat-warm-gray" />
                   </span>
                   <div>
-                    <p className="text-sm font-semibold text-bisat-black">You're in.</p>
-                    <p className="text-xs text-bisat-black/50 font-light">Watch your inbox for something special.</p>
+                    <p className="text-sm font-medium text-bisat-black">You're in.</p>
+                    <p className="text-xs text-bisat-black/45 font-light">Watch your inbox for something special.</p>
                   </div>
                 </div>
               ) : (
-                <form onSubmit={handleSubscribe} className="flex gap-2 bg-white/60 border border-bisat-black/10 rounded-2xl p-2">
+                <form onSubmit={handleSubscribe} className="flex gap-0 border border-bisat-border overflow-hidden">
                   <input
                     type="email"
                     required
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                     placeholder={t('footer.placeholder')}
-                    className="flex-1 bg-transparent px-4 py-3 text-sm text-bisat-black placeholder:text-bisat-black/30 focus:outline-none min-w-0"
+                    className="flex-1 bg-white/50 px-5 py-3.5 text-sm text-bisat-black placeholder:text-bisat-black/30 focus:outline-none min-w-0"
                   />
                   <button
                     type="submit"
-                    className="flex-shrink-0 bg-bisat-black text-white px-6 py-3 rounded-xl text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-bisat-charcoal transition-colors flex items-center gap-2 group whitespace-nowrap"
+                    className="flex-shrink-0 bg-bisat-black text-white px-6 py-3.5 text-[10px] uppercase tracking-[0.18em] font-medium hover:bg-bisat-charcoal transition-colors flex items-center gap-2 whitespace-nowrap"
                   >
                     Subscribe
-                    <Mail size={12} className="group-hover:scale-110 transition-transform" />
+                    <Mail size={11} />
                   </button>
                 </form>
               )}
@@ -144,15 +144,15 @@ export const Footer = () => {
 
           {/* Brand column */}
           <div className="col-span-2 md:col-span-4">
-            <Link href="/" className="font-display text-[2rem] font-bold tracking-tight text-bisat-black hover:text-bisat-gold transition-colors duration-300 block mb-5">
+            <Link href="/" className="font-display text-[1.8rem] font-bold tracking-tight text-bisat-black hover:text-bisat-warm-gray transition-colors duration-200 block mb-4">
               Bisāṭ
             </Link>
-            <p className="text-bisat-black/50 text-sm leading-relaxed font-light max-w-[260px] mb-8">
+            <p className="text-bisat-black/45 text-sm leading-relaxed font-light max-w-[240px] mb-7">
               {t('footer.desc')}
             </p>
 
             {/* Social icons */}
-            <div className="flex items-center gap-2.5">
+            <div className="flex items-center gap-3">
               {socials.map(s => (
                 <a
                   key={s.label}
@@ -160,7 +160,7 @@ export const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={s.label}
-                  className="w-9 h-9 rounded-xl border border-bisat-black/12 flex items-center justify-center text-bisat-black/40 hover:text-bisat-gold hover:border-bisat-gold/50 hover:bg-bisat-gold/8 transition-all duration-300"
+                  className="text-bisat-black/35 hover:text-bisat-black transition-colors duration-200"
                 >
                   {s.icon}
                 </a>
@@ -170,7 +170,7 @@ export const Footer = () => {
 
           {/* Collections */}
           <div className="col-span-1 md:col-span-2 md:col-start-6">
-            <h4 className="text-[9px] uppercase tracking-[0.3em] font-bold text-bisat-black/35 mb-6">Collections</h4>
+            <h4 className="text-[9px] uppercase tracking-[0.25em] font-medium text-bisat-black/35 mb-5">Collections</h4>
             <ul className="space-y-3">
               {[
                 ...collections,
@@ -178,7 +178,7 @@ export const Footer = () => {
                 { label: 'On Sale',      href: '/shop?sale=true' },
               ].map(link => (
                 <li key={link.label}>
-                  <Link href={link.href} className="text-bisat-black/60 text-sm font-light hover:text-bisat-gold transition-colors duration-200 hover:translate-x-0.5 inline-block">
+                  <Link href={link.href} className="text-bisat-black/55 text-[13px] font-light hover:text-bisat-black transition-colors duration-150 inline-block">
                     {link.label}
                   </Link>
                 </li>
@@ -188,11 +188,11 @@ export const Footer = () => {
 
           {/* Company */}
           <div className="col-span-1 md:col-span-2">
-            <h4 className="text-[9px] uppercase tracking-[0.3em] font-bold text-bisat-black/35 mb-6">Company</h4>
+            <h4 className="text-[9px] uppercase tracking-[0.25em] font-medium text-bisat-black/35 mb-5">Company</h4>
             <ul className="space-y-3">
               {companyLinks.map(link => (
                 <li key={link.label}>
-                  <Link href={link.href} className="text-bisat-black/60 text-sm font-light hover:text-bisat-gold transition-colors duration-200 hover:translate-x-0.5 inline-block">
+                  <Link href={link.href} className="text-bisat-black/55 text-[13px] font-light hover:text-bisat-black transition-colors duration-150 inline-block">
                     {link.label}
                   </Link>
                 </li>
@@ -202,11 +202,11 @@ export const Footer = () => {
 
           {/* Support */}
           <div className="col-span-1 md:col-span-2">
-            <h4 className="text-[9px] uppercase tracking-[0.3em] font-bold text-bisat-black/35 mb-6">Support</h4>
+            <h4 className="text-[9px] uppercase tracking-[0.25em] font-medium text-bisat-black/35 mb-5">Support</h4>
             <ul className="space-y-3">
               {supportLinks.map(link => (
                 <li key={link.label}>
-                  <Link href={link.href} className="text-bisat-black/60 text-sm font-light hover:text-bisat-gold transition-colors duration-200 hover:translate-x-0.5 inline-block">
+                  <Link href={link.href} className="text-bisat-black/55 text-[13px] font-light hover:text-bisat-black transition-colors duration-150 inline-block">
                     {link.label}
                   </Link>
                 </li>

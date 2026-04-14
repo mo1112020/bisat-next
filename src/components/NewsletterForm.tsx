@@ -4,15 +4,15 @@ import React from 'react';
 export const NewsletterForm: React.FC = () => {
   return (
     <form
-      className="flex flex-col sm:flex-row relative z-10 gap-3"
+      className="flex flex-col sm:flex-row gap-0 border border-bisat-border overflow-hidden"
       onSubmit={(e) => e.preventDefault()}
     >
       <input
         type="email"
         placeholder="Enter your email"
-        className="bg-white/10 border border-white/20 text-white placeholder-white/40 px-5 py-3.5 rounded-xl focus:outline-none focus:border-bisat-gold text-sm w-full outline-hidden"
+        className="bg-white/50 border-0 text-bisat-black placeholder:text-bisat-black/30 px-5 py-3.5 focus:outline-none text-sm w-full"
       />
-      <button className="bg-bisat-gold text-white px-8 py-3.5 text-[11px] uppercase tracking-widest font-bold hover:bg-white hover:text-bisat-black transition-colors rounded-xl whitespace-nowrap">
+      <button className="bg-bisat-black text-white px-8 py-3.5 text-[10px] uppercase tracking-[0.18em] font-medium hover:bg-bisat-charcoal transition-colors whitespace-nowrap">
         Sign Up
       </button>
     </form>

@@ -37,14 +37,14 @@ export const Reviews = () => {
         />
 
         {/* Filter */}
-        <div className="flex items-center gap-2 sm:gap-4 bg-white p-2 rounded-2xl shadow-sm border border-bisat-black/5 w-full sm:w-fit mb-10 overflow-x-auto scrollbar-hide">
+        <div className="flex items-center gap-0 border border-bisat-border w-full sm:w-fit mb-10 overflow-x-auto scrollbar-hide">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setFilter(cat)}
-              className={`px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-widest transition-all duration-300 ${
+              className={`px-6 py-2.5 text-[10px] font-medium uppercase tracking-[0.18em] transition-all duration-200 border-r border-bisat-border last:border-r-0 ${
                 filter === cat
-                ? 'bg-bisat-black text-white shadow-md'
+                ? 'bg-bisat-black text-white'
                 : 'text-bisat-black/40 hover:text-bisat-black hover:bg-bisat-cream'
               }`}
             >
@@ -61,8 +61,8 @@ export const Reviews = () => {
               { label: 'Total Reviews', value: reviews.length.toLocaleString(), icon: MessageSquare },
               { label: 'Satisfaction', value: `${Math.round((reviews.filter(r => r.rating >= 4).length / reviews.length) * 100)}%`, icon: ThumbsUp },
             ].map((stat, i) => (
-              <div key={i} className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-bisat-black/5 flex items-center gap-5">
-                <div className="p-4 bg-bisat-gold/10 rounded-2xl text-bisat-gold">
+              <div key={i} className="bg-white p-6 sm:p-8 border border-bisat-border flex items-center gap-5">
+                <div className="p-4 border border-bisat-border text-bisat-warm-gray">
                   <stat.icon size={28} strokeWidth={1.5} />
                 </div>
                 <div>
@@ -88,7 +88,7 @@ export const Reviews = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 whileHover={{ y: -10 }}
-                className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-bisat-black/5 flex flex-col h-full"
+                className="bg-white p-6 sm:p-8 border border-bisat-border flex flex-col h-full"
               >
                 <div className="mb-6">
                   <span className="text-bisat-black/40 text-sm font-medium">{review.title}</span>
@@ -120,7 +120,7 @@ export const Reviews = () => {
 
         {/* Load More */}
         <div className="mt-12 text-center">
-          <button className="bg-bisat-black text-white px-12 py-5 rounded-full text-[10px] uppercase tracking-[0.3em] font-bold hover:bg-bisat-gold transition-all duration-500 flex items-center mx-auto group">
+          <button className="bg-bisat-black text-white px-12 py-4 text-[10px] uppercase tracking-[0.2em] font-medium hover:bg-bisat-charcoal transition-colors flex items-center mx-auto group">
             Load More Reviews
             <ArrowRight size={14} className="ml-3 group-hover:translate-x-1 transition-transform" />
           </button>

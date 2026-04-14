@@ -7,8 +7,8 @@
   --font-sans: "Work Sans", sans-serif;
   --font-arabic: "Noto Sans Arabic", sans-serif;
 
-  --color-bisat-black: #222222;
-  --color-bisat-charcoal: #333333;
+  --color-bisat-black: #000000;
+  --color-bisat-charcoal: #1a1a1a;
   --color-bisat-warm-gray: #786A57;
   --color-bisat-sand: #C4B5A0;
   --color-bisat-cream: #FFFBF2;
@@ -22,6 +22,7 @@
   --color-bisat-navy: #1E2D3D;
   --color-bisat-footer: #EBE7DE;
   --color-bisat-border: #E5E3DD;
+  --color-bisat-topbar: #E9E7DF;
 }
 
 @layer base {
@@ -29,12 +30,18 @@
     @apply bg-bisat-ivory text-bisat-black font-sans antialiased selection:bg-bisat-gold/15 selection:text-bisat-gold-dark;
     scrollbar-gutter: stable;
     letter-spacing: 0.01em;
+    font-size: 14px;
+    line-height: 1.6;
   }
-  
+
   h1, h2, h3, h4, h5, h6 {
     @apply font-sans font-normal;
-    letter-spacing: -0.01em;
-    line-height: 1.2;
+    letter-spacing: 0.02em;
+    line-height: 1.3;
+  }
+
+  a {
+    transition: color 0.15s ease;
   }
 }
 

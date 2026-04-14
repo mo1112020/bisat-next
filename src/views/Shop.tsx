@@ -157,14 +157,14 @@ export const Shop = () => {
               type="number" min="0" placeholder="Min $"
               value={priceRange.min}
               onChange={e => setPriceRange(r => ({ ...r, min: e.target.value }))}
-              className="w-full border border-bisat-black/10 rounded-lg px-2.5 py-1.5 text-xs focus:outline-none focus:border-bisat-gold/50"
+              className="w-full border border-bisat-border px-2.5 py-1.5 text-xs focus:outline-none"
             />
             <span className="text-bisat-black/30 text-xs flex-shrink-0">–</span>
             <input
               type="number" min="0" placeholder="Max $"
               value={priceRange.max}
               onChange={e => setPriceRange(r => ({ ...r, max: e.target.value }))}
-              className="w-full border border-bisat-black/10 rounded-lg px-2.5 py-1.5 text-xs focus:outline-none focus:border-bisat-gold/50"
+              className="w-full border border-bisat-border px-2.5 py-1.5 text-xs focus:outline-none"
             />
           </div>
           <button
