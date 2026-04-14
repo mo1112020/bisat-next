@@ -36,32 +36,29 @@ export const StickyAtcBar = ({ product, anchorRef, onAddToCart, added }: StickyA
           animate={{ y: 0 }}
           exit={{ y: '100%' }}
           transition={{ type: 'spring', damping: 28, stiffness: 280 }}
-          className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-bisat-black/10 shadow-[0_-8px_30px_rgba(0,0,0,0.08)] safe-area-bottom"
+          className="safe-area-bottom fixed bottom-0 left-0 right-0 z-50 border-t border-bisat-border bg-white shadow-[0_-8px_30px_rgba(0,0,0,0.05)]"
         >
-          <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 py-3 flex items-center gap-4">
-            {/* Thumbnail */}
-            <div className="relative w-12 h-12 overflow-hidden bg-[#F6F3EE] flex-shrink-0 hidden sm:block">
+          <div className="mx-auto flex max-w-[1320px] items-center gap-4 px-5 py-3 sm:px-8 lg:px-12">
+            <div className="relative hidden h-12 w-12 flex-shrink-0 overflow-hidden border border-bisat-border bg-bisat-cream sm:block">
               {product.images[0] && (
                 <Image src={product.images[0]} alt={product.name} fill sizes="48px" className="object-cover" />
               )}
             </div>
 
-            {/* Name + Price */}
             <div className="flex-1 min-w-0">
-              <p className="text-[13px] font-normal text-bisat-black truncate leading-tight">{product.name}</p>
-              <p className="text-bisat-black/60 text-[13px]">${displayPrice.toLocaleString()}</p>
+              <p className="truncate font-serif text-[1rem] font-light leading-tight text-bisat-black">{product.name}</p>
+              <p className="text-[13px] text-bisat-black/55">${displayPrice.toLocaleString()}</p>
             </div>
 
-            {/* CTA */}
             <button
               onClick={onAddToCart}
               disabled={product.stock === 0 || added}
-              className={`flex items-center gap-2 px-6 py-3 text-[10px] uppercase tracking-[0.18em] font-medium flex-shrink-0 transition-all duration-200 ${
+              className={`flex flex-shrink-0 items-center gap-2 border px-6 py-3 text-[10px] font-semibold uppercase tracking-[0.22em] transition-all duration-200 ${
                 added
-                  ? 'bg-bisat-warm-gray text-white'
-                  : product.stock === 0
-                  ? 'bg-bisat-black/10 text-bisat-black/30 cursor-not-allowed'
-                  : 'bg-bisat-black text-white hover:bg-bisat-charcoal'
+                  ? 'border-bisat-black bg-bisat-black text-white'
+                : product.stock === 0
+                  ? 'cursor-not-allowed border-bisat-border bg-bisat-cream text-bisat-black/30'
+                  : 'border-bisat-black bg-bisat-black text-white hover:border-bisat-gold-dark hover:bg-bisat-gold-dark'
               }`}
             >
               {added ? <><Check size={15} /> Added</> : <><ShoppingBag size={15} /> Add to Bag</>}

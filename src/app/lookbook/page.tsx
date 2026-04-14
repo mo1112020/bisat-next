@@ -1,5 +1,5 @@
-import { Lookbook } from '../../views/Lookbook';
+import { redirect } from 'next/navigation';
 
 export default function LookbookPage() {
-  return <Lookbook />;
+  redirect('/pages/case-gallery');
 }

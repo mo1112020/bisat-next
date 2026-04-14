@@ -3,17 +3,14 @@ import React, { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 
 const MESSAGES = [
-  <>Free worldwide shipping over <strong className="font-semibold">$500</strong></>,
-  <>Handmade in Turkey — Certificate of Authenticity included</>,
-  <>30-day easy returns · No questions asked</>,
-  <>Over 100 master artisan partners worldwide</>,
+  <>New arrivals from Turkey and beyond</>,
+  <>Free worldwide shipping on orders over <strong className="font-semibold">$500</strong></>,
+  <>Custom sourcing and styling guidance available</>,
+  <>Sign up for drops, stories, and first access</>,
 ];
 
 const Diamond = () => (
-  <span
-    className="inline-block w-[3px] h-[3px] bg-bisat-warm-gray rotate-45 mx-4 shrink-0 opacity-50"
-    aria-hidden
-  />
+  <span className="inline-block h-3 w-px bg-bisat-black/12 mx-4 shrink-0" aria-hidden />
 );
 
 const STORAGE_KEY = 'bisat_topbar_dismissed';
@@ -45,9 +42,9 @@ export const Topbar: React.FC = () => {
   if (!visible) return null;
 
   return (
-    <div id="topbar-bar" className="h-9 bg-bisat-topbar flex items-center justify-center relative overflow-hidden shrink-0 border-b border-bisat-border">
+    <div id="topbar-bar" className="relative flex h-9 shrink-0 items-center justify-center overflow-hidden border-b border-bisat-border bg-bisat-topbar">
       {/* Desktop: all messages with separators */}
-      <div className="hidden md:flex items-center text-bisat-black/65 text-[10px] uppercase tracking-[0.22em] font-medium">
+      <div className="hidden items-center text-[10px] font-medium uppercase tracking-[0.24em] text-bisat-black/55 md:flex">
         {MESSAGES.map((msg, i) => (
           <React.Fragment key={i}>
             <span>{msg}</span>
@@ -57,7 +54,7 @@ export const Topbar: React.FC = () => {
       </div>
 
       {/* Mobile: rotating single message */}
-      <div className="md:hidden text-bisat-black/65 text-[10px] uppercase tracking-[0.18em] font-medium text-center px-8">
+      <div className="px-8 text-center text-[10px] font-medium uppercase tracking-[0.2em] text-bisat-black/55 md:hidden">
         {MESSAGES[mobileIdx]}
       </div>
 
@@ -65,7 +62,7 @@ export const Topbar: React.FC = () => {
       <button
         onClick={dismiss}
         aria-label="Close announcement"
-        className="absolute right-3 top-1/2 -translate-y-1/2 text-bisat-black/30 hover:text-bisat-black transition-colors p-1"
+        className="absolute right-3 top-1/2 p-1 -translate-y-1/2 text-bisat-black/25 transition-colors hover:text-bisat-black"
       >
         <X size={11} />
       </button>

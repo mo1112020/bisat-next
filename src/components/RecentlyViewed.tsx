@@ -12,19 +12,19 @@ export const RecentlyViewed: React.FC = () => {
   if (recentlyViewed.length === 0) return null;
 
   return (
-    <section className="py-12 sm:py-16 bg-white overflow-hidden">
+    <section className="overflow-hidden border-t border-bisat-border bg-white py-14 sm:py-20">
       <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12">
-        <div className="flex items-start justify-between mb-6 sm:mb-10">
+        <div className="mb-6 flex items-start justify-between sm:mb-10">
           <div>
-            <span className="text-bisat-gold uppercase tracking-[0.2em] text-[10px] font-bold mb-2 block">
+            <span className="mb-2 block text-[10px] font-semibold uppercase tracking-[0.28em] text-bisat-black/38">
               {t('product.yourJourney')}
             </span>
-            <h2 className="text-2xl sm:text-4xl font-serif">{t('product.recentlyViewed')}</h2>
+            <h2 className="font-serif text-3xl font-light sm:text-4xl">{t('product.recentlyViewed')}</h2>
           </div>
         </div>
 
         <div className="relative">
-          <div className="flex overflow-x-auto pb-4 -mx-4 px-4 gap-4 sm:gap-6 scrollbar-hide snap-x snap-mandatory">
+          <div className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 scrollbar-hide sm:gap-6">
             {recentlyViewed.map((product, index) => (
               <motion.div
                 key={product.id}
@@ -32,15 +32,14 @@ export const RecentlyViewed: React.FC = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="flex-none w-[72vw] sm:w-64 snap-start"
+                className="w-[72vw] flex-none snap-start sm:w-64"
               >
                 <ProductCard product={product} />
               </motion.div>
             ))}
           </div>
 
-          {/* Subtle fade indicators for scroll */}
-          <div className="absolute top-0 right-0 h-full w-16 bg-gradient-to-l from-white to-transparent pointer-events-none hidden lg:block" />
+          <div className="pointer-events-none absolute right-0 top-0 hidden h-full w-16 bg-gradient-to-l from-white to-transparent lg:block" />
         </div>
       </div>
     </section>
