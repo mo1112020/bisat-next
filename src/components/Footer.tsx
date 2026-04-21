@@ -210,6 +210,12 @@ export const Footer = () => {
 
         </div>
 
+        <div className="border-t border-bisat-black/8 pt-10 pb-6 text-center">
+          <p className="font-rh text-lg font-light tracking-[0.12em] text-bisat-black/72 sm:text-xl">
+            Bisāṭ — mood and craft for the everyday home
+          </p>
+        </div>
+
         <div className="border-t border-bisat-black/8 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-[10px] font-medium uppercase tracking-[0.24em] text-bisat-black/34">
             {t('footer.rights')}

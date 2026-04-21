@@ -576,7 +576,15 @@ export async function adminUpsertSiteSetting(key: string, value: string): Promis
 export type SiteImageKey =
   | 'hero'
   | 'promo_split'
-  | 'about_artisan';
+  | 'about_artisan'
+  | 'lifestyle_1_hero'
+  | 'lifestyle_1_thumb'
+  | 'lifestyle_2_hero'
+  | 'lifestyle_2_thumb'
+  | 'lifestyle_3_hero'
+  | 'lifestyle_3_thumb'
+  | 'lifestyle_4_hero'
+  | 'lifestyle_4_thumb';
 
 export interface SiteImage {
   key: SiteImageKey;
@@ -588,6 +596,14 @@ export const SITE_IMAGE_DEFAULTS: Record<SiteImageKey, { label: string; fallback
   hero:          { label: 'Home — Hero Background', fallback: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop' },
   promo_split:   { label: 'Home — Promo Section',   fallback: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=1200&auto=format&fit=crop' },
   about_artisan: { label: 'About — Artisan Section', fallback: 'https://images.unsplash.com/photo-1528360983277-13d401cdc186?q=80&w=1200&auto=format&fit=crop' },
+  lifestyle_1_hero:  { label: 'Home — Lifestyle card 1 (hero)',  fallback: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=85&w=1100&auto=format&fit=crop' },
+  lifestyle_1_thumb: { label: 'Home — Lifestyle card 1 (thumb)', fallback: 'https://images.unsplash.com/photo-1615529328331-f8917597711f?q=80&w=400&auto=format&fit=crop' },
+  lifestyle_2_hero:  { label: 'Home — Lifestyle card 2 (hero)',  fallback: 'https://images.unsplash.com/photo-1548199973-03f0f5fc9730?q=85&w=1100&auto=format&fit=crop' },
+  lifestyle_2_thumb: { label: 'Home — Lifestyle card 2 (thumb)', fallback: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=400&auto=format&fit=crop' },
+  lifestyle_3_hero:  { label: 'Home — Lifestyle card 3 (hero)',  fallback: 'https://images.unsplash.com/photo-1600166898405-da9535204843?q=85&w=1100&auto=format&fit=crop' },
+  lifestyle_3_thumb: { label: 'Home — Lifestyle card 3 (thumb)', fallback: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?q=80&w=400&auto=format&fit=crop' },
+  lifestyle_4_hero:  { label: 'Home — Lifestyle card 4 (hero)',  fallback: 'https://images.unsplash.com/photo-1616486338812-3dadae4ddf4c?q=85&w=1100&auto=format&fit=crop' },
+  lifestyle_4_thumb: { label: 'Home — Lifestyle card 4 (thumb)', fallback: 'https://images.unsplash.com/photo-1585412727339-54e4be3f3467?q=80&w=400&auto=format&fit=crop' },
 };
 
 export async function getSiteImages(): Promise<Record<SiteImageKey, string>> {

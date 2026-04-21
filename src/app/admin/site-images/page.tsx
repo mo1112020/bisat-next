@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { Check, ImageIcon, RotateCcw } from 'lucide-react';
 import { getSiteImages, adminUpsertSiteImage, SITE_IMAGE_DEFAULTS, SiteImageKey } from '@/src/lib/db-browser';
+import { LIFESTYLE_SLOT_IMAGE_KEYS } from '@/src/lib/lifestyleQuad';
 import { CdnImagePicker } from '@/src/components/CdnImagePicker';
 
 type Images = Record<SiteImageKey, string>;
@@ -49,12 +50,15 @@ export default function SiteImagesPage() {
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-gray-900">Site Images</h1>
         <p className="text-sm text-gray-400 mt-1">
-          Control which images appear in the static sections of your website. Pick from your CDN library.
+          Control which images appear in the static sections of your website. Pick from your CDN library. Lifestyle quad
+          hero/thumbnails are edited under <strong className="text-gray-600">Lifestyle quad</strong> in the sidebar.
         </p>
       </div>
 
       <div className="space-y-4">
-        {(Object.keys(SITE_IMAGE_DEFAULTS) as SiteImageKey[]).map(key => {
+        {(Object.keys(SITE_IMAGE_DEFAULTS) as SiteImageKey[])
+          .filter(key => !LIFESTYLE_SLOT_IMAGE_KEYS.includes(key))
+          .map(key => {
           const { label, fallback } = SITE_IMAGE_DEFAULTS[key];
           const current = images[key];
           const isDefault = current === fallback;

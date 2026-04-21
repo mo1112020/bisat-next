@@ -3,10 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 
 const MESSAGES = [
-  <>New arrivals from Turkey and beyond</>,
-  <>Free worldwide shipping on orders over <strong className="font-semibold">$500</strong></>,
-  <>Custom sourcing and styling guidance available</>,
-  <>Sign up for drops, stories, and first access</>,
+  <>Complimentary worldwide shipping on all rug orders</>,
+  <>New arrivals — curated vintage and hand-woven pieces weekly</>,
+  <>Size, material, and room styling — ask our team anytime</>,
 ];
 
 const Diamond = () => (
@@ -42,9 +41,9 @@ export const Topbar: React.FC = () => {
   if (!visible) return null;
 
   return (
-    <div id="topbar-bar" className="relative flex h-9 shrink-0 items-center justify-center overflow-hidden border-b border-bisat-border bg-bisat-topbar">
+    <div id="topbar-bar" className="relative flex h-9 shrink-0 items-center justify-center overflow-hidden border-b border-bisat-black/[0.06] bg-bisat-paper">
       {/* Desktop: all messages with separators */}
-      <div className="hidden items-center text-[10px] font-medium uppercase tracking-[0.24em] text-bisat-black/55 md:flex">
+      <div className="hidden items-center text-[10px] font-medium uppercase tracking-[0.26em] text-bisat-black/48 md:flex">
         {MESSAGES.map((msg, i) => (
           <React.Fragment key={i}>
             <span>{msg}</span>
@@ -54,7 +53,7 @@ export const Topbar: React.FC = () => {
       </div>
 
       {/* Mobile: rotating single message */}
-      <div className="px-8 text-center text-[10px] font-medium uppercase tracking-[0.2em] text-bisat-black/55 md:hidden">
+      <div className="px-8 text-center text-[10px] font-medium uppercase tracking-[0.22em] text-bisat-black/48 md:hidden">
         {MESSAGES[mobileIdx]}
       </div>
 

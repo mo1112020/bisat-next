@@ -5,7 +5,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import {
   LayoutDashboard, Package, FileText, ShoppingBag,
   Star, MessageSquare, LogOut, Menu, X, Images, Globe,
-  Tag, Settings2, Sliders,
+  Tag, Settings2, Sliders, Layers,
 } from 'lucide-react';
 
 const NAV = [
@@ -19,6 +19,7 @@ const NAV = [
   { href: '/admin/testimonials', label: 'Testimonials', icon: MessageSquare },
   { href: '/admin/cdn', label: 'CDN Images', icon: Images },
   { href: '/admin/site-images', label: 'Site Images', icon: Globe },
+  { href: '/admin/lifestyle-quad', label: 'Lifestyle quad', icon: Layers },
   { href: '/admin/settings', label: 'Site Settings', icon: Sliders },
 ];
 

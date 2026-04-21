@@ -10,9 +10,11 @@ import { useCart } from '../context/CartContext';
 interface ProductCardProps {
   product: Product;
   priority?: boolean;
+  /** Rughaus-style “New” ribbon on the image */
+  newArrival?: boolean;
 }
 
-export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = false }) => {
+export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = false, newArrival = false }) => {
   const { toggleWishlist, isInWishlist } = useWishlist();
   const { addToCart } = useCart();
   const isFavorite = isInWishlist(product.id);
@@ -62,6 +64,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
         )}
 
         <div className="absolute left-3 top-3 z-10 flex flex-col gap-1.5">
+          {newArrival && !isSoldOut && (
+            <span className="bg-bisat-black px-2.5 py-1 text-[8px] font-semibold uppercase tracking-[0.22em] text-white">
+              New
+            </span>
+          )}
           {isSoldOut ? (
             <span className="bg-white px-2.5 py-1 text-[8px] font-semibold uppercase tracking-[0.22em] text-bisat-black">
               Sold Out

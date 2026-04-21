@@ -67,7 +67,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 <Topbar />
                 <Navbar />
               </header>
-              <div className="flex flex-col min-h-screen" style={{ paddingTop: 'calc(4.5rem + var(--topbar-h, 2.25rem))' }}>
+              <div className="flex flex-col min-h-screen" style={{ paddingTop: 'calc(5rem + var(--topbar-h, 2.25rem))' }}>
                 <main id="main-content" className="flex-grow">
                   {children}
                 </main>

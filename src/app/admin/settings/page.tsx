@@ -92,7 +92,8 @@ export default function AdminSettingsPage() {
               {keys.map(key => {
                 const def = SITE_SETTING_DEFAULTS[key];
                 const currentVal = localSettings[key] ?? def.value;
-                const isModified = currentVal !== def.value;
+                const savedVal = settings[key] ?? def.value;
+                const isModified = currentVal !== savedVal;
 
                 return (
                   <div key={key}>

@@ -95,8 +95,8 @@ export const Navbar = () => {
   ];
 
   const NAV_LINKS = [
-    { label: 'Journal',      href: '/pages/articles' },
-    { label: 'Gallery',      href: '/pages/case-gallery' },
+    { label: 'Stories',      href: '/pages/articles' },
+    { label: 'Lookbook',     href: '/pages/case-gallery' },
     { label: 'About',        href: '/pages/about' },
   ];
 
@@ -104,8 +104,8 @@ export const Navbar = () => {
     <>
       {/* ── Main bar ─────────────────────────────────────────────────────── */}
       <nav
-        className="relative z-40 h-[4.75rem] border-b border-bisat-border bg-white transition-shadow duration-300"
-        style={{ boxShadow: scrolled ? '0 10px 24px rgba(17,17,17,0.04)' : 'none' }}
+        className="relative z-40 h-20 border-b border-bisat-black/[0.06] bg-white/95 backdrop-blur-md transition-shadow duration-300"
+        style={{ boxShadow: scrolled ? '0 12px 28px rgba(17,17,17,0.045)' : 'none' }}
       >
         <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 h-full">
           <div className="relative flex items-center h-full">
@@ -113,17 +113,17 @@ export const Navbar = () => {
             {/* ── Logo (left) ─────────────────────────────────────── */}
             <Link
               href="/"
-              className="flex-shrink-0 font-serif text-[1.9rem] font-medium tracking-[-0.04em] text-bisat-black"
+              className="flex-shrink-0 font-rh text-[2rem] font-light tracking-[-0.02em] text-bisat-black"
             >
               Bisāṭ
             </Link>
 
             {/* ── Desktop nav (centered absolutely) ───────────────── */}
             <div className="hidden md:flex absolute inset-0 items-center justify-center pointer-events-none">
-              <div className="flex items-center gap-9 pointer-events-auto">
+              <div className="flex items-center gap-10 pointer-events-auto">
 
                 <DesktopNavItem
-                  id="shop" label="Items" hasDropdown
+                  id="shop" label="Shop" hasDropdown
                   activeDropdown={activeDropdown} onOpen={openDropdown} onClose={closeDropdown}
                 />
                 <DesktopNavItem
@@ -341,7 +341,7 @@ export const Navbar = () => {
             exit={{ opacity: 0, x: '100%' }}
             transition={{ type: 'spring', damping: 32, stiffness: 260 }}
             className="fixed inset-0 z-30 overflow-y-auto bg-white md:hidden"
-            style={{ top: 68 }}
+            style={{ top: 'calc(var(--topbar-h, 2.25rem) + 5rem)' }}
           >
             <div className="px-6 pt-5 pb-20">
 

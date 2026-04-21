@@ -1,9 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Noto+Sans+Arabic:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Noto+Sans+Arabic:wght@100..900&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-serif: "Playfair Display", serif;
-  --font-display: "Playfair Display", serif;
+  --font-display: "Cormorant Garamond", "Playfair Display", serif;
+  --font-rh: "Cormorant Garamond", ui-serif, Georgia, serif;
   --font-sans: "Inter", sans-serif;
   --font-arabic: "Noto Sans Arabic", sans-serif;
 
@@ -12,6 +13,7 @@
   --color-bisat-warm-gray: #7a756d;
   --color-bisat-sand: #e5e0d8;
   --color-bisat-cream: #f4efea;
+  --color-bisat-paper: #f7f5f2;
   --color-bisat-ivory: #ffffff;
   --color-bisat-gold: #8b8378;
   --color-bisat-gold-light: #aaa297;
