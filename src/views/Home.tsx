@@ -16,8 +16,8 @@ import { ProductCard } from '../components/ProductCard';
 import { RecentlyViewed } from '../components/RecentlyViewed';
 import { ScrollReveal } from '../components/ScrollReveal';
 import { NewsletterForm } from '../components/NewsletterForm';
-import { RughausLifestyleQuad } from '../components/RughausLifestyleQuad';
-import { buildLifestyleQuadCards } from '../lib/lifestyleQuad';
+import { LifestyleSelector } from '../components/LifestyleSelector';
+import { HeroCarousel } from '../components/HeroCarousel';
 
 const collectionPathFor = (name: string) => {
   const normalized = name.toLowerCase();
@@ -86,7 +86,6 @@ export const Home = async () => {
         { label: 'Modern Rugs', name: 'Modern', badge: 'Contemporary', img: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=1200&auto=format&fit=crop', href: '/collections/easy-rugs' },
       ];
 
-  const lifestyleQuad = buildLifestyleQuadCards(settings, siteImgs);
 
   const reviewCards = testimonials.length > 0 ? testimonials.slice(0, 8) : FALLBACK_TESTIMONIALS;
   const reviewCount = testimonials.length > 0 ? testimonials.length : 132;
@@ -100,45 +99,9 @@ export const Home = async () => {
       <Schema data={getOrganizationSchema()} />
       <Schema data={getWebSiteSchema()} />
 
-      {/* ── Full-bleed hero (Rughaus-style editorial) ─────────────────────── */}
-      <section className="relative min-h-[min(92svh,920px)] w-full overflow-hidden bg-bisat-black">
-        <Image
-          src={siteImgs.hero}
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover opacity-88"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/35 to-black/20" />
-        <div className="relative z-10 mx-auto flex min-h-[min(92svh,920px)] max-w-[1320px] flex-col justify-end px-5 pb-16 pt-32 sm:px-8 sm:pb-20 lg:px-12 lg:pb-24">
-          <p className="hero-animate mb-4 text-[10px] font-semibold uppercase tracking-[0.38em] text-white/65">
-            {settings.hero_badge}
-          </p>
-          <h1 className="hero-animate-2 max-w-[18ch] font-rh text-[clamp(2.75rem,8vw,5.5rem)] font-light leading-[0.98] tracking-[-0.02em] text-white">
-            {settings.hero_title}
-            <span className="block text-white/78">{settings.hero_title_italic}</span>
-          </h1>
-          <p className="hero-animate-3 mt-6 max-w-md text-[15px] leading-7 text-white/72">
-            {settings.hero_subtitle}
-          </p>
-          <div className="hero-animate-3 mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <Link
-              href="/collections/rug"
-              className="inline-flex w-fit items-center justify-center gap-2 border border-white bg-white px-8 py-3.5 text-[10px] font-semibold uppercase tracking-[0.26em] text-bisat-black transition-colors hover:bg-transparent hover:text-white"
-            >
-              Shop all
-              <ArrowRight size={12} />
-            </Link>
-            <Link
-              href="/size-guide"
-              className="inline-flex w-fit items-center justify-center gap-2 border border-white/40 bg-transparent px-8 py-3.5 text-[10px] font-semibold uppercase tracking-[0.26em] text-white transition-colors hover:border-white hover:bg-white/10"
-            >
-              Rug size guide
-            </Link>
-          </div>
-        </div>
-      </section>
+      <HeroCarousel />
+
+      <LifestyleSelector />
 
       {/* ── Intro line ───────────────────────────────────────────────────── */}
       <section className="border-b border-bisat-black/[0.06] bg-bisat-paper py-14 sm:py-16">
@@ -273,12 +236,6 @@ export const Home = async () => {
         </div>
       </section>
 
-      <RughausLifestyleQuad
-        eyebrow={lifestyleQuad.eyebrow}
-        title={lifestyleQuad.title}
-        subtitle={lifestyleQuad.subtitle}
-        cards={lifestyleQuad.cards}
-      />
 
       {/* ── NEW ARRIVAL — product strip ───────────────────────────────────── */}
       <section className="border-b border-bisat-black/[0.06] bg-bisat-paper py-14 sm:py-20">

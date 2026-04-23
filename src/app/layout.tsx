@@ -13,16 +13,16 @@ import { Topbar } from '../components/layout/Topbar';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Bisāṭ | Artisanal Turkish Rugs & Carpets',
-    template: '%s | Bisāṭ',
+    default: 'Bisāṭim | Artisanal Turkish Rugs & Carpets',
+    template: '%s | Bisāṭim',
   },
-  description: 'Bisāṭ – Premium hand-woven rugs & carpets from Turkey. Hereke silk, Oushak vintage, Kilim and more. Shop authentic artisanal heritage for your home.',
+  description: 'Bisāṭim – Premium hand-woven rugs & carpets from Turkey. Hereke silk, Oushak vintage, Kilim and more. Shop authentic artisanal heritage for your home.',
   keywords: ['Turkish rugs', 'artisanal carpets', 'hand-woven rugs', 'Hereke silk rug', 'Oushak rug', 'Kilim', 'vintage rugs', 'luxury carpets'],
   openGraph: {
     type: 'website',
-    siteName: 'Bisāṭ',
+    siteName: 'Bisāṭim',
     locale: 'en_US',
-    images: [{ url: 'https://bisat-store.com/og-default.jpg', width: 1200, height: 630, alt: 'Bisāṭ — Premium Turkish Rugs' }],
+    images: [{ url: 'https://bisat-store.com/og-default.jpg', width: 1200, height: 630, alt: 'Bisāṭim — Premium Turkish Rugs' }],
   },
   twitter: {
     card: 'summary_large_image',
@@ -63,11 +63,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 <Analytics />
               </Suspense>
               <Heatmap />
-              <header className="fixed top-0 left-0 right-0 z-50 flex flex-col">
+              <header className="fixed top-0 left-0 right-0 z-50 flex flex-col overflow-hidden">
                 <Topbar />
                 <Navbar />
               </header>
-              <div className="flex flex-col min-h-screen" style={{ paddingTop: 'calc(5rem + var(--topbar-h, 2.25rem))' }}>
+              <div className="flex flex-col min-h-screen">
                 <main id="main-content" className="flex-grow">
                   {children}
                 </main>

@@ -97,8 +97,8 @@ export const Footer = () => {
               <h2 className="font-serif text-3xl font-light leading-snug text-bisat-black mb-2">
                 Receive new arrivals, styling notes, and private collection drops.
               </h2>
-              <p className="text-sm leading-relaxed text-bisat-black/52">
-                {t('footer.news_desc')}
+              <p className="text-sm leading-relaxed text-bisat-black/52" suppressHydrationWarning>
+                Join our list for exclusive previews of new arrivals and artisanal stories.
               </p>
             </div>
 
@@ -120,7 +120,8 @@ export const Footer = () => {
                     required
                     value={email}
                     onChange={e => setEmail(e.target.value)}
-                    placeholder={t('footer.placeholder')}
+                    placeholder="Email Address"
+                    suppressHydrationWarning
                     className="min-w-0 flex-1 bg-transparent px-5 py-3.5 text-sm text-bisat-black placeholder:text-bisat-black/30 focus:outline-none"
                   />
                   <button
@@ -141,10 +142,10 @@ export const Footer = () => {
         <div className="grid grid-cols-2 md:grid-cols-12 gap-10 sm:gap-12 mb-14 sm:mb-20">
           <div className="col-span-2 md:col-span-4">
             <Link href="/" className="mb-4 block font-serif text-[1.9rem] font-light tracking-[-0.05em] text-bisat-black transition-colors duration-200 hover:text-bisat-gold-dark">
-              Bisāṭ
+              Bisāṭim
             </Link>
-            <p className="mb-7 max-w-[260px] text-sm leading-relaxed text-bisat-black/52">
-              {t('footer.desc')}
+            <p className="mb-7 max-w-[260px] text-sm leading-relaxed text-bisat-black/52" suppressHydrationWarning>
+              Curating the world&apos;s finest hand-woven rugs and carpets. Each piece tells a story of heritage and craftsmanship.
             </p>
 
             <div className="flex items-center gap-3">
@@ -212,13 +213,13 @@ export const Footer = () => {
 
         <div className="border-t border-bisat-black/8 pt-10 pb-6 text-center">
           <p className="font-rh text-lg font-light tracking-[0.12em] text-bisat-black/72 sm:text-xl">
-            Bisāṭ — mood and craft for the everyday home
+            Bisāṭim — mood and craft for the everyday home
           </p>
         </div>
 
         <div className="border-t border-bisat-black/8 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-[10px] font-medium uppercase tracking-[0.24em] text-bisat-black/34">
-            {t('footer.rights')}
+          <p className="text-[10px] font-medium uppercase tracking-[0.24em] text-bisat-black/34" suppressHydrationWarning>
+            © 2026 Bisāṭim. All Rights Reserved.
           </p>
           <Link
             href="/collections/rug"

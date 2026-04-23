@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { ShoppingBag, Menu, X, Search, Heart, User, ChevronDown, ArrowRight } from 'lucide-react';
+import { ShoppingBag, Menu, X, Search, Heart, User, ChevronDown, ArrowRight, Instagram } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
 import { AnimatePresence, motion } from 'motion/react';
@@ -95,8 +95,9 @@ export const Navbar = () => {
   ];
 
   const NAV_LINKS = [
-    { label: 'Stories',      href: '/pages/articles' },
-    { label: 'Lookbook',     href: '/pages/case-gallery' },
+    { label: 'Items',        href: '/collections/rug', id: 'shop', hasDropdown: true },
+    { label: 'Room Ideas',   href: '/pages/case-gallery' },
+    { label: 'Quiz',        href: '/pages/virtual-coordinate' },
     { label: 'About',        href: '/pages/about' },
   ];
 
@@ -104,66 +105,71 @@ export const Navbar = () => {
     <>
       {/* ── Main bar ─────────────────────────────────────────────────────── */}
       <nav
-        className="relative z-40 h-20 border-b border-bisat-black/[0.06] bg-white/95 backdrop-blur-md transition-shadow duration-300"
-        style={{ boxShadow: scrolled ? '0 12px 28px rgba(17,17,17,0.045)' : 'none' }}
+        className={`relative z-50 h-20 transition-all duration-500 ease-in-out ${
+          scrolled 
+            ? 'bg-white border-b border-bisat-black/[0.06] py-0' 
+            : 'bg-transparent border-b border-white/10 py-2'
+        }`}
+        style={{ boxShadow: scrolled ? '0 10px 30px rgba(0,0,0,0.04)' : 'none' }}
       >
-        <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 h-full">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 h-full">
           <div className="relative flex items-center h-full">
-
+ 
             {/* ── Logo (left) ─────────────────────────────────────── */}
             <Link
               href="/"
-              className="flex-shrink-0 font-rh text-[2rem] font-light tracking-[-0.02em] text-bisat-black"
+              className={`flex-shrink-0 font-rh text-[1.8rem] sm:text-[2.1rem] font-light tracking-[-0.03em] transition-colors duration-500 ${
+                scrolled ? 'text-bisat-black' : 'text-white'
+              }`}
             >
-              Bisāṭ
+              Bisāṭim
             </Link>
-
+ 
             {/* ── Desktop nav (centered absolutely) ───────────────── */}
             <div className="hidden md:flex absolute inset-0 items-center justify-center pointer-events-none">
               <div className="flex items-center gap-10 pointer-events-auto">
-
-                <DesktopNavItem
-                  id="shop" label="Shop" hasDropdown
-                  activeDropdown={activeDropdown} onOpen={openDropdown} onClose={closeDropdown}
-                />
-                <DesktopNavItem
-                  id="rooms" label="Room Ideas" hasDropdown
-                  activeDropdown={activeDropdown} onOpen={openDropdown} onClose={closeDropdown}
-                />
-
                 {NAV_LINKS.map(link => (
-                  <Link
-                    key={link.href}
+                  <DesktopNavItem
+                    key={link.label}
+                    id={link.id || link.label.toLowerCase()}
+                    label={link.label}
                     href={link.href}
-                    className={`relative group text-[9px] font-semibold uppercase tracking-[0.28em] transition-colors duration-150 ${
-                      pathname === link.href ? 'text-bisat-black' : 'text-bisat-black/45 hover:text-bisat-black'
-                    }`}
-                  >
-                    {link.label}
-                    <span className={`absolute -bottom-1 left-0 h-px bg-bisat-black transition-all duration-300 ${
-                      pathname === link.href ? 'w-full' : 'w-0 group-hover:w-full'
-                    }`} />
-                  </Link>
+                    hasDropdown={link.hasDropdown}
+                    scrolled={scrolled}
+                    activeDropdown={activeDropdown}
+                    onOpen={openDropdown}
+                    onClose={closeDropdown}
+                  />
                 ))}
               </div>
             </div>
 
             {/* ── Right icons ─────────────────────────────────────── */}
-            <div className="flex items-center gap-0 ml-auto">
+            <div className={`flex items-center gap-0 ml-auto transition-colors duration-500 ${scrolled ? 'text-bisat-black' : 'text-white'}`}>
+
+              {/* Trade Button (法人窓口 analogue) */}
+              <Link
+                href="/pages/for-business"
+                className={`mr-4 hidden px-4 py-1.5 text-[9.5px] font-bold uppercase tracking-[0.2em] transition-all duration-500 lg:block ${
+                  scrolled ? 'bg-bisat-black text-white' : 'bg-white text-bisat-black'
+                }`}
+              >
+                Trade
+              </Link>
 
               {/* Search */}
               <button
                 onClick={() => setSearchOpen(s => !s)}
-                className="p-2.5 text-bisat-black/48 transition-colors duration-150 hover:text-bisat-black"
+                className="p-2.5 transition-colors duration-150 hover:opacity-70"
                 aria-label="Search"
               >
                 <Search size={17} strokeWidth={1.5} />
               </button>
 
-              {/* Wishlist — no badge, clean icon */}
+              {/* Wishlist */}
               <Link
                 href="/wishlist"
-                className="p-2.5 text-bisat-black/48 transition-colors duration-150 hover:text-bisat-black"
+                className="p-2.5 transition-colors duration-150 hover:opacity-70"
                 aria-label={`Wishlist${wishlist.length > 0 ? ` (${wishlist.length})` : ''}`}
               >
                 <Heart size={17} strokeWidth={1.5} />
@@ -172,7 +178,7 @@ export const Navbar = () => {
               {/* Account */}
               <Link
                 href="/account"
-                className="hidden p-2.5 text-bisat-black/48 transition-colors duration-150 hover:text-bisat-black sm:flex"
+                className="hidden p-2.5 transition-colors duration-150 hover:opacity-70 sm:flex"
                 aria-label="Account"
               >
                 <User size={17} strokeWidth={1.5} />
@@ -181,12 +187,14 @@ export const Navbar = () => {
               {/* Cart */}
               <Link
                 href="/cart"
-                className="relative p-2.5 text-bisat-black/48 transition-colors duration-150 hover:text-bisat-black"
+                className="relative p-2.5 transition-colors duration-150 hover:opacity-70"
                 aria-label={`Cart${totalItems > 0 ? ` (${totalItems})` : ''}`}
               >
                 <ShoppingBag size={17} strokeWidth={1.5} />
                 {totalItems > 0 && (
-                  <span className="absolute right-1 top-1.5 flex h-3.5 w-3.5 items-center justify-center border border-bisat-black bg-white text-[8px] font-medium text-bisat-black">
+                  <span className={`absolute right-1 top-1.5 flex h-3.5 w-3.5 items-center justify-center border text-[8px] font-medium ${
+                    scrolled ? 'border-bisat-black bg-white text-bisat-black' : 'border-white bg-bisat-black text-white'
+                  }`}>
                     {totalItems}
                   </span>
                 )}
@@ -195,7 +203,7 @@ export const Navbar = () => {
               {/* Mobile hamburger */}
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="ml-1 p-2.5 text-bisat-black/48 transition-colors duration-150 hover:text-bisat-black md:hidden"
+                className="ml-1 p-2.5 transition-colors duration-150 hover:opacity-70 md:hidden"
                 aria-label={isOpen ? 'Close menu' : 'Open menu'}
               >
                 {isOpen ? <X size={18} strokeWidth={1.5} /> : <Menu size={18} strokeWidth={1.5} />}
@@ -339,108 +347,111 @@ export const Navbar = () => {
             initial={{ opacity: 0, x: '100%' }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
-            transition={{ type: 'spring', damping: 32, stiffness: 260 }}
-            className="fixed inset-0 z-30 overflow-y-auto bg-white md:hidden"
-            style={{ top: 'calc(var(--topbar-h, 2.25rem) + 5rem)' }}
+            transition={{ type: 'spring', damping: 35, stiffness: 280 }}
+            className="fixed inset-0 z-[100] overflow-y-auto bg-bisat-paper md:hidden"
           >
-            <div className="px-6 pt-5 pb-20">
+            {/* Top Bar with X */}
+            <div className="flex items-center justify-between px-6 py-6 border-b border-bisat-black/5">
+              <span className="font-rh text-2xl font-light tracking-tight text-bisat-black">Bisāṭim</span>
+              <button
+                onClick={() => setIsOpen(false)}
+                className="p-2 -mr-2 text-bisat-black/40 hover:text-bisat-black"
+                aria-label="Close menu"
+              >
+                <X size={24} strokeWidth={1.5} />
+              </button>
+            </div>
 
-              {/* Search */}
-              <form onSubmit={handleSearch} className="mb-2 flex items-center gap-2 border-b border-bisat-border pb-4">
-                <Search size={14} className="flex-shrink-0 text-bisat-black/25" />
-                <input
-                  value={searchQuery}
-                  onChange={e => setSearchQuery(e.target.value)}
-                  placeholder="Search rugs…"
-                  className="flex-1 bg-transparent text-[13px] text-bisat-black placeholder:text-bisat-black/25 focus:outline-none"
-                />
-              </form>
+            <div className="px-6 py-8 flex flex-col min-h-[calc(100vh-80px)]">
+              {/* Main Sections */}
+              <div className="flex flex-col gap-0 border-t border-bisat-black/5">
+                {/* Products Accordion */}
+                <MobileAccordion title="Items" id="shop" active={mobileAccordion} onToggle={id => setMobileAccordion(mobileAccordion === id ? null : id)}>
+                  <div className="pb-6 flex flex-col pl-4">
+                    {STATIC_FEATURED.map(item => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        onClick={() => setIsOpen(false)}
+                        className="py-3.5 text-[14px] text-bisat-black/70 border-b border-bisat-black/[0.04] last:border-0"
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                </MobileAccordion>
 
-              {/* Shop accordion */}
-              <MobileAccordion title="Products" id="shop" active={mobileAccordion} onToggle={id => setMobileAccordion(mobileAccordion === id ? null : id)}>
-                <div className="pb-4 flex flex-col">
-                  {STATIC_FEATURED.map(item => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      onClick={() => setIsOpen(false)}
-                      className="border-b border-bisat-border/40 py-3 text-[13px] text-bisat-black/55 transition-colors last:border-0 hover:text-bisat-black"
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
-                  <p className="mb-1 mt-4 text-[9px] font-semibold uppercase tracking-[0.22em] text-bisat-black/25">By Size</p>
-                  {STATIC_SIZE_LINKS.map(l => (
-                    <Link
-                      key={l.href}
-                      href={l.href}
-                      onClick={() => setIsOpen(false)}
-                      className="border-b border-bisat-border/30 py-2.5 text-[13px] text-bisat-black/50 transition-colors last:border-0 hover:text-bisat-black"
-                    >
-                      {l.label}
-                    </Link>
-                  ))}
-                </div>
-              </MobileAccordion>
-
-              {/* Rooms accordion */}
-              <MobileAccordion title="Service" id="rooms" active={mobileAccordion} onToggle={id => setMobileAccordion(mobileAccordion === id ? null : id)}>
-                <div className="pb-4 flex flex-col">
-                  {[
-                    { label: 'About', href: '/pages/about' },
-                    { label: 'Living With Rugs', href: '/pages/living-with-rugs' },
-                    { label: 'Articles', href: '/pages/articles' },
-                    { label: 'Case Gallery', href: '/pages/case-gallery' },
-                    { label: 'Virtual Coordinate', href: '/pages/virtual-coordinate' },
-                    { label: 'Contact', href: '/pages/contact' },
-                    { label: 'For Business', href: '/pages/for-business' },
-                  ].map(item => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      onClick={() => setIsOpen(false)}
-                      className="border-b border-bisat-border/40 py-3 text-[13px] text-bisat-black/50 transition-colors last:border-0 hover:text-bisat-black"
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
-                </div>
-              </MobileAccordion>
-
-              {/* Direct links */}
-              {[
-                { label: 'Shipping and Payment', href: '/pages/shipping-and-payment' },
-                { label: 'Cart',                 href: '/cart' },
-                { label: 'Checkout',             href: '/checkout' },
-              ].map(link => (
                 <Link
-                  key={link.href}
-                  href={link.href}
+                  href="/pages/case-gallery"
                   onClick={() => setIsOpen(false)}
-                  className="flex items-center border-b border-bisat-border py-4 text-[15px] text-bisat-black/70 transition-colors hover:text-bisat-black"
+                  className="flex items-center justify-between border-b border-bisat-black/5 py-5 text-[16px] text-bisat-black/85"
                 >
-                  {link.label}
+                  Room Ideas
+                  <ChevronDown size={14} className="-rotate-90 text-bisat-black/20" />
                 </Link>
-              ))}
 
-              <div className="pt-6 grid grid-cols-2 gap-3 mt-2">
                 <Link
-                  href="/cart"
+                  href="/pages/virtual-coordinate"
                   onClick={() => setIsOpen(false)}
-                  className="flex items-center justify-center gap-2 border border-bisat-black bg-bisat-black py-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-white"
+                  className="flex items-center justify-between border-b border-bisat-black/5 py-5 text-[16px] text-bisat-black/85"
                 >
-                  <ShoppingBag size={13} strokeWidth={1.5} />
-                  Cart {totalItems > 0 && `(${totalItems})`}
+                  Virtual Coordinate
+                  <ChevronDown size={14} className="-rotate-90 text-bisat-black/20" />
                 </Link>
+
+                <MobileAccordion title="About" id="about" active={mobileAccordion} onToggle={id => setMobileAccordion(mobileAccordion === id ? null : id)}>
+                  <div className="pb-6 flex flex-col pl-4">
+                    {[
+                      { label: 'Our Story', href: '/pages/about' },
+                      { label: 'Living With Rugs', href: '/pages/living-with-rugs' },
+                      { label: 'Articles', href: '/pages/articles' },
+                      { label: 'Contact', href: '/pages/contact' },
+                    ].map(item => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        onClick={() => setIsOpen(false)}
+                        className="py-3.5 text-[14px] text-bisat-black/70 border-b border-bisat-black/[0.04] last:border-0"
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                </MobileAccordion>
+
                 <Link
-                  href="/pages/contact"
+                  href="/pages/for-business"
                   onClick={() => setIsOpen(false)}
-                  className="flex items-center justify-center border border-bisat-border py-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-bisat-black/60 transition-colors hover:bg-bisat-cream hover:text-bisat-black"
+                  className="flex items-center justify-between border-b border-bisat-black/5 py-5 text-[16px] text-bisat-black/85"
                 >
-                  Contact
+                  Trade
+                  <ChevronDown size={14} className="-rotate-90 text-bisat-black/20" />
                 </Link>
               </div>
 
+              {/* Account/Utility links at bottom of list */}
+              <div className="mt-8 flex flex-col gap-6">
+                <Link
+                  href="/account"
+                  onClick={() => setIsOpen(false)}
+                  className="text-[14px] text-bisat-black/50 hover:text-bisat-black"
+                >
+                  Account
+                </Link>
+                
+                {/* Social Icons at bottom */}
+                <div className="pt-12 mt-auto flex items-center gap-8">
+                  <a href="https://www.instagram.com/bisat.store/" target="_blank" rel="noopener noreferrer" className="text-bisat-black/40 hover:text-bisat-black">
+                    <Instagram size={20} strokeWidth={1.5} />
+                  </a>
+                  <a href="https://tr.pinterest.com/bisattstore/" target="_blank" rel="noopener noreferrer" className="text-bisat-black/40 hover:text-bisat-black">
+                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+                  </a>
+                  <a href="https://www.tiktok.com/@bisattstore" target="_blank" rel="noopener noreferrer" className="text-bisat-black/40 hover:text-bisat-black">
+                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9.01a8.16 8.16 0 0 0 4.77 1.52V7.08a4.85 4.85 0 0 1-1-.39z"/></svg>
+                  </a>
+                </div>
+              </div>
             </div>
           </motion.div>
         )}
@@ -451,28 +462,33 @@ export const Navbar = () => {
 
 // ── Desktop nav item ──────────────────────────────────────────────────────────
 const DesktopNavItem: React.FC<{
-  id: string; label: string; href?: string; hasDropdown?: boolean;
+  id: string; label: string; href?: string; hasDropdown?: boolean; scrolled: boolean;
   activeDropdown: string | null; onOpen: (id: string) => void; onClose: () => void;
-}> = ({ id, label, href, hasDropdown, activeDropdown, onOpen, onClose }) => {
+}> = ({ id, label, href, hasDropdown, scrolled, activeDropdown, onOpen, onClose }) => {
   const isDropOpen = activeDropdown === id;
+  const textColor = scrolled ? 'text-bisat-black' : 'text-white';
+  const inactiveColor = scrolled ? 'text-bisat-black/50' : 'text-white/60';
+
   if (!hasDropdown && href) {
     return (
-      <Link href={href} className="relative group text-[10px] font-semibold uppercase tracking-[0.22em] text-bisat-black/52 transition-colors duration-150 hover:text-bisat-black">
+      <Link href={href} className={`relative group text-[10px] font-bold uppercase tracking-[0.3em] transition-colors duration-500 ${inactiveColor} hover:${textColor}`}>
         {label}
-        <span className="absolute -bottom-0.5 left-0 h-px bg-bisat-black w-0 group-hover:w-full transition-all duration-200" />
+        <span className={`absolute -bottom-1.5 left-0 h-[1.5px] w-0 group-hover:w-full transition-all duration-200 ${scrolled ? 'bg-bisat-black' : 'bg-white'}`} />
       </Link>
     );
   }
   return (
     <div className="relative" onMouseEnter={() => onOpen(id)} onMouseLeave={onClose}>
       <button
-        className={`relative group flex items-center gap-0.5 text-[10px] font-semibold uppercase tracking-[0.22em] transition-colors duration-150 ${
-          isDropOpen ? 'text-bisat-black' : 'text-bisat-black/52 hover:text-bisat-black'
+        className={`relative group flex items-center gap-0.5 text-[10px] font-bold uppercase tracking-[0.3em] transition-colors duration-500 ${
+          isDropOpen ? textColor : `${inactiveColor} hover:${textColor}`
         }`}
       >
         {label}
-        <ChevronDown size={10} strokeWidth={2} className={`transition-transform duration-200 mt-px ${isDropOpen ? 'rotate-180' : ''}`} />
-        <span className={`absolute -bottom-0.5 left-0 h-px bg-bisat-black transition-all duration-200 ${isDropOpen ? 'w-[calc(100%-12px)]' : 'w-0 group-hover:w-[calc(100%-12px)]'}`} />
+        <ChevronDown size={10} strokeWidth={2.5} className={`transition-transform duration-200 mt-px ${isDropOpen ? 'rotate-180' : ''}`} />
+        <span className={`absolute -bottom-1.5 left-0 h-[1.5px] transition-all duration-200 ${
+          isDropOpen ? 'w-[calc(100%-12px)]' : 'w-0 group-hover:w-[calc(100%-12px)]'
+        } ${scrolled ? 'bg-bisat-black' : 'bg-white'}`} />
       </button>
     </div>
   );
