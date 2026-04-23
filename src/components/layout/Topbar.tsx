@@ -17,11 +17,17 @@ const STORAGE_KEY = 'bisat_topbar_dismissed';
 export const Topbar: React.FC = () => {
   const [visible, setVisible] = useState(true);
   const [mobileIdx, setMobileIdx] = useState(0);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    if (localStorage.getItem(STORAGE_KEY) === '1') {
-      setVisible(false);
-    }
+    // Force visible for design review
+    setVisible(true);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
@@ -41,19 +47,24 @@ export const Topbar: React.FC = () => {
   if (!visible) return null;
 
   return (
-    <div id="topbar-bar" className="relative flex h-9 shrink-0 items-center justify-center overflow-hidden border-b border-bisat-black/[0.06] bg-bisat-paper">
+    <div 
+      id="topbar-bar" 
+      className="relative z-[60] flex min-h-[40px] md:h-9 shrink-0 items-center justify-center overflow-hidden border-b border-black/5 bg-[#F2F2F2]"
+    >
       {/* Desktop: all messages with separators */}
-      <div className="hidden items-center text-[10px] font-medium uppercase tracking-[0.26em] text-bisat-black/48 md:flex">
+      <div className="hidden items-center text-[10px] font-medium uppercase tracking-[0.26em] text-[#666666] md:flex">
         {MESSAGES.map((msg, i) => (
           <React.Fragment key={i}>
             <span>{msg}</span>
-            {i < MESSAGES.length - 1 && <Diamond />}
+            {i < MESSAGES.length - 1 && (
+              <span className="inline-block h-3 w-px bg-black/10 mx-4 shrink-0" aria-hidden />
+            )}
           </React.Fragment>
         ))}
       </div>
 
       {/* Mobile: rotating single message */}
-      <div className="px-8 text-center text-[10px] font-medium uppercase tracking-[0.22em] text-bisat-black/48 md:hidden">
+      <div className="px-12 py-2.5 text-center text-[9px] font-medium uppercase tracking-[0.16em] text-[#666666] md:hidden leading-normal">
         {MESSAGES[mobileIdx]}
       </div>
 
@@ -61,9 +72,9 @@ export const Topbar: React.FC = () => {
       <button
         onClick={dismiss}
         aria-label="Close announcement"
-        className="absolute right-3 top-1/2 p-1 -translate-y-1/2 text-bisat-black/25 transition-colors hover:text-bisat-black"
+        className="absolute right-2 top-1/2 p-2 -translate-y-1/2 text-black/20 transition-colors hover:text-black"
       >
-        <X size={11} />
+        <X size={12} />
       </button>
     </div>
   );

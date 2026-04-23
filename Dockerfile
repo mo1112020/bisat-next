@@ -1,3 +1,16 @@
+# ── Stage 0: Dev (hot-reload) ──────────────────────────────────────────────────
+FROM node:20-alpine AS dev
+RUN apk add --no-cache libc6-compat
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm install
+# Bake source into image; docker-compose volumes overlay src/ & public/ for hot-reload
+COPY . .
+EXPOSE 3000
+ENV PORT=3000
+ENV HOSTNAME=0.0.0.0
+CMD ["npm", "run", "dev"]
+
 # ── Stage 1: Install dependencies ─────────────────────────────────────────────
 FROM node:20-alpine AS deps
 RUN apk add --no-cache libc6-compat
@@ -13,7 +26,14 @@ COPY . .
 
 # Build args that become public env vars at build time
 ARG NEXT_PUBLIC_SITE_URL
+ARG NEXT_PUBLIC_SUPABASE_URL
+ARG NEXT_PUBLIC_SUPABASE_ANON_KEY
+ARG SUPABASE_SERVICE_ROLE_KEY
+
 ENV NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL}
+ENV NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}
+ENV NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+ENV SUPABASE_SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY}
 ENV NEXT_TELEMETRY_DISABLED=1
 
 RUN npm run build

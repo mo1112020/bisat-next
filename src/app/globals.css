@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Noto+Sans+Arabic:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Noto+Sans+Arabic:wght@100..900&family=Montserrat:wght@100..900&family=Noto+Sans+JP:wght@100..900&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -7,6 +7,8 @@
   --font-rh: "Cormorant Garamond", ui-serif, Georgia, serif;
   --font-sans: "Inter", sans-serif;
   --font-arabic: "Noto Sans Arabic", sans-serif;
+  --font-montserrat: "Montserrat", sans-serif;
+  --font-jp-sans: "Noto Sans JP", sans-serif;
 
   --color-bisat-black: #1a1a1a;
   --color-bisat-charcoal: #2a2a2a;
@@ -32,7 +34,8 @@
     color-scheme: light;
   }
 
-  body {
+  html, body {
+    @apply overflow-x-hidden;
     @apply bg-bisat-ivory text-bisat-black font-sans antialiased selection:bg-bisat-gold/18 selection:text-bisat-black;
     scrollbar-gutter: stable;
     letter-spacing: 0.015em;
@@ -135,9 +138,7 @@
 }
 /* Hide topbar immediately for dismissed users — inline script adds this class
    before first paint, so there is no flash even though SSR renders the HTML. */
-.topbar-dismissed #topbar-bar {
-  display: none;
-}
+/* Removed topbar-dismissed rule to force visibility during design review */
 
 /* ── Scroll-reveal animation (IntersectionObserver driven) ─────────────────── */
 .scroll-animate {
