@@ -19,6 +19,8 @@ import { NewsletterForm } from '../components/NewsletterForm';
 import { LifestyleSelector } from '../components/LifestyleSelector';
 import { HeroCarousel } from '../components/HeroCarousel';
 
+const CONTAINER = 'mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12';
+
 const collectionPathFor = (name: string) => {
   const normalized = name.toLowerCase();
   if (normalized.includes('vintage')) return '/collections/vintage-rugs';
@@ -86,7 +88,6 @@ export const Home = async () => {
         { label: 'Modern Rugs', name: 'Modern', badge: 'Contemporary', img: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=1200&auto=format&fit=crop', href: '/collections/easy-rugs' },
       ];
 
-
   const reviewCards = testimonials.length > 0 ? testimonials.slice(0, 8) : FALLBACK_TESTIMONIALS;
   const reviewCount = testimonials.length > 0 ? testimonials.length : 132;
 
@@ -99,62 +100,68 @@ export const Home = async () => {
       <Schema data={getOrganizationSchema()} />
       <Schema data={getWebSiteSchema()} />
 
+      {/* ── Hero — pulls up under the transparent navbar ─────────────────── */}
       <HeroCarousel />
 
+      {/* ── Lifestyle selector ───────────────────────────────────────────── */}
       <LifestyleSelector />
 
       {/* ── Intro line ───────────────────────────────────────────────────── */}
       <section className="border-b border-bisat-black/[0.06] bg-bisat-paper py-14 sm:py-16">
-        <div className="mx-auto max-w-[720px] px-5 text-center sm:px-8">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.34em] text-bisat-black/38">Bisāṭ interiors</p>
-          <p className="mt-5 font-rh text-[clamp(1.75rem,4.2vw,2.65rem)] font-light leading-snug tracking-[-0.02em] text-bisat-black">
-            Colour and fibre, brought into everyday rooms — the way you actually live.
-          </p>
+        <div className={CONTAINER}>
+          <div className="mx-auto max-w-[720px] text-center">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.34em] text-bisat-black/38">Bisāṭ interiors</p>
+            <p className="mt-5 font-rh text-[clamp(1.75rem,4.2vw,2.65rem)] font-light leading-snug tracking-[-0.02em] text-bisat-black">
+              Colour and fibre, brought into everyday rooms — the way you actually live.
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* ── Personal rug guide (quiz / diagnosis analogue) ──────────────── */}
+      {/* ── Personal rug guide ───────────────────────────────────────────── */}
       <section className="border-b border-bisat-black/[0.06] bg-white">
-        <div className="mx-auto grid max-w-[1320px] grid-cols-1 lg:grid-cols-2">
-          <Link
-            href="/size-guide"
-            className="group relative flex min-h-[280px] flex-col justify-end overflow-hidden border-b border-bisat-black/[0.06] p-8 sm:min-h-[340px] sm:p-12 lg:border-b-0 lg:border-r"
-          >
-            <Image
-              src={siteImgs.promo_split}
-              alt=""
-              fill
-              className="object-cover transition-transform duration-[1.1s] ease-out group-hover:scale-[1.03]"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent" />
-            <div className="relative z-10 max-w-md">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-white/55">Guide</p>
-              <h2 className="mt-3 font-rh text-4xl font-light tracking-[-0.02em] text-white sm:text-[2.75rem]">
-                Find the right rug for your space
+        <div className="mx-auto max-w-[1400px]">
+          <div className="grid grid-cols-1 lg:grid-cols-2">
+            <Link
+              href="/size-guide"
+              className="group relative flex min-h-[280px] flex-col justify-end overflow-hidden border-b border-bisat-black/[0.06] p-8 sm:min-h-[340px] sm:p-12 lg:border-b-0 lg:border-r"
+            >
+              <Image
+                src={siteImgs.promo_split}
+                alt=""
+                fill
+                className="object-cover transition-transform duration-[1.1s] ease-out group-hover:scale-[1.03]"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent" />
+              <div className="relative z-10 max-w-md">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-white/55">Guide</p>
+                <h2 className="mt-3 font-rh text-4xl font-light tracking-[-0.02em] text-white sm:text-[2.75rem]">
+                  Find the right rug for your space
+                </h2>
+                <span className="mt-6 inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.24em] text-white">
+                  Open size guide
+                  <ArrowRight size={11} />
+                </span>
+              </div>
+            </Link>
+            <div className="flex flex-col justify-center bg-bisat-paper px-5 py-12 sm:px-8 sm:py-16 lg:px-12">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-bisat-black/38">Styling</p>
+              <h2 className="mt-4 font-rh text-4xl font-light tracking-[-0.02em] text-bisat-black sm:text-[2.65rem]">
+                Virtual placement and room ideas
               </h2>
-              <span className="mt-6 inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.24em] text-white">
-                Open size guide
-                <ArrowRight size={11} />
-              </span>
-            </div>
-          </Link>
-          <div className="flex flex-col justify-center bg-bisat-paper px-8 py-12 sm:px-12 sm:py-16">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-bisat-black/38">Styling</p>
-            <h2 className="mt-4 font-rh text-4xl font-light tracking-[-0.02em] text-bisat-black sm:text-[2.65rem]">
-              Virtual placement and room ideas
-            </h2>
-            <p className="mt-5 max-w-md text-[15px] leading-7 text-bisat-black/52">
-              See how texture and scale read in your own layout before you commit — or browse real installs for inspiration.
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href="/pages/virtual-coordinate" className="bisat-button">
-                Try virtual coordinate
-                <ArrowRight size={12} />
-              </Link>
-              <Link href="/pages/case-gallery" className="bisat-button-secondary">
-                Case gallery
-              </Link>
+              <p className="mt-5 max-w-md text-[15px] leading-7 text-bisat-black/52">
+                See how texture and scale read in your own layout before you commit — or browse real installs for inspiration.
+              </p>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <Link href="/pages/virtual-coordinate" className="bisat-button">
+                  Try virtual coordinate
+                  <ArrowRight size={12} />
+                </Link>
+                <Link href="/pages/case-gallery" className="bisat-button-secondary">
+                  Case gallery
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -162,7 +169,7 @@ export const Home = async () => {
 
       {/* ── NEW RELEASE — collection spotlight ───────────────────────────── */}
       <section className="border-b border-bisat-black/[0.06] bg-white py-14 sm:py-20">
-        <div className="mx-auto max-w-[1320px] px-5 sm:px-8 lg:px-12">
+        <div className={CONTAINER}>
           <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
             <div>
               <p className="text-[10px] font-semibold uppercase tracking-[0.32em] text-bisat-black/38">New release</p>
@@ -187,7 +194,7 @@ export const Home = async () => {
               alt="Bedroom rugs"
               fill
               className="object-cover transition-transform duration-[1.1s] ease-out group-hover:scale-[1.02]"
-              sizes="(max-width: 1320px) 100vw, 1320px"
+              sizes="(max-width: 1400px) 100vw, 1400px"
             />
             <div className="absolute left-5 top-5 bg-bisat-black px-3 py-1.5 text-[9px] font-semibold uppercase tracking-[0.22em] text-white">
               New release
@@ -196,50 +203,51 @@ export const Home = async () => {
         </div>
       </section>
 
-      {/* ── Dual editorial tiles — “Always wanted” / “Discovery” ───────────── */}
+      {/* ── Dual editorial tiles ─────────────────────────────────────────── */}
       <section className="border-b border-bisat-black/[0.06] bg-bisat-paper">
-        <div className="mx-auto grid max-w-[1320px] grid-cols-1 md:grid-cols-2">
-          {[
-            {
-              kicker: 'Curated',
-              title: 'Always wanted',
-              sub: 'Pieces we return to — texture, tone, and longevity.',
-              href: '/collections/vintage-rugs',
-              img: categories[2]?.img ?? siteImgs.hero,
-            },
-            {
-              kicker: 'Explore',
-              title: 'Your next discovery',
-              sub: 'Fresh arrivals and unexpected colour stories.',
-              href: '/collections/rug',
-              img: categories[0]?.img ?? siteImgs.promo_split,
-            },
-          ].map((tile, i) => (
-            <Link
-              key={tile.title}
-              href={tile.href}
-              className={`group relative flex min-h-[420px] flex-col justify-end overflow-hidden p-8 sm:min-h-[480px] sm:p-12 ${i === 1 ? 'border-t border-bisat-black/[0.06] md:border-l md:border-t-0' : ''}`}
-            >
-              <Image src={tile.img} alt="" fill className="object-cover transition-transform duration-[1.1s] ease-out group-hover:scale-[1.04]" sizes="(max-width: 768px) 100vw, 50vw" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/72 via-black/2 to-transparent" />
-              <div className="relative z-10 max-w-md">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-white/55">{tile.kicker}</p>
-                <h2 className="mt-3 font-rh text-[2.25rem] font-light tracking-[-0.02em] text-white sm:text-5xl">{tile.title}</h2>
-                <p className="mt-4 text-[14px] leading-relaxed text-white/75">{tile.sub}</p>
-                <span className="mt-6 inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.24em] text-white">
-                  View collection
-                  <ArrowRight size={11} />
-                </span>
-              </div>
-            </Link>
-          ))}
+        <div className="mx-auto max-w-[1400px]">
+          <div className="grid grid-cols-1 md:grid-cols-2">
+            {[
+              {
+                kicker: 'Curated',
+                title: 'Always wanted',
+                sub: 'Pieces we return to — texture, tone, and longevity.',
+                href: '/collections/vintage-rugs',
+                img: categories[2]?.img ?? siteImgs.hero,
+              },
+              {
+                kicker: 'Explore',
+                title: 'Your next discovery',
+                sub: 'Fresh arrivals and unexpected colour stories.',
+                href: '/collections/rug',
+                img: categories[0]?.img ?? siteImgs.promo_split,
+              },
+            ].map((tile, i) => (
+              <Link
+                key={tile.title}
+                href={tile.href}
+                className={`group relative flex min-h-[420px] flex-col justify-end overflow-hidden p-8 sm:min-h-[480px] sm:p-12 ${i === 1 ? 'border-t border-bisat-black/[0.06] md:border-l md:border-t-0' : ''}`}
+              >
+                <Image src={tile.img} alt="" fill className="object-cover transition-transform duration-[1.1s] ease-out group-hover:scale-[1.04]" sizes="(max-width: 768px) 100vw, 50vw" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/72 via-black/2 to-transparent" />
+                <div className="relative z-10 max-w-md">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-white/55">{tile.kicker}</p>
+                  <h2 className="mt-3 font-rh text-[2.25rem] font-light tracking-[-0.02em] text-white sm:text-5xl">{tile.title}</h2>
+                  <p className="mt-4 text-[14px] leading-relaxed text-white/75">{tile.sub}</p>
+                  <span className="mt-6 inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.24em] text-white">
+                    View collection
+                    <ArrowRight size={11} />
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
-
-      {/* ── NEW ARRIVAL — product strip ───────────────────────────────────── */}
+      {/* ── NEW ARRIVAL — product strip ──────────────────────────────────── */}
       <section className="border-b border-bisat-black/[0.06] bg-bisat-paper py-14 sm:py-20">
-        <div className="mx-auto max-w-[1320px] px-5 sm:px-8 lg:px-12">
+        <div className={CONTAINER}>
           <div className="mb-10 flex items-end justify-between gap-4">
             <div>
               <p className="text-[10px] font-semibold uppercase tracking-[0.32em] text-bisat-black/38">New arrival</p>
@@ -273,9 +281,9 @@ export const Home = async () => {
         </div>
       </section>
 
-      {/* ── Reviews — Judge.me style band ───────────────────────────────── */}
+      {/* ── Reviews ──────────────────────────────────────────────────────── */}
       <section className="border-b border-bisat-black/[0.06] bg-white py-14 sm:py-20">
-        <div className="mx-auto max-w-[1320px] px-5 sm:px-8 lg:px-12">
+        <div className={CONTAINER}>
           <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="text-[10px] font-semibold uppercase tracking-[0.32em] text-bisat-black/38">Reviews</p>
@@ -326,61 +334,67 @@ export const Home = async () => {
 
       {/* ── Room visualizer CTA ───────────────────────────────────────────── */}
       <section className="border-b border-bisat-black/[0.06] bg-bisat-black text-white">
-        <div className="mx-auto grid max-w-[1320px] grid-cols-1 gap-0 lg:grid-cols-[1fr_0.9fr]">
-          <div className="flex flex-col justify-center px-8 py-14 sm:px-12 sm:py-20 lg:py-24">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.32em] text-white/45">Preview</p>
-            <h2 className="mt-4 font-rh text-4xl font-light leading-tight tracking-[-0.02em] sm:text-5xl">
-              How will this piece feel in your room?
-            </h2>
-            <p className="mt-6 max-w-md text-[15px] leading-7 text-white/58">
-              Project scale and mood before you order — so choosing a rug stays simple and confident.
-            </p>
-            <Link
-              href="/pages/virtual-coordinate"
-              className="mt-10 inline-flex w-fit items-center gap-2 border border-white bg-white px-8 py-3.5 text-[10px] font-semibold uppercase tracking-[0.26em] text-bisat-black transition-colors hover:bg-transparent hover:text-white"
-            >
-              Try it
-              <ArrowRight size={12} />
-            </Link>
-          </div>
-          <div className="relative min-h-[280px] lg:min-h-0">
-            <Image src={siteImgs.hero} alt="" fill className="object-cover opacity-90" sizes="(max-width: 1024px) 100vw, 45vw" />
-            <div className="absolute inset-0 bg-gradient-to-r from-bisat-black/80 to-transparent lg:bg-gradient-to-t" />
+        <div className="mx-auto max-w-[1400px]">
+          <div className="grid grid-cols-1 gap-0 lg:grid-cols-[1fr_0.9fr]">
+            <div className="flex flex-col justify-center px-5 py-14 sm:px-8 sm:py-20 lg:px-12 lg:py-24">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.32em] text-white/45">Preview</p>
+              <h2 className="mt-4 font-rh text-4xl font-light leading-tight tracking-[-0.02em] sm:text-5xl">
+                How will this piece feel in your room?
+              </h2>
+              <p className="mt-6 max-w-md text-[15px] leading-7 text-white/58">
+                Project scale and mood before you order — so choosing a rug stays simple and confident.
+              </p>
+              <Link
+                href="/pages/virtual-coordinate"
+                className="mt-10 inline-flex w-fit items-center gap-2 border border-white bg-white px-8 py-3.5 text-[10px] font-semibold uppercase tracking-[0.26em] text-bisat-black transition-colors hover:bg-transparent hover:text-white"
+              >
+                Try it
+                <ArrowRight size={12} />
+              </Link>
+            </div>
+            <div className="relative min-h-[280px] lg:min-h-0">
+              <Image src={siteImgs.hero} alt="" fill className="object-cover opacity-90" sizes="(max-width: 1024px) 100vw, 45vw" />
+              <div className="absolute inset-0 bg-gradient-to-r from-bisat-black/80 to-transparent lg:bg-gradient-to-t" />
+            </div>
           </div>
         </div>
       </section>
 
       {/* ── About split ───────────────────────────────────────────────────── */}
       <section className="border-b border-bisat-black/[0.06] bg-white">
-        <div className="mx-auto grid max-w-[1320px] grid-cols-1 lg:grid-cols-[1fr_0.95fr]">
-          <div className="relative min-h-[320px] overflow-hidden bg-bisat-cream lg:min-h-[520px]">
-            <Image src={siteImgs.promo_split} alt="" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
-          </div>
-          <div className="flex flex-col justify-center border-bisat-black/[0.06] px-8 py-12 sm:px-12 lg:border-l lg:py-20">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.32em] text-bisat-black/38">About Bisāṭ</p>
-            <h2 className="mt-4 font-rh text-4xl font-light tracking-[-0.02em] text-bisat-black sm:text-5xl">
-              Heritage craft, edited for contemporary rooms.
-            </h2>
-            <p className="mt-6 max-w-xl text-[15px] leading-7 text-bisat-black/52">
-              We work with weavers and archives to offer rugs with material honesty and quiet character — selected for how they live with light, furniture, and daily use.
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href="/pages/about" className="bisat-button">
-                Our story
-              </Link>
-              <Link href="/pages/for-business" className="bisat-button-secondary">
-                Trade and projects
-              </Link>
+        <div className="mx-auto max-w-[1400px]">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_0.95fr]">
+            <div className="relative min-h-[320px] overflow-hidden bg-bisat-cream lg:min-h-[520px]">
+              <Image src={siteImgs.promo_split} alt="" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
+            </div>
+            <div className="flex flex-col justify-center border-bisat-black/[0.06] px-5 py-12 sm:px-8 lg:px-12 lg:border-l lg:py-20">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.32em] text-bisat-black/38">About Bisāṭ</p>
+              <h2 className="mt-4 font-rh text-4xl font-light tracking-[-0.02em] text-bisat-black sm:text-5xl">
+                Heritage craft, edited for contemporary rooms.
+              </h2>
+              <p className="mt-6 max-w-xl text-[15px] leading-7 text-bisat-black/52">
+                We work with weavers and archives to offer rugs with material honesty and quiet character — selected for how they live with light, furniture, and daily use.
+              </p>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <Link href="/pages/about" className="bisat-button">
+                  Our story
+                </Link>
+                <Link href="/pages/for-business" className="bisat-button-secondary">
+                  Trade and projects
+                </Link>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
+      {/* RecentlyViewed manages its own container */}
       <RecentlyViewed />
 
+      {/* ── Blog ─────────────────────────────────────────────────────────── */}
       {blogPosts.length > 0 && (
         <section className="border-b border-bisat-black/[0.06] bg-bisat-paper py-14 sm:py-20">
-          <div className="mx-auto max-w-[1320px] px-5 sm:px-8 lg:px-12">
+          <div className={CONTAINER}>
             <div className="mb-10 flex items-end justify-between gap-4">
               <div>
                 <p className="text-[10px] font-semibold uppercase tracking-[0.32em] text-bisat-black/38">Journal</p>
@@ -431,33 +445,35 @@ export const Home = async () => {
         </section>
       )}
 
-      {/* ── Newsletter (Rughaus closes with email + social) ──────────────── */}
+      {/* ── Newsletter ────────────────────────────────────────────────────── */}
       <section className="bg-white py-14 sm:py-18">
-        <div className="mx-auto grid max-w-[1320px] gap-10 px-5 sm:px-8 lg:grid-cols-2 lg:gap-16 lg:px-12">
-          <div>
-            <p className="text-[10px] font-semibold uppercase tracking-[0.32em] text-bisat-black/38">Instagram</p>
-            <h2 className="mt-3 font-rh text-4xl font-light tracking-[-0.02em] text-bisat-black">Follow the edit</h2>
-            <p className="mt-4 max-w-md text-[15px] leading-7 text-bisat-black/52">
-              Room installs, sourcing trips, and weekly drops from the archive.
-            </p>
-            <a
-              href={settings.social_instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-8 inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.24em] text-bisat-black transition-colors hover:text-bisat-gold-dark"
-            >
-              <Instagram size={12} />
-              Follow on Instagram
-            </a>
-          </div>
-          <div>
-            <p className="text-[10px] font-semibold uppercase tracking-[0.32em] text-bisat-black/38">Email</p>
-            <h2 className="mt-3 font-rh text-4xl font-light tracking-[-0.02em] text-bisat-black">Private previews</h2>
-            <p className="mt-4 max-w-md text-[15px] leading-7 text-bisat-black/52">
-              First access to arrivals and one-of-a-kind pieces.
-            </p>
-            <div className="mt-8 max-w-md">
-              <NewsletterForm />
+        <div className={CONTAINER}>
+          <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
+            <div>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.32em] text-bisat-black/38">Instagram</p>
+              <h2 className="mt-3 font-rh text-4xl font-light tracking-[-0.02em] text-bisat-black">Follow the edit</h2>
+              <p className="mt-4 max-w-md text-[15px] leading-7 text-bisat-black/52">
+                Room installs, sourcing trips, and weekly drops from the archive.
+              </p>
+              <a
+                href={settings.social_instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-8 inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.24em] text-bisat-black transition-colors hover:text-bisat-gold-dark"
+              >
+                <Instagram size={12} />
+                Follow on Instagram
+              </a>
+            </div>
+            <div>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.32em] text-bisat-black/38">Email</p>
+              <h2 className="mt-3 font-rh text-4xl font-light tracking-[-0.02em] text-bisat-black">Private previews</h2>
+              <p className="mt-4 max-w-md text-[15px] leading-7 text-bisat-black/52">
+                First access to arrivals and one-of-a-kind pieces.
+              </p>
+              <div className="mt-8 max-w-md">
+                <NewsletterForm />
+              </div>
             </div>
           </div>
         </div>

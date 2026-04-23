@@ -7,12 +7,6 @@ import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
 import { AnimatePresence, motion } from 'motion/react';
 
-const STATIC_SIZE_LINKS = [
-  { label: 'Small (under 4m²)', href: '/collections/rug?size=Small' },
-  { label: 'Medium (4–8m²)',    href: '/collections/rug?size=Medium' },
-  { label: 'Large (8–12m²)',    href: '/collections/rug?size=Large' },
-  { label: 'Runner',            href: '/collections/rug?size=Runner' },
-];
 
 const STATIC_FEATURED = [
   { label: 'All Products',    href: '/collections/rug',            highlight: true  },
@@ -43,6 +37,7 @@ export const Navbar = () => {
   const { wishlist }   = useWishlist();
   const pathname       = usePathname();
   const router         = useRouter();
+
 
   useEffect(() => {
     fetch('/api/store-config')
@@ -77,22 +72,6 @@ export const Navbar = () => {
     }
   };
 
-  const shopMega = [
-    {
-      title: 'By Category',
-      links: [
-        ...STATIC_FEATURED,
-      ],
-    },
-    {
-      title: 'By Size',
-      links: STATIC_SIZE_LINKS.map(l => ({ ...l, highlight: false })),
-    },
-    {
-      title: 'Featured',
-      links: STATIC_FEATURED,
-    },
-  ];
 
   const NAV_LINKS = [
     { label: 'Items',        href: '/collections/rug', id: 'shop', hasDropdown: true },
@@ -105,12 +84,10 @@ export const Navbar = () => {
     <>
       {/* ── Main bar ─────────────────────────────────────────────────────── */}
       <nav
-        className={`relative z-50 h-20 transition-all duration-500 ease-in-out ${
-          scrolled 
-            ? 'bg-white border-b border-bisat-black/[0.06] py-0' 
-            : 'bg-transparent border-b border-white/10 py-2'
+        className={`relative z-50 h-20 bg-white border-b border-bisat-black/[0.06] transition-all duration-300 ${
+          scrolled ? 'shadow-sm' : ''
         }`}
-        style={{ boxShadow: scrolled ? '0 10px 30px rgba(0,0,0,0.04)' : 'none' }}
+        style={{ boxShadow: scrolled ? '0 4px 24px rgba(0,0,0,0.06)' : 'none' }}
       >
         <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 h-full">
           <div className="relative flex items-center h-full">
@@ -118,9 +95,7 @@ export const Navbar = () => {
             {/* ── Logo (left) ─────────────────────────────────────── */}
             <Link
               href="/"
-              className={`flex-shrink-0 font-rh text-[1.8rem] sm:text-[2.1rem] font-light tracking-[-0.03em] transition-colors duration-500 ${
-                scrolled ? 'text-bisat-black' : 'text-white'
-              }`}
+              className="flex-shrink-0 font-rh text-[1.8rem] sm:text-[2.1rem] font-light tracking-[-0.03em] text-bisat-black"
             >
               Bisāṭim
             </Link>
@@ -135,7 +110,6 @@ export const Navbar = () => {
                     label={link.label}
                     href={link.href}
                     hasDropdown={link.hasDropdown}
-                    scrolled={scrolled}
                     activeDropdown={activeDropdown}
                     onOpen={openDropdown}
                     onClose={closeDropdown}
@@ -145,14 +119,12 @@ export const Navbar = () => {
             </div>
 
             {/* ── Right icons ─────────────────────────────────────── */}
-            <div className={`flex items-center gap-0 ml-auto transition-colors duration-500 ${scrolled ? 'text-bisat-black' : 'text-white'}`}>
+            <div className="flex items-center gap-0 ml-auto text-bisat-black">
 
               {/* Trade Button (法人窓口 analogue) */}
               <Link
                 href="/pages/for-business"
-                className={`mr-4 hidden px-4 py-1.5 text-[9.5px] font-bold uppercase tracking-[0.2em] transition-all duration-500 lg:block ${
-                  scrolled ? 'bg-bisat-black text-white' : 'bg-white text-bisat-black'
-                }`}
+                className="mr-4 hidden px-4 py-1.5 text-[9.5px] font-bold uppercase tracking-[0.2em] bg-bisat-black text-white transition-colors hover:bg-bisat-black/80 lg:block"
               >
                 Trade
               </Link>
@@ -192,9 +164,7 @@ export const Navbar = () => {
               >
                 <ShoppingBag size={17} strokeWidth={1.5} />
                 {totalItems > 0 && (
-                  <span className={`absolute right-1 top-1.5 flex h-3.5 w-3.5 items-center justify-center border text-[8px] font-medium ${
-                    scrolled ? 'border-bisat-black bg-white text-bisat-black' : 'border-white bg-bisat-black text-white'
-                  }`}>
+                  <span className="absolute right-1 top-1.5 flex h-3.5 w-3.5 items-center justify-center border border-bisat-black bg-white text-[8px] font-medium text-bisat-black">
                     {totalItems}
                   </span>
                 )}
@@ -252,87 +222,77 @@ export const Navbar = () => {
           )}
         </AnimatePresence>
 
-        {/* ── Shop mega dropdown ───────────────────────────────────── */}
+        {/* ── Shop dropdown — editorial numbered list ───────────────── */}
         <AnimatePresence>
           {activeDropdown === 'shop' && (
             <motion.div
-              initial={{ opacity: 0, y: -6 }}
+              initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -6 }}
-              transition={{ duration: 0.14, ease: 'easeOut' }}
-              className="absolute left-0 right-0 z-50 hidden border-b border-bisat-border bg-white md:block"
-              style={{ boxShadow: '0 18px 34px rgba(17,17,17,0.05)' }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+              className="fixed left-0 right-0 z-[9999] hidden bg-white md:block"
+              style={{
+                top: 'calc(var(--topbar-h, 2.25rem) + 5rem)',
+                borderBottom: '1px solid rgba(0,0,0,0.07)',
+                boxShadow: '0 24px 60px rgba(0,0,0,0.08)',
+              }}
               onMouseEnter={() => openDropdown('shop')}
               onMouseLeave={closeDropdown}
             >
-              <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 py-10">
-                <div className="grid grid-cols-3 divide-x divide-bisat-border">
-                  {shopMega.map((col, colIdx) => (
-                    <div key={col.title} className={colIdx > 0 ? 'pl-10' : 'pr-10'}>
-                      <p className="mb-5 text-[10px] font-semibold uppercase tracking-[0.24em] text-bisat-black/35">
-                        {col.title}
-                      </p>
-                      <ul>
-                        {col.links.map(link => (
-                          <li key={link.href + link.label}>
-                            <Link
-                              href={link.href}
-                              onClick={closeAll}
-                              className="group flex items-center border-b border-bisat-border/60 py-2.5 text-[13px] text-bisat-black/62 transition-colors duration-150 last:border-0 hover:text-bisat-black"
-                            >
-                              <span className="w-0 overflow-hidden group-hover:w-3.5 transition-all duration-200 ease-out opacity-0 group-hover:opacity-100 flex-shrink-0">
-                                <ArrowRight size={10} className="text-bisat-black" />
-                              </span>
-                              <span className={link.highlight ? 'font-semibold text-bisat-black' : ''}>{link.label}</span>
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+              <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
+                <div className="grid grid-cols-[1fr_340px]">
 
-        {/* ── Rooms dropdown ───────────────────────────────────────── */}
-        <AnimatePresence>
-          {activeDropdown === 'rooms' && (
-            <motion.div
-              initial={{ opacity: 0, y: -6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -6 }}
-              transition={{ duration: 0.14, ease: 'easeOut' }}
-              className="absolute left-0 right-0 z-50 hidden border-b border-bisat-border bg-white md:block"
-              style={{ boxShadow: '0 18px 34px rgba(17,17,17,0.05)' }}
-              onMouseEnter={() => openDropdown('rooms')}
-              onMouseLeave={closeDropdown}
-            >
-              <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 py-10">
-                <p className="mb-5 text-[10px] font-semibold uppercase tracking-[0.24em] text-bisat-black/35">Service</p>
-                <div className="grid grid-cols-5 divide-x divide-bisat-border">
-                  {[
-                    { label: 'About', href: '/pages/about' },
-                    { label: 'Living With Rugs', href: '/pages/living-with-rugs' },
-                    { label: 'Articles', href: '/pages/articles' },
-                    { label: 'Case Gallery', href: '/pages/case-gallery' },
-                    { label: 'Contact', href: '/pages/contact' },
-                    { label: 'For Business', href: '/pages/for-business' },
-                  ].map((item, i) => (
-                    <div key={item.href} className={i > 0 ? 'pl-8' : 'pr-8'}>
+                  {/* ── Collection list ── */}
+                  <div className="border-r border-bisat-black/[0.06] py-8 pr-14">
+                    <p className="mb-4 text-[9px] font-semibold uppercase tracking-[0.35em] text-bisat-black/22">
+                      Collections
+                    </p>
+                    {STATIC_FEATURED.map((item, i) => (
                       <Link
+                        key={item.href}
                         href={item.href}
                         onClick={closeAll}
-                        className="group flex items-center py-2.5 text-[13px] text-bisat-black/62 transition-colors duration-150 hover:text-bisat-black"
+                        className="group flex items-center justify-between border-b border-bisat-black/[0.05] py-3.5 last:border-0"
                       >
-                        <span className="w-0 overflow-hidden group-hover:w-3.5 transition-all duration-200 ease-out opacity-0 group-hover:opacity-100 flex-shrink-0">
-                          <ArrowRight size={10} className="text-bisat-black" />
-                        </span>
-                        {item.label}
+                        <div className="flex items-center gap-6">
+                          <span className="w-5 text-right text-[10px] font-light tabular-nums text-bisat-black/18 transition-colors duration-150 group-hover:text-bisat-black/38">
+                            {String(i + 1).padStart(2, '0')}
+                          </span>
+                          <span className={`font-rh text-[1.55rem] font-light tracking-[-0.025em] transition-colors duration-150 ${
+                            item.highlight
+                              ? 'text-bisat-black'
+                              : 'text-bisat-black/50 group-hover:text-bisat-black'
+                          }`}>
+                            {item.label}
+                          </span>
+                        </div>
+                        <ArrowRight
+                          size={13}
+                          className="-translate-x-1 opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-50"
+                        />
                       </Link>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
+
+                  {/* ── Brand panel ── */}
+                  <div className="flex flex-col justify-center py-8 pl-12">
+                    <p className="text-[9px] font-semibold uppercase tracking-[0.35em] text-bisat-black/22">
+                      Bisāṭim
+                    </p>
+                    <p className="mt-5 font-rh text-[1.85rem] font-light leading-snug tracking-[-0.03em] text-bisat-black">
+                      Colour and fibre, for rooms that breathe.
+                    </p>
+                    <div className="mt-3 h-px w-8 bg-bisat-black/15" />
+                    <Link
+                      href="/collections/rug"
+                      onClick={closeAll}
+                      className="mt-7 inline-flex items-center gap-2 text-[9.5px] font-semibold uppercase tracking-[0.3em] text-bisat-black/35 transition-colors duration-150 hover:text-bisat-black"
+                    >
+                      Shop all rugs
+                      <ArrowRight size={10} />
+                    </Link>
+                  </div>
+
                 </div>
               </div>
             </motion.div>
@@ -462,33 +422,31 @@ export const Navbar = () => {
 
 // ── Desktop nav item ──────────────────────────────────────────────────────────
 const DesktopNavItem: React.FC<{
-  id: string; label: string; href?: string; hasDropdown?: boolean; scrolled: boolean;
+  id: string; label: string; href?: string; hasDropdown?: boolean;
   activeDropdown: string | null; onOpen: (id: string) => void; onClose: () => void;
-}> = ({ id, label, href, hasDropdown, scrolled, activeDropdown, onOpen, onClose }) => {
+}> = ({ id, label, href, hasDropdown, activeDropdown, onOpen, onClose }) => {
   const isDropOpen = activeDropdown === id;
-  const textColor = scrolled ? 'text-bisat-black' : 'text-white';
-  const inactiveColor = scrolled ? 'text-bisat-black/50' : 'text-white/60';
 
   if (!hasDropdown && href) {
     return (
-      <Link href={href} className={`relative group text-[10px] font-bold uppercase tracking-[0.3em] transition-colors duration-500 ${inactiveColor} hover:${textColor}`}>
+      <Link href={href} className="relative group text-[10px] font-bold uppercase tracking-[0.3em] text-bisat-black/50 transition-colors hover:text-bisat-black">
         {label}
-        <span className={`absolute -bottom-1.5 left-0 h-[1.5px] w-0 group-hover:w-full transition-all duration-200 ${scrolled ? 'bg-bisat-black' : 'bg-white'}`} />
+        <span className="absolute -bottom-1.5 left-0 h-[1.5px] w-0 bg-bisat-black group-hover:w-full transition-all duration-200" />
       </Link>
     );
   }
   return (
     <div className="relative" onMouseEnter={() => onOpen(id)} onMouseLeave={onClose}>
       <button
-        className={`relative group flex items-center gap-0.5 text-[10px] font-bold uppercase tracking-[0.3em] transition-colors duration-500 ${
-          isDropOpen ? textColor : `${inactiveColor} hover:${textColor}`
+        className={`relative group flex items-center gap-0.5 text-[10px] font-bold uppercase tracking-[0.3em] transition-colors duration-200 ${
+          isDropOpen ? 'text-bisat-black' : 'text-bisat-black/50 hover:text-bisat-black'
         }`}
       >
         {label}
         <ChevronDown size={10} strokeWidth={2.5} className={`transition-transform duration-200 mt-px ${isDropOpen ? 'rotate-180' : ''}`} />
-        <span className={`absolute -bottom-1.5 left-0 h-[1.5px] transition-all duration-200 ${
+        <span className={`absolute -bottom-1.5 left-0 h-[1.5px] bg-bisat-black transition-all duration-200 ${
           isDropOpen ? 'w-[calc(100%-12px)]' : 'w-0 group-hover:w-[calc(100%-12px)]'
-        } ${scrolled ? 'bg-bisat-black' : 'bg-white'}`} />
+        }`} />
       </button>
     </div>
   );

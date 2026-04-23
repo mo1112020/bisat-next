@@ -13,7 +13,7 @@ export const RecentlyViewed: React.FC = () => {
 
   return (
     <section className="overflow-hidden border-t border-bisat-border bg-white py-14 sm:py-20">
-      <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12">
+      <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
         <div className="mb-6 flex items-start justify-between sm:mb-10">
           <div>
             <span className="mb-2 block text-[10px] font-semibold uppercase tracking-[0.28em] text-bisat-black/38">

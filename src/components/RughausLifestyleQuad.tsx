@@ -25,7 +25,7 @@ export const RughausLifestyleQuad: React.FC<RughausLifestyleQuadProps> = ({
 }) => {
   return (
     <section className="border-b border-bisat-black/[0.06] bg-white py-14 sm:py-20">
-      <div className="mx-auto max-w-[1320px] px-5 sm:px-8 lg:px-12">
+      <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
         <div className="mb-10 max-w-2xl">
           {eyebrow ? (
             <p className="text-[10px] font-semibold uppercase tracking-[0.32em] text-bisat-black/38">{eyebrow}</p>

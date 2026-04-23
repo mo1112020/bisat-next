@@ -35,7 +35,7 @@ export const Cart = () => {
 
       {/* ── Header ───────────────────────────────────────────────── */}
       <div className="border-b border-bisat-border">
-        <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 py-10">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-10">
           <p className="text-[9px] uppercase tracking-[0.3em] font-semibold text-bisat-black/30 mb-3">{t('cart.shopping_bag')}</p>
           <div className="flex items-end justify-between">
             <h1 className="text-3xl font-light text-bisat-black">{t('cart.title')}</h1>
@@ -44,7 +44,7 @@ export const Cart = () => {
         </div>
       </div>
 
-      <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 py-10">
+      <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14">
 
           {/* ── Items ────────────────────────────────────────────── */}

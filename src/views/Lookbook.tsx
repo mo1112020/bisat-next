@@ -81,7 +81,7 @@ export const Lookbook = () => {
 
       {/* ── Header ───────────────────────────────────────────────── */}
       <div className="border-b border-bisat-border bg-bisat-ivory">
-        <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 py-14 sm:py-20">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-14 sm:py-20">
           <p className="text-[9px] uppercase tracking-[0.3em] font-semibold text-bisat-black/30 mb-4">Inspiration</p>
           <h1 className="text-4xl sm:text-5xl font-light text-bisat-black mb-4 leading-tight max-w-xl">
             Room Ideas
@@ -93,7 +93,7 @@ export const Lookbook = () => {
       </div>
 
       {/* ── Room grid ─────────────────────────────────────────────── */}
-      <section className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 py-14 sm:py-20">
+      <section className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-14 sm:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-bisat-border">
           {ROOMS.map((room) => (
             <Link
@@ -130,7 +130,7 @@ export const Lookbook = () => {
 
       {/* ── Style guides ──────────────────────────────────────────── */}
       <section className="bg-bisat-cream border-t border-bisat-border py-14 sm:py-20">
-        <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
           <div className="flex justify-between items-end mb-10">
             <div>
               <p className="text-[9px] uppercase tracking-[0.3em] font-semibold text-bisat-black/30 mb-3">Guides</p>
@@ -156,7 +156,7 @@ export const Lookbook = () => {
 
       {/* ── CTA ───────────────────────────────────────────────────── */}
       <section className="border-t border-bisat-border py-14 bg-bisat-ivory">
-        <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div>
             <p className="text-[9px] uppercase tracking-[0.3em] font-semibold text-bisat-black/30 mb-2">Ready to shop?</p>
             <h2 className="text-2xl font-light text-bisat-black">Browse the full collection</h2>

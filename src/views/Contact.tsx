@@ -36,7 +36,7 @@ export const Contact = () => {
 
       {/* ── Header ───────────────────────────────────────────────── */}
       <div className="border-b border-bisat-border">
-        <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 py-14 sm:py-20">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-14 sm:py-20">
           <p className="text-[9px] uppercase tracking-[0.3em] font-semibold text-bisat-black/30 mb-4">Get in Touch</p>
           <h1 className="text-4xl sm:text-5xl font-light text-bisat-black mb-4 leading-tight">Contact Us</h1>
           <p className="text-bisat-black/50 text-sm font-light leading-relaxed max-w-lg">
@@ -45,7 +45,7 @@ export const Contact = () => {
         </div>
       </div>
 
-      <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 py-14 sm:py-20">
+      <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-14 sm:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
 
           {/* ── Contact info ─────────────────────────────────────── */}

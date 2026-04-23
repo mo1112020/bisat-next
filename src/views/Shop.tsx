@@ -223,7 +223,7 @@ export const Shop = () => {
 
       {/* ── Page header ───────────────────────────────────────────────────── */}
       <div className="bg-bisat-ivory border-b border-bisat-border">
-        <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 py-6 sm:py-8">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-6 sm:py-8">
           {/* Breadcrumb */}
           <nav className="flex items-center gap-1.5 mb-3 text-[11px] text-bisat-black/35 font-medium">
             <Link href="/" className="hover:text-bisat-gold transition-colors">Home</Link>
@@ -246,7 +246,7 @@ export const Shop = () => {
 
       {/* ── Category quick-nav pills ──────────────────────────────────────── */}
       <div className="bg-bisat-ivory border-b border-bisat-border sticky top-[4.5rem] z-20">
-        <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
           <div className="flex items-center gap-2 py-3 overflow-x-auto scrollbar-hide">
             <button onClick={() => setFilter('category','')}
               className={`px-4 py-2 rounded-sm text-[11px] font-semibold whitespace-nowrap flex-shrink-0 transition-all ${
@@ -267,7 +267,7 @@ export const Shop = () => {
       </div>
 
       {/* ── Main layout ───────────────────────────────────────────────────── */}
-      <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 py-8">
+      <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-8">
         <div className="flex gap-8">
 
           {/* ── Desktop sidebar ──────────────────────────────────────────── */}

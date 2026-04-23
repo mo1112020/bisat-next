@@ -60,7 +60,7 @@ export const LifestyleSelector: React.FC = () => {
 
   return (
     <section className="bg-white py-16 sm:py-24 border-b border-bisat-black/[0.06]">
-      <div className="mx-auto max-w-[1600px] px-5 sm:px-8 lg:px-10">
+      <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
 
         {/* Section heading */}
         <div className="mb-12 sm:mb-16">

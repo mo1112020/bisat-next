@@ -31,7 +31,7 @@ export const ForBusiness = () => {
       />
 
       <section className="border-b border-bisat-border bg-white">
-        <div className="mx-auto max-w-[1320px] px-5 py-14 sm:px-8 lg:px-12 lg:py-18">
+        <div className="mx-auto max-w-[1400px] px-5 py-14 sm:px-8 lg:px-12 lg:py-18">
           <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.32em] text-bisat-black/38">For Business</p>
           <h1 className="max-w-3xl font-serif text-4xl font-light tracking-[-0.05em] text-bisat-black sm:text-5xl">
             Project support for designers, retailers, and hospitality spaces.
@@ -43,7 +43,7 @@ export const ForBusiness = () => {
       </section>
 
       <section className="border-b border-bisat-border bg-bisat-cream py-14 sm:py-18">
-        <div className="mx-auto max-w-[1320px] px-5 sm:px-8 lg:px-12">
+        <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
           <div className="grid gap-px bg-bisat-border md:grid-cols-3">
             {OFFERINGS.map(({ icon: Icon, title, body }) => (
               <div key={title} className="bg-white px-6 py-8 sm:px-8">
@@ -57,7 +57,7 @@ export const ForBusiness = () => {
       </section>
 
       <section className="bg-white py-14 sm:py-18">
-        <div className="mx-auto max-w-[1320px] px-5 sm:px-8 lg:px-12">
+        <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
           <div className="border border-bisat-border bg-white px-6 py-10 sm:px-10">
             <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.32em] text-bisat-black/38">Contact</p>
             <h2 className="font-serif text-4xl font-light tracking-[-0.05em] text-bisat-black sm:text-5xl">

@@ -8,7 +8,7 @@ export const AIRoomPreview = () => {
 
   return (
     <section className="bg-bisat-black py-24 overflow-hidden">
-      <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12">
+      <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           
           {/* Left Content */}

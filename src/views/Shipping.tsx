@@ -15,7 +15,7 @@ export const Shipping = () => {
       />
 
       {/* Hero */}
-      <section className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 pt-6">
+      <section className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 pt-6">
         <PageHeader
           badge="Worldwide Delivery"
           title={<>Shipped with <span className="italic text-bisat-gold">Care</span></>}
@@ -24,7 +24,7 @@ export const Shipping = () => {
       </section>
 
       {/* Info Cards */}
-      <section className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 mb-24">
+      <section className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 mb-24">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {[
             {
@@ -65,7 +65,7 @@ export const Shipping = () => {
       </section>
 
       {/* Policy Details */}
-      <section className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 mb-24">
+      <section className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 mb-24">
         <div className="bg-white border border-bisat-border p-8 md:p-12">
           <h2 className="text-3xl font-serif mb-8 text-bisat-black">Shipping Policy</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-bisat-black/60 leading-relaxed font-light">
@@ -94,7 +94,7 @@ export const Shipping = () => {
       </section>
 
       {/* CTA */}
-      <section className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 text-center">
+      <section className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

@@ -41,7 +41,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           id="topbar-init"
           strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var d=localStorage.getItem('bisat_topbar_dismissed');if(d==='1'){document.documentElement.style.setProperty('--topbar-h','0px');document.documentElement.classList.add('topbar-dismissed');}else{document.documentElement.style.setProperty('--topbar-h','2.25rem');}}catch(e){}})();`,
+            __html: `(function(){try{var d=localStorage.getItem('bisat_topbar_dismissed');if(d==='1'){document.documentElement.style.setProperty('--topbar-h','0px');document.documentElement.classList.add('topbar-dismissed');}else{document.documentElement.style.setProperty('--topbar-h','2.5rem');}}catch(e){}})();`,
           }}
         />
         <link rel="alternate" hrefLang="en" href="https://bisat-store.com" />
@@ -63,12 +63,16 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 <Analytics />
               </Suspense>
               <Heatmap />
-              <header className="fixed top-0 left-0 right-0 z-50 flex flex-col overflow-hidden">
+              <header className="fixed top-0 left-0 right-0 z-50 flex flex-col">
                 <Topbar />
                 <Navbar />
               </header>
               <div className="flex flex-col min-h-screen">
-                <main id="main-content" className="flex-grow">
+                <main
+                  id="main-content"
+                  className="flex-grow"
+                  style={{ paddingTop: 'calc(var(--topbar-h, 2.25rem) + 5rem)' }}
+                >
                   {children}
                 </main>
                 <Footer />

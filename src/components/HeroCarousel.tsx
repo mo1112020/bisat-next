@@ -6,7 +6,7 @@ import Link from 'next/link';
 const SLIDES = [
   {
     image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=85&w=1920&auto=format&fit=crop',
-    title: 'RUGHAUS New Lifestyle Interior',
+    title: 'Bisāṭim New Lifestyle Interior',
     subtitle: 'Colour and fibre, brought into everyday rooms — the way you actually live.',
     cta: 'Details Here',
     href: '/collections/rug',

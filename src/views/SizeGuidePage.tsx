@@ -53,7 +53,7 @@ export const SizeGuidePage = () => {
 
       {/* ── Header ───────────────────────────────────────────────── */}
       <div className="border-b border-bisat-border">
-        <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 py-14 sm:py-20">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-14 sm:py-20">
           <p className="text-[9px] uppercase tracking-[0.3em] font-semibold text-bisat-black/30 mb-4">Shopping Help</p>
           <h1 className="text-4xl sm:text-5xl font-light text-bisat-black mb-4 leading-tight">
             Rug Size Guide
@@ -66,7 +66,7 @@ export const SizeGuidePage = () => {
 
       {/* ── The golden rule ───────────────────────────────────────── */}
       <section className="bg-bisat-cream border-b border-bisat-border py-10">
-        <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
           <div className="flex items-start gap-4 max-w-2xl">
             <div className="w-8 h-8 bg-bisat-black flex items-center justify-center flex-shrink-0 mt-0.5">
               <Check size={14} className="text-white" strokeWidth={2.5} />
@@ -83,7 +83,7 @@ export const SizeGuidePage = () => {
 
       {/* ── Size categories ───────────────────────────────────────── */}
       <section className="py-14 sm:py-20">
-        <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
           <p className="text-[9px] uppercase tracking-[0.3em] font-semibold text-bisat-black/30 mb-10">Size Categories</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-bisat-border">
             {SIZES.map((size) => (
@@ -109,7 +109,7 @@ export const SizeGuidePage = () => {
 
       {/* ── Room-by-room guide ────────────────────────────────────── */}
       <section className="bg-bisat-cream border-t border-bisat-border py-14 sm:py-20">
-        <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
           <p className="text-[9px] uppercase tracking-[0.3em] font-semibold text-bisat-black/30 mb-3">By Room</p>
           <h2 className="text-2xl sm:text-3xl font-light text-bisat-black mb-10">Room-by-Room Recommendations</h2>
           <div className="divide-y divide-bisat-border border border-bisat-border">
@@ -134,7 +134,7 @@ export const SizeGuidePage = () => {
 
       {/* ── Measurement tip ───────────────────────────────────────── */}
       <section className="border-t border-bisat-border py-10 bg-bisat-ivory">
-        <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
           <div className="max-w-xl">
             <p className="text-[9px] uppercase tracking-[0.3em] font-semibold text-bisat-black/30 mb-3">Pro Tip</p>
             <p className="text-bisat-black/55 text-sm font-light leading-relaxed mb-6">

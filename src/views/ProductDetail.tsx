@@ -125,7 +125,7 @@ export const ProductDetail = () => {
         { name: product.name, path: `/product/${product.id}` },
       ])} />
 
-      <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 py-8">
+      <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-8">
 
         {/* Breadcrumb */}
         <nav className="flex items-center gap-1.5 text-[11px] text-bisat-black/40 mb-6 font-medium">

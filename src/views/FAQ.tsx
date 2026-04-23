@@ -80,7 +80,7 @@ export const FAQ = () => {
         description="Answers to common questions about shipping, rug care, returns, and the authenticity of Bisāṭ artisanal pieces."
       />
       <Schema data={getFAQSchema(faqs)} />
-      <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 pt-6">
+      <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 pt-6">
         <PageHeader
           badge="Assistance"
           title="Common Questions"

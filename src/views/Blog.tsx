@@ -34,7 +34,7 @@ export const Blog = () => {
 
       {/* ── Header ───────────────────────────────────────────────── */}
       <div className="border-b border-bisat-border">
-        <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 py-14 sm:py-20">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-14 sm:py-20">
           <p className="text-[9px] uppercase tracking-[0.3em] font-semibold text-bisat-black/30 mb-4">The Journal</p>
           <h1 className="text-4xl sm:text-5xl font-light text-bisat-black mb-4 leading-tight">Stories & Guides</h1>
           <p className="text-bisat-black/50 text-sm font-light leading-relaxed max-w-lg">
@@ -44,7 +44,7 @@ export const Blog = () => {
       </div>
 
       {/* ── Post grid ─────────────────────────────────────────────── */}
-      <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 py-14 sm:py-20">
+      <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-14 sm:py-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-bisat-border">
           {posts.map((post, i) => (
             <motion.article

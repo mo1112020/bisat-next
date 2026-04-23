@@ -20,8 +20,14 @@ export const Topbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    // Force visible for design review
-    setVisible(true);
+    const dismissed = localStorage.getItem('bisat_topbar_dismissed') === '1';
+    if (dismissed) {
+      setVisible(false);
+      document.documentElement.style.setProperty('--topbar-h', '0px');
+    } else {
+      setVisible(true);
+      document.documentElement.style.setProperty('--topbar-h', '2.5rem');
+    }
   }, []);
 
   useEffect(() => {
@@ -48,19 +54,19 @@ export const Topbar: React.FC = () => {
 
   return (
     <div 
-      id="topbar-bar" 
-      className="relative z-[60] flex min-h-[40px] md:h-9 shrink-0 items-center justify-center overflow-hidden border-b border-black/5 bg-[#F2F2F2]"
+      id="topbar-bar"
+      className="relative z-[60] flex h-10 shrink-0 items-center justify-center overflow-hidden border-b border-black/5 bg-[#F2F2F2]"
     >
-      {/* Desktop: all messages with separators */}
-      <div className="hidden items-center text-[10px] font-medium uppercase tracking-[0.26em] text-[#666666] md:flex">
-        {MESSAGES.map((msg, i) => (
-          <React.Fragment key={i}>
-            <span>{msg}</span>
-            {i < MESSAGES.length - 1 && (
-              <span className="inline-block h-3 w-px bg-black/10 mx-4 shrink-0" aria-hidden />
-            )}
-          </React.Fragment>
-        ))}
+      {/* Desktop: sliding marquee */}
+      <div className="hidden md:block overflow-hidden w-full">
+        <div className="animate-topbar-marquee flex whitespace-nowrap w-max">
+          {[...MESSAGES, ...MESSAGES].map((msg, i) => (
+            <span key={i} className="inline-flex items-center shrink-0 text-[10px] font-medium uppercase tracking-[0.26em] text-[#666666] px-8">
+              {msg}
+              <span className="inline-block h-3 w-px bg-black/10 ml-8 shrink-0" aria-hidden />
+            </span>
+          ))}
+        </div>
       </div>
 
       {/* Mobile: rotating single message */}

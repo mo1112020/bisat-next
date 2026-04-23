@@ -18,7 +18,7 @@ export const Wishlist: React.FC = () => {
         description="Your saved rugs and carpets at Bisāṭ."
         robots="noindex, nofollow"
       />
-      <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 pt-6">
+      <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 pt-6">
         <PageHeader
           badge="Saved Items"
           title="Your Wishlist"

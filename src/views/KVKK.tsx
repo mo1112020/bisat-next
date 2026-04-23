@@ -15,7 +15,7 @@ export const KVKK = () => {
         description="Kişisel verilerin korunması kanunu kapsamında Bisāṭ aydınlatma metni."
         robots="noindex, follow"
       />
-      <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 pt-6">
+      <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 pt-6">
         <PageHeader badge={t('kvkk.badge')} title={t('kvkk.title')} />
         <div className="max-w-4xl">
           <motion.div

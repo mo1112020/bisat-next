@@ -29,7 +29,7 @@ export const Reviews = () => {
         title="Customer Reviews"
         description="Read verified reviews from customers around the world who brought a piece of Turkish heritage into their homes with Bisāṭ."
       />
-      <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 pt-6">
+      <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 pt-6">
         <PageHeader
           badge="Testimonials"
           title="Kind Words from Our Global Community"

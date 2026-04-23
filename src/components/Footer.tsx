@@ -90,7 +90,7 @@ export const Footer = () => {
   return (
     <footer className="bg-bisat-footer text-bisat-black">
       <div className="border-b border-bisat-black/8">
-        <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 py-12 sm:py-16">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-12 sm:py-16">
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
             <div className="max-w-md">
               <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.32em] text-bisat-black/38">Newsletter</p>
@@ -138,7 +138,7 @@ export const Footer = () => {
         </div>
       </div>
 
-      <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 py-14 sm:py-20">
+      <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-14 sm:py-20">
         <div className="grid grid-cols-2 md:grid-cols-12 gap-10 sm:gap-12 mb-14 sm:mb-20">
           <div className="col-span-2 md:col-span-4">
             <Link href="/" className="mb-4 block font-serif text-[1.9rem] font-light tracking-[-0.05em] text-bisat-black transition-colors duration-200 hover:text-bisat-gold-dark">

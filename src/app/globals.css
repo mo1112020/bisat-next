@@ -175,3 +175,12 @@
 .nav-link-hover:hover {
   color: var(--color-bisat-gold-dark);
 }
+
+/* ── Topbar marquee animation ────────────────────────────────────────────── */
+@keyframes topbar-marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-topbar-marquee {
+  animation: topbar-marquee 22s linear infinite;
+}

@@ -24,7 +24,7 @@ export const About = ({ artisanImage }: AboutProps) => {
 
       {/* ── Header ───────────────────────────────────────────────── */}
       <div className="border-b border-bisat-border">
-        <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 py-14 sm:py-20">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-14 sm:py-20">
           <p className="text-[9px] uppercase tracking-[0.3em] font-semibold text-bisat-black/30 mb-4">Our Heritage</p>
           <h1 className="text-4xl sm:text-5xl font-light text-bisat-black mb-5 leading-tight max-w-xl">
             Weaving Stories Across Borders
@@ -49,7 +49,7 @@ export const About = ({ artisanImage }: AboutProps) => {
 
       {/* ── Mission ───────────────────────────────────────────────── */}
       <section className="bg-bisat-cream border-b border-bisat-border py-14 sm:py-20">
-        <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
           <div className="max-w-2xl mb-12">
             <p className="text-[9px] uppercase tracking-[0.3em] font-semibold text-bisat-black/30 mb-4">Our Purpose</p>
             <h2 className="text-3xl font-light text-bisat-black mb-5 leading-tight">Preserving the Art of the Hand</h2>
@@ -83,7 +83,7 @@ export const About = ({ artisanImage }: AboutProps) => {
 
       {/* ── Artisans ──────────────────────────────────────────────── */}
       <section className="py-14 sm:py-20 border-b border-bisat-border">
-        <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div className="relative aspect-[4/5] overflow-hidden">
               <Image
@@ -124,7 +124,7 @@ export const About = ({ artisanImage }: AboutProps) => {
 
       {/* ── Origin story ──────────────────────────────────────────── */}
       <section className="py-14 sm:py-20 bg-bisat-cream border-b border-bisat-border">
-        <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
           <div className="max-w-2xl mx-auto text-center">
             <p className="text-[9px] uppercase tracking-[0.3em] font-semibold text-bisat-black/30 mb-4">The Beginning</p>
             <h2 className="text-3xl font-light text-bisat-black mb-6 leading-tight">The Origin of Bisāṭ</h2>
@@ -138,7 +138,7 @@ export const About = ({ artisanImage }: AboutProps) => {
 
       {/* ── CTA ───────────────────────────────────────────────────── */}
       <section className="py-12 bg-bisat-ivory">
-        <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div>
             <p className="text-[9px] uppercase tracking-[0.3em] font-semibold text-bisat-black/30 mb-2">Explore the Collection</p>
             <h2 className="text-xl font-light text-bisat-black">Every rug tells a story.</h2>
