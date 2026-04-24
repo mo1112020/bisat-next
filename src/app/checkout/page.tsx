@@ -3,7 +3,7 @@ import { Checkout } from '../../views/Checkout';
 
 export const metadata: Metadata = {
   title: 'Checkout',
-  description: 'Complete your Bisāṭ order securely.',
+  description: 'Complete your Bisatim order securely.',
 };
 
 export default function CheckoutPage() {

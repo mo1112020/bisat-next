@@ -18,7 +18,7 @@ export const About = ({ artisanImage }: AboutProps) => {
     <div className="bg-bisat-ivory min-h-screen">
       <Meta
         title="Our Story"
-        description="Learn about Bisāṭ's journey, our mission to preserve artisanal heritage, and our connection to global weavers."
+        description="Learn about Bisatim's journey, our mission to preserve artisanal heritage, and our connection to global weavers."
       />
       <Schema data={getOrganizationSchema()} />
 
@@ -30,7 +30,7 @@ export const About = ({ artisanImage }: AboutProps) => {
             Weaving Stories Across Borders
           </h1>
           <p className="text-bisat-black/50 text-sm font-light leading-relaxed max-w-lg mb-10">
-            Bisāṭ was born from a simple realization: that a rug is more than just a floor covering. It is a canvas of history, a testament to human patience, and a bridge between cultures.
+            Bisatim was born from a simple realization: that a rug is more than just a floor covering. It is a canvas of history, a testament to human patience, and a bridge between cultures.
           </p>
           <div className="flex items-center gap-12 sm:gap-16 pt-8 border-t border-bisat-border">
             {[
@@ -101,7 +101,7 @@ export const About = ({ artisanImage }: AboutProps) => {
                 Our journey takes us to remote villages in the Atlas Mountains of Morocco, the bustling bazaars of Tabriz, and the quiet artisan workshops of Anatolia.
               </p>
               <p className="text-bisat-black/45 text-sm leading-relaxed font-light italic mb-8">
-                "We don't just buy rugs; we build relationships. By understanding the climate, the sheep, and the local dyes, we ensure that every Bisāṭ piece is an authentic representation of its origin."
+                "We don't just buy rugs; we build relationships. By understanding the climate, the sheep, and the local dyes, we ensure that every Bisatim piece is an authentic representation of its origin."
               </p>
               <div className="grid grid-cols-2 gap-6 pt-8 border-t border-bisat-border">
                 <div className="flex items-center gap-4">
@@ -127,9 +127,9 @@ export const About = ({ artisanImage }: AboutProps) => {
         <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
           <div className="max-w-2xl mx-auto text-center">
             <p className="text-[9px] uppercase tracking-[0.3em] font-semibold text-bisat-black/30 mb-4">The Beginning</p>
-            <h2 className="text-3xl font-light text-bisat-black mb-6 leading-tight">The Origin of Bisāṭ</h2>
+            <h2 className="text-3xl font-light text-bisat-black mb-6 leading-tight">The Origin of Bisatim</h2>
             <p className="text-bisat-black/50 text-sm font-light leading-relaxed italic mb-8">
-              "It started with a single rug found in a small market in Isfahan. The complexity of the knots and the depth of the natural indigo told a story that mass-produced textiles simply couldn't replicate. Bisāṭ was founded to bring those stories to the world."
+              "It started with a single rug found in a small market in Isfahan. The complexity of the knots and the depth of the natural indigo told a story that mass-produced textiles simply couldn't replicate. Bisatim was founded to bring those stories to the world."
             </p>
             <p className="text-[9px] uppercase tracking-[0.4em] font-semibold text-bisat-black/25">Established MMXXIV</p>
           </div>

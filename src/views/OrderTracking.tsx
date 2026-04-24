@@ -118,7 +118,7 @@ export const OrderTracking = () => {
               <div className="bg-white border border-bisat-border p-10">
                 <div className="flex justify-between items-center mb-12">
                   <div>
-                    <h3 className="text-xl font-serif mb-1">Status: {trackingResult.status.charAt(0).toUpperCase() + trackingResult.status.slice(1)}</h3>
+                    <h3 className="text-xl font-sans mb-1">Status: {trackingResult.status.charAt(0).toUpperCase() + trackingResult.status.slice(1)}</h3>
                     <p className="text-xs text-bisat-black/40 uppercase tracking-widest">Order {trackingResult.id}</p>
                   </div>
                   <div className="text-right">
@@ -164,7 +164,7 @@ export const OrderTracking = () => {
                     <MapPin size={20} className="mr-3" />
                     <h4 className="text-xs uppercase tracking-widest font-bold">Current Location</h4>
                   </div>
-                  <p className="text-bisat-black font-serif text-lg">{trackingResult.location}</p>
+                  <p className="text-bisat-black font-sans text-lg">{trackingResult.location}</p>
                 </div>
 
                 <div className="bg-white border border-bisat-border p-8">
@@ -188,7 +188,7 @@ export const OrderTracking = () => {
 
         {/* FAQ Section */}
         <div className="mt-24 text-center">
-          <h2 className="text-2xl font-serif mb-8">Common Questions</h2>
+          <h2 className="text-2xl font-sans mb-8">Common Questions</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
             <div className="p-8 bg-white/50 border border-bisat-border">
               <h4 className="font-bold text-sm mb-2">Where is my order ID?</h4>

@@ -12,7 +12,7 @@ export const Terms = () => {
     <div className="pb-16 bg-bisat-ivory min-h-screen">
       <Meta
         title="Terms & Conditions"
-        description="Terms and conditions governing use of the Bisāṭ online store and purchase of artisanal rugs."
+        description="Terms and conditions governing use of the Bisatim online store and purchase of artisanal rugs."
       />
       <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 pt-6">
         <PageHeader badge={t('terms.badge')} title={t('terms.title')} />
@@ -26,19 +26,19 @@ export const Terms = () => {
             <p>
               {t('terms.intro')}
             </p>
-            <h2 className="text-2xl font-serif text-bisat-black mt-8 mb-4">{t('terms.s1_t')}</h2>
+            <h2 className="text-2xl font-sans text-bisat-black mt-8 mb-4">{t('terms.s1_t')}</h2>
             <p>
               {t('terms.s1_c')}
             </p>
 
-            <h2 className="text-2xl font-serif text-bisat-black mt-8 mb-4">{t('terms.s2_t')}</h2>
+            <h2 className="text-2xl font-sans text-bisat-black mt-8 mb-4">{t('terms.s2_t')}</h2>
             <p>
               {t('terms.s2_c')}
             </p>
 
-            <h2 className="text-2xl font-serif text-bisat-black mt-8 mb-4">{t('terms.s3_t')}</h2>
+            <h2 className="text-2xl font-sans text-bisat-black mt-8 mb-4">{t('terms.s3_t')}</h2>
             <p>
-              {t('terms.s3_c')}<a href="mailto:support@bisat-store.com" className="text-bisat-gold hover:underline">support@bisat-store.com</a>.
+              {t('terms.s3_c')}<a href="mailto:support@bisatim.com" className="text-bisat-gold hover:underline">support@bisatim.com</a>.
             </p>
           </div>
         </motion.div>

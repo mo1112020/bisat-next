@@ -3,7 +3,7 @@ import { Blog } from '@/src/views/Blog';
 
 export const metadata: Metadata = {
   title: 'Articles',
-  description: 'Stories, guides, and useful articles from Bisāṭ.',
+  description: 'Stories, guides, and useful articles from Bisatim.',
 };
 
 export default function ArticlesPage() {

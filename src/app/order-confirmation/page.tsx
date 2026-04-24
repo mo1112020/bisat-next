@@ -3,7 +3,7 @@ import { OrderConfirmation } from '../../views/OrderConfirmation';
 
 export const metadata: Metadata = {
   title: 'Order Confirmed',
-  description: 'Your Bisāṭ order has been placed successfully.',
+  description: 'Your Bisatim order has been placed successfully.',
 };
 
 export default function OrderConfirmationPage() {

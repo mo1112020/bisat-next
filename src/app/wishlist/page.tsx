@@ -3,7 +3,7 @@ import { Wishlist } from '../../views/Wishlist';
 
 export const metadata: Metadata = {
   title: 'Your Wishlist',
-  description: 'Your saved rugs and carpets from Bisāṭ.',
+  description: 'Your saved rugs and carpets from Bisatim.',
 };
 
 export default function WishlistPage() {

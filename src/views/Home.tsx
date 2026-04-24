@@ -94,7 +94,7 @@ export const Home = async () => {
   return (
     <div className="bg-bisat-paper">
       <Meta
-        title="Bisāṭ | Authentic Turkish Rugs & Carpets"
+        title="Bisatim | Authentic Turkish Rugs & Carpets"
         description="Shop our extensive collection of premium vintage, handmade, and modern Turkish rugs."
       />
       <Schema data={getOrganizationSchema()} />
@@ -107,11 +107,11 @@ export const Home = async () => {
       <LifestyleSelector />
 
       {/* ── Intro line ───────────────────────────────────────────────────── */}
-      <section className="border-b border-bisat-black/[0.06] bg-bisat-paper py-14 sm:py-16">
+      <section className="border-b border-bisat-black/[0.06] bg-bisat-paper py-20 sm:py-24">
         <div className={CONTAINER}>
-          <div className="mx-auto max-w-[720px] text-center">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.34em] text-bisat-black/38">Bisāṭ interiors</p>
-            <p className="mt-5 font-rh text-[clamp(1.75rem,4.2vw,2.65rem)] font-light leading-snug tracking-[-0.02em] text-bisat-black">
+          <div className="mx-auto max-w-[680px] text-center">
+            <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-bisat-black/38">Bisāṭim interiors</p>
+            <p className="mt-6 font-rh text-[clamp(1.85rem,4vw,2.75rem)] font-light leading-[1.2] tracking-[-0.02em] text-bisat-black">
               Colour and fibre, brought into everyday rooms — the way you actually live.
             </p>
           </div>
@@ -124,7 +124,7 @@ export const Home = async () => {
           <div className="grid grid-cols-1 lg:grid-cols-2">
             <Link
               href="/size-guide"
-              className="group relative flex min-h-[280px] flex-col justify-end overflow-hidden border-b border-bisat-black/[0.06] p-8 sm:min-h-[340px] sm:p-12 lg:border-b-0 lg:border-r"
+              className="group relative flex min-h-[380px] flex-col justify-end overflow-hidden p-8 sm:p-10 lg:min-h-[520px]"
             >
               <Image
                 src={siteImgs.promo_split}
@@ -135,8 +135,8 @@ export const Home = async () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent" />
               <div className="relative z-10 max-w-md">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-white/55">Guide</p>
-                <h2 className="mt-3 font-rh text-4xl font-light tracking-[-0.02em] text-white sm:text-[2.75rem]">
+                <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-white/55">Guide</p>
+                <h2 className="mt-3 font-sans text-[1.9rem] font-normal tracking-[-0.025em] leading-[1.2] text-white sm:text-[2.4rem]">
                   Find the right rug for your space
                 </h2>
                 <span className="mt-6 inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.24em] text-white">
@@ -145,9 +145,9 @@ export const Home = async () => {
                 </span>
               </div>
             </Link>
-            <div className="flex flex-col justify-center bg-bisat-paper px-5 py-12 sm:px-8 sm:py-16 lg:px-12">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-bisat-black/38">Styling</p>
-              <h2 className="mt-4 font-rh text-4xl font-light tracking-[-0.02em] text-bisat-black sm:text-[2.65rem]">
+            <div className="flex flex-col justify-center px-5 py-14 sm:px-8 sm:py-20 lg:px-12 lg:py-24">
+              <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-bisat-black/38">Styling</p>
+              <h2 className="mt-4 font-sans text-[1.9rem] font-normal tracking-[-0.025em] leading-[1.2] text-bisat-black sm:text-[2.4rem]">
                 Virtual placement and room ideas
               </h2>
               <p className="mt-5 max-w-md text-[15px] leading-7 text-bisat-black/52">
@@ -168,12 +168,12 @@ export const Home = async () => {
       </section>
 
       {/* ── NEW RELEASE — collection spotlight ───────────────────────────── */}
-      <section className="border-b border-bisat-black/[0.06] bg-white py-14 sm:py-20">
+      <section className="border-b border-bisat-black/[0.06] bg-white py-20 sm:py-28">
         <div className={CONTAINER}>
           <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
             <div>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.32em] text-bisat-black/38">New release</p>
-              <h2 className="mt-3 font-rh text-4xl font-light tracking-[-0.02em] text-bisat-black sm:text-5xl">
+              <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-bisat-black/38">New release</p>
+              <h2 className="mt-3 font-sans text-[2rem] font-normal tracking-[-0.025em] leading-[1.2] text-bisat-black sm:text-[2.5rem]">
                 Bedroom collection
               </h2>
               <p className="mt-3 max-w-lg text-[15px] text-bisat-black/50">
@@ -205,7 +205,7 @@ export const Home = async () => {
 
       {/* ── Dual editorial tiles ─────────────────────────────────────────── */}
       <section className="border-b border-bisat-black/[0.06] bg-bisat-paper">
-        <div className="mx-auto max-w-[1400px]">
+        <div className={CONTAINER}>
           <div className="grid grid-cols-1 md:grid-cols-2">
             {[
               {
@@ -231,8 +231,8 @@ export const Home = async () => {
                 <Image src={tile.img} alt="" fill className="object-cover transition-transform duration-[1.1s] ease-out group-hover:scale-[1.04]" sizes="(max-width: 768px) 100vw, 50vw" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/72 via-black/2 to-transparent" />
                 <div className="relative z-10 max-w-md">
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-white/55">{tile.kicker}</p>
-                  <h2 className="mt-3 font-rh text-[2.25rem] font-light tracking-[-0.02em] text-white sm:text-5xl">{tile.title}</h2>
+                  <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-white/55">{tile.kicker}</p>
+                  <h2 className="mt-3 font-sans text-[1.85rem] font-normal tracking-[-0.025em] leading-[1.2] text-white sm:text-[2.4rem]">{tile.title}</h2>
                   <p className="mt-4 text-[14px] leading-relaxed text-white/75">{tile.sub}</p>
                   <span className="mt-6 inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.24em] text-white">
                     View collection
@@ -246,12 +246,12 @@ export const Home = async () => {
       </section>
 
       {/* ── NEW ARRIVAL — product strip ──────────────────────────────────── */}
-      <section className="border-b border-bisat-black/[0.06] bg-bisat-paper py-14 sm:py-20">
+      <section className="border-b border-bisat-black/[0.06] bg-bisat-paper py-20 sm:py-28">
         <div className={CONTAINER}>
           <div className="mb-10 flex items-end justify-between gap-4">
             <div>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.32em] text-bisat-black/38">New arrival</p>
-              <h2 className="mt-3 font-rh text-4xl font-light tracking-[-0.02em] text-bisat-black sm:text-5xl">
+              <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-bisat-black/38">New arrival</p>
+              <h2 className="mt-3 font-sans text-[2rem] font-normal tracking-[-0.025em] leading-[1.2] text-bisat-black sm:text-[2.5rem]">
                 Latest pieces
               </h2>
             </div>
@@ -282,12 +282,12 @@ export const Home = async () => {
       </section>
 
       {/* ── Reviews ──────────────────────────────────────────────────────── */}
-      <section className="border-b border-bisat-black/[0.06] bg-white py-14 sm:py-20">
+      <section className="border-b border-bisat-black/[0.06] bg-white py-20 sm:py-28">
         <div className={CONTAINER}>
           <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.32em] text-bisat-black/38">Reviews</p>
-              <h2 className="mt-3 font-rh text-4xl font-light tracking-[-0.02em] text-bisat-black sm:text-5xl">
+              <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-bisat-black/38">Reviews</p>
+              <h2 className="mt-3 font-sans text-[2rem] font-normal tracking-[-0.025em] leading-[1.2] text-bisat-black sm:text-[2.5rem]">
                 Let customers speak for us
               </h2>
             </div>
@@ -335,10 +335,10 @@ export const Home = async () => {
       {/* ── Room visualizer CTA ───────────────────────────────────────────── */}
       <section className="border-b border-bisat-black/[0.06] bg-bisat-black text-white">
         <div className="mx-auto max-w-[1400px]">
-          <div className="grid grid-cols-1 gap-0 lg:grid-cols-[1fr_0.9fr]">
+          <div className="grid grid-cols-1 lg:grid-cols-2">
             <div className="flex flex-col justify-center px-5 py-14 sm:px-8 sm:py-20 lg:px-12 lg:py-24">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.32em] text-white/45">Preview</p>
-              <h2 className="mt-4 font-rh text-4xl font-light leading-tight tracking-[-0.02em] sm:text-5xl">
+              <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-white/45">Preview</p>
+              <h2 className="mt-4 font-sans text-[2rem] font-normal tracking-[-0.025em] leading-[1.2] sm:text-[2.5rem]">
                 How will this piece feel in your room?
               </h2>
               <p className="mt-6 max-w-md text-[15px] leading-7 text-white/58">
@@ -346,15 +346,15 @@ export const Home = async () => {
               </p>
               <Link
                 href="/pages/virtual-coordinate"
-                className="mt-10 inline-flex w-fit items-center gap-2 border border-white bg-white px-8 py-3.5 text-[10px] font-semibold uppercase tracking-[0.26em] text-bisat-black transition-colors hover:bg-transparent hover:text-white"
+                className="mt-10 inline-flex w-fit items-center gap-2 border border-white bg-white px-8 py-3.5 text-[10px] font-semibold uppercase tracking-[0.26em] text-bisat-black"
               >
                 Try it
                 <ArrowRight size={12} />
               </Link>
             </div>
-            <div className="relative min-h-[280px] lg:min-h-0">
-              <Image src={siteImgs.hero} alt="" fill className="object-cover opacity-90" sizes="(max-width: 1024px) 100vw, 45vw" />
-              <div className="absolute inset-0 bg-gradient-to-r from-bisat-black/80 to-transparent lg:bg-gradient-to-t" />
+            <div className="relative min-h-[320px] lg:min-h-0">
+              <Image src={siteImgs.hero} alt="" fill className="object-cover opacity-90" sizes="(max-width: 1024px) 100vw, 50vw" />
+              <div className="absolute inset-0 bg-gradient-to-t from-bisat-black/60 to-transparent lg:bg-gradient-to-l" />
             </div>
           </div>
         </div>
@@ -363,13 +363,13 @@ export const Home = async () => {
       {/* ── About split ───────────────────────────────────────────────────── */}
       <section className="border-b border-bisat-black/[0.06] bg-white">
         <div className="mx-auto max-w-[1400px]">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_0.95fr]">
-            <div className="relative min-h-[320px] overflow-hidden bg-bisat-cream lg:min-h-[520px]">
+          <div className="grid grid-cols-1 lg:grid-cols-2">
+            <div className="relative min-h-[380px] overflow-hidden bg-bisat-cream lg:min-h-0">
               <Image src={siteImgs.promo_split} alt="" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
             </div>
-            <div className="flex flex-col justify-center border-bisat-black/[0.06] px-5 py-12 sm:px-8 lg:px-12 lg:border-l lg:py-20">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.32em] text-bisat-black/38">About Bisāṭ</p>
-              <h2 className="mt-4 font-rh text-4xl font-light tracking-[-0.02em] text-bisat-black sm:text-5xl">
+            <div className="flex flex-col justify-center px-5 py-14 sm:px-8 sm:py-20 lg:px-12 lg:py-24">
+              <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-bisat-black/38">About Bisatim</p>
+              <h2 className="mt-4 font-sans text-[2rem] font-normal tracking-[-0.025em] leading-[1.2] text-bisat-black sm:text-[2.5rem]">
                 Heritage craft, edited for contemporary rooms.
               </h2>
               <p className="mt-6 max-w-xl text-[15px] leading-7 text-bisat-black/52">
@@ -393,12 +393,12 @@ export const Home = async () => {
 
       {/* ── Blog ─────────────────────────────────────────────────────────── */}
       {blogPosts.length > 0 && (
-        <section className="border-b border-bisat-black/[0.06] bg-bisat-paper py-14 sm:py-20">
+        <section className="border-b border-bisat-black/[0.06] bg-bisat-paper py-20 sm:py-28">
           <div className={CONTAINER}>
             <div className="mb-10 flex items-end justify-between gap-4">
               <div>
-                <p className="text-[10px] font-semibold uppercase tracking-[0.32em] text-bisat-black/38">Journal</p>
-                <h2 className="mt-3 font-rh text-4xl font-light tracking-[-0.02em] text-bisat-black sm:text-5xl">
+                <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-bisat-black/38">Journal</p>
+                <h2 className="mt-3 font-sans text-[2rem] font-normal tracking-[-0.025em] leading-[1.2] text-bisat-black sm:text-[2.5rem]">
                   Stories and guides
                 </h2>
               </div>
@@ -425,7 +425,7 @@ export const Home = async () => {
                     </Link>
                     <div className="border-t border-bisat-black/[0.06] px-5 py-5">
                       <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-bisat-black/35">{post.category}</p>
-                      <h3 className="mt-3 font-rh text-2xl font-light tracking-[-0.02em] text-bisat-black">
+                      <h3 className="mt-3 font-sans text-[1.15rem] font-normal tracking-[-0.02em] text-bisat-black">
                         <Link href={`/blog/${post.id}`}>{post.title}</Link>
                       </h3>
                       <p className="mt-3 text-[14px] leading-6 text-bisat-black/50 line-clamp-3">{post.excerpt}</p>
@@ -450,8 +450,8 @@ export const Home = async () => {
         <div className={CONTAINER}>
           <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
             <div>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.32em] text-bisat-black/38">Instagram</p>
-              <h2 className="mt-3 font-rh text-4xl font-light tracking-[-0.02em] text-bisat-black">Follow the edit</h2>
+              <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-bisat-black/38">Instagram</p>
+              <h2 className="mt-3 font-sans text-[2rem] font-normal tracking-[-0.025em] leading-[1.2] text-bisat-black">Follow the edit</h2>
               <p className="mt-4 max-w-md text-[15px] leading-7 text-bisat-black/52">
                 Room installs, sourcing trips, and weekly drops from the archive.
               </p>
@@ -466,8 +466,8 @@ export const Home = async () => {
               </a>
             </div>
             <div>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.32em] text-bisat-black/38">Email</p>
-              <h2 className="mt-3 font-rh text-4xl font-light tracking-[-0.02em] text-bisat-black">Private previews</h2>
+              <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-bisat-black/38">Email</p>
+              <h2 className="mt-3 font-sans text-[2rem] font-normal tracking-[-0.025em] leading-[1.2] text-bisat-black">Private previews</h2>
               <p className="mt-4 max-w-md text-[15px] leading-7 text-bisat-black/52">
                 First access to arrivals and one-of-a-kind pieces.
               </p>

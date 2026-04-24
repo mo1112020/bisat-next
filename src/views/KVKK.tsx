@@ -12,7 +12,7 @@ export const KVKK = () => {
     <div className="pb-16 bg-bisat-ivory min-h-screen">
       <Meta
         title="KVKK Aydınlatma Metni"
-        description="Kişisel verilerin korunması kanunu kapsamında Bisāṭ aydınlatma metni."
+        description="Kişisel verilerin korunması kanunu kapsamında Bisatim aydınlatma metni."
         robots="noindex, follow"
       />
       <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 pt-6">
@@ -27,24 +27,24 @@ export const KVKK = () => {
             <p>
               {t('kvkk.intro')}
             </p>
-            <h2 className="text-2xl font-serif text-bisat-black mt-8 mb-4">{t('kvkk.s1_t')}</h2>
+            <h2 className="text-2xl font-sans text-bisat-black mt-8 mb-4">{t('kvkk.s1_t')}</h2>
             <p>
               {t('kvkk.s1_c')}
             </p>
 
-            <h2 className="text-2xl font-serif text-bisat-black mt-8 mb-4">{t('kvkk.s2_t')}</h2>
+            <h2 className="text-2xl font-sans text-bisat-black mt-8 mb-4">{t('kvkk.s2_t')}</h2>
             <p>
               {t('kvkk.s2_c')}
             </p>
 
-            <h2 className="text-2xl font-serif text-bisat-black mt-8 mb-4">{t('kvkk.s3_t')}</h2>
+            <h2 className="text-2xl font-sans text-bisat-black mt-8 mb-4">{t('kvkk.s3_t')}</h2>
             <p>
               {t('kvkk.s3_c')}
             </p>
 
-            <h2 className="text-2xl font-serif text-bisat-black mt-8 mb-4">{t('kvkk.s4_t')}</h2>
+            <h2 className="text-2xl font-sans text-bisat-black mt-8 mb-4">{t('kvkk.s4_t')}</h2>
             <p>
-              {t('kvkk.s4_c')}<a href="mailto:privacy@bisat-store.com" className="text-bisat-gold hover:underline">privacy@bisat-store.com</a>.
+              {t('kvkk.s4_c')}<a href="mailto:privacy@bisatim.com" className="text-bisat-gold hover:underline">privacy@bisatim.com</a>.
             </p>
           </div>
         </motion.div>

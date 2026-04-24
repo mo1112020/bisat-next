@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Instagram, Mail, Check, ArrowRight } from 'lucide-react';
+import { Instagram, Check, ArrowRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 const PinterestIcon = () => (
@@ -28,9 +28,9 @@ export const Footer = () => {
     { label: 'Kilim',         href: '/shop?category=Kilim' },
     { label: 'Machine Woven', href: '/shop?category=Machine' },
   ]);
-  const [instagramUrl, setInstagramUrl] = useState('https://www.instagram.com/bisat.store/');
-  const [pinterestUrl, setPinterestUrl] = useState('https://tr.pinterest.com/bisattstore/');
-  const [tiktokUrl, setTiktokUrl]       = useState('https://www.tiktok.com/@bisattstore');
+  const [instagramUrl, setInstagramUrl] = useState('https://www.instagram.com/bisatim_/');
+  const [pinterestUrl, setPinterestUrl] = useState('https://tr.pinterest.com/bisatim_/');
+  const [tiktokUrl, setTiktokUrl]       = useState('https://www.tiktok.com/@bisatim_');
 
   useEffect(() => {
     fetch('/api/store-config')
@@ -93,43 +93,41 @@ export const Footer = () => {
         <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-12 sm:py-16">
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
             <div className="max-w-md">
-              <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.32em] text-bisat-black/38">Newsletter</p>
-              <h2 className="font-serif text-3xl font-light leading-snug text-bisat-black mb-2">
-                Receive new arrivals, styling notes, and private collection drops.
+              <p className="mb-4 text-[11px] font-medium uppercase tracking-[0.2em] text-bisat-black/38">Newsletter</p>
+              <h2 className="font-sans text-[1.6rem] font-normal leading-snug tracking-[-0.02em] text-bisat-black mb-3">
+                Receive new arrivals, styling notes, and private drops.
               </h2>
-              <p className="text-sm leading-relaxed text-bisat-black/52" suppressHydrationWarning>
-                Join our list for exclusive previews of new arrivals and artisanal stories.
+              <p className="text-[14px] leading-relaxed text-bisat-black/52" suppressHydrationWarning>
+                Join our list for exclusive previews and artisanal stories.
               </p>
             </div>
 
             <div className="w-full lg:w-auto lg:min-w-[380px]">
               {subscribed ? (
-                <div className="flex items-center gap-3 border border-bisat-border bg-white px-6 py-5">
-                  <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center border border-bisat-black/15">
-                    <Check size={12} className="text-bisat-warm-gray" />
-                  </span>
+                <div className="flex items-center gap-3 border-b border-bisat-black/20 py-4">
+                  <Check size={13} className="text-bisat-warm-gray flex-shrink-0" />
                   <div>
-                    <p className="text-sm font-medium text-bisat-black">You're in.</p>
-                    <p className="text-xs text-bisat-black/45">Watch your inbox for something special.</p>
+                    <p className="text-[13px] font-medium text-bisat-black">You're in.</p>
+                    <p className="text-[12px] text-bisat-black/45">Watch your inbox for something special.</p>
                   </div>
                 </div>
               ) : (
-                <form onSubmit={handleSubscribe} className="flex gap-0 overflow-hidden border border-bisat-border bg-white">
+                <form onSubmit={handleSubscribe} className="flex items-end gap-0 border-b border-bisat-black/25">
                   <input
                     type="email"
                     required
                     value={email}
                     onChange={e => setEmail(e.target.value)}
-                    placeholder="Email Address"
+                    placeholder="Email address"
                     suppressHydrationWarning
-                    className="min-w-0 flex-1 bg-transparent px-5 py-3.5 text-sm text-bisat-black placeholder:text-bisat-black/30 focus:outline-none"
+                    className="min-w-0 flex-1 bg-transparent pb-3 text-[14px] text-bisat-black placeholder:text-bisat-black/30 focus:outline-none"
                   />
                   <button
                     type="submit"
-                    className="flex flex-shrink-0 items-center gap-2 border-l border-bisat-border px-6 py-3.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-bisat-black transition-colors hover:bg-bisat-cream whitespace-nowrap"
+                    className="flex flex-shrink-0 items-center gap-1.5 pb-3 text-[11px] font-medium uppercase tracking-[0.18em] text-bisat-black whitespace-nowrap"
                   >
                     Subscribe
-                    <Mail size={11} />
+                    <ArrowRight size={11} />
                   </button>
                 </form>
               )}
@@ -141,7 +139,7 @@ export const Footer = () => {
       <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-14 sm:py-20">
         <div className="grid grid-cols-2 md:grid-cols-12 gap-10 sm:gap-12 mb-14 sm:mb-20">
           <div className="col-span-2 md:col-span-4">
-            <Link href="/" className="mb-4 block font-serif text-[1.9rem] font-light tracking-[-0.05em] text-bisat-black transition-colors duration-200 hover:text-bisat-gold-dark">
+            <Link href="/" className="mb-4 block font-rh text-[1.9rem] font-light tracking-[-0.03em] text-bisat-black">
               Bisāṭim
             </Link>
             <p className="mb-7 max-w-[260px] text-sm leading-relaxed text-bisat-black/52" suppressHydrationWarning>
@@ -156,7 +154,7 @@ export const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={s.label}
-                  className="flex h-9 w-9 items-center justify-center border border-bisat-border bg-white text-bisat-black/40 transition-colors duration-200 hover:bg-bisat-black hover:text-white"
+                  className="flex h-9 w-9 items-center justify-center border border-bisat-border bg-white text-bisat-black"
                 >
                   {s.icon}
                 </a>
@@ -165,7 +163,7 @@ export const Footer = () => {
           </div>
 
           <div className="col-span-1 md:col-span-2 md:col-start-6">
-            <h4 className="mb-5 text-[10px] font-semibold uppercase tracking-[0.28em] text-bisat-black/38">Product</h4>
+            <h4 className="mb-5 text-[11px] font-medium uppercase tracking-[0.2em] text-bisat-black">Product</h4>
             <ul className="space-y-3">
               {[
                 { label: 'All Products', href: '/collections/rug' },
@@ -175,7 +173,7 @@ export const Footer = () => {
                 { label: 'Custom Rugs', href: '/collections/custom-rugs' },
               ].map(link => (
                 <li key={link.label}>
-                  <Link href={link.href} className="inline-block text-[13px] text-bisat-black/62 transition-colors duration-150 hover:text-bisat-black">
+                  <Link href={link.href} className="inline-block text-[13px] text-bisat-black">
                     {link.label}
                   </Link>
                 </li>
@@ -184,11 +182,11 @@ export const Footer = () => {
           </div>
 
           <div className="col-span-1 md:col-span-2">
-            <h4 className="mb-5 text-[10px] font-semibold uppercase tracking-[0.28em] text-bisat-black/38">Service</h4>
+            <h4 className="mb-5 text-[11px] font-medium uppercase tracking-[0.2em] text-bisat-black">Service</h4>
             <ul className="space-y-3">
               {companyLinks.map(link => (
                 <li key={link.label}>
-                  <Link href={link.href} className="inline-block text-[13px] text-bisat-black/62 transition-colors duration-150 hover:text-bisat-black">
+                  <Link href={link.href} className="inline-block text-[13px] text-bisat-black">
                     {link.label}
                   </Link>
                 </li>
@@ -197,11 +195,11 @@ export const Footer = () => {
           </div>
 
           <div className="col-span-1 md:col-span-2">
-            <h4 className="mb-5 text-[10px] font-semibold uppercase tracking-[0.28em] text-bisat-black/38">Information</h4>
+            <h4 className="mb-5 text-[11px] font-medium uppercase tracking-[0.2em] text-bisat-black">Information</h4>
             <ul className="space-y-3">
               {supportLinks.map(link => (
                 <li key={link.label}>
-                  <Link href={link.href} className="inline-block text-[13px] text-bisat-black/62 transition-colors duration-150 hover:text-bisat-black">
+                  <Link href={link.href} className="inline-block text-[13px] text-bisat-black">
                     {link.label}
                   </Link>
                 </li>
@@ -223,10 +221,10 @@ export const Footer = () => {
           </p>
           <Link
             href="/collections/rug"
-            className="group flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-bisat-black/42 transition-colors duration-300 hover:text-bisat-black"
+            className="flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.18em] text-bisat-black"
           >
             Browse All Products
-            <ArrowRight size={11} className="group-hover:translate-x-0.5 transition-transform" />
+            <ArrowRight size={11} />
           </Link>
         </div>
       </div>

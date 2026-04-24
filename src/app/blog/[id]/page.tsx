@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!post) {
     return { title: 'Article Not Found' };
   }
-  const title = `${post.title} | Bisāṭ Journal`;
+  const title = `${post.title} | Bisatim Journal`;
   const description = post.metaDescription || post.excerpt?.slice(0, 160) || '';
   return {
     title,

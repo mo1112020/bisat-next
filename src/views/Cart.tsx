@@ -21,7 +21,7 @@ export const Cart = () => {
         </p>
         <Link
           href="/shop"
-          className="bg-bisat-black text-white px-10 py-3.5 text-[10px] uppercase tracking-widest font-semibold hover:bg-bisat-charcoal transition-colors"
+          className="bg-bisat-black text-white px-10 py-3.5 text-[11px] uppercase tracking-[0.18em] font-medium hover:bg-bisat-charcoal transition-colors"
         >
           {t('cart.explore')}
         </Link>
@@ -134,7 +134,7 @@ export const Cart = () => {
 
               <Link
                 href="/checkout"
-                className="w-full bg-bisat-black text-white py-4 text-[10px] uppercase tracking-widest font-semibold hover:bg-bisat-charcoal transition-colors flex items-center justify-center gap-2 group"
+                className="w-full bg-bisat-black text-white py-4 text-[11px] uppercase tracking-[0.18em] font-medium hover:bg-bisat-charcoal transition-colors flex items-center justify-center gap-2 group"
               >
                 {t('cart.checkout')}
                 <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />

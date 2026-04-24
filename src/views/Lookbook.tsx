@@ -75,8 +75,8 @@ export const Lookbook = () => {
   return (
     <div className="bg-bisat-ivory min-h-screen">
       <Meta
-        title="Room Ideas & Lookbook | Bisāṭ"
-        description="Find the perfect rug for every room. Browse room inspiration, styling guides, and curated looks from Bisāṭ."
+        title="Room Ideas & Lookbook | Bisatim"
+        description="Find the perfect rug for every room. Browse room inspiration, styling guides, and curated looks from Bisatim."
       />
 
       {/* ── Header ───────────────────────────────────────────────── */}

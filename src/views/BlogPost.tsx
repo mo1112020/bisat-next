@@ -22,7 +22,7 @@ export const BlogPost = () => {
   if (loading) {
     return (
       <div className="pb-16 text-center pt-32">
-        <p className="text-bisat-black/30 text-lg font-serif">Loading…</p>
+        <p className="text-bisat-black/30 text-lg font-sans">Loading…</p>
       </div>
     );
   }
@@ -30,7 +30,7 @@ export const BlogPost = () => {
   if (!post) {
     return (
       <div className="pb-16 text-center">
-        <h1 className="text-4xl font-serif">Story not found</h1>
+        <h1 className="text-4xl font-sans">Story not found</h1>
         <Link href="/blog" className="text-bisat-gold mt-4 inline-block">Return to Journal</Link>
       </div>
     );
@@ -39,7 +39,7 @@ export const BlogPost = () => {
   return (
     <div className="pb-32 bg-bisat-ivory min-h-screen">
       <Meta
-        title={`${post.title} | The Journal | Bisāṭ`}
+        title={`${post.title} | The Journal | Bisatim`}
         description={post.metaDescription || post.excerpt}
         image={post.image}
         type="article"
@@ -74,7 +74,7 @@ export const BlogPost = () => {
               <span className="text-bisat-gold uppercase tracking-[0.4em] text-[10px] font-bold mb-8 block">
                 {post.category}
               </span>
-              <h1 className="text-5xl md:text-8xl font-serif text-bisat-ivory leading-[0.9] mb-12 tracking-tight">
+              <h1 className="text-5xl md:text-8xl font-sans text-bisat-ivory leading-[0.9] mb-12 tracking-tight">
                 {post.title}
               </h1>
 
@@ -131,20 +131,20 @@ export const BlogPost = () => {
               className="prose prose-brand max-w-none"
             >
               <div
-                className="text-bisat-black/90 text-xl leading-[1.8] space-y-12 font-light first-letter:text-7xl first-letter:font-serif first-letter:mr-4 first-letter:float-left first-letter:text-bisat-gold"
+                className="text-bisat-black/90 text-xl leading-[1.8] space-y-12 font-light first-letter:text-7xl first-letter:font-sans first-letter:mr-4 first-letter:float-left first-letter:text-bisat-gold"
                 dangerouslySetInnerHTML={{ __html: post.content }}
               />
             </motion.div>
 
             {/* Author Bio */}
             <div className="mt-24 pt-16 border-t border-bisat-black/5 flex items-center space-x-8">
-              <div className="w-20 h-20 rounded-full bg-bisat-gold/10 flex items-center justify-center text-bisat-gold font-serif text-3xl">
+              <div className="w-20 h-20 rounded-full bg-bisat-gold/10 flex items-center justify-center text-bisat-gold font-sans text-3xl">
                 {post.author[0]}
               </div>
               <div>
                 <span className="text-[10px] uppercase tracking-[0.2em] text-bisat-black/60 font-bold block mb-2">Written By</span>
-                <h4 className="text-2xl font-serif">{post.author}</h4>
-                <p className="text-base text-bisat-black/60 mt-2 font-light">Heritage specialist and contributor to the Bisāṭ journal.</p>
+                <h4 className="text-2xl font-sans">{post.author}</h4>
+                <p className="text-base text-bisat-black/60 mt-2 font-light">Heritage specialist and contributor to the Bisatim journal.</p>
               </div>
             </div>
           </main>

@@ -17,7 +17,7 @@ const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? '';
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? '';
 
 if (!supabaseUrl || !supabaseAnonKey) {
-  console.warn('[Bisāṭ] Supabase env vars missing — check .env.local');
+  console.warn('[Bisatim] Supabase env vars missing — check .env.local');
 }
 
 const globalForSupabase = globalThis as unknown as { supabase: SupabaseClient };

@@ -11,7 +11,7 @@ export const Shipping = () => {
     <div className="pb-16 bg-bisat-cream min-h-screen">
       <Meta
         title="Global Shipping"
-        description="Bisāṭ ships worldwide. Learn about our delivery timelines, packaging, and shipping policy for handmade rugs."
+        description="Bisatim ships worldwide. Learn about our delivery timelines, packaging, and shipping policy for handmade rugs."
       />
 
       {/* Hero */}
@@ -57,7 +57,7 @@ export const Shipping = () => {
               className="bg-white border border-bisat-border p-10"
             >
               <item.icon size={28} strokeWidth={1.5} className="text-bisat-gold mb-6" />
-              <h3 className="text-xl font-serif mb-3 text-bisat-black">{item.title}</h3>
+              <h3 className="text-xl font-sans mb-3 text-bisat-black">{item.title}</h3>
               <p className="text-bisat-black/60 text-sm leading-relaxed font-light">{item.body}</p>
             </motion.div>
           ))}
@@ -67,7 +67,7 @@ export const Shipping = () => {
       {/* Policy Details */}
       <section className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 mb-24">
         <div className="bg-white border border-bisat-border p-8 md:p-12">
-          <h2 className="text-3xl font-serif mb-8 text-bisat-black">Shipping Policy</h2>
+          <h2 className="text-3xl font-sans mb-8 text-bisat-black">Shipping Policy</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-bisat-black/60 leading-relaxed font-light">
             <div className="space-y-6">
               <div>

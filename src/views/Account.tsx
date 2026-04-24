@@ -25,7 +25,7 @@ export const Account = () => {
 
   return (
     <div className="pb-16 bg-bisat-cream min-h-screen">
-      <Meta title="My Account" description="Manage your Bisāṭ account, orders, and preferences." />
+      <Meta title="My Account" description="Manage your Bisatim account, orders, and preferences." />
 
       <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 pt-6">
         <PageHeader
@@ -42,7 +42,7 @@ export const Account = () => {
               <div className="w-20 h-20 bg-bisat-black flex items-center justify-center mx-auto mb-4">
                 <User size={32} className="text-bisat-cream" strokeWidth={1.5} />
               </div>
-              <h3 className="font-serif text-lg">Leila Arslan</h3>
+              <h3 className="font-sans text-lg">Leila Arslan</h3>
               <p className="text-xs text-bisat-black/40 mt-1">Member since 2025</p>
             </div>
 
@@ -90,7 +90,7 @@ export const Account = () => {
                     ].map(({ label, value, icon: Icon }) => (
                       <div key={label} className="bg-white border border-bisat-border p-8">
                         <Icon size={20} className="text-bisat-gold mb-4" />
-                        <p className="text-3xl font-serif mb-1">{value}</p>
+                        <p className="text-3xl font-sans mb-1">{value}</p>
                         <p className="text-xs text-bisat-black/40 uppercase tracking-widest">{label}</p>
                       </div>
                     ))}
@@ -99,7 +99,7 @@ export const Account = () => {
                   {/* Recent Order */}
                   <div className="bg-white border border-bisat-border p-8">
                     <div className="flex items-center justify-between mb-6">
-                      <h3 className="font-serif text-xl">Recent Order</h3>
+                      <h3 className="font-sans text-xl">Recent Order</h3>
                       <button onClick={() => setActiveTab('Orders')} className="text-xs uppercase tracking-widest font-bold text-bisat-gold flex items-center gap-2 hover:gap-3 transition-all">
                         View All <ArrowRight size={14} />
                       </button>
@@ -108,7 +108,7 @@ export const Account = () => {
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                         <div>
                           <p className="text-xs text-bisat-black/40 uppercase tracking-widest mb-1">{DUMMY_ORDERS[0].id}</p>
-                          <p className="font-serif">{DUMMY_ORDERS[0].items.join(', ')}</p>
+                          <p className="font-sans">{DUMMY_ORDERS[0].items.join(', ')}</p>
                           <p className="text-xs text-bisat-black/40 mt-1">{DUMMY_ORDERS[0].date}</p>
                         </div>
                         <div className="flex items-center gap-4">
@@ -151,7 +151,7 @@ export const Account = () => {
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                         <div>
                           <p className="text-xs text-bisat-black/40 uppercase tracking-widest mb-1">{order.id} · {order.date}</p>
-                          <p className="font-serif text-lg">{order.items.join(', ')}</p>
+                          <p className="font-sans text-lg">{order.items.join(', ')}</p>
                           <p className="text-sm text-bisat-black/60 mt-1">{order.total}</p>
                         </div>
                         <div className="flex items-center gap-4">
@@ -178,7 +178,7 @@ export const Account = () => {
                           <MapPin size={18} className="text-bisat-gold" />
                           <span className="text-xs uppercase tracking-widest font-bold">Default Address</span>
                         </div>
-                        <p className="font-serif text-lg">Leila Arslan</p>
+                        <p className="font-sans text-lg">Leila Arslan</p>
                         <p className="text-sm text-bisat-black/60 mt-1 leading-relaxed">
                           14 Bosphorus Avenue, Apt 3B<br />
                           Beşiktaş, Istanbul 34353<br />
@@ -200,7 +200,7 @@ export const Account = () => {
               {activeTab === 'Settings' && (
                 <div className="space-y-4">
                   <div className="bg-white border border-bisat-border p-8">
-                    <h3 className="font-serif text-xl mb-6">Personal Information</h3>
+                    <h3 className="font-sans text-xl mb-6">Personal Information</h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       {[
                         { label: 'First Name', value: 'Leila', type: 'text' },
@@ -224,7 +224,7 @@ export const Account = () => {
                   </div>
 
                   <div className="bg-white border border-bisat-border p-8">
-                    <h3 className="font-serif text-xl mb-6">Notifications</h3>
+                    <h3 className="font-sans text-xl mb-6">Notifications</h3>
                     {['Order updates', 'New arrivals', 'Exclusive offers'].map((item) => (
                       <div key={item} className="flex items-center justify-between py-3 border-b border-bisat-black/5 last:border-0">
                         <span className="text-sm">{item}</span>

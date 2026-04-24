@@ -12,7 +12,7 @@ export const Privacy = () => {
     <div className="pb-16 bg-bisat-ivory min-h-screen">
       <Meta
         title="Privacy Policy"
-        description="Bisāṭ's privacy policy outlining how we collect, use and protect your personal data."
+        description="Bisatim's privacy policy outlining how we collect, use and protect your personal data."
       />
       <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 pt-6">
         <PageHeader badge={t('privacy.badge')} title={t('privacy.title')} />
@@ -26,19 +26,19 @@ export const Privacy = () => {
             <p>
               {t('privacy.intro')}
             </p>
-            <h2 className="text-2xl font-serif text-bisat-black mt-8 mb-4">{t('privacy.s1_t')}</h2>
+            <h2 className="text-2xl font-sans text-bisat-black mt-8 mb-4">{t('privacy.s1_t')}</h2>
             <p>
               {t('privacy.s1_c')}
             </p>
 
-            <h2 className="text-2xl font-serif text-bisat-black mt-8 mb-4">{t('privacy.s2_t')}</h2>
+            <h2 className="text-2xl font-sans text-bisat-black mt-8 mb-4">{t('privacy.s2_t')}</h2>
             <p>
               {t('privacy.s2_c')}
             </p>
 
-            <h2 className="text-2xl font-serif text-bisat-black mt-8 mb-4">{t('privacy.s3_t')}</h2>
+            <h2 className="text-2xl font-sans text-bisat-black mt-8 mb-4">{t('privacy.s3_t')}</h2>
             <p>
-              {t('privacy.s3_c')}<a href="mailto:privacy@bisat-store.com" className="text-bisat-gold hover:underline">privacy@bisat-store.com</a>.
+              {t('privacy.s3_c')}<a href="mailto:privacy@bisatim.com" className="text-bisat-gold hover:underline">privacy@bisatim.com</a>.
             </p>
           </div>
         </motion.div>

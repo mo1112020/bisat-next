@@ -49,9 +49,16 @@
     line-height: 1.12;
   }
 
-  a {
-    transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+  a,
+  a:link,
+  a:visited,
+  a:hover,
+  a:focus,
+  a:active {
+    color: inherit;
+    text-decoration: none;
   }
+
 
   input,
   textarea,
@@ -75,27 +82,27 @@
   }
 
   .bisat-kicker {
-    @apply text-[10px] uppercase tracking-[0.34em] font-semibold text-bisat-warm-gray;
+    @apply text-[11px] uppercase tracking-[0.2em] font-medium text-bisat-warm-gray;
   }
 
   .bisat-heading {
-    @apply font-serif font-light text-bisat-black tracking-[-0.03em];
+    @apply font-sans font-normal text-bisat-black tracking-[-0.025em];
   }
 
   .bisat-copy {
-    @apply text-bisat-black/58 leading-relaxed;
+    @apply text-bisat-black/55 leading-relaxed;
   }
 
   .bisat-button {
-    @apply inline-flex items-center justify-center gap-2 border border-bisat-black bg-bisat-black px-6 py-3.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-white transition-colors duration-200 hover:border-bisat-gold-dark hover:bg-bisat-gold-dark;
+    @apply inline-flex items-center justify-center gap-2 border border-bisat-black bg-bisat-black px-7 py-3.5 text-[11px] font-medium uppercase tracking-[0.18em] text-white transition-colors duration-200 hover:border-bisat-gold-dark hover:bg-bisat-gold-dark;
   }
 
   .bisat-button-secondary {
-    @apply inline-flex items-center justify-center gap-2 border border-bisat-border bg-white/55 px-6 py-3.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-bisat-black transition-colors duration-200 hover:border-bisat-gold hover:bg-bisat-cream/80 hover:text-bisat-gold-dark;
+    @apply inline-flex items-center justify-center gap-2 border border-bisat-border bg-white/55 px-7 py-3.5 text-[11px] font-medium uppercase tracking-[0.18em] text-bisat-black transition-colors duration-200 hover:border-bisat-gold hover:bg-bisat-cream/80 hover:text-bisat-gold-dark;
   }
 
   .bisat-link {
-    @apply inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.24em] font-semibold text-bisat-black/55 transition-colors duration-200 hover:text-bisat-gold-dark;
+    @apply inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] font-medium text-bisat-black/55 transition-colors duration-200 hover:text-bisat-gold-dark;
   }
 
   .bisat-chip {
@@ -113,6 +120,14 @@
   .bisat-grid-border {
     @apply gap-px bg-bisat-border;
   }
+}
+
+/* ── Nav / Footer: lock all links to black, no hover change ─────────────── */
+nav a, nav a:link, nav a:visited, nav a:hover, nav a:focus, nav a:active,
+nav button, nav button:hover,
+footer a, footer a:link, footer a:visited, footer a:hover, footer a:focus, footer a:active {
+  color: #1a1a1a !important;
+  text-decoration: none !important;
 }
 
 .perspective-1000 {
@@ -168,13 +183,6 @@
   animation: heroFadeUp 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
 }
 
-/* ── Mega-dropdown link hover ────────────────────────────────────────────── */
-.nav-link-hover {
-  transition: color 0.2s ease;
-}
-.nav-link-hover:hover {
-  color: var(--color-bisat-gold-dark);
-}
 
 /* ── Topbar marquee animation ────────────────────────────────────────────── */
 @keyframes topbar-marquee {

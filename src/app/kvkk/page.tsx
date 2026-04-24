@@ -3,7 +3,7 @@ import { KVKK } from '../../views/KVKK';
 
 export const metadata: Metadata = {
   title: 'KVKK Aydınlatma Metni',
-  description: 'Kişisel verilerin korunması kanunu kapsamında Bisāṭ aydınlatma metni.',
+  description: 'Kişisel verilerin korunması kanunu kapsamında Bisatim aydınlatma metni.',
 };
 
 export default function KVKKPage() {

@@ -40,19 +40,16 @@ export const HeroCarousel: React.FC = () => {
   }, []);
 
   return (
-    <section className="relative h-[500px] sm:h-[580px] w-full overflow-hidden bg-bisat-black">
-      {/* Background Images with Overlapping Slide Animation (No Black Gap) */}
+    <section className="relative h-[88vh] min-h-[540px] w-full overflow-hidden bg-bisat-black">
+      {/* Background images */}
       <div className="absolute inset-0 z-0">
         <AnimatePresence initial={false}>
           <motion.div
             key={current}
-            initial={{ x: '100%', opacity: 0.5 }}
-            animate={{ x: 0, opacity: 1 }}
-            exit={{ x: '-30%', opacity: 0 }}
-            transition={{ 
-              x: { duration: 1.2, ease: [0.45, 0, 0.55, 1] },
-              opacity: { duration: 0.8 }
-            }}
+            initial={{ opacity: 0, scale: 1.04 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.1, ease: [0.25, 0.1, 0.25, 1] }}
             className="absolute inset-0"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -61,68 +58,66 @@ export const HeroCarousel: React.FC = () => {
               alt=""
               className="h-full w-full object-cover"
             />
-            <div className="absolute inset-0 bg-black/10" />
           </motion.div>
         </AnimatePresence>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 mx-auto flex h-full max-w-[1400px] flex-col justify-end px-6 pb-28 pt-32 sm:px-10 sm:pb-32 lg:px-16">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={current}
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="mb-8 max-w-[700px]"
-          >
-            <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.4em] text-white/60">
-              EDITORIAL / 0{current + 1}
-            </p>
-            <h1 className="font-rh text-[clamp(2.5rem,6vw,4rem)] font-light leading-[1] tracking-[-0.03em] text-white">
-              {SLIDES[current].title}
-            </h1>
-            <p className="mt-5 max-w-[440px] text-[14px] leading-relaxed text-white/70 font-normal">
-              {SLIDES[current].subtitle}
-            </p>
-            <div className="mt-8">
-              <Link
-                href={SLIDES[current].href}
-                className="inline-flex items-center justify-center border border-white bg-transparent px-9 py-3 text-[10px] font-bold uppercase tracking-[0.3em] text-white transition-all duration-300 hover:bg-white hover:text-black"
+      {/* Content — bottom-left, Rughaus editorial style */}
+      <div className="relative z-10 flex h-full flex-col justify-end">
+        <div className="mx-auto w-full max-w-[1400px] px-5 pb-16 sm:px-8 sm:pb-20 lg:px-12 lg:pb-24">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={current}
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.75, ease: [0.25, 0.1, 0.25, 1] }}
+              className="max-w-[640px]"
+            >
+              <p className="mb-4 text-[11px] font-medium uppercase tracking-[0.2em] text-white/50">
+                {String(current + 1).padStart(2, '0')} / {String(SLIDES.length).padStart(2, '0')}
+              </p>
+              <h1 className="font-rh text-[clamp(2.4rem,5.5vw,3.75rem)] font-light leading-[1.05] tracking-[-0.02em] text-white">
+                {SLIDES[current].title}
+              </h1>
+              <p className="mt-4 max-w-[400px] text-[14px] leading-[1.7] text-white/65">
+                {SLIDES[current].subtitle}
+              </p>
+              <div className="mt-8">
+                <Link
+                  href={SLIDES[current].href}
+                  className="inline-flex items-center gap-3 border border-white/80 bg-transparent px-8 py-3 text-[11px] font-medium uppercase tracking-[0.18em] text-white transition-all duration-300 hover:bg-white hover:text-bisat-black"
+                >
+                  {SLIDES[current].cta}
+                </Link>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Slide indicators — thin progress bars */}
+          <div className="mt-10 flex items-center gap-3">
+            {SLIDES.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrent(i)}
+                className="group relative h-[2px] w-12 sm:w-20 overflow-hidden bg-white/20 focus:outline-none"
               >
-                {SLIDES[current].cta}
-              </Link>
-            </div>
-          </motion.div>
-        </AnimatePresence>
-      </div>
-
-      {/* Carousel Indicators: With Progress Loading Animation */}
-      <div className="absolute bottom-0 left-1/2 z-20 flex -translate-x-1/2 items-center gap-4">
-        {SLIDES.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setCurrent(i)}
-            className="group relative h-[8px] w-14 sm:w-40 overflow-hidden transition-all duration-500 focus:outline-none"
-            style={{ 
-              backgroundColor: 'rgba(255,255,255,0.1)'
-            }}
-          >
-            {i === current ? (
-              <motion.div 
-                key={`progress-${i}-${current}`}
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ duration: AUTO_PLAY_INTERVAL / 1000, ease: "linear" }}
-                className="absolute inset-0 origin-left bg-white"
-              />
-            ) : (
-              <div className="absolute inset-0 bg-transparent transition-colors group-hover:bg-white/10" />
-            )}
-          </button>
-        ))}
+                {i === current ? (
+                  <motion.div
+                    key={`progress-${i}-${current}`}
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: 1 }}
+                    transition={{ duration: AUTO_PLAY_INTERVAL / 1000, ease: 'linear' }}
+                    className="absolute inset-0 origin-left bg-white"
+                  />
+                ) : (
+                  <div className="absolute inset-0 bg-white/0 transition-colors group-hover:bg-white/40" />
+                )}
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

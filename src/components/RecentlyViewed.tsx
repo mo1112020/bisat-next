@@ -19,7 +19,7 @@ export const RecentlyViewed: React.FC = () => {
             <span className="mb-2 block text-[10px] font-semibold uppercase tracking-[0.28em] text-bisat-black/38">
               {t('product.yourJourney')}
             </span>
-            <h2 className="font-serif text-3xl font-light sm:text-4xl">{t('product.recentlyViewed')}</h2>
+            <h2 className="font-sans text-3xl font-light sm:text-4xl">{t('product.recentlyViewed')}</h2>
           </div>
         </div>
 

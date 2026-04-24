@@ -18,8 +18,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const title = TITLES[slug] ?? 'Products';
   return {
-    title: `${title} | Bisāṭ`,
-    description: `Browse ${title.toLowerCase()} from Bisāṭ.`,
+    title: `${title} | Bisatim`,
+    description: `Browse ${title.toLowerCase()} from Bisatim.`,
   };
 }
 

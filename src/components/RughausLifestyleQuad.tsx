@@ -28,7 +28,7 @@ export const RughausLifestyleQuad: React.FC<RughausLifestyleQuadProps> = ({
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
         <div className="mb-10 max-w-2xl">
           {eyebrow ? (
-            <p className="text-[10px] font-semibold uppercase tracking-[0.32em] text-bisat-black/38">{eyebrow}</p>
+            <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-bisat-black/38">{eyebrow}</p>
           ) : null}
           <h2 className="mt-3 font-sans text-2xl font-normal leading-tight tracking-[-0.02em] text-bisat-black sm:text-3xl lg:text-[2rem]">
             {title}

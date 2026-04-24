@@ -157,171 +157,6 @@ export async function addProductReview(
   if (error) logError(error);
 }
 
-// ─── Admin functions ────────────────────────────────────────────────────────
-
-export async function getDashboardStats() {
-  const [p, o, r, b, t] = await Promise.all([
-    supabase.from('products').select('*', { count: 'exact', head: true }),
-    supabase.from('orders').select('*', { count: 'exact', head: true }),
-    supabase.from('product_reviews').select('*', { count: 'exact', head: true }),
-    supabase.from('blog_posts').select('*', { count: 'exact', head: true }),
-    supabase.from('testimonials').select('*', { count: 'exact', head: true }),
-  ]);
-  return {
-    products: p.count || 0,
-    orders: o.count || 0,
-    reviews: r.count || 0,
-    blogPosts: b.count || 0,
-    testimonials: t.count || 0,
-  };
-}
-
-export async function adminGetOrders() {
-  const { data, error } = await supabase
-    .from('orders')
-    .select('*')
-    .order('date', { ascending: false });
-  if (error) { logError(error); return []; }
-  return (data || []).map((row: Record<string, unknown>) => ({
-    id: row.id as string,
-    status: row.status as string,
-    date: row.date as string,
-    items: (row.items as string[]) || [],
-    estimatedDelivery: row.estimated_delivery as string,
-    location: row.location as string,
-  }));
-}
-
-export async function adminUpdateOrderStatus(id: string, status: string): Promise<boolean> {
-  const { error } = await supabase.from('orders').update({ status }).eq('id', id);
-  if (error) { logError(error); return false; }
-  return true;
-}
-
-export async function adminCreateProduct(data: {
-  name: string; category: string; price: number; description: string;
-  images: string[]; dimensions: string; sizeCategory: string; rooms: string[];
-  material: string; origin: string; stock: number;
-}): Promise<Product | null> {
-  const { data: row, error } = await supabase
-    .from('products')
-    .insert({
-      name: data.name, category: data.category, price: data.price,
-      description: data.description, images: data.images,
-      dimensions: data.dimensions, size_category: data.sizeCategory,
-      rooms: data.rooms, material: data.material, origin: data.origin,
-      stock: data.stock,
-    })
-    .select()
-    .single();
-  if (error) { logError(error); return null; }
-  return toProduct(row);
-}
-
-export async function adminUpdateProduct(
-  id: string,
-  data: {
-    name: string; category: string; price: number; description: string;
-    images: string[]; dimensions: string; sizeCategory: string; rooms: string[];
-    material: string; origin: string; stock: number;
-  }
-): Promise<boolean> {
-  const { error } = await supabase
-    .from('products')
-    .update({
-      name: data.name, category: data.category, price: data.price,
-      description: data.description, images: data.images,
-      dimensions: data.dimensions, size_category: data.sizeCategory,
-      rooms: data.rooms, material: data.material, origin: data.origin,
-      stock: data.stock,
-    })
-    .eq('id', id);
-  if (error) { logError(error); return false; }
-  return true;
-}
-
-export async function adminDeleteProduct(id: string): Promise<boolean> {
-  const { error } = await supabase.from('products').delete().eq('id', id);
-  if (error) { logError(error); return false; }
-  return true;
-}
-
-export async function adminCreateBlogPost(data: {
-  title: string; excerpt: string; content: string; image: string;
-  date: string; author: string; category: string; metaDescription: string;
-}): Promise<boolean> {
-  const { error } = await supabase.from('blog_posts').insert({
-    title: data.title, excerpt: data.excerpt, content: data.content,
-    image: data.image, date: data.date, author: data.author,
-    category: data.category, meta_description: data.metaDescription,
-  });
-  if (error) { logError(error); return false; }
-  return true;
-}
-
-export async function adminUpdateBlogPost(
-  id: string,
-  data: {
-    title: string; excerpt: string; content: string; image: string;
-    date: string; author: string; category: string; metaDescription: string;
-  }
-): Promise<boolean> {
-  const { error } = await supabase
-    .from('blog_posts')
-    .update({
-      title: data.title, excerpt: data.excerpt, content: data.content,
-      image: data.image, date: data.date, author: data.author,
-      category: data.category, meta_description: data.metaDescription,
-    })
-    .eq('id', id);
-  if (error) { logError(error); return false; }
-  return true;
-}
-
-export async function adminDeleteBlogPost(id: string): Promise<boolean> {
-  const { error } = await supabase.from('blog_posts').delete().eq('id', id);
-  if (error) { logError(error); return false; }
-  return true;
-}
-
-export async function adminGetAllReviews() {
-  const { data, error } = await supabase
-    .from('product_reviews')
-    .select('*, products(name)')
-    .order('created_at', { ascending: false });
-  if (error) { logError(error); return []; }
-  return (data || []).map((row: Record<string, unknown>) => ({
-    id: row.id as string,
-    productId: row.product_id as string,
-    productName: ((row.products as Record<string, unknown>)?.name as string) || 'Unknown',
-    userName: row.user_name as string,
-    rating: row.rating as number,
-    comment: row.comment as string,
-    date: row.date as string,
-  }));
-}
-
-export async function adminDeleteReview(id: string): Promise<boolean> {
-  const { error } = await supabase.from('product_reviews').delete().eq('id', id);
-  if (error) { logError(error); return false; }
-  return true;
-}
-
-export async function adminCreateTestimonial(data: {
-  name: string; location: string; title: string; text: string;
-  date: string; rating: number; category: string;
-}): Promise<boolean> {
-  const { error } = await supabase.from('testimonials').insert(data);
-  if (error) { logError(error); return false; }
-  return true;
-}
-
-export async function adminDeleteTestimonial(id: string): Promise<boolean> {
-  const { error } = await supabase.from('testimonials').delete().eq('id', id);
-  if (error) { logError(error); return false; }
-  return true;
-}
-
 // ─── Categories ──────────────────────────────────────────────────────────────
 
 export interface Category {
@@ -356,46 +191,6 @@ export async function getCategories(): Promise<Category[]> {
   return (data || []).map(toCategory);
 }
 
-export async function adminGetCategories(): Promise<Category[]> {
-  const { data, error } = await supabase
-    .from('categories')
-    .select('*')
-    .order('sort_order', { ascending: true });
-  if (error) { logError(error); return []; }
-  return (data || []).map(toCategory);
-}
-
-export async function adminCreateCategory(data: Omit<Category, 'id'>): Promise<Category | null> {
-  const { data: row, error } = await supabase
-    .from('categories')
-    .insert({
-      name: data.name, slug: data.slug, badge: data.badge,
-      image_url: data.imageUrl, sort_order: data.sortOrder, active: data.active,
-    })
-    .select()
-    .single();
-  if (error) { logError(error); return null; }
-  return toCategory(row);
-}
-
-export async function adminUpdateCategory(id: string, data: Omit<Category, 'id'>): Promise<boolean> {
-  const { error } = await supabase
-    .from('categories')
-    .update({
-      name: data.name, slug: data.slug, badge: data.badge,
-      image_url: data.imageUrl, sort_order: data.sortOrder, active: data.active,
-    })
-    .eq('id', id);
-  if (error) { logError(error); return false; }
-  return true;
-}
-
-export async function adminDeleteCategory(id: string): Promise<boolean> {
-  const { error } = await supabase.from('categories').delete().eq('id', id);
-  if (error) { logError(error); return false; }
-  return true;
-}
-
 // ─── Room Types ───────────────────────────────────────────────────────────────
 
 export interface RoomType {
@@ -422,38 +217,6 @@ export async function getRoomTypes(): Promise<RoomType[]> {
     .order('sort_order', { ascending: true });
   if (error) { logError(error); return []; }
   return (data || []).map(toRoomType);
-}
-
-export async function adminGetRoomTypes(): Promise<RoomType[]> {
-  const { data, error } = await supabase
-    .from('room_types')
-    .select('*')
-    .order('sort_order', { ascending: true });
-  if (error) { logError(error); return []; }
-  return (data || []).map(toRoomType);
-}
-
-export async function adminCreateRoomType(data: Omit<RoomType, 'id'>): Promise<boolean> {
-  const { error } = await supabase.from('room_types').insert({
-    name: data.name, sort_order: data.sortOrder, active: data.active,
-  });
-  if (error) { logError(error); return false; }
-  return true;
-}
-
-export async function adminUpdateRoomType(id: string, data: Omit<RoomType, 'id'>): Promise<boolean> {
-  const { error } = await supabase
-    .from('room_types')
-    .update({ name: data.name, sort_order: data.sortOrder, active: data.active })
-    .eq('id', id);
-  if (error) { logError(error); return false; }
-  return true;
-}
-
-export async function adminDeleteRoomType(id: string): Promise<boolean> {
-  const { error } = await supabase.from('room_types').delete().eq('id', id);
-  if (error) { logError(error); return false; }
-  return true;
 }
 
 // ─── Size Categories ──────────────────────────────────────────────────────────
@@ -484,38 +247,6 @@ export async function getSizeCategories(): Promise<SizeCategory[]> {
   return (data || []).map(toSizeCategory);
 }
 
-export async function adminGetSizeCategories(): Promise<SizeCategory[]> {
-  const { data, error } = await supabase
-    .from('size_categories')
-    .select('*')
-    .order('sort_order', { ascending: true });
-  if (error) { logError(error); return []; }
-  return (data || []).map(toSizeCategory);
-}
-
-export async function adminCreateSizeCategory(data: Omit<SizeCategory, 'id'>): Promise<boolean> {
-  const { error } = await supabase.from('size_categories').insert({
-    name: data.name, sort_order: data.sortOrder, active: data.active,
-  });
-  if (error) { logError(error); return false; }
-  return true;
-}
-
-export async function adminUpdateSizeCategory(id: string, data: Omit<SizeCategory, 'id'>): Promise<boolean> {
-  const { error } = await supabase
-    .from('size_categories')
-    .update({ name: data.name, sort_order: data.sortOrder, active: data.active })
-    .eq('id', id);
-  if (error) { logError(error); return false; }
-  return true;
-}
-
-export async function adminDeleteSizeCategory(id: string): Promise<boolean> {
-  const { error } = await supabase.from('size_categories').delete().eq('id', id);
-  if (error) { logError(error); return false; }
-  return true;
-}
-
 // ─── Site Settings ────────────────────────────────────────────────────────────
 
 export interface SiteSetting {
@@ -543,9 +274,9 @@ export const SITE_SETTING_DEFAULTS: Record<string, { label: string; value: strin
   trust_4_sub:           { label: 'Trust 4 Subtext',         value: 'No middlemen',         type: 'text', group: 'Trust' },
   contact_address:       { label: 'Address',                 value: 'Grand Bazaar Quarter, Istanbul, Turkey', type: 'text', group: 'Contact' },
   contact_phone:         { label: 'Phone',                   value: '+90 212 000 0000',     type: 'text', group: 'Contact' },
-  social_instagram:      { label: 'Instagram URL',           value: 'https://www.instagram.com/bisat.store/', type: 'url', group: 'Social' },
-  social_pinterest:      { label: 'Pinterest URL',           value: 'https://tr.pinterest.com/bisattstore/', type: 'url', group: 'Social' },
-  social_tiktok:         { label: 'TikTok URL',              value: 'https://www.tiktok.com/@bisattstore',    type: 'url', group: 'Social' },
+  social_instagram:      { label: 'Instagram URL',           value: 'https://www.instagram.com/bisatim_/', type: 'url', group: 'Social' },
+  social_pinterest:      { label: 'Pinterest URL',           value: 'https://tr.pinterest.com/bisatim_/', type: 'url', group: 'Social' },
+  social_tiktok:         { label: 'TikTok URL',              value: 'https://www.tiktok.com/@bisatim_',    type: 'url', group: 'Social' },
   footer_shipping_title: { label: 'Footer Shipping Title',   value: 'Free Worldwide Shipping', type: 'text', group: 'Footer' },
   footer_shipping_desc:  { label: 'Footer Shipping Description', value: 'Every rug is hand-packed and insured for complimentary delivery.', type: 'text', group: 'Footer' },
 };
@@ -561,14 +292,6 @@ export async function getSiteSettings(): Promise<Record<string, string>> {
     if (row.value != null) map[row.key as string] = row.value as string;
   }
   return map;
-}
-
-export async function adminUpsertSiteSetting(key: string, value: string): Promise<boolean> {
-  const { error } = await supabase
-    .from('site_settings')
-    .upsert({ key, value, label: SITE_SETTING_DEFAULTS[key]?.label ?? key }, { onConflict: 'key' });
-  if (error) { logError(error); return false; }
-  return true;
 }
 
 // ─── Site Images ─────────────────────────────────────────────────────────────
@@ -620,10 +343,3 @@ export async function getSiteImages(): Promise<Record<SiteImageKey, string>> {
   return map;
 }
 
-export async function adminUpsertSiteImage(key: SiteImageKey, url: string): Promise<boolean> {
-  const { error } = await supabase
-    .from('site_images')
-    .upsert({ key, url, label: SITE_IMAGE_DEFAULTS[key]?.label ?? key }, { onConflict: 'key' });
-  if (error) { logError(error); return false; }
-  return true;
-}

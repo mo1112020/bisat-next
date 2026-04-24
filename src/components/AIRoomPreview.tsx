@@ -28,7 +28,7 @@ export const AIRoomPreview = () => {
               </span>
             </div>
             
-            <h2 className="text-4xl md:text-6xl font-serif text-bisat-cream leading-tight">
+            <h2 className="text-4xl md:text-6xl font-sans text-bisat-cream leading-tight">
               {t('aiRoom.title')}
             </h2>
             

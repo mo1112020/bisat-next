@@ -79,7 +79,7 @@ export const ProductDetail = () => {
   if (loading) {
     return (
       <div className="pt-32 pb-24 text-center min-h-screen flex flex-col items-center justify-center">
-        <p className="text-bisat-black/30 text-lg font-serif">Loading…</p>
+        <p className="text-bisat-black/30 text-lg font-sans">Loading…</p>
       </div>
     );
   }
@@ -87,7 +87,7 @@ export const ProductDetail = () => {
   if (!product) {
     return (
       <div className="pt-32 pb-24 text-center min-h-screen flex flex-col items-center justify-center">
-        <p className="text-2xl font-serif mb-4 text-bisat-black">Product not found</p>
+        <p className="text-2xl font-sans mb-4 text-bisat-black">Product not found</p>
         <Link href="/shop" className="text-bisat-gold text-sm underline">Back to Shop</Link>
       </div>
     );
@@ -229,7 +229,7 @@ export const ProductDetail = () => {
             </div>
 
             {/* Title */}
-            <h1 className="text-2xl md:text-3xl font-serif font-medium text-bisat-black leading-tight mb-3">
+            <h1 className="text-2xl md:text-3xl font-sans font-medium text-bisat-black leading-tight mb-3">
               {product.name}
             </h1>
 
@@ -252,7 +252,7 @@ export const ProductDetail = () => {
 
             {/* Price */}
             <div className="flex items-baseline gap-3 mb-5 pb-5 border-b border-bisat-black/8">
-              <p className="text-3xl font-serif text-bisat-black">${product.price.toLocaleString()}</p>
+              <p className="text-3xl font-sans text-bisat-black">${product.price.toLocaleString()}</p>
               <p className="text-sm text-bisat-black/35">Free worldwide shipping</p>
             </div>
 
@@ -407,7 +407,7 @@ export const ProductDetail = () => {
 
             {/* Form */}
             <div>
-              <h2 className="text-xl font-serif mb-1">Write a Review</h2>
+              <h2 className="text-xl font-sans mb-1">Write a Review</h2>
               <p className="text-sm text-bisat-black/40 mb-6">Share your experience with this rug</p>
               <form onSubmit={handleReviewSubmit} className="space-y-4">
                 <div>
@@ -451,7 +451,7 @@ export const ProductDetail = () => {
             {/* Reviews list */}
             <div className="lg:col-span-2">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-serif">
+                <h2 className="text-xl font-sans">
                   Customer Reviews
                   {localReviews.length > 0 && (
                     <span className="ml-2 text-sm font-sans font-normal text-bisat-black/35">({localReviews.length})</span>
@@ -460,7 +460,7 @@ export const ProductDetail = () => {
                 {avgRating && (
                   <div className="flex items-center gap-2">
                     <Star size={16} fill="#B8944F" color="#B8944F" />
-                    <span className="text-lg font-serif">{avgRating}</span>
+                    <span className="text-lg font-sans">{avgRating}</span>
                     <span className="text-sm text-bisat-black/35">/ 5</span>
                   </div>
                 )}
@@ -502,7 +502,7 @@ export const ProductDetail = () => {
         {relatedProducts.length > 0 && (
           <div className="border-t border-bisat-black/8 pt-12">
             <div className="flex items-center justify-between mb-8">
-              <h2 className="text-xl font-serif">More {product.category} Rugs</h2>
+              <h2 className="text-xl font-sans">More {product.category} Rugs</h2>
               <Link href={`/shop?category=${product.category}`} className="text-[11px] uppercase tracking-widest font-bold text-bisat-black/40 hover:text-bisat-gold transition-colors">
                 View All
               </Link>

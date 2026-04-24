@@ -18,7 +18,7 @@ export const getOrganizationSchema = () => ({
   '@context': 'https://schema.org',
   '@type': 'Organization',
   '@id': `${getSiteUrl()}/#organization`,
-  name: 'Bisāṭ',
+  name: 'Bisatim',
   url: getSiteUrl(),
   logo: {
     '@type': 'ImageObject',
@@ -26,13 +26,13 @@ export const getOrganizationSchema = () => ({
   },
   description: 'Premium artisanal rugs and carpets from Turkey.',
   sameAs: [
-    'https://www.instagram.com/bisat.store/',
-    'https://tr.pinterest.com/bisattstore/',
-    'https://www.tiktok.com/@bisattstore',
+    'https://www.instagram.com/bisatim_/',
+    'https://tr.pinterest.com/bisatim_/',
+    'https://www.tiktok.com/@bisatim_',
   ],
   contactPoint: {
     '@type': 'ContactPoint',
-    email: 'heritage@bisat-store.com',
+    email: 'heritage@bisatim.com',
     contactType: 'customer service',
     availableLanguage: ['English', 'Turkish', 'Arabic'],
   },
@@ -44,7 +44,7 @@ export const getWebSiteSchema = () => ({
   '@type': 'WebSite',
   '@id': `${getSiteUrl()}/#website`,
   url: getSiteUrl(),
-  name: 'Bisāṭ',
+  name: 'Bisatim',
   publisher: { '@id': `${getSiteUrl()}/#organization` },
   potentialAction: {
     '@type': 'SearchAction',
@@ -63,8 +63,8 @@ export const getProductSchema = (product: any) => ({
   name: product.name,
   image: product.images,
   description: product.description,
-  sku: `BISAT-${product.id}`,
-  brand: { '@type': 'Brand', name: 'Bisāṭ' },
+  sku: `BISATIM-${product.id}`,
+  brand: { '@type': 'Brand', name: 'Bisatim' },
   material: product.material,
   countryOfOrigin: product.origin,
   offers: {

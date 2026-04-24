@@ -1,21 +1,55 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Bisatim
 
-# Run and deploy your AI Studio app
+**bisatim.com** — Artisanal rugs and carpets for the everyday home.
 
-This contains everything you need to run your app locally.
+## Tech Stack
 
-View your app in AI Studio: https://ai.studio/apps/dee9a14e-e561-49c7-9d8e-bd7c203e57c4
+- **Framework**: Next.js 15 (App Router)
+- **Styling**: Tailwind CSS v4
+- **Database**: Supabase (PostgreSQL)
+- **Animation**: Framer Motion
+- **Language**: TypeScript
 
-## Run Locally
+## Getting Started
 
-**Prerequisites:**  Node.js
+```bash
+npm install
+npm run dev
+```
 
+Open [http://localhost:3000](http://localhost:3000).
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
-# bisat-next
+## Environment Variables
+
+Create a `.env.local` file:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+NEXT_PUBLIC_SITE_URL=https://bisatim.com
+```
+
+## Project Structure
+
+```
+src/
+├── app/          # Next.js App Router pages & layouts
+├── components/   # Shared UI components
+├── context/      # React context (cart, wishlist)
+├── lib/          # Supabase client, db helpers, utilities
+└── views/        # Page-level view components
+```
+
+## Brand
+
+- **Website**: [bisatim.com](https://bisatim.com)
+- **Instagram**: [@bisatim_](https://www.instagram.com/bisatim_/)
+- **TikTok**: [@bisatim_](https://www.tiktok.com/@bisatim_)
+- **Pinterest**: [bisatim_](https://www.pinterest.com/bisatim_/)
+
+## Build
+
+```bash
+npm run build
+npm run start
+```

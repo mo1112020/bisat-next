@@ -212,7 +212,7 @@ export const Shop = () => {
   return (
     <div className="min-h-screen bg-bisat-ivory">
       <Meta
-        title={categoryFilter ? `${categoryFilter} Rugs | Bisāṭ` : 'Shop All Rugs & Carpets | Bisāṭ'}
+        title={categoryFilter ? `${categoryFilter} Rugs | Bisatim` : 'Shop All Rugs & Carpets | Bisatim'}
         description="Browse our collection of hand-woven Turkish rugs. Handmade, vintage, kilim and machine-woven carpets shipped worldwide."
         keywords="buy Turkish rugs, handmade carpets, kilim rugs, vintage rugs online"
       />
@@ -274,7 +274,7 @@ export const Shop = () => {
           <aside className="hidden lg:block w-64 flex-shrink-0">
             <div className="sticky top-[6rem]">
               <div className="border border-bisat-border p-6">
-                <p className="text-[9px] uppercase tracking-[0.3em] font-bold text-bisat-black/35 mb-5">Filter By</p>
+                <p className="text-[11px] uppercase tracking-[0.2em] font-medium text-bisat-black/35 mb-5">Filter By</p>
                 <FilterPanel />
               </div>
             </div>
@@ -406,7 +406,7 @@ export const Shop = () => {
               <div className="overflow-y-auto flex-1 p-5 space-y-6">
                 {/* Sort inside drawer */}
                 <div>
-                  <p className="text-[9px] uppercase tracking-[0.3em] font-bold text-bisat-black/35 mb-3">Sort By</p>
+                  <p className="text-[11px] uppercase tracking-[0.2em] font-medium text-bisat-black/35 mb-3">Sort By</p>
                   <div className="grid grid-cols-2 gap-2">
                     {SORT_OPTIONS.map(o => (
                       <button key={o.value} onClick={() => setSortBy(o.value)}
@@ -439,7 +439,7 @@ export const Shop = () => {
 function FilterSection({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
-      <p className="text-[9px] uppercase tracking-[0.3em] font-bold text-bisat-black/35 mb-2.5">{title}</p>
+      <p className="text-[11px] uppercase tracking-[0.2em] font-medium text-bisat-black/35 mb-2.5">{title}</p>
       <div className="flex flex-wrap gap-1.5">{children}</div>
     </div>
   );

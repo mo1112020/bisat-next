@@ -31,7 +31,7 @@ export const Contact = () => {
     <div className="bg-bisat-ivory min-h-screen">
       <Meta
         title="Contact Us"
-        description="Get in touch with the Bisāṭ team for custom orders, care advice, or general inquiries about our artisanal rugs."
+        description="Get in touch with the Bisatim team for custom orders, care advice, or general inquiries about our artisanal rugs."
       />
 
       {/* ── Header ───────────────────────────────────────────────── */}
@@ -57,7 +57,7 @@ export const Contact = () => {
                   <Mail size={16} className="text-bisat-black/35 mt-0.5 flex-shrink-0" strokeWidth={1.5} />
                   <div>
                     <p className="text-[10px] uppercase tracking-[0.15em] font-semibold text-bisat-black/40 mb-1">Email</p>
-                    <p className="text-sm font-light text-bisat-black">heritage@bisat-store.com</p>
+                    <p className="text-sm font-light text-bisat-black">heritage@bisatim.com</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4 pt-6">
@@ -74,9 +74,9 @@ export const Contact = () => {
               <p className="text-[9px] uppercase tracking-[0.3em] font-semibold text-bisat-black/30 mb-5">Follow Along</p>
               <div className="flex gap-2">
                 {[
-                  { icon: <Instagram size={16} strokeWidth={1.5} />, label: 'Instagram', href: 'https://www.instagram.com/bisat.store/' },
-                  { icon: <PinterestIcon />, label: 'Pinterest', href: 'https://tr.pinterest.com/bisattstore/' },
-                  { icon: <TikTokIcon />, label: 'TikTok', href: 'https://www.tiktok.com/@bisattstore' },
+                  { icon: <Instagram size={16} strokeWidth={1.5} />, label: 'Instagram', href: 'https://www.instagram.com/bisatim_/' },
+                  { icon: <PinterestIcon />, label: 'Pinterest', href: 'https://tr.pinterest.com/bisatim_/' },
+                  { icon: <TikTokIcon />, label: 'TikTok', href: 'https://www.tiktok.com/@bisatim_' },
                 ].map((social) => (
                   <a
                     key={social.label}

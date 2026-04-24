@@ -46,11 +46,11 @@ const faqs = [
     questions: [
       {
         q: "What is your return policy?",
-        a: "We want you to love your Bisāṭ rug. If you are not completely satisfied, you can return your rug within 14 days of delivery for a full refund, minus shipping costs. The rug must be in its original condition."
+        a: "We want you to love your Bisatim rug. If you are not completely satisfied, you can return your rug within 14 days of delivery for a full refund, minus shipping costs. The rug must be in its original condition."
       },
       {
         q: "How do I initiate a return?",
-        a: "Please contact our support team at heritage@bisat-store.com with your order number. We will provide you with return instructions and a shipping label if applicable."
+        a: "Please contact our support team at heritage@bisatim.com with your order number. We will provide you with return instructions and a shipping label if applicable."
       }
     ]
   },
@@ -77,7 +77,7 @@ export const FAQ = () => {
     <div className="pb-16 bg-bisat-ivory min-h-screen">
       <Meta
         title="FAQ – Shipping, Care & Authenticity"
-        description="Answers to common questions about shipping, rug care, returns, and the authenticity of Bisāṭ artisanal pieces."
+        description="Answers to common questions about shipping, rug care, returns, and the authenticity of Bisatim artisanal pieces."
       />
       <Schema data={getFAQSchema(faqs)} />
       <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 pt-6">
@@ -112,7 +112,7 @@ export const FAQ = () => {
               ))}
 
               <div className="mt-12 p-8 bg-bisat-cream border border-bisat-border">
-                <h4 className="font-serif text-xl mb-4">Still have questions?</h4>
+                <h4 className="font-sans text-xl mb-4">Still have questions?</h4>
                 <p className="text-sm text-bisat-black/60 mb-6 leading-relaxed">
                   Our heritage experts are available to assist you with any specific inquiries.
                 </p>

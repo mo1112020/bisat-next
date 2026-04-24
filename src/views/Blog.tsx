@@ -28,7 +28,7 @@ export const Blog = () => {
   return (
     <div className="bg-bisat-ivory min-h-screen">
       <Meta
-        title="Journal | Bisāṭ"
+        title="Journal | Bisatim"
         description="Explore the world of hand-woven rugs, interior design tips, and stories from our global artisan partners."
       />
 

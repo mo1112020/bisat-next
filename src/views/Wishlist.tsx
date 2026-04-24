@@ -15,7 +15,7 @@ export const Wishlist: React.FC = () => {
     <div className="pb-16 bg-bisat-cream min-h-screen">
       <Meta
         title="My Wishlist"
-        description="Your saved rugs and carpets at Bisāṭ."
+        description="Your saved rugs and carpets at Bisatim."
         robots="noindex, nofollow"
       />
       <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 pt-6">
@@ -32,7 +32,7 @@ export const Wishlist: React.FC = () => {
           className="text-center py-20 bg-bisat-cream/30 border border-bisat-border"
         >
           <Heart size={48} className="mx-auto mb-6 text-bisat-sand/40" />
-          <h2 className="text-2xl font-serif mb-4">Your wishlist is empty</h2>
+          <h2 className="text-2xl font-sans mb-4">Your wishlist is empty</h2>
           <p className="text-bisat-warm-gray mb-8 max-w-md mx-auto">
             Save your favorite Turkish masterpieces to view them later or share with others.
           </p>

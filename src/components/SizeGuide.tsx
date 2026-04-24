@@ -90,7 +90,7 @@ export const SizeGuide = ({ trigger }: SizeGuideProps) => {
               {/* Header */}
               <div className="flex items-center justify-between px-6 py-5 border-b border-bisat-black/5 flex-shrink-0">
                 <div>
-                  <h2 className="font-serif text-xl text-bisat-black">Rug Size Guide</h2>
+                  <h2 className="font-sans text-xl text-bisat-black">Rug Size Guide</h2>
                   <p className="text-[11px] text-bisat-black/40 mt-0.5">Find the perfect size for your space</p>
                 </div>
                 <button onClick={() => setOpen(false)} className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-bisat-cream transition-colors text-bisat-black/40">

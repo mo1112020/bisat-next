@@ -30,7 +30,7 @@ export const OrderConfirmation = () => {
 
   return (
     <div className="min-h-screen bg-bisat-cream pb-24">
-      <Meta title="Order Confirmed" description="Your Bisāṭ order has been placed successfully." />
+      <Meta title="Order Confirmed" description="Your Bisatim order has been placed successfully." />
 
       <div className="max-w-3xl mx-auto px-5 sm:px-8 lg:px-12 pt-6">
 
@@ -57,7 +57,7 @@ export const OrderConfirmation = () => {
             transition={{ delay: 0.4 }}
           >
             <p className="text-bisat-gold text-[10px] uppercase tracking-[0.4em] font-bold mb-4">Order Placed</p>
-            <h1 className="text-5xl md:text-6xl font-serif text-bisat-black mb-4">Thank You</h1>
+            <h1 className="text-5xl md:text-6xl font-sans text-bisat-black mb-4">Thank You</h1>
             <p className="text-bisat-black/50 text-lg leading-relaxed max-w-md mx-auto">
               Your order has been confirmed. A confirmation email is on its way to you.
             </p>
@@ -74,7 +74,7 @@ export const OrderConfirmation = () => {
           <div className="bg-bisat-black text-bisat-cream px-8 py-6 flex items-center justify-between">
             <div>
               <p className="text-[10px] uppercase tracking-[0.3em] font-bold text-bisat-cream/50 mb-1">Order Number</p>
-              <p className="text-2xl font-serif">{orderNumber}</p>
+              <p className="text-2xl font-sans">{orderNumber}</p>
             </div>
             <div className="text-right">
               <p className="text-[10px] uppercase tracking-[0.3em] font-bold text-bisat-cream/50 mb-1">Est. Delivery</p>

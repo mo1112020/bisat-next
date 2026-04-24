@@ -32,12 +32,12 @@ export const ForBusiness = () => {
 
       <section className="border-b border-bisat-border bg-white">
         <div className="mx-auto max-w-[1400px] px-5 py-14 sm:px-8 lg:px-12 lg:py-18">
-          <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.32em] text-bisat-black/38">For Business</p>
-          <h1 className="max-w-3xl font-serif text-4xl font-light tracking-[-0.05em] text-bisat-black sm:text-5xl">
+          <p className="mb-4 text-[10px] font-medium uppercase tracking-[0.2em] text-bisat-black/38">For Business</p>
+          <h1 className="max-w-3xl font-sans text-4xl font-light tracking-[-0.05em] text-bisat-black sm:text-5xl">
             Project support for designers, retailers, and hospitality spaces.
           </h1>
           <p className="mt-6 max-w-2xl text-[15px] leading-7 text-bisat-black/56">
-            Bisāṭ helps commercial clients source rugs for residential developments, hospitality projects, curated retail spaces, and private design commissions.
+            Bisatim helps commercial clients source rugs for residential developments, hospitality projects, curated retail spaces, and private design commissions.
           </p>
         </div>
       </section>
@@ -48,7 +48,7 @@ export const ForBusiness = () => {
             {OFFERINGS.map(({ icon: Icon, title, body }) => (
               <div key={title} className="bg-white px-6 py-8 sm:px-8">
                 <Icon size={20} className="mb-5 text-bisat-black/45" strokeWidth={1.5} />
-                <h2 className="font-serif text-[1.7rem] font-light tracking-[-0.04em] text-bisat-black">{title}</h2>
+                <h2 className="font-sans text-[1.7rem] font-light tracking-[-0.04em] text-bisat-black">{title}</h2>
                 <p className="mt-4 text-[14px] leading-6 text-bisat-black/56">{body}</p>
               </div>
             ))}
@@ -59,8 +59,8 @@ export const ForBusiness = () => {
       <section className="bg-white py-14 sm:py-18">
         <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
           <div className="border border-bisat-border bg-white px-6 py-10 sm:px-10">
-            <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.32em] text-bisat-black/38">Contact</p>
-            <h2 className="font-serif text-4xl font-light tracking-[-0.05em] text-bisat-black sm:text-5xl">
+            <p className="mb-3 text-[10px] font-medium uppercase tracking-[0.2em] text-bisat-black/38">Contact</p>
+            <h2 className="font-sans text-4xl font-light tracking-[-0.05em] text-bisat-black sm:text-5xl">
               Tell us about your project.
             </h2>
             <p className="mt-5 max-w-2xl text-[15px] leading-7 text-bisat-black/56">

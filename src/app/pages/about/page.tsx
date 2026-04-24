@@ -4,7 +4,7 @@ import { getSiteImages } from '@/src/lib/db';
 
 export const metadata: Metadata = {
   title: 'About',
-  description: 'Learn about Bisāṭ and our approach to sourcing and curating rugs.',
+  description: 'Learn about Bisatim and our approach to sourcing and curating rugs.',
 };
 
 export default async function AboutPage() {

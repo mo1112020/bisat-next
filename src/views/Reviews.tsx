@@ -27,13 +27,13 @@ export const Reviews = () => {
     <div className="pb-16 bg-bisat-ivory min-h-screen">
       <Meta
         title="Customer Reviews"
-        description="Read verified reviews from customers around the world who brought a piece of Turkish heritage into their homes with Bisāṭ."
+        description="Read verified reviews from customers around the world who brought a piece of Turkish heritage into their homes with Bisatim."
       />
       <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 pt-6">
         <PageHeader
           badge="Testimonials"
           title="Kind Words from Our Global Community"
-          description="Discover why collectors and designers around the world trust Bisāṭ for their most cherished spaces."
+          description="Discover why collectors and designers around the world trust Bisatim for their most cherished spaces."
         />
 
         {/* Filter */}
@@ -67,7 +67,7 @@ export const Reviews = () => {
                 </div>
                 <div>
                   <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-bisat-black/40 mb-1">{stat.label}</p>
-                  <p className="text-3xl font-serif text-bisat-black">{stat.value}</p>
+                  <p className="text-3xl font-sans text-bisat-black">{stat.value}</p>
                 </div>
               </div>
             ))}

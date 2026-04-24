@@ -14,15 +14,15 @@ interface MetaProps {
 export const Meta = ({
   title,
   description = 'Premium artisanal rugs and carpets from around the world. Hand-woven heritage for your modern home.',
-  image = 'https://bisat-store.com/og-default.jpg',
+  image = 'https://bisatim.com/og-default.jpg',
   type = 'website',
   robots,
   keywords,
 }: MetaProps) => {
   const location = ({ pathname: usePathname() });
-  const siteName = 'Bisāṭ';
-  const fullTitle = title.includes('Bisāṭ') ? title : `${title} | ${siteName}`;
-  const origin = typeof window !== 'undefined' ? window.location.origin : 'https://bisat-store.com';
+  const siteName = 'Bisatim';
+  const fullTitle = title.includes('Bisatim') ? title : `${title} | ${siteName}`;
+  const origin = typeof window !== 'undefined' ? window.location.origin : 'https://bisatim.com';
   const canonicalUrl = `${origin}${location.pathname}`;
 
   useEffect(() => {

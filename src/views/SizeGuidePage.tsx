@@ -47,7 +47,7 @@ export const SizeGuidePage = () => {
   return (
     <div className="bg-bisat-ivory min-h-screen">
       <Meta
-        title="Rug Size Guide | Bisāṭ"
+        title="Rug Size Guide | Bisatim"
         description="Find the perfect rug size for every room. Our comprehensive size guide covers living rooms, bedrooms, dining rooms, hallways, and more."
       />
 

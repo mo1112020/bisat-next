@@ -46,7 +46,7 @@ export const StickyAtcBar = ({ product, anchorRef, onAddToCart, added }: StickyA
             </div>
 
             <div className="flex-1 min-w-0">
-              <p className="truncate font-serif text-[1rem] font-light leading-tight text-bisat-black">{product.name}</p>
+              <p className="truncate font-sans text-[1rem] font-light leading-tight text-bisat-black">{product.name}</p>
               <p className="text-[13px] text-bisat-black/55">${displayPrice.toLocaleString()}</p>
             </div>
 

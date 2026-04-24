@@ -84,7 +84,7 @@ export const Navbar = () => {
     <>
       {/* ── Main bar ─────────────────────────────────────────────────────── */}
       <nav
-        className={`relative z-50 h-20 bg-white border-b border-bisat-black/[0.06] transition-all duration-300 ${
+        className={`relative z-50 h-20 bg-white border-b border-bisat-black/[0.06] transition-shadow duration-300 ${
           scrolled ? 'shadow-sm' : ''
         }`}
         style={{ boxShadow: scrolled ? '0 4px 24px rgba(0,0,0,0.06)' : 'none' }}
@@ -121,10 +121,10 @@ export const Navbar = () => {
             {/* ── Right icons ─────────────────────────────────────── */}
             <div className="flex items-center gap-0 ml-auto text-bisat-black">
 
-              {/* Trade Button (法人窓口 analogue) */}
+              {/* Trade link */}
               <Link
                 href="/pages/for-business"
-                className="mr-4 hidden px-4 py-1.5 text-[9.5px] font-bold uppercase tracking-[0.2em] bg-bisat-black text-white transition-colors hover:bg-bisat-black/80 lg:block"
+                className="mr-3 hidden text-[11px] font-medium uppercase tracking-[0.18em] text-bisat-black lg:block"
               >
                 Trade
               </Link>
@@ -132,39 +132,39 @@ export const Navbar = () => {
               {/* Search */}
               <button
                 onClick={() => setSearchOpen(s => !s)}
-                className="p-2.5 transition-colors duration-150 hover:opacity-70"
+                className="p-2.5 text-bisat-black"
                 aria-label="Search"
               >
-                <Search size={17} strokeWidth={1.5} />
+                <Search size={18} strokeWidth={1.5} />
               </button>
 
               {/* Wishlist */}
               <Link
                 href="/wishlist"
-                className="p-2.5 transition-colors duration-150 hover:opacity-70"
+                className="p-2.5 text-bisat-black"
                 aria-label={`Wishlist${wishlist.length > 0 ? ` (${wishlist.length})` : ''}`}
               >
-                <Heart size={17} strokeWidth={1.5} />
+                <Heart size={18} strokeWidth={1.5} />
               </Link>
 
               {/* Account */}
               <Link
                 href="/account"
-                className="hidden p-2.5 transition-colors duration-150 hover:opacity-70 sm:flex"
+                className="hidden p-2.5 text-bisat-black sm:flex"
                 aria-label="Account"
               >
-                <User size={17} strokeWidth={1.5} />
+                <User size={18} strokeWidth={1.5} />
               </Link>
 
               {/* Cart */}
               <Link
                 href="/cart"
-                className="relative p-2.5 transition-colors duration-150 hover:opacity-70"
+                className="relative p-2.5 text-bisat-black"
                 aria-label={`Cart${totalItems > 0 ? ` (${totalItems})` : ''}`}
               >
-                <ShoppingBag size={17} strokeWidth={1.5} />
+                <ShoppingBag size={18} strokeWidth={1.5} />
                 {totalItems > 0 && (
-                  <span className="absolute right-1 top-1.5 flex h-3.5 w-3.5 items-center justify-center border border-bisat-black bg-white text-[8px] font-medium text-bisat-black">
+                  <span className="absolute right-1 top-1.5 flex h-3.5 w-3.5 items-center justify-center bg-bisat-black text-[8px] font-medium text-white">
                     {totalItems}
                   </span>
                 )}
@@ -173,10 +173,10 @@ export const Navbar = () => {
               {/* Mobile hamburger */}
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="ml-1 p-2.5 transition-colors duration-150 hover:opacity-70 md:hidden"
+                className="ml-1 p-2.5 text-bisat-black md:hidden"
                 aria-label={isOpen ? 'Close menu' : 'Open menu'}
               >
-                {isOpen ? <X size={18} strokeWidth={1.5} /> : <Menu size={18} strokeWidth={1.5} />}
+                {isOpen ? <X size={19} strokeWidth={1.5} /> : <Menu size={19} strokeWidth={1.5} />}
               </button>
             </div>
 
@@ -205,7 +205,7 @@ export const Navbar = () => {
                 {searchQuery && (
                   <button
                     type="submit"
-                    className="flex-shrink-0 border border-bisat-black bg-bisat-black px-5 py-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-white transition-colors hover:border-bisat-gold-dark hover:bg-bisat-gold-dark"
+                    className="flex-shrink-0 border border-bisat-black bg-bisat-black px-5 py-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-white"
                   >
                     Search
                   </button>
@@ -213,7 +213,7 @@ export const Navbar = () => {
                 <button
                   type="button"
                   onClick={() => setSearchOpen(false)}
-                  className="text-bisat-black/25 hover:text-bisat-black transition-colors flex-shrink-0"
+                  className="text-bisat-black flex-shrink-0"
                 >
                   <X size={15} />
                 </button>
@@ -222,78 +222,46 @@ export const Navbar = () => {
           )}
         </AnimatePresence>
 
-        {/* ── Shop dropdown — editorial numbered list ───────────────── */}
+        {/* ── Shop dropdown — compact floating panel ───────────────── */}
         <AnimatePresence>
           {activeDropdown === 'shop' && (
             <motion.div
-              initial={{ opacity: 0, y: -10 }}
+              initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
-              className="fixed left-0 right-0 z-[9999] hidden bg-white md:block"
+              exit={{ opacity: 0, y: 6 }}
+              transition={{ duration: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
+              className="absolute left-1/2 z-[9999] hidden -translate-x-1/2 md:block"
               style={{
-                top: 'calc(var(--topbar-h, 2.25rem) + 5rem)',
-                borderBottom: '1px solid rgba(0,0,0,0.07)',
-                boxShadow: '0 24px 60px rgba(0,0,0,0.08)',
+                top: '100%',
+                marginTop: '1px',
               }}
               onMouseEnter={() => openDropdown('shop')}
               onMouseLeave={closeDropdown}
             >
-              <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
-                <div className="grid grid-cols-[1fr_340px]">
-
-                  {/* ── Collection list ── */}
-                  <div className="border-r border-bisat-black/[0.06] py-8 pr-14">
-                    <p className="mb-4 text-[9px] font-semibold uppercase tracking-[0.35em] text-bisat-black/22">
-                      Collections
-                    </p>
-                    {STATIC_FEATURED.map((item, i) => (
-                      <Link
-                        key={item.href}
-                        href={item.href}
-                        onClick={closeAll}
-                        className="group flex items-center justify-between border-b border-bisat-black/[0.05] py-3.5 last:border-0"
-                      >
-                        <div className="flex items-center gap-6">
-                          <span className="w-5 text-right text-[10px] font-light tabular-nums text-bisat-black/18 transition-colors duration-150 group-hover:text-bisat-black/38">
-                            {String(i + 1).padStart(2, '0')}
-                          </span>
-                          <span className={`font-rh text-[1.55rem] font-light tracking-[-0.025em] transition-colors duration-150 ${
-                            item.highlight
-                              ? 'text-bisat-black'
-                              : 'text-bisat-black/50 group-hover:text-bisat-black'
-                          }`}>
-                            {item.label}
-                          </span>
-                        </div>
-                        <ArrowRight
-                          size={13}
-                          className="-translate-x-1 opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-50"
-                        />
-                      </Link>
-                    ))}
-                  </div>
-
-                  {/* ── Brand panel ── */}
-                  <div className="flex flex-col justify-center py-8 pl-12">
-                    <p className="text-[9px] font-semibold uppercase tracking-[0.35em] text-bisat-black/22">
-                      Bisāṭim
-                    </p>
-                    <p className="mt-5 font-rh text-[1.85rem] font-light leading-snug tracking-[-0.03em] text-bisat-black">
-                      Colour and fibre, for rooms that breathe.
-                    </p>
-                    <div className="mt-3 h-px w-8 bg-bisat-black/15" />
-                    <Link
-                      href="/collections/rug"
-                      onClick={closeAll}
-                      className="mt-7 inline-flex items-center gap-2 text-[9.5px] font-semibold uppercase tracking-[0.3em] text-bisat-black/35 transition-colors duration-150 hover:text-bisat-black"
-                    >
-                      Shop all rugs
-                      <ArrowRight size={10} />
-                    </Link>
-                  </div>
-
-                </div>
+              <div
+                className="w-[220px] bg-white py-2"
+                style={{ boxShadow: '0 8px 32px rgba(0,0,0,0.10)', border: '1px solid rgba(0,0,0,0.07)' }}
+              >
+                {STATIC_FEATURED.map(item => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={closeAll}
+                    className="flex items-center justify-between px-5 py-2.5 text-[13px] text-bisat-black"
+                  >
+                    {item.label}
+                    <ArrowRight size={11} className="text-bisat-black/30 flex-shrink-0" />
+                  </Link>
+                ))}
+                <div className="mx-5 my-2 border-t border-bisat-black/[0.06]" />
+                <Link
+                  href="/collections/rug"
+                  onClick={closeAll}
+                  className="flex items-center gap-2 px-5 py-2 text-[10px] font-medium uppercase tracking-[0.18em] text-bisat-black/45"
+                >
+                  View all
+                  <ArrowRight size={9} />
+                </Link>
               </div>
             </motion.div>
           )}
@@ -315,7 +283,7 @@ export const Navbar = () => {
               <span className="font-rh text-2xl font-light tracking-tight text-bisat-black">Bisāṭim</span>
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-2 -mr-2 text-bisat-black/40 hover:text-bisat-black"
+                className="p-2 -mr-2 text-bisat-black"
                 aria-label="Close menu"
               >
                 <X size={24} strokeWidth={1.5} />
@@ -333,7 +301,7 @@ export const Navbar = () => {
                         key={item.href}
                         href={item.href}
                         onClick={() => setIsOpen(false)}
-                        className="py-3.5 text-[14px] text-bisat-black/70 border-b border-bisat-black/[0.04] last:border-0"
+                        className="py-3.5 text-[14px] text-bisat-black border-b border-bisat-black/[0.04] last:border-0"
                       >
                         {item.label}
                       </Link>
@@ -344,7 +312,7 @@ export const Navbar = () => {
                 <Link
                   href="/pages/case-gallery"
                   onClick={() => setIsOpen(false)}
-                  className="flex items-center justify-between border-b border-bisat-black/5 py-5 text-[16px] text-bisat-black/85"
+                  className="flex items-center justify-between border-b border-bisat-black/5 py-5 text-[16px] text-bisat-black"
                 >
                   Room Ideas
                   <ChevronDown size={14} className="-rotate-90 text-bisat-black/20" />
@@ -353,7 +321,7 @@ export const Navbar = () => {
                 <Link
                   href="/pages/virtual-coordinate"
                   onClick={() => setIsOpen(false)}
-                  className="flex items-center justify-between border-b border-bisat-black/5 py-5 text-[16px] text-bisat-black/85"
+                  className="flex items-center justify-between border-b border-bisat-black/5 py-5 text-[16px] text-bisat-black"
                 >
                   Virtual Coordinate
                   <ChevronDown size={14} className="-rotate-90 text-bisat-black/20" />
@@ -371,7 +339,7 @@ export const Navbar = () => {
                         key={item.href}
                         href={item.href}
                         onClick={() => setIsOpen(false)}
-                        className="py-3.5 text-[14px] text-bisat-black/70 border-b border-bisat-black/[0.04] last:border-0"
+                        className="py-3.5 text-[14px] text-bisat-black border-b border-bisat-black/[0.04] last:border-0"
                       >
                         {item.label}
                       </Link>
@@ -382,7 +350,7 @@ export const Navbar = () => {
                 <Link
                   href="/pages/for-business"
                   onClick={() => setIsOpen(false)}
-                  className="flex items-center justify-between border-b border-bisat-black/5 py-5 text-[16px] text-bisat-black/85"
+                  className="flex items-center justify-between border-b border-bisat-black/5 py-5 text-[16px] text-bisat-black"
                 >
                   Trade
                   <ChevronDown size={14} className="-rotate-90 text-bisat-black/20" />
@@ -394,20 +362,20 @@ export const Navbar = () => {
                 <Link
                   href="/account"
                   onClick={() => setIsOpen(false)}
-                  className="text-[14px] text-bisat-black/50 hover:text-bisat-black"
+                  className="text-[14px] text-bisat-black"
                 >
                   Account
                 </Link>
-                
+
                 {/* Social Icons at bottom */}
                 <div className="pt-12 mt-auto flex items-center gap-8">
-                  <a href="https://www.instagram.com/bisat.store/" target="_blank" rel="noopener noreferrer" className="text-bisat-black/40 hover:text-bisat-black">
+                  <a href="https://www.instagram.com/bisatim_/" target="_blank" rel="noopener noreferrer" className="text-bisat-black">
                     <Instagram size={20} strokeWidth={1.5} />
                   </a>
-                  <a href="https://tr.pinterest.com/bisattstore/" target="_blank" rel="noopener noreferrer" className="text-bisat-black/40 hover:text-bisat-black">
+                  <a href="https://tr.pinterest.com/bisatim_/" target="_blank" rel="noopener noreferrer" className="text-bisat-black">
                     <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
                   </a>
-                  <a href="https://www.tiktok.com/@bisattstore" target="_blank" rel="noopener noreferrer" className="text-bisat-black/40 hover:text-bisat-black">
+                  <a href="https://www.tiktok.com/@bisatim_" target="_blank" rel="noopener noreferrer" className="text-bisat-black">
                     <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9.01a8.16 8.16 0 0 0 4.77 1.52V7.08a4.85 4.85 0 0 1-1-.39z"/></svg>
                   </a>
                 </div>
@@ -429,24 +397,16 @@ const DesktopNavItem: React.FC<{
 
   if (!hasDropdown && href) {
     return (
-      <Link href={href} className="relative group text-[10px] font-bold uppercase tracking-[0.3em] text-bisat-black/50 transition-colors hover:text-bisat-black">
+      <Link href={href} className="text-[11px] font-medium uppercase tracking-[0.18em] text-bisat-black">
         {label}
-        <span className="absolute -bottom-1.5 left-0 h-[1.5px] w-0 bg-bisat-black group-hover:w-full transition-all duration-200" />
       </Link>
     );
   }
   return (
     <div className="relative" onMouseEnter={() => onOpen(id)} onMouseLeave={onClose}>
-      <button
-        className={`relative group flex items-center gap-0.5 text-[10px] font-bold uppercase tracking-[0.3em] transition-colors duration-200 ${
-          isDropOpen ? 'text-bisat-black' : 'text-bisat-black/50 hover:text-bisat-black'
-        }`}
-      >
+      <button className="flex items-center gap-1 text-[11px] font-medium uppercase tracking-[0.18em] text-bisat-black">
         {label}
-        <ChevronDown size={10} strokeWidth={2.5} className={`transition-transform duration-200 mt-px ${isDropOpen ? 'rotate-180' : ''}`} />
-        <span className={`absolute -bottom-1.5 left-0 h-[1.5px] bg-bisat-black transition-all duration-200 ${
-          isDropOpen ? 'w-[calc(100%-12px)]' : 'w-0 group-hover:w-[calc(100%-12px)]'
-        }`} />
+        <ChevronDown size={9} strokeWidth={2} className={`transition-transform duration-200 mt-px ${isDropOpen ? 'rotate-180' : ''}`} />
       </button>
     </div>
   );
@@ -462,7 +422,7 @@ const MobileAccordion: React.FC<{
     <div className="border-b border-bisat-border">
       <button
         onClick={() => onToggle(id)}
-        className="flex w-full items-center justify-between py-4 text-[15px] text-bisat-black/70"
+        className="flex w-full items-center justify-between py-4 text-[15px] text-bisat-black"
       >
         {title}
         <ChevronDown

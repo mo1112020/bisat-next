@@ -65,7 +65,7 @@ export const Checkout = () => {
   if (cart.length === 0 && !isPlacing) {
     return (
       <div className="pt-40 pb-24 min-h-screen bg-bisat-cream flex flex-col items-center justify-center px-4 text-center">
-        <p className="text-3xl font-serif mb-6 text-bisat-black">Your cart is empty</p>
+        <p className="text-3xl font-sans mb-6 text-bisat-black">Your cart is empty</p>
         <Link href="/shop" className="bg-bisat-black text-white px-10 py-4 text-[10px] uppercase tracking-[0.2em] font-medium hover:bg-bisat-charcoal transition-colors">
           Explore Collection
         </Link>
@@ -81,7 +81,7 @@ export const Checkout = () => {
 
   return (
     <div className="min-h-screen bg-bisat-cream pb-16 sm:pb-24">
-      <Meta title="Checkout" description="Complete your Bisāṭ order securely." />
+      <Meta title="Checkout" description="Complete your Bisatim order securely." />
 
       <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 pt-8">
 
@@ -91,7 +91,7 @@ export const Checkout = () => {
             <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
             Back to Cart
           </Link>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-serif text-bisat-black">Checkout</h1>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-sans text-bisat-black">Checkout</h1>
         </div>
 
         {/* Step indicator */}
@@ -138,7 +138,7 @@ export const Checkout = () => {
                       <div className="w-7 h-7 border border-bisat-border flex items-center justify-center">
                         <span className="text-bisat-black/50 text-xs font-medium">1</span>
                       </div>
-                      <h2 className="text-xl font-serif">Contact Information</h2>
+                      <h2 className="text-xl font-sans">Contact Information</h2>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                       <div>
@@ -170,7 +170,7 @@ export const Checkout = () => {
                       <div className="w-7 h-7 border border-bisat-border flex items-center justify-center">
                         <Truck size={13} className="text-bisat-black/40" />
                       </div>
-                      <h2 className="text-xl font-serif">Shipping Address</h2>
+                      <h2 className="text-xl font-sans">Shipping Address</h2>
                     </div>
                     <div>
                       <label className={labelClass}>Street Address</label>
@@ -239,7 +239,7 @@ export const Checkout = () => {
                       <div className="w-7 h-7 border border-bisat-border flex items-center justify-center">
                         <CreditCard size={13} className="text-bisat-black/40" />
                       </div>
-                      <h2 className="text-xl font-serif">Payment Details</h2>
+                      <h2 className="text-xl font-sans">Payment Details</h2>
                       <div className="ml-auto flex items-center gap-2">
                         <Lock size={12} className="text-bisat-black/30" />
                         <span className="text-[10px] uppercase tracking-widest font-bold text-bisat-black/30">Secure</span>
@@ -336,7 +336,7 @@ export const Checkout = () => {
               className="bg-bisat-black text-bisat-cream p-8 lg:sticky lg:top-28 overflow-hidden"
             >
 
-              <h2 className="text-2xl font-serif mb-8 relative z-10">Order Summary</h2>
+              <h2 className="text-2xl font-sans mb-8 relative z-10">Order Summary</h2>
 
               <div className="space-y-5 mb-8 relative z-10 max-h-64 overflow-y-auto pr-1 scrollbar-hide">
                 {cart.map(item => (
@@ -373,7 +373,7 @@ export const Checkout = () => {
 
               <div className="flex justify-between items-end border-t border-bisat-cream/10 pt-6 mb-6 relative z-10">
                 <span className="text-[10px] uppercase tracking-widest font-bold text-bisat-cream/60">Total</span>
-                <span className="text-3xl font-serif">${totalPrice.toLocaleString()}</span>
+                <span className="text-3xl font-sans">${totalPrice.toLocaleString()}</span>
               </div>
 
               <div className="flex items-center gap-3 bg-white/5 border border-white/10 px-4 py-3 relative z-10">
