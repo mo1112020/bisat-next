@@ -13,7 +13,7 @@ export const Cart = () => {
 
   if (cart.length === 0) {
     return (
-      <div className="min-h-screen bg-bisat-ivory flex flex-col items-center justify-center px-4">
+      <div className="min-h-screen bg-white flex flex-col items-center justify-center px-4">
         <ShoppingBag size={48} className="text-bisat-black/15 mb-6" strokeWidth={1} />
         <h2 className="text-2xl font-light text-bisat-black mb-3">{t('cart.empty_title')}</h2>
         <p className="text-bisat-black/45 mb-10 max-w-sm text-center text-sm font-light leading-relaxed">
@@ -30,11 +30,11 @@ export const Cart = () => {
   }
 
   return (
-    <div className="bg-bisat-ivory min-h-screen">
+    <div className="bg-white min-h-screen">
       <Meta title={t('cart.title')} />
 
       {/* ── Header ───────────────────────────────────────────────── */}
-      <div className="border-b border-bisat-border">
+      <div className="border-b border-bisat-black/[0.07]">
         <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-10">
           <p className="text-[9px] uppercase tracking-[0.3em] font-semibold text-bisat-black/30 mb-3">{t('cart.shopping_bag')}</p>
           <div className="flex items-end justify-between">
@@ -56,9 +56,9 @@ export const Cart = () => {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.07 }}
-                className="bg-white border border-bisat-border flex flex-row items-start gap-5 p-5 sm:p-6 group"
+                className="bg-white border border-bisat-black/[0.07] flex flex-row items-start gap-5 p-5 sm:p-6 group"
               >
-                <div className="w-20 h-28 sm:w-28 sm:h-36 flex-shrink-0 overflow-hidden bg-bisat-cream">
+                <div className="w-20 h-28 sm:w-28 sm:h-36 flex-shrink-0 overflow-hidden bg-[#f7f5f2]">
                   <img
                     src={item.images[0]}
                     alt={item.name}
@@ -76,11 +76,11 @@ export const Cart = () => {
                     {item.category} · {item.dimensions}
                   </p>
 
-                  <div className="flex items-center justify-between mt-auto pt-3 border-t border-bisat-border">
-                    <div className="flex items-center border border-bisat-border">
+                  <div className="flex items-center justify-between mt-auto pt-3 border-t border-bisat-black/[0.07]">
+                    <div className="flex items-center border border-bisat-black/[0.07]">
                       <button
                         onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                        className="p-2 text-bisat-black/40 hover:text-bisat-black hover:bg-bisat-cream transition-colors"
+                        className="p-2 text-bisat-black/40 hover:text-bisat-black hover:bg-[#f7f5f2] transition-colors"
                       >
                         <Minus size={12} />
                       </button>
@@ -88,7 +88,7 @@ export const Cart = () => {
                       <button
                         onClick={() => updateQuantity(item.id, item.quantity + 1)}
                         disabled={item.quantity >= item.stock}
-                        className="p-2 text-bisat-black/40 hover:text-bisat-black hover:bg-bisat-cream transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                        className="p-2 text-bisat-black/40 hover:text-bisat-black hover:bg-[#f7f5f2] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
                       >
                         <Plus size={12} />
                       </button>
@@ -109,10 +109,10 @@ export const Cart = () => {
 
           {/* ── Summary ──────────────────────────────────────────── */}
           <div className="lg:col-span-4">
-            <div className="bg-bisat-cream border border-bisat-border p-6 lg:sticky lg:top-28">
+            <div className="bg-[#f7f5f2] border border-bisat-black/[0.07] p-6 lg:sticky lg:top-28">
               <p className="text-[9px] uppercase tracking-[0.3em] font-semibold text-bisat-black/30 mb-5">{t('cart.order_summary')}</p>
 
-              <div className="space-y-3 mb-5 pb-5 border-b border-bisat-border">
+              <div className="space-y-3 mb-5 pb-5 border-b border-bisat-black/[0.07]">
                 <div className="flex justify-between text-sm">
                   <span className="text-bisat-black/45 font-light">{t('cart.subtotal')}</span>
                   <span className="font-normal">${totalPrice.toLocaleString()}</span>

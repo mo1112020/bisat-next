@@ -157,14 +157,14 @@ export const Shop = () => {
               type="number" min="0" placeholder="Min $"
               value={priceRange.min}
               onChange={e => setPriceRange(r => ({ ...r, min: e.target.value }))}
-              className="w-full border border-bisat-border px-2.5 py-1.5 text-xs focus:outline-none"
+              className="w-full border border-bisat-black/[0.07] px-2.5 py-1.5 text-xs focus:outline-none"
             />
             <span className="text-bisat-black/30 text-xs flex-shrink-0">–</span>
             <input
               type="number" min="0" placeholder="Max $"
               value={priceRange.max}
               onChange={e => setPriceRange(r => ({ ...r, max: e.target.value }))}
-              className="w-full border border-bisat-border px-2.5 py-1.5 text-xs focus:outline-none"
+              className="w-full border border-bisat-black/[0.07] px-2.5 py-1.5 text-xs focus:outline-none"
             />
           </div>
           <button
@@ -202,7 +202,7 @@ export const Shop = () => {
       )}
       {activeCount > 0 && (
         <button onClick={() => { clearAll(); onClose?.(); }}
-          className="w-full text-sm font-semibold text-bisat-black/40 hover:text-red-500 transition-colors flex items-center justify-center gap-2 py-2.5 border border-dashed border-bisat-border hover:border-red-200">
+          className="w-full text-sm font-semibold text-bisat-black/40 hover:text-red-500 transition-colors flex items-center justify-center gap-2 py-2.5 border border-dashed border-bisat-black/[0.07] hover:border-red-200">
           <X size={13} /> Clear All Filters
         </button>
       )}
@@ -210,7 +210,7 @@ export const Shop = () => {
   );
 
   return (
-    <div className="min-h-screen bg-bisat-ivory">
+    <div className="min-h-screen bg-[#f7f5f2]">
       <Meta
         title={categoryFilter ? `${categoryFilter} Rugs | Bisatim` : 'Shop All Rugs & Carpets | Bisatim'}
         description="Browse our collection of hand-woven Turkish rugs. Handmade, vintage, kilim and machine-woven carpets shipped worldwide."
@@ -222,42 +222,41 @@ export const Shop = () => {
       )} />
 
       {/* ── Page header ───────────────────────────────────────────────────── */}
-      <div className="bg-bisat-ivory border-b border-bisat-border">
-        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-6 sm:py-8">
-          {/* Breadcrumb */}
-          <nav className="flex items-center gap-1.5 mb-3 text-[11px] text-bisat-black/35 font-medium">
-            <Link href="/" className="hover:text-bisat-gold transition-colors">Home</Link>
-            <span>/</span>
-            {categoryFilter
-              ? <><Link href="/shop" className="hover:text-bisat-gold transition-colors">Shop</Link><span>/</span><span className="text-bisat-black/60">{categoryFilter}</span></>
-              : <span className="text-bisat-black/60">Shop</span>
-            }
-          </nav>
-          <div className="flex items-end justify-between gap-4">
-            <h1 className="text-2xl md:text-3xl font-light text-bisat-black">
-              {categoryFilter ? `${categoryFilter} Rugs` : searchTerm ? `Results for "${searchTerm}"` : 'All Rugs & Carpets'}
-            </h1>
-            <p className="text-bisat-black/35 text-sm font-medium pb-0.5 flex-shrink-0">
-              {isLoading ? '…' : `${filteredProducts.length} item${filteredProducts.length !== 1 ? 's' : ''}`}
+      <div className="border-b border-bisat-black/[0.07] bg-white">
+        <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 py-10 sm:py-14">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="mb-3 text-[10px] font-medium uppercase tracking-[0.3em] text-bisat-black/35">
+                Collection
+              </p>
+              <h1 className="font-rh text-[clamp(2rem,5vw,3.5rem)] font-light leading-[1.08] text-bisat-black">
+                {categoryFilter ? `${categoryFilter} Rugs` : searchTerm ? `Results for "${searchTerm}"` : 'All Rugs & Carpets'}
+              </h1>
+            </div>
+            <p className="pb-0.5 text-[10px] font-medium uppercase tracking-[0.24em] text-bisat-black/35 sm:flex-shrink-0">
+              {isLoading ? '…' : `${filteredProducts.length} piece${filteredProducts.length !== 1 ? 's' : ''}`}
             </p>
           </div>
         </div>
       </div>
 
       {/* ── Category quick-nav pills ──────────────────────────────────────── */}
-      <div className="bg-bisat-ivory border-b border-bisat-border sticky top-[4.5rem] z-20">
-        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
+      <div
+        className="sticky z-20 border-b border-bisat-black/[0.07] bg-[#f7f5f2]/95 backdrop-blur-sm"
+        style={{ top: 'calc(var(--topbar-h, 2.25rem) + 5rem)' }}
+      >
+        <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12">
           <div className="flex items-center gap-2 py-3 overflow-x-auto scrollbar-hide">
             <button onClick={() => setFilter('category','')}
-              className={`px-4 py-2 rounded-sm text-[11px] font-semibold whitespace-nowrap flex-shrink-0 transition-all ${
-                !categoryFilter ? 'bg-bisat-black text-white' : 'bg-transparent border border-bisat-border text-bisat-black/55 hover:border-bisat-black/20 hover:text-bisat-black'
+              className={`px-4 py-2 border text-[10px] font-semibold uppercase tracking-[0.22em] whitespace-nowrap flex-shrink-0 transition-all ${
+                !categoryFilter ? 'bg-bisat-black text-white' : 'bg-transparent border border-bisat-black/[0.07] text-bisat-black/55 hover:border-bisat-black/20 hover:text-bisat-black'
               }`}>
               All
             </button>
             {config.categories.map(cat => (
               <button key={cat} onClick={() => setFilter('category', categoryFilter === cat ? '' : cat)}
-                className={`px-4 py-2 rounded-sm text-[11px] font-semibold whitespace-nowrap flex-shrink-0 transition-all ${
-                  categoryFilter === cat ? 'bg-bisat-black text-white' : 'bg-transparent border border-bisat-border text-bisat-black/55 hover:border-bisat-black/20 hover:text-bisat-black'
+                className={`px-4 py-2 border text-[10px] font-semibold uppercase tracking-[0.22em] whitespace-nowrap flex-shrink-0 transition-all ${
+                  categoryFilter === cat ? 'bg-bisat-black text-white' : 'bg-transparent border border-bisat-black/[0.07] text-bisat-black/55 hover:border-bisat-black/20 hover:text-bisat-black'
                 }`}>
                 {cat}
               </button>
@@ -267,14 +266,14 @@ export const Shop = () => {
       </div>
 
       {/* ── Main layout ───────────────────────────────────────────────────── */}
-      <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-8">
+      <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 py-8 sm:py-10">
         <div className="flex gap-8">
 
           {/* ── Desktop sidebar ──────────────────────────────────────────── */}
           <aside className="hidden lg:block w-64 flex-shrink-0">
-            <div className="sticky top-[6rem]">
-              <div className="border border-bisat-border p-6">
-                <p className="text-[11px] uppercase tracking-[0.2em] font-medium text-bisat-black/35 mb-5">Filter By</p>
+            <div style={{ position: 'sticky', top: 'calc(var(--topbar-h, 2.25rem) + 7rem)' }}>
+              <div className="border border-bisat-black/[0.07] bg-white p-6">
+                <p className="mb-5 text-[10px] font-medium uppercase tracking-[0.28em] text-bisat-black/35">Filter</p>
                 <FilterPanel />
               </div>
             </div>
@@ -293,7 +292,7 @@ export const Shop = () => {
                   placeholder="Search by name, material, origin…"
                   value={searchTerm}
                   onChange={e => setSearchTerm(e.target.value)}
-                  className="w-full bg-white border border-bisat-border rounded-sm pl-9 pr-9 py-2.5 text-sm focus:outline-none focus:border-bisat-black/30 transition-all"
+                  className="w-full border border-bisat-black/[0.08] bg-white pl-9 pr-9 py-3 text-sm focus:border-bisat-black/30 focus:outline-none transition-all"
                 />
                 {searchTerm && (
                   <button onClick={() => setSearchTerm('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-bisat-black/25 hover:text-bisat-black">
@@ -304,8 +303,8 @@ export const Shop = () => {
 
               {/* Mobile filter button */}
               <button onClick={() => setMobileOpen(true)}
-                className={`lg:hidden flex items-center gap-1.5 px-3.5 py-2.5 rounded-sm text-[11px] font-semibold border transition-all flex-shrink-0 ${
-                  activeCount > 0 ? 'bg-bisat-black text-white border-bisat-black' : 'bg-transparent border-bisat-border text-bisat-black/55 hover:border-bisat-black/20'
+                className={`lg:hidden flex items-center gap-1.5 px-3.5 py-3 text-[10px] font-semibold uppercase tracking-[0.22em] border transition-all flex-shrink-0 ${
+                  activeCount > 0 ? 'bg-bisat-black text-white border-bisat-black' : 'bg-transparent border-bisat-black/[0.07] text-bisat-black/55 hover:border-bisat-black/20'
                 }`}>
                 <SlidersHorizontal size={13} />
                 Filter{activeCount > 0 && ` (${activeCount})`}
@@ -317,7 +316,7 @@ export const Shop = () => {
                 <select
                   value={sortBy}
                   onChange={e => setSortBy(e.target.value)}
-                  className="appearance-none bg-white border border-bisat-border rounded-sm pl-8 pr-8 py-2.5 text-[11px] font-semibold text-bisat-black/60 focus:outline-none cursor-pointer hover:border-bisat-black/20 transition-all"
+                  className="appearance-none border border-bisat-black/[0.08] bg-white pl-8 pr-8 py-3 text-[10px] font-semibold uppercase tracking-[0.22em] text-bisat-black/60 cursor-pointer focus:outline-none hover:border-bisat-black/20 transition-all"
                 >
                   {SORT_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
                 </select>
@@ -327,8 +326,8 @@ export const Shop = () => {
 
             {/* Active filter chips */}
             {(categoryFilter || roomFilter || sizeFilter || colorFilter || minPrice || maxPrice || searchTerm) && (
-              <div className="flex flex-wrap items-center gap-2 mb-5">
-                <span className="text-[10px] uppercase tracking-widest font-bold text-bisat-black/25">Filtering:</span>
+              <div className="mb-5 flex flex-wrap items-center gap-2">
+                <span className="text-[10px] font-semibold uppercase tracking-[0.24em] text-bisat-black/25">Filtering:</span>
                 {searchTerm    && <ActivePill label={`"${searchTerm}"`} onRemove={() => setSearchTerm('')} />}
                 {categoryFilter && <ActivePill label={categoryFilter} onRemove={() => setFilter('category','')} />}
                 {roomFilter     && <ActivePill label={roomFilter}     onRemove={() => setFilter('room','')}     />}
@@ -345,7 +344,7 @@ export const Shop = () => {
                     }}
                   />
                 )}
-                <button onClick={clearAll} className="text-[10px] text-bisat-black/30 hover:text-red-500 underline transition-colors ml-1">Clear all</button>
+                <button onClick={clearAll} className="ml-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-bisat-black/30 underline transition-colors hover:text-red-500">Clear all</button>
               </div>
             )}
 
@@ -353,7 +352,7 @@ export const Shop = () => {
             {isLoading ? (
               <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
                 {Array.from({ length: 9 }).map((_, i) => (
-                  <div key={i} className="bg-bisat-cream animate-pulse" style={{ aspectRatio: '3/4' }} />
+                  <div key={i} className="bg-[#f7f5f2] animate-pulse" style={{ aspectRatio: '3/4' }} />
                 ))}
               </div>
             ) : filteredProducts.length > 0 ? (
@@ -369,14 +368,11 @@ export const Shop = () => {
                 </AnimatePresence>
               </div>
             ) : (
-              <div className="py-24 text-center bg-white border border-bisat-border">
-                <div className="w-16 h-16 bg-bisat-cream flex items-center justify-center mx-auto mb-4">
-                  <Search size={24} className="text-bisat-black/20" />
-                </div>
-                <p className="text-bisat-black/40 text-xl font-light mb-2">No rugs found</p>
-                <p className="text-bisat-black/25 text-sm mb-6">Try adjusting your filters or search</p>
+              <div className="border border-bisat-black/[0.07] bg-white py-24 text-center">
+                <p className="mb-2 font-rh text-[1.75rem] font-light text-bisat-black/40">No rugs found</p>
+                <p className="mb-8 text-[14px] text-bisat-black/28">Try adjusting your filters or search</p>
                 <button onClick={clearAll}
-                  className="bg-bisat-black text-white px-8 py-3 text-xs uppercase tracking-[0.2em] font-bold hover:bg-bisat-charcoal transition-all">
+                  className="bg-bisat-black px-8 py-3.5 text-[10px] font-semibold uppercase tracking-[0.24em] text-white transition-colors hover:bg-bisat-black/85">
                   Clear Filters
                 </button>
               </div>
@@ -394,7 +390,7 @@ export const Shop = () => {
             <motion.div
               initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }}
               transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-              className="fixed bottom-0 left-0 right-0 bg-bisat-ivory z-50 lg:hidden border-t border-bisat-border max-h-[88vh] flex flex-col" style={{ boxShadow: '0 -4px 24px rgba(0,0,0,0.07)' }}>
+              className="fixed bottom-0 left-0 right-0 bg-white z-50 lg:hidden border-t border-bisat-black/[0.07] max-h-[88vh] flex flex-col" style={{ boxShadow: '0 -4px 24px rgba(0,0,0,0.07)' }}>
               {/* Handle */}
               <div className="flex justify-center pt-3 pb-1 flex-shrink-0">
                 <div className="w-10 h-1 bg-bisat-black/10 rounded-full" />
@@ -411,7 +407,7 @@ export const Shop = () => {
                     {SORT_OPTIONS.map(o => (
                       <button key={o.value} onClick={() => setSortBy(o.value)}
                         className={`flex items-center gap-2 px-3 py-2.5 text-[11px] font-semibold border transition-all ${
-                          sortBy === o.value ? 'bg-bisat-black text-white border-bisat-black' : 'bg-transparent border-bisat-border text-bisat-black/60'
+                          sortBy === o.value ? 'bg-bisat-black text-white border-bisat-black' : 'bg-transparent border-bisat-black/[0.07] text-bisat-black/60'
                         }`}>
                         {sortBy === o.value && <Check size={11} />}
                         {o.label}
@@ -451,7 +447,7 @@ function FilterPill({ label, active, onClick }: { label: string; active: boolean
       className={`flex items-center gap-1.5 px-3 py-1.5 rounded-sm text-[11px] font-semibold transition-all border ${
         active
           ? 'bg-bisat-black text-white border-bisat-black'
-          : 'bg-transparent border-bisat-border text-bisat-black/55 hover:border-bisat-black/30 hover:text-bisat-black'
+          : 'bg-transparent border-bisat-black/[0.07] text-bisat-black/55 hover:border-bisat-black/30 hover:text-bisat-black'
       }`}>
       {active && <Check size={10} />}
       {label}
@@ -461,7 +457,7 @@ function FilterPill({ label, active, onClick }: { label: string; active: boolean
 
 function ActivePill({ label, onRemove }: { label: string; onRemove: () => void }) {
   return (
-    <span className="flex items-center gap-1.5 px-2.5 py-1 bg-bisat-cream border border-bisat-border text-bisat-black/60 text-[11px] font-semibold">
+    <span className="flex items-center gap-1.5 px-2.5 py-1 bg-[#f7f5f2] border border-bisat-black/[0.07] text-bisat-black/60 text-[11px] font-semibold">
       {label}
       <button onClick={onRemove} className="hover:text-bisat-black transition-colors ml-0.5"><X size={11} /></button>
     </span>

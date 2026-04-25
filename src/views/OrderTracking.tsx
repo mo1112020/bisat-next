@@ -58,7 +58,7 @@ export const OrderTracking = () => {
   const currentStep = trackingResult ? getStatusStep(trackingResult.status) : 0;
 
   return (
-    <div className="pb-16 bg-bisat-cream min-h-screen">
+    <div className="pb-16 bg-[#f7f5f2] min-h-screen">
       <Meta title="Track Your Order" description="Follow your artisanal rug's journey from our looms to your home." />
       
       <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 pt-6">
@@ -69,7 +69,7 @@ export const OrderTracking = () => {
         />
 
         {/* Search Bar */}
-        <div className="bg-white border border-bisat-border p-5 sm:p-8 mb-8">
+        <div className="bg-white border border-bisat-black/[0.07] p-5 sm:p-8 mb-8">
           <form onSubmit={handleTrack} className="flex flex-col sm:flex-row gap-4">
             <div className="relative flex-grow">
               <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-bisat-black/30" size={20} />
@@ -78,7 +78,7 @@ export const OrderTracking = () => {
                 value={orderId}
                 onChange={(e) => setOrderId(e.target.value)}
                 placeholder="e.g. ORD-12345"
-                className="w-full bg-bisat-cream border border-bisat-border pl-14 pr-6 py-5 text-sm focus:ring-2 focus:ring-bisat-gold transition-all uppercase tracking-widest"
+                className="w-full bg-[#f7f5f2] border border-bisat-black/[0.07] pl-14 pr-6 py-5 text-sm focus:ring-2 focus:ring-bisat-gold transition-all uppercase tracking-widest"
               />
             </div>
             <button 
@@ -115,7 +115,7 @@ export const OrderTracking = () => {
               className="space-y-8"
             >
               {/* Progress Bar */}
-              <div className="bg-white border border-bisat-border p-10">
+              <div className="bg-white border border-bisat-black/[0.07] p-10">
                 <div className="flex justify-between items-center mb-12">
                   <div>
                     <h3 className="text-xl font-sans mb-1">Status: {trackingResult.status.charAt(0).toUpperCase() + trackingResult.status.slice(1)}</h3>
@@ -159,7 +159,7 @@ export const OrderTracking = () => {
 
               {/* Details Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="bg-white border border-bisat-border p-8">
+                <div className="bg-white border border-bisat-black/[0.07] p-8">
                   <div className="flex items-center mb-6 text-bisat-gold">
                     <MapPin size={20} className="mr-3" />
                     <h4 className="text-xs uppercase tracking-widest font-bold">Current Location</h4>
@@ -167,7 +167,7 @@ export const OrderTracking = () => {
                   <p className="text-bisat-black font-sans text-lg">{trackingResult.location}</p>
                 </div>
 
-                <div className="bg-white border border-bisat-border p-8">
+                <div className="bg-white border border-bisat-black/[0.07] p-8">
                   <div className="flex items-center mb-6 text-bisat-gold">
                     <Package size={20} className="mr-3" />
                     <h4 className="text-xs uppercase tracking-widest font-bold">Items in Shipment</h4>
@@ -190,11 +190,11 @@ export const OrderTracking = () => {
         <div className="mt-24 text-center">
           <h2 className="text-2xl font-sans mb-8">Common Questions</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
-            <div className="p-8 bg-white/50 border border-bisat-border">
+            <div className="p-8 bg-white/50 border border-bisat-black/[0.07]">
               <h4 className="font-bold text-sm mb-2">Where is my order ID?</h4>
               <p className="text-xs text-bisat-black/60 leading-relaxed">You can find your order ID in the confirmation email sent immediately after your purchase.</p>
             </div>
-            <div className="p-8 bg-white/50 border border-bisat-border">
+            <div className="p-8 bg-white/50 border border-bisat-black/[0.07]">
               <h4 className="font-bold text-sm mb-2">International Shipping</h4>
               <p className="text-xs text-bisat-black/60 leading-relaxed">Artisanal pieces may take longer to clear customs. We appreciate your patience as heritage travels.</p>
             </div>

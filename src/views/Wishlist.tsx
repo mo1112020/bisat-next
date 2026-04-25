@@ -12,7 +12,7 @@ export const Wishlist: React.FC = () => {
   const { wishlist } = useWishlist();
 
   return (
-    <div className="pb-16 bg-bisat-cream min-h-screen">
+    <div className="pb-16 bg-[#f7f5f2] min-h-screen">
       <Meta
         title="My Wishlist"
         description="Your saved rugs and carpets at Bisatim."
@@ -29,7 +29,7 @@ export const Wishlist: React.FC = () => {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center py-20 bg-bisat-cream/30 border border-bisat-border"
+          className="text-center py-20 bg-[#f7f5f2]/30 border border-bisat-black/[0.07]"
         >
           <Heart size={48} className="mx-auto mb-6 text-bisat-sand/40" />
           <h2 className="text-2xl font-sans mb-4">Your wishlist is empty</h2>

@@ -24,7 +24,7 @@ export const Reviews = () => {
     : null;
 
   return (
-    <div className="pb-16 bg-bisat-ivory min-h-screen">
+    <div className="pb-16 bg-white min-h-screen">
       <Meta
         title="Customer Reviews"
         description="Read verified reviews from customers around the world who brought a piece of Turkish heritage into their homes with Bisatim."
@@ -37,15 +37,15 @@ export const Reviews = () => {
         />
 
         {/* Filter */}
-        <div className="flex items-center gap-0 border border-bisat-border w-full sm:w-fit mb-10 overflow-x-auto scrollbar-hide">
+        <div className="flex items-center gap-0 border border-bisat-black/[0.07] w-full sm:w-fit mb-10 overflow-x-auto scrollbar-hide">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setFilter(cat)}
-              className={`px-6 py-2.5 text-[10px] font-medium uppercase tracking-[0.18em] transition-all duration-200 border-r border-bisat-border last:border-r-0 ${
+              className={`px-6 py-2.5 text-[10px] font-medium uppercase tracking-[0.18em] transition-all duration-200 border-r border-bisat-black/[0.07] last:border-r-0 ${
                 filter === cat
                 ? 'bg-bisat-black text-white'
-                : 'text-bisat-black/40 hover:text-bisat-black hover:bg-bisat-cream'
+                : 'text-bisat-black/40 hover:text-bisat-black hover:bg-[#f7f5f2]'
               }`}
             >
               {cat}
@@ -61,8 +61,8 @@ export const Reviews = () => {
               { label: 'Total Reviews', value: reviews.length.toLocaleString(), icon: MessageSquare },
               { label: 'Satisfaction', value: `${Math.round((reviews.filter(r => r.rating >= 4).length / reviews.length) * 100)}%`, icon: ThumbsUp },
             ].map((stat, i) => (
-              <div key={i} className="bg-white p-6 sm:p-8 border border-bisat-border flex items-center gap-5">
-                <div className="p-4 border border-bisat-border text-bisat-warm-gray">
+              <div key={i} className="bg-white p-6 sm:p-8 border border-bisat-black/[0.07] flex items-center gap-5">
+                <div className="p-4 border border-bisat-black/[0.07] text-bisat-warm-gray">
                   <stat.icon size={28} strokeWidth={1.5} />
                 </div>
                 <div>
@@ -88,7 +88,7 @@ export const Reviews = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 whileHover={{ y: -10 }}
-                className="bg-white p-6 sm:p-8 border border-bisat-border flex flex-col h-full"
+                className="bg-white p-6 sm:p-8 border border-bisat-black/[0.07] flex flex-col h-full"
               >
                 <div className="mb-6">
                   <span className="text-bisat-black/40 text-sm font-medium">{review.title}</span>

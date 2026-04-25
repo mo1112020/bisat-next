@@ -36,7 +36,7 @@ export const AIRoomPreview = () => {
               {t('aiRoom.description')}
             </p>
             
-            <button className="group flex items-center gap-3 text-bisat-cream hover:text-bisat-gold transition-colors">
+            <button className="group flex items-center gap-3 text-bisat-cream hover:text-bisat-black transition-colors">
               <span className="text-xs uppercase tracking-[0.2em] font-bold border-b border-bisat-cream/30 pb-1 group-hover:border-bisat-gold/50 transition-colors">
                 {t('aiRoom.button')}
               </span>
@@ -52,12 +52,12 @@ export const AIRoomPreview = () => {
             transition={{ duration: 0.8 }}
             className="relative"
           >
-            <div className="bg-bisat-cream/5 rounded-3xl p-8 border border-bisat-cream/10 backdrop-blur-sm">
+            <div className="bg-[#f7f5f2]/5 rounded-3xl p-8 border border-bisat-cream/10 backdrop-blur-sm">
               <div className="grid grid-rows-2 gap-4 h-[400px]">
                 
                 {/* Upload Area */}
                 <div className="border-2 border-dashed border-bisat-cream/20 rounded-2xl flex flex-col items-center justify-center space-y-4 hover:border-bisat-gold/40 transition-colors cursor-pointer group">
-                  <div className="bg-bisat-cream/10 p-4 rounded-full group-hover:bg-bisat-gold/20 transition-colors">
+                  <div className="bg-[#f7f5f2]/10 p-4 rounded-full group-hover:bg-bisat-gold/20 transition-colors">
                     <Upload className="text-bisat-gold" size={24} />
                   </div>
                   <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-bisat-cream/60 group-hover:text-bisat-cream transition-colors">
@@ -66,7 +66,7 @@ export const AIRoomPreview = () => {
                 </div>
 
                 {/* Processing State */}
-                <div className="bg-bisat-cream/5 rounded-2xl relative overflow-hidden flex items-center justify-center">
+                <div className="bg-[#f7f5f2]/5 rounded-2xl relative overflow-hidden flex items-center justify-center">
                   <div className="absolute inset-0 bg-gradient-to-br from-bisat-gold/10 to-transparent opacity-50" />
                   <div className="relative flex items-center gap-3 bg-black/40 backdrop-blur-md px-6 py-3 rounded-full border border-bisat-cream/10">
                     <Eye size={16} className="text-bisat-gold animate-pulse" />

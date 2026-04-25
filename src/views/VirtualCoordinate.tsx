@@ -1,66 +1,88 @@
 "use client";
 import React from 'react';
 import Link from 'next/link';
-import { Camera, LayoutGrid, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Meta } from '../components/Meta';
+
+const SHELL = 'mx-auto max-w-[1400px] px-5 sm:px-10 lg:px-16';
 
 export const VirtualCoordinate = () => {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="bg-white min-h-screen">
       <Meta
-        title="Virtual Coordinate"
+        title="Virtual Coordinate | Bisatim"
         description="Get support visualizing rugs in your space and narrowing down the right scale, color, and category."
       />
 
-      <section className="border-b border-bisat-border bg-white">
-        <div className="mx-auto max-w-[1400px] px-5 py-14 sm:px-8 lg:px-12 lg:py-18">
-          <p className="mb-4 text-[10px] font-medium uppercase tracking-[0.2em] text-bisat-black/38">Virtual Coordinate</p>
-          <h1 className="max-w-3xl font-sans text-4xl font-light tracking-[-0.05em] text-bisat-black sm:text-5xl">
-            Compare rug options with your room before you decide.
+      {/* ── Hero ─────────────────────────────────────── */}
+      <section className="bg-bisat-black px-5 py-28 text-white sm:py-40 lg:py-52">
+        <div className="mx-auto max-w-[1000px] text-center">
+          <p className="mb-8 text-[10px] font-medium uppercase tracking-[0.38em] text-white/30">
+            Virtual Coordinate
+          </p>
+          <h1 className="font-rh text-[clamp(2.5rem,6vw,5rem)] font-light leading-[1.1] text-white">
+            See the rug in your room before you decide.
           </h1>
-          <p className="mt-6 max-w-2xl text-[15px] leading-7 text-bisat-black/56">
-            Send a room photo and your preferred size or mood. We will suggest rugs that fit the layout, style, and scale of your space.
+          <p className="mx-auto mt-8 max-w-[520px] text-[15px] leading-[1.9] text-white/40">
+            Send a room photo. We suggest rugs that fit your layout, style, and scale — before you commit to a single piece.
           </p>
         </div>
       </section>
 
-      <section className="border-b border-bisat-border bg-bisat-cream py-14 sm:py-18">
-        <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
-          <div className="grid gap-px bg-bisat-border md:grid-cols-2">
-            <div className="bg-white px-6 py-10 sm:px-10">
-              <Camera size={20} className="mb-5 text-bisat-black/45" strokeWidth={1.5} />
-              <h2 className="font-sans text-[1.9rem] font-light tracking-[-0.04em] text-bisat-black">1. Share your room</h2>
-              <p className="mt-4 text-[14px] leading-6 text-bisat-black/56">
-                Send a clear photo of the space along with any notes about dimensions, preferred tones, and intended use.
+      {/* ── Steps ────────────────────────────────────── */}
+      <section className="bg-[#f7f5f2] py-20 sm:py-28">
+        <div className={SHELL}>
+          <div className="grid grid-cols-1 gap-px bg-bisat-black/[0.07] sm:grid-cols-2">
+            <div className="bg-white px-8 py-10 sm:px-10 sm:py-12">
+              <p className="mb-6 font-rh text-[1.5rem] font-light text-bisat-black/18">01</p>
+              <h3 className="font-rh text-[1.5rem] font-light leading-snug text-bisat-black sm:text-[1.75rem]">
+                Share your room
+              </h3>
+              <p className="mt-4 text-[14px] leading-[1.8] text-bisat-black/50">
+                Send a clear photo of the space along with notes about dimensions, preferred tones, and intended use.
               </p>
             </div>
-            <div className="bg-white px-6 py-10 sm:px-10">
-              <LayoutGrid size={20} className="mb-5 text-bisat-black/45" strokeWidth={1.5} />
-              <h2 className="font-sans text-[1.9rem] font-light tracking-[-0.04em] text-bisat-black">2. Receive recommendations</h2>
-              <p className="mt-4 text-[14px] leading-6 text-bisat-black/56">
-                We reply with a focused set of options that are closer to your room proportions and your preferred style direction.
+            <div className="bg-white px-8 py-10 sm:px-10 sm:py-12">
+              <p className="mb-6 font-rh text-[1.5rem] font-light text-bisat-black/18">02</p>
+              <h3 className="font-rh text-[1.5rem] font-light leading-snug text-bisat-black sm:text-[1.75rem]">
+                Receive recommendations
+              </h3>
+              <p className="mt-4 text-[14px] leading-[1.8] text-bisat-black/50">
+                We reply with a focused set of options closer to your room&apos;s proportions and preferred style direction.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-white py-14 sm:py-18">
-        <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
-          <div className="border border-bisat-border bg-white px-6 py-10 sm:px-10">
-            <p className="mb-3 text-[10px] font-medium uppercase tracking-[0.2em] text-bisat-black/38">Start</p>
-            <h2 className="font-sans text-4xl font-light tracking-[-0.05em] text-bisat-black sm:text-5xl">
-              Ready to coordinate your room?
-            </h2>
-            <p className="mt-5 max-w-2xl text-[15px] leading-7 text-bisat-black/56">
-              Contact us with your room photo and we will help narrow down the right collection and dimensions.
-            </p>
-            <div className="mt-8">
-              <Link href="/pages/contact" className="bisat-button">
-                Contact us
-                <ArrowRight size={12} />
-              </Link>
-            </div>
+      {/* ── What to include ──────────────────────────── */}
+      <section className="bg-white px-5 py-20 sm:py-28">
+        <div className="mx-auto max-w-[680px] text-center">
+          <p className="mb-8 text-[10px] font-medium uppercase tracking-[0.34em] text-bisat-black/30">
+            What to include
+          </p>
+          <h2 className="font-rh text-[2rem] font-light leading-[1.2] text-bisat-black sm:text-[2.75rem]">
+            The more context, the better the match.
+          </h2>
+          <p className="mt-7 text-[15px] leading-[1.9] text-bisat-black/50">
+            Room dimensions, current furniture, desired mood, budget range — any detail that helps us understand the space will lead to a more precise recommendation.
+          </p>
+        </div>
+      </section>
+
+      {/* ── CTA ──────────────────────────────────────── */}
+      <section className="bg-bisat-black py-20 sm:py-28">
+        <div className="mx-auto max-w-[560px] px-5 text-center">
+          <h2 className="font-rh text-[2.25rem] font-light leading-[1.15] text-white sm:text-[3rem]">
+            Ready to coordinate your room?
+          </h2>
+          <p className="mt-5 text-[15px] leading-[1.85] text-white/38">
+            Contact us with your room photo and we will help narrow down the right collection and dimensions.
+          </p>
+          <div className="mt-10">
+            <Link href="/pages/contact" className="inline-flex items-center gap-3 bg-white px-8 py-4 text-[11px] font-semibold uppercase tracking-[0.24em] text-bisat-black transition-colors hover:bg-white/85">
+              Contact us <ArrowRight size={12} />
+            </Link>
           </div>
         </div>
       </section>

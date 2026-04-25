@@ -8,6 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default async function AboutPage() {
-  const siteImgs = await getSiteImages();
-  return <About artisanImage={siteImgs.about_artisan} />;
+  return <About />;
 }

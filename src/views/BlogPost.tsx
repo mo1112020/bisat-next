@@ -37,7 +37,7 @@ export const BlogPost = () => {
   }
 
   return (
-    <div className="pb-32 bg-bisat-ivory min-h-screen">
+    <div className="pb-32 bg-white min-h-screen">
       <Meta
         title={`${post.title} | The Journal | Bisatim`}
         description={post.metaDescription || post.excerpt}
@@ -98,7 +98,7 @@ export const BlogPost = () => {
           {/* Sidebar */}
           <aside className="lg:w-1/4 order-2 lg:order-1">
             <div className="sticky top-32 space-y-16">
-              <Link href="/blog" className="group inline-flex items-center text-[10px] uppercase tracking-[0.3em] font-bold text-bisat-black/60 hover:text-bisat-gold transition-colors">
+              <Link href="/blog" className="group inline-flex items-center text-[10px] uppercase tracking-[0.3em] font-bold text-bisat-black/60 hover:text-bisat-black transition-colors">
                 <ArrowLeft size={14} className="mr-4 group-hover:-translate-x-2 transition-transform" />
                 Back to Journal
               </Link>
@@ -106,10 +106,10 @@ export const BlogPost = () => {
               <div className="pt-12 border-t border-bisat-black/5">
                 <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-bisat-black/60 mb-8 block">Share Story</span>
                 <div className="flex space-x-6">
-                  <button className="text-bisat-black/60 hover:text-bisat-gold transition-colors">
+                  <button className="text-bisat-black/60 hover:text-bisat-black transition-colors">
                     <Share2 size={20} />
                   </button>
-                  <button className="text-bisat-black/60 hover:text-bisat-gold transition-colors">
+                  <button className="text-bisat-black/60 hover:text-bisat-black transition-colors">
                     <Bookmark size={20} />
                   </button>
                 </div>

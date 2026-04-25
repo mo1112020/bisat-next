@@ -27,6 +27,12 @@
   --color-bisat-footer: #f4efea;
   --color-bisat-border: #e8e2db;
   --color-bisat-topbar: #ffffff;
+
+  /* Brand palette */
+  --color-brand-cream: #F6F4E8;
+  --color-brand-sage:  #E5EEE4;
+  --color-brand-mint:  #C0E1D2;
+  --color-brand-rose:  #DC9B9B;
 }
 
 @layer base {
@@ -36,9 +42,9 @@
 
   html, body {
     @apply overflow-x-hidden;
-    @apply bg-bisat-ivory text-bisat-black font-sans antialiased selection:bg-bisat-gold/18 selection:text-bisat-black;
+    @apply bg-white text-bisat-black font-sans antialiased selection:bg-bisat-black/10 selection:text-bisat-black;
     scrollbar-gutter: stable;
-    letter-spacing: 0.015em;
+    letter-spacing: 0.012em;
     font-size: 14px;
     line-height: 1.68;
   }
@@ -59,7 +65,6 @@
     text-decoration: none;
   }
 
-
   input,
   textarea,
   select,
@@ -69,12 +74,16 @@
 }
 
 @layer components {
+  .bisat-shell {
+    @apply mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12;
+  }
+
   .glass {
-    @apply bg-white/65 backdrop-blur-xl border border-white/40;
+    @apply border border-white/40 bg-white/65 backdrop-blur-xl;
   }
   
   .glass-dark {
-    @apply bg-bisat-black/85 backdrop-blur-xl border border-white/10;
+    @apply border border-white/10 bg-bisat-black/85 backdrop-blur-xl;
   }
 
   .text-balance {
@@ -82,35 +91,35 @@
   }
 
   .bisat-kicker {
-    @apply text-[11px] uppercase tracking-[0.2em] font-medium text-bisat-warm-gray;
+    @apply text-[11px] font-medium uppercase tracking-[0.2em] text-bisat-warm-gray;
   }
 
   .bisat-heading {
-    @apply font-sans font-normal text-bisat-black tracking-[-0.025em];
+    @apply font-sans font-normal tracking-[-0.025em] text-bisat-black;
   }
 
   .bisat-copy {
-    @apply text-bisat-black/55 leading-relaxed;
+    @apply leading-relaxed text-bisat-black/55;
   }
 
   .bisat-button {
-    @apply inline-flex items-center justify-center gap-2 border border-bisat-black bg-bisat-black px-7 py-3.5 text-[11px] font-medium uppercase tracking-[0.18em] text-white transition-colors duration-200 hover:border-bisat-gold-dark hover:bg-bisat-gold-dark;
+    @apply inline-flex items-center justify-center gap-2 border border-bisat-black bg-bisat-black px-7 py-3.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-white transition-all duration-200 hover:bg-white hover:text-bisat-black;
   }
 
   .bisat-button-secondary {
-    @apply inline-flex items-center justify-center gap-2 border border-bisat-border bg-white/55 px-7 py-3.5 text-[11px] font-medium uppercase tracking-[0.18em] text-bisat-black transition-colors duration-200 hover:border-bisat-gold hover:bg-bisat-cream/80 hover:text-bisat-gold-dark;
+    @apply inline-flex items-center justify-center gap-2 border border-bisat-black/25 bg-white px-7 py-3.5 text-[11px] font-medium uppercase tracking-[0.2em] text-bisat-black transition-all duration-200 hover:border-bisat-black hover:bg-bisat-black hover:text-white;
   }
 
   .bisat-link {
-    @apply inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] font-medium text-bisat-black/55 transition-colors duration-200 hover:text-bisat-gold-dark;
+    @apply inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.18em] text-bisat-black/55 transition-colors duration-200 hover:text-bisat-black;
   }
 
   .bisat-chip {
-    @apply inline-flex items-center gap-2 border border-bisat-border bg-white/65 px-3 py-1.5 text-[10px] uppercase tracking-[0.2em] font-semibold text-bisat-black/60;
+    @apply inline-flex items-center gap-2 border border-bisat-border bg-white/65 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-bisat-black/60;
   }
 
   .bisat-panel {
-    @apply border border-bisat-border bg-white/55;
+    @apply border border-bisat-border bg-white/70;
   }
 
   .bisat-input {
@@ -120,14 +129,19 @@
   .bisat-grid-border {
     @apply gap-px bg-bisat-border;
   }
+
+  .bisat-section-heading {
+    @apply mt-3 font-sans text-[2rem] font-normal leading-[1.14] tracking-[-0.025em] text-bisat-black sm:text-[2.5rem];
+  }
+
+  .bisat-section-copy {
+    @apply mt-4 text-[15px] leading-7 text-bisat-black/52;
+  }
 }
 
-/* ── Nav / Footer: lock all links to black, no hover change ─────────────── */
-nav a, nav a:link, nav a:visited, nav a:hover, nav a:focus, nav a:active,
-nav button, nav button:hover,
-footer a, footer a:link, footer a:visited, footer a:hover, footer a:focus, footer a:active {
-  color: #1a1a1a !important;
-  text-decoration: none !important;
+nav a,
+footer a {
+  text-decoration: none;
 }
 
 .perspective-1000 {
@@ -147,15 +161,10 @@ footer a, footer a:link, footer a:visited, footer a:hover, footer a:focus, foote
   scrollbar-width: none;
 }
 
-/* ── Topbar CSS variable (set by inline script / Topbar component) ─────────── */
 :root {
   --topbar-h: 2.25rem;
 }
-/* Hide topbar immediately for dismissed users — inline script adds this class
-   before first paint, so there is no flash even though SSR renders the HTML. */
-/* Removed topbar-dismissed rule to force visibility during design review */
 
-/* ── Scroll-reveal animation (IntersectionObserver driven) ─────────────────── */
 .scroll-animate {
   opacity: 0;
   transform: translateY(30px) scale(0.98);
@@ -163,32 +172,34 @@ footer a, footer a:link, footer a:visited, footer a:hover, footer a:focus, foote
               transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
+
 .scroll-animate-visible {
   opacity: 1;
   transform: translateY(0) scale(1);
 }
 
-/* ── Hero load animation (CSS keyframe, plays immediately on load) ─────────── */
 @keyframes heroFadeUp {
   from { opacity: 0; transform: translateY(28px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+
 .hero-animate {
   animation: heroFadeUp 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
+
 .hero-animate-2 {
   animation: heroFadeUp 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
 }
+
 .hero-animate-3 {
   animation: heroFadeUp 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
 }
 
-
-/* ── Topbar marquee animation ────────────────────────────────────────────── */
 @keyframes topbar-marquee {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
+
 .animate-topbar-marquee {
   animation: topbar-marquee 22s linear infinite;
 }

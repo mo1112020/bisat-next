@@ -29,7 +29,7 @@ export const OrderConfirmation = () => {
   })();
 
   return (
-    <div className="min-h-screen bg-bisat-cream pb-24">
+    <div className="min-h-screen bg-[#f7f5f2] pb-24">
       <Meta title="Order Confirmed" description="Your Bisatim order has been placed successfully." />
 
       <div className="max-w-3xl mx-auto px-5 sm:px-8 lg:px-12 pt-6">
@@ -69,7 +69,7 @@ export const OrderConfirmation = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.55 }}
-          className="bg-white overflow-hidden border border-bisat-border mb-8"
+          className="bg-white overflow-hidden border border-bisat-black/[0.07] mb-8"
         >
           <div className="bg-bisat-black text-bisat-cream px-8 py-6 flex items-center justify-between">
             <div>
@@ -106,7 +106,7 @@ export const OrderConfirmation = () => {
                     <div className={`w-10 h-10 flex items-center justify-center mb-3 z-10 relative transition-all border ${
                       s.active
                         ? 'bg-bisat-black border-bisat-black text-white'
-                        : 'border-bisat-border text-bisat-black/20'
+                        : 'border-bisat-black/[0.07] text-bisat-black/20'
                     }`}>
                       <s.icon size={16} />
                     </div>
@@ -125,7 +125,7 @@ export const OrderConfirmation = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7 }}
-          className="flex items-start gap-4 bg-bisat-cream border border-bisat-border px-6 py-5 mb-10"
+          className="flex items-start gap-4 bg-[#f7f5f2] border border-bisat-black/[0.07] px-6 py-5 mb-10"
         >
           <Mail size={18} className="text-bisat-gold mt-0.5 flex-shrink-0" />
           <p className="text-sm text-bisat-black/60 leading-relaxed">
@@ -149,7 +149,7 @@ export const OrderConfirmation = () => {
           </Link>
           <Link
             href="/shop"
-            className="flex-1 border border-bisat-border text-bisat-black/60 py-5 text-[10px] uppercase tracking-[0.2em] font-medium hover:border-bisat-black hover:text-bisat-black transition-colors flex items-center justify-center gap-3 group"
+            className="flex-1 border border-bisat-black/[0.07] text-bisat-black/60 py-5 text-[10px] uppercase tracking-[0.2em] font-medium hover:border-bisat-black hover:text-bisat-black transition-colors flex items-center justify-center gap-3 group"
           >
             Continue Shopping
             <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />

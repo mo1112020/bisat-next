@@ -9,7 +9,7 @@ export const KVKK = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="pb-16 bg-bisat-ivory min-h-screen">
+    <div className="pb-16 bg-white min-h-screen">
       <Meta
         title="KVKK Aydınlatma Metni"
         description="Kişisel verilerin korunması kanunu kapsamında Bisatim aydınlatma metni."

@@ -19,7 +19,7 @@ const COUNTRIES = [
 ];
 
 const inputClass =
-  'w-full bg-white border border-bisat-border px-5 py-4 text-sm focus:outline-none transition-all placeholder:text-bisat-black/25 text-bisat-black';
+  'w-full bg-white border border-bisat-black/[0.07] px-5 py-4 text-sm focus:outline-none transition-all placeholder:text-bisat-black/25 text-bisat-black';
 
 const labelClass = 'block text-[10px] uppercase tracking-[0.25em] font-bold text-bisat-black/50 mb-2';
 
@@ -64,7 +64,7 @@ export const Checkout = () => {
 
   if (cart.length === 0 && !isPlacing) {
     return (
-      <div className="pt-40 pb-24 min-h-screen bg-bisat-cream flex flex-col items-center justify-center px-4 text-center">
+      <div className="pt-40 pb-24 min-h-screen bg-[#f7f5f2] flex flex-col items-center justify-center px-4 text-center">
         <p className="text-3xl font-sans mb-6 text-bisat-black">Your cart is empty</p>
         <Link href="/shop" className="bg-bisat-black text-white px-10 py-4 text-[10px] uppercase tracking-[0.2em] font-medium hover:bg-bisat-charcoal transition-colors">
           Explore Collection
@@ -80,14 +80,14 @@ export const Checkout = () => {
   })();
 
   return (
-    <div className="min-h-screen bg-bisat-cream pb-16 sm:pb-24">
+    <div className="min-h-screen bg-[#f7f5f2] pb-16 sm:pb-24">
       <Meta title="Checkout" description="Complete your Bisatim order securely." />
 
       <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 pt-8">
 
         {/* Header */}
         <div className="mb-6 sm:mb-10">
-          <Link href="/cart" className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.25em] font-bold text-bisat-black/40 hover:text-bisat-gold transition-colors mb-4 sm:mb-6 group">
+          <Link href="/cart" className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.25em] font-bold text-bisat-black/40 hover:text-bisat-black transition-colors mb-4 sm:mb-6 group">
             <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
             Back to Cart
           </Link>
@@ -104,7 +104,7 @@ export const Checkout = () => {
               >
                 <span className={`w-7 h-7 flex items-center justify-center text-[10px] font-medium transition-all border ${
                   step === s ? 'bg-bisat-black border-bisat-black text-white' :
-                  step === 'payment' && s === 'shipping' ? 'bg-bisat-black border-bisat-black text-white' : 'border-bisat-border text-bisat-black/30'
+                  step === 'payment' && s === 'shipping' ? 'bg-bisat-black border-bisat-black text-white' : 'border-bisat-black/[0.07] text-bisat-black/30'
                 }`}>
                   {step === 'payment' && s === 'shipping' ? <Check size={14} /> : i + 1}
                 </span>
@@ -133,9 +133,9 @@ export const Checkout = () => {
                   className="space-y-8"
                 >
                   {/* Contact */}
-                  <div className="bg-white border border-bisat-border p-8 space-y-6">
+                  <div className="bg-white border border-bisat-black/[0.07] p-8 space-y-6">
                     <div className="flex items-center gap-3 mb-2">
-                      <div className="w-7 h-7 border border-bisat-border flex items-center justify-center">
+                      <div className="w-7 h-7 border border-bisat-black/[0.07] flex items-center justify-center">
                         <span className="text-bisat-black/50 text-xs font-medium">1</span>
                       </div>
                       <h2 className="text-xl font-sans">Contact Information</h2>
@@ -165,9 +165,9 @@ export const Checkout = () => {
                   </div>
 
                   {/* Shipping Address */}
-                  <div className="bg-white border border-bisat-border p-8 space-y-6">
+                  <div className="bg-white border border-bisat-black/[0.07] p-8 space-y-6">
                     <div className="flex items-center gap-3 mb-2">
-                      <div className="w-7 h-7 border border-bisat-border flex items-center justify-center">
+                      <div className="w-7 h-7 border border-bisat-black/[0.07] flex items-center justify-center">
                         <Truck size={13} className="text-bisat-black/40" />
                       </div>
                       <h2 className="text-xl font-sans">Shipping Address</h2>
@@ -234,9 +234,9 @@ export const Checkout = () => {
                   onSubmit={handlePaymentSubmit}
                   className="space-y-8"
                 >
-                  <div className="bg-white border border-bisat-border p-8 space-y-6">
+                  <div className="bg-white border border-bisat-black/[0.07] p-8 space-y-6">
                     <div className="flex items-center gap-3 mb-2">
-                      <div className="w-7 h-7 border border-bisat-border flex items-center justify-center">
+                      <div className="w-7 h-7 border border-bisat-black/[0.07] flex items-center justify-center">
                         <CreditCard size={13} className="text-bisat-black/40" />
                       </div>
                       <h2 className="text-xl font-sans">Payment Details</h2>
@@ -287,7 +287,7 @@ export const Checkout = () => {
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-3 bg-bisat-cream border border-bisat-border px-5 py-4">
+                    <div className="flex items-center gap-3 bg-[#f7f5f2] border border-bisat-black/[0.07] px-5 py-4">
                       <ShieldCheck size={15} className="text-bisat-warm-gray flex-shrink-0" />
                       <p className="text-xs text-bisat-black/50 leading-relaxed">
                         Your payment is encrypted with 256-bit SSL. We never store card details.
@@ -299,7 +299,7 @@ export const Checkout = () => {
                     <button
                       type="button"
                       onClick={() => setStep('shipping')}
-                      className="flex items-center gap-2 px-8 py-5 border border-bisat-border text-[11px] uppercase tracking-[0.2em] font-medium text-bisat-black/50 hover:border-bisat-black hover:text-bisat-black transition-all group"
+                      className="flex items-center gap-2 px-8 py-5 border border-bisat-black/[0.07] text-[11px] uppercase tracking-[0.2em] font-medium text-bisat-black/50 hover:border-bisat-black hover:text-bisat-black transition-all group"
                     >
                       <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
                       Back

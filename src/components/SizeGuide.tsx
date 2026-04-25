@@ -66,7 +66,7 @@ export const SizeGuide = ({ trigger }: SizeGuideProps) => {
     <>
       <div onClick={() => setOpen(true)} className="cursor-pointer">
         {trigger ?? (
-          <button className="flex items-center gap-1.5 text-[11px] font-bold text-bisat-black/40 uppercase tracking-wider hover:text-bisat-gold transition-colors">
+          <button className="flex items-center gap-1.5 text-[11px] font-bold text-bisat-black/40 uppercase tracking-wider hover:text-bisat-black transition-colors">
             <Ruler size={13} /> Size Guide
           </button>
         )}
@@ -93,7 +93,7 @@ export const SizeGuide = ({ trigger }: SizeGuideProps) => {
                   <h2 className="font-sans text-xl text-bisat-black">Rug Size Guide</h2>
                   <p className="text-[11px] text-bisat-black/40 mt-0.5">Find the perfect size for your space</p>
                 </div>
-                <button onClick={() => setOpen(false)} className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-bisat-cream transition-colors text-bisat-black/40">
+                <button onClick={() => setOpen(false)} className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#f7f5f2] transition-colors text-bisat-black/40">
                   <X size={18} />
                 </button>
               </div>
@@ -102,7 +102,7 @@ export const SizeGuide = ({ trigger }: SizeGuideProps) => {
                 {/* Size cards */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {SIZES.map(s => (
-                    <div key={s.label} className="flex gap-4 p-4 rounded-2xl border border-bisat-black/6 hover:border-bisat-gold/30 hover:bg-bisat-cream/30 transition-all group">
+                    <div key={s.label} className="flex gap-4 p-4 rounded-2xl border border-bisat-black/6 hover:border-bisat-gold/30 hover:bg-[#f7f5f2]/30 transition-all group">
                       {/* Visual box */}
                       <div className="flex-shrink-0 flex items-end justify-center" style={{ width: 56, height: 56 }}>
                         <div

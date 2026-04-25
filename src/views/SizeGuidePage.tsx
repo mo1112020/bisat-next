@@ -45,14 +45,14 @@ const ROOM_GUIDES = [
 
 export const SizeGuidePage = () => {
   return (
-    <div className="bg-bisat-ivory min-h-screen">
+    <div className="bg-white min-h-screen">
       <Meta
         title="Rug Size Guide | Bisatim"
         description="Find the perfect rug size for every room. Our comprehensive size guide covers living rooms, bedrooms, dining rooms, hallways, and more."
       />
 
       {/* ── Header ───────────────────────────────────────────────── */}
-      <div className="border-b border-bisat-border">
+      <div className="border-b border-bisat-black/[0.07]">
         <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-14 sm:py-20">
           <p className="text-[9px] uppercase tracking-[0.3em] font-semibold text-bisat-black/30 mb-4">Shopping Help</p>
           <h1 className="text-4xl sm:text-5xl font-light text-bisat-black mb-4 leading-tight">
@@ -65,7 +65,7 @@ export const SizeGuidePage = () => {
       </div>
 
       {/* ── The golden rule ───────────────────────────────────────── */}
-      <section className="bg-bisat-cream border-b border-bisat-border py-10">
+      <section className="bg-[#f7f5f2] border-b border-bisat-black/[0.07] py-10">
         <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
           <div className="flex items-start gap-4 max-w-2xl">
             <div className="w-8 h-8 bg-bisat-black flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -85,22 +85,22 @@ export const SizeGuidePage = () => {
       <section className="py-14 sm:py-20">
         <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
           <p className="text-[9px] uppercase tracking-[0.3em] font-semibold text-bisat-black/30 mb-10">Size Categories</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-bisat-border">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-bisat-black/[0.07]">
             {SIZES.map((size) => (
-              <div key={size.name} className="bg-bisat-ivory p-8">
+              <div key={size.name} className="bg-white p-8">
                 <div className="flex items-start justify-between mb-4">
                   <div>
                     <h3 className="text-xl font-normal text-bisat-black">{size.name}</h3>
                     <p className="text-[11px] text-bisat-black/40 font-light mt-0.5">{size.dimensions}</p>
                   </div>
-                  <span className="text-[10px] uppercase tracking-[0.2em] font-semibold bg-bisat-cream text-bisat-black/50 px-2.5 py-1">{size.sqm}</span>
+                  <span className="text-[10px] uppercase tracking-[0.2em] font-semibold bg-[#f7f5f2] text-bisat-black/50 px-2.5 py-1">{size.sqm}</span>
                 </div>
                 <div className="flex flex-wrap gap-1.5 mb-4">
                   {size.rooms.map(r => (
-                    <span key={r} className="text-[10px] border border-bisat-border text-bisat-black/50 px-2 py-0.5 font-light">{r}</span>
+                    <span key={r} className="text-[10px] border border-bisat-black/[0.07] text-bisat-black/50 px-2 py-0.5 font-light">{r}</span>
                   ))}
                 </div>
-                <p className="text-[12px] text-bisat-black/50 font-light leading-relaxed border-t border-bisat-border pt-4">{size.tip}</p>
+                <p className="text-[12px] text-bisat-black/50 font-light leading-relaxed border-t border-bisat-black/[0.07] pt-4">{size.tip}</p>
               </div>
             ))}
           </div>
@@ -108,13 +108,13 @@ export const SizeGuidePage = () => {
       </section>
 
       {/* ── Room-by-room guide ────────────────────────────────────── */}
-      <section className="bg-bisat-cream border-t border-bisat-border py-14 sm:py-20">
+      <section className="bg-[#f7f5f2] border-t border-bisat-black/[0.07] py-14 sm:py-20">
         <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
           <p className="text-[9px] uppercase tracking-[0.3em] font-semibold text-bisat-black/30 mb-3">By Room</p>
           <h2 className="text-2xl sm:text-3xl font-light text-bisat-black mb-10">Room-by-Room Recommendations</h2>
-          <div className="divide-y divide-bisat-border border border-bisat-border">
+          <div className="divide-y divide-bisat-black/[0.07] border border-bisat-black/[0.07]">
             {ROOM_GUIDES.map((guide) => (
-              <div key={guide.room} className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 p-6 bg-bisat-ivory hover:bg-white transition-colors">
+              <div key={guide.room} className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 p-6 bg-white hover:bg-white transition-colors">
                 <div>
                   <p className="font-normal text-bisat-black text-sm">{guide.room}</p>
                 </div>
@@ -133,7 +133,7 @@ export const SizeGuidePage = () => {
       </section>
 
       {/* ── Measurement tip ───────────────────────────────────────── */}
-      <section className="border-t border-bisat-border py-10 bg-bisat-ivory">
+      <section className="border-t border-bisat-black/[0.07] py-10 bg-white">
         <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
           <div className="max-w-xl">
             <p className="text-[9px] uppercase tracking-[0.3em] font-semibold text-bisat-black/30 mb-3">Pro Tip</p>

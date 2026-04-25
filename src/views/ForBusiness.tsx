@@ -1,22 +1,24 @@
 "use client";
 import React from 'react';
 import Link from 'next/link';
-import { Briefcase, Palette, Ruler, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Meta } from '../components/Meta';
+
+const SHELL = 'mx-auto max-w-[1400px] px-5 sm:px-10 lg:px-16';
 
 const OFFERINGS = [
   {
-    icon: Briefcase,
-    title: 'Hospitality and commercial sourcing',
-    body: 'Support for hotels, restaurants, offices, and multi-room interior projects that need consistent quality and lead times.',
+    num: '01',
+    title: 'Hospitality & commercial sourcing',
+    body: 'Support for hotels, restaurants, offices, and multi-room interior projects that need consistent quality and reliable lead times.',
   },
   {
-    icon: Palette,
-    title: 'Material and color consultation',
-    body: 'Guidance on texture, tone, and durability so selections fit the project concept and daily use requirements.',
+    num: '02',
+    title: 'Material & colour consultation',
+    body: 'Guidance on texture, tone, and durability so selections fit the project concept and daily-use requirements.',
   },
   {
-    icon: Ruler,
+    num: '03',
     title: 'Custom size coordination',
     body: 'Recommendations for scale, placement, and custom orders when standard formats do not fit the plan.',
   },
@@ -24,54 +26,74 @@ const OFFERINGS = [
 
 export const ForBusiness = () => {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="bg-white min-h-screen">
       <Meta
-        title="For Business"
+        title="For Business | Bisatim"
         description="Business inquiries, sourcing support, and project coordination for hospitality, retail, and interior design projects."
       />
 
-      <section className="border-b border-bisat-border bg-white">
-        <div className="mx-auto max-w-[1400px] px-5 py-14 sm:px-8 lg:px-12 lg:py-18">
-          <p className="mb-4 text-[10px] font-medium uppercase tracking-[0.2em] text-bisat-black/38">For Business</p>
-          <h1 className="max-w-3xl font-sans text-4xl font-light tracking-[-0.05em] text-bisat-black sm:text-5xl">
-            Project support for designers, retailers, and hospitality spaces.
+      {/* ── Hero ─────────────────────────────────────── */}
+      <section className="bg-bisat-black px-5 py-28 text-white sm:py-40 lg:py-52">
+        <div className="mx-auto max-w-[1000px] text-center">
+          <p className="mb-8 text-[10px] font-medium uppercase tracking-[0.38em] text-white/30">
+            For Business
+          </p>
+          <h1 className="font-rh text-[clamp(2.5rem,6vw,5rem)] font-light leading-[1.1] text-white">
+            Project support for designers and commercial spaces.
           </h1>
-          <p className="mt-6 max-w-2xl text-[15px] leading-7 text-bisat-black/56">
-            Bisatim helps commercial clients source rugs for residential developments, hospitality projects, curated retail spaces, and private design commissions.
+          <p className="mx-auto mt-8 max-w-[520px] text-[15px] leading-[1.9] text-white/40">
+            We help commercial clients source rugs for hospitality projects, residential developments, and private design commissions.
           </p>
         </div>
       </section>
 
-      <section className="border-b border-bisat-border bg-bisat-cream py-14 sm:py-18">
-        <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
-          <div className="grid gap-px bg-bisat-border md:grid-cols-3">
-            {OFFERINGS.map(({ icon: Icon, title, body }) => (
-              <div key={title} className="bg-white px-6 py-8 sm:px-8">
-                <Icon size={20} className="mb-5 text-bisat-black/45" strokeWidth={1.5} />
-                <h2 className="font-sans text-[1.7rem] font-light tracking-[-0.04em] text-bisat-black">{title}</h2>
-                <p className="mt-4 text-[14px] leading-6 text-bisat-black/56">{body}</p>
+      {/* ── Offerings ────────────────────────────────── */}
+      <section className="bg-[#f7f5f2] py-20 sm:py-28">
+        <div className={SHELL}>
+          <div className="grid grid-cols-1 gap-px bg-bisat-black/[0.07] sm:grid-cols-3">
+            {OFFERINGS.map(item => (
+              <div key={item.num} className="bg-white px-8 py-10 sm:px-10 sm:py-12">
+                <p className="mb-6 font-rh text-[1.5rem] font-light text-bisat-black/18">{item.num}</p>
+                <h3 className="font-rh text-[1.5rem] font-light leading-snug text-bisat-black sm:text-[1.75rem]">
+                  {item.title}
+                </h3>
+                <p className="mt-4 text-[14px] leading-[1.8] text-bisat-black/50">
+                  {item.body}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-white py-14 sm:py-18">
-        <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
-          <div className="border border-bisat-border bg-white px-6 py-10 sm:px-10">
-            <p className="mb-3 text-[10px] font-medium uppercase tracking-[0.2em] text-bisat-black/38">Contact</p>
-            <h2 className="font-sans text-4xl font-light tracking-[-0.05em] text-bisat-black sm:text-5xl">
-              Tell us about your project.
-            </h2>
-            <p className="mt-5 max-w-2xl text-[15px] leading-7 text-bisat-black/56">
-              Share the scope, timeline, and location of your project. We can then suggest product directions, custom options, and next steps.
-            </p>
-            <div className="mt-8">
-              <Link href="/pages/contact" className="bisat-button">
-                Contact us
-                <ArrowRight size={12} />
-              </Link>
-            </div>
+      {/* ── Who we work with ─────────────────────────── */}
+      <section className="bg-white px-5 py-20 sm:py-28">
+        <div className="mx-auto max-w-[680px] text-center">
+          <p className="mb-8 text-[10px] font-medium uppercase tracking-[0.34em] text-bisat-black/30">
+            Who we work with
+          </p>
+          <h2 className="font-rh text-[2rem] font-light leading-[1.2] text-bisat-black sm:text-[2.75rem]">
+            Hotels, design studios, retail, and private commissions.
+          </h2>
+          <p className="mt-7 text-[15px] leading-[1.9] text-bisat-black/50">
+            From boutique guesthouses to large-scale residential developments, we adapt our sourcing and consultation process to fit the scope and timeline of each project.
+          </p>
+        </div>
+      </section>
+
+      {/* ── CTA ──────────────────────────────────────── */}
+      <section className="bg-bisat-black py-20 sm:py-28">
+        <div className="mx-auto max-w-[560px] px-5 text-center">
+          <h2 className="font-rh text-[2.25rem] font-light leading-[1.15] text-white sm:text-[3rem]">
+            Tell us about your project.
+          </h2>
+          <p className="mt-5 text-[15px] leading-[1.85] text-white/38">
+            Share the scope, timeline, and location. We will suggest product directions, custom options, and next steps.
+          </p>
+          <div className="mt-10">
+            <Link href="/pages/contact" className="inline-flex items-center gap-3 bg-white px-8 py-4 text-[11px] font-semibold uppercase tracking-[0.24em] text-bisat-black transition-colors hover:bg-white/85">
+              Contact us <ArrowRight size={12} />
+            </Link>
           </div>
         </div>
       </section>

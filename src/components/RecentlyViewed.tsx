@@ -12,7 +12,7 @@ export const RecentlyViewed: React.FC = () => {
   if (recentlyViewed.length === 0) return null;
 
   return (
-    <section className="overflow-hidden border-t border-bisat-border bg-white py-14 sm:py-20">
+    <section className="overflow-hidden border-t border-bisat-black/[0.07] bg-white py-14 sm:py-20">
       <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
         <div className="mb-6 flex items-start justify-between sm:mb-10">
           <div>

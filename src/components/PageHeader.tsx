@@ -9,7 +9,7 @@ interface PageHeaderProps {
 
 export const PageHeader: React.FC<PageHeaderProps> = ({ badge, title, description, children }) => {
   return (
-    <div className="mb-14 border-b border-bisat-border pb-10 pt-12 sm:pt-16">
+    <div className="mb-14 border-b border-bisat-black/[0.07] pb-10 pt-12 sm:pt-16">
       {badge && (
         <p className="bisat-kicker mb-5">
           {badge}

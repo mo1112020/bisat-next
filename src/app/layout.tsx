@@ -37,7 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           id="topbar-init"
           strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var d=localStorage.getItem('bisat_topbar_dismissed');if(d==='1'){document.documentElement.style.setProperty('--topbar-h','0px');document.documentElement.classList.add('topbar-dismissed');}else{document.documentElement.style.setProperty('--topbar-h','2.5rem');}}catch(e){}})();`,
+            __html: `(function(){try{var d=localStorage.getItem('bisat_topbar_dismissed');if(d==='1'){document.documentElement.style.setProperty('--topbar-h','0px');document.documentElement.classList.add('topbar-dismissed');}else{document.documentElement.style.setProperty('--topbar-h','2.25rem');}}catch(e){}})();`,
           }}
         />
         <link rel="alternate" hrefLang="en" href="https://bisatim.com" />

@@ -1,16 +1,16 @@
 "use client";
+
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Product } from '../data/products';
 import { Heart, ShoppingBag } from 'lucide-react';
+import { Product } from '../data/products';
 import { useWishlist } from '../context/WishlistContext';
 import { useCart } from '../context/CartContext';
 
 interface ProductCardProps {
   product: Product;
   priority?: boolean;
-  /** Rughaus-style “New” ribbon on the image */
   newArrival?: boolean;
 }
 
@@ -23,13 +23,15 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
   const displayPrice = isOnSale ? product.salePrice! : product.price;
   const [justAdded, setJustAdded] = useState(false);
 
-  const handleWishlist = (e: React.MouseEvent) => {
-    e.preventDefault(); e.stopPropagation();
+  const handleWishlist = (event: React.MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
     toggleWishlist(product);
   };
 
-  const handleAdd = (e: React.MouseEvent) => {
-    e.preventDefault(); e.stopPropagation();
+  const handleAdd = (event: React.MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
     if (isSoldOut) return;
     addToCart(product);
     setJustAdded(true);
@@ -37,10 +39,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
   };
 
   return (
-    <div className="group flex flex-col h-full">
+    <div className="group flex h-full flex-col">
       <Link
         href={`/products/${product.id}`}
-        className="relative block aspect-[3/4] overflow-hidden bg-bisat-cream"
+        className="relative block aspect-[3/4] overflow-hidden bg-[#f7f5f2]"
       >
         <Image
           src={product.images[0]}
@@ -100,8 +102,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
               justAdded
                 ? 'bg-bisat-black text-white'
                 : isSoldOut
-                ? 'cursor-not-allowed bg-white/80 text-bisat-black/35'
-                : 'bg-white text-bisat-black hover:bg-bisat-black hover:text-white'
+                  ? 'cursor-not-allowed bg-white/80 text-bisat-black/35'
+                  : 'bg-white text-bisat-black hover:bg-bisat-black hover:text-white'
             }`}
           >
             <ShoppingBag size={11} strokeWidth={1.5} />
@@ -116,7 +118,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
         </p>
         <div className="flex items-start justify-between gap-3">
           <Link href={`/products/${product.id}`} className="block flex-grow">
-            <h3 className="font-sans text-[13px] font-normal leading-snug text-bisat-black transition-colors duration-150 group-hover:text-bisat-gold-dark line-clamp-2">
+            <h3 className="font-sans text-[13px] font-normal leading-snug text-bisat-black transition-colors duration-150 group-hover:text-bisat-black line-clamp-2">
               {product.name}
             </h3>
           </Link>

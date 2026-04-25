@@ -1,8 +1,8 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Instagram, Check, ArrowRight } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
 
 const PinterestIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="w-[15px] h-[15px]">
@@ -19,44 +19,43 @@ const TikTokIcon = () => (
 interface CollectionLink { label: string; href: string; }
 
 export const Footer = () => {
-  const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
   const [collections, setCollections] = useState<CollectionLink[]>([
-    { label: 'Handmade Rugs', href: '/shop?category=Handmade' },
-    { label: 'Vintage Rugs',  href: '/shop?category=Vintage' },
-    { label: 'Kilim',         href: '/shop?category=Kilim' },
-    { label: 'Machine Woven', href: '/shop?category=Machine' },
+    { label: 'Handmade Rugs', href: '/collections/rug?category=Handmade' },
+    { label: 'Vintage Rugs', href: '/collections/rug?category=Vintage' },
+    { label: 'Kilim', href: '/collections/rug?category=Kilim' },
+    { label: 'Machine Woven', href: '/collections/rug?category=Machine' },
   ]);
   const [instagramUrl, setInstagramUrl] = useState('https://www.instagram.com/bisatim_/');
   const [pinterestUrl, setPinterestUrl] = useState('https://tr.pinterest.com/bisatim_/');
-  const [tiktokUrl, setTiktokUrl]       = useState('https://www.tiktok.com/@bisatim_');
+  const [tiktokUrl, setTiktokUrl] = useState('https://www.tiktok.com/@bisatim_');
 
   useEffect(() => {
     fetch('/api/store-config')
-      .then(r => r.json())
+      .then(response => response.json())
       .then(data => {
         if (data.categories?.length) {
           setCollections((data.categories as string[]).map((name: string) => ({
-            label: name + ' Rugs',
-            href: '/shop?category=' + encodeURIComponent(name),
+            label: `${name} Rugs`,
+            href: `/collections/rug?category=${encodeURIComponent(name)}`,
           })));
         }
       })
       .catch(() => {});
 
     fetch('/api/site-settings-public')
-      .then(r => r.json())
+      .then(response => response.json())
       .then(data => {
         if (data.social_instagram) setInstagramUrl(data.social_instagram as string);
         if (data.social_pinterest) setPinterestUrl(data.social_pinterest as string);
-        if (data.social_tiktok)    setTiktokUrl(data.social_tiktok as string);
+        if (data.social_tiktok) setTiktokUrl(data.social_tiktok as string);
       })
       .catch(() => {});
   }, []);
 
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubscribe = (event: React.FormEvent) => {
+    event.preventDefault();
     if (!email) return;
     setSubscribed(true);
     setEmail('');
@@ -64,48 +63,48 @@ export const Footer = () => {
 
   const socials = [
     { href: instagramUrl, label: 'Instagram', icon: <Instagram size={15} /> },
-    { href: pinterestUrl, label: 'Pinterest',  icon: <PinterestIcon /> },
-    { href: tiktokUrl,    label: 'TikTok',     icon: <TikTokIcon /> },
+    { href: pinterestUrl, label: 'Pinterest', icon: <PinterestIcon /> },
+    { href: tiktokUrl, label: 'TikTok', icon: <TikTokIcon /> },
   ];
 
   const companyLinks = [
-    { label: 'About',             href: '/pages/about' },
-    { label: 'Living With Rugs',  href: '/pages/living-with-rugs' },
-    { label: 'Articles',          href: '/pages/articles' },
-    { label: 'Case Gallery',      href: '/pages/case-gallery' },
+    { label: 'About', href: '/pages/about' },
+    { label: 'Living With Rugs', href: '/pages/living-with-rugs' },
+    { label: 'Articles', href: '/pages/articles' },
+    { label: 'Case Gallery', href: '/pages/case-gallery' },
     { label: 'Virtual Coordinate', href: '/pages/virtual-coordinate' },
-    { label: 'Contact',           href: '/pages/contact' },
+    { label: 'Contact', href: '/pages/contact' },
   ];
 
   const supportLinks = [
-    { label: 'All Products',         href: '/collections/rug' },
-    { label: 'Authentic Rugs',       href: '/collections/authentic-rugs' },
-    { label: 'Easy Rugs',            href: '/collections/easy-rugs' },
-    { label: 'Vintage Rugs',         href: '/collections/vintage-rugs' },
-    { label: 'Custom Rugs',          href: '/collections/custom-rugs' },
+    { label: 'All Products', href: '/collections/rug' },
+    { label: 'Authentic Rugs', href: '/collections/authentic-rugs' },
+    { label: 'Easy Rugs', href: '/collections/easy-rugs' },
+    { label: 'Vintage Rugs', href: '/collections/vintage-rugs' },
+    { label: 'Custom Rugs', href: '/collections/custom-rugs' },
     { label: 'Shipping and Payment', href: '/pages/shipping-and-payment' },
-    { label: 'For Business',         href: '/pages/for-business' },
+    { label: 'For Business', href: '/pages/for-business' },
   ];
 
   return (
-    <footer className="bg-bisat-footer text-bisat-black">
-      <div className="border-b border-bisat-black/8">
-        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-12 sm:py-16">
-          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+    <footer className="bg-[#f7f5f2] text-bisat-black">
+      <div className="border-b border-bisat-black/[0.07]">
+        <div className="mx-auto max-w-[1400px] px-5 py-12 sm:px-8 sm:py-16 lg:px-12">
+          <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
             <div className="max-w-md">
-              <p className="mb-4 text-[11px] font-medium uppercase tracking-[0.2em] text-bisat-black/38">Newsletter</p>
-              <h2 className="font-sans text-[1.6rem] font-normal leading-snug tracking-[-0.02em] text-bisat-black mb-3">
+              <p className="mb-4 text-[10px] font-medium uppercase tracking-[0.28em] text-bisat-black/35">Newsletter</p>
+              <h2 className="mb-3 font-rh text-[1.75rem] font-light leading-snug text-bisat-black">
                 Receive new arrivals, styling notes, and private drops.
               </h2>
-              <p className="text-[14px] leading-relaxed text-bisat-black/52" suppressHydrationWarning>
+              <p className="text-[13px] leading-relaxed text-bisat-black/48" suppressHydrationWarning>
                 Join our list for exclusive previews and artisanal stories.
               </p>
             </div>
 
-            <div className="w-full lg:w-auto lg:min-w-[380px]">
+            <div className="w-full lg:min-w-[380px] lg:w-auto">
               {subscribed ? (
                 <div className="flex items-center gap-3 border-b border-bisat-black/20 py-4">
-                  <Check size={13} className="text-bisat-warm-gray flex-shrink-0" />
+                  <Check size={13} className="shrink-0 text-bisat-warm-gray" />
                   <div>
                     <p className="text-[13px] font-medium text-bisat-black">You're in.</p>
                     <p className="text-[12px] text-bisat-black/45">Watch your inbox for something special.</p>
@@ -117,14 +116,14 @@ export const Footer = () => {
                     type="email"
                     required
                     value={email}
-                    onChange={e => setEmail(e.target.value)}
+                    onChange={event => setEmail(event.target.value)}
                     placeholder="Email address"
                     suppressHydrationWarning
                     className="min-w-0 flex-1 bg-transparent pb-3 text-[14px] text-bisat-black placeholder:text-bisat-black/30 focus:outline-none"
                   />
                   <button
                     type="submit"
-                    className="flex flex-shrink-0 items-center gap-1.5 pb-3 text-[11px] font-medium uppercase tracking-[0.18em] text-bisat-black whitespace-nowrap"
+                    className="flex shrink-0 items-center gap-1.5 whitespace-nowrap pb-3 text-[11px] font-medium uppercase tracking-[0.18em] text-bisat-black"
                   >
                     Subscribe
                     <ArrowRight size={11} />
@@ -136,44 +135,38 @@ export const Footer = () => {
         </div>
       </div>
 
-      <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-14 sm:py-20">
-        <div className="grid grid-cols-2 md:grid-cols-12 gap-10 sm:gap-12 mb-14 sm:mb-20">
+      <div className="mx-auto max-w-[1400px] px-5 py-14 sm:px-8 sm:py-20 lg:px-12">
+        <div className="mb-14 grid grid-cols-2 gap-10 sm:gap-12 md:grid-cols-12 sm:mb-20">
           <div className="col-span-2 md:col-span-4">
             <Link href="/" className="mb-4 block font-rh text-[1.9rem] font-light tracking-[-0.03em] text-bisat-black">
               Bisāṭim
             </Link>
-            <p className="mb-7 max-w-[260px] text-sm leading-relaxed text-bisat-black/52" suppressHydrationWarning>
+            <p className="mb-7 max-w-[260px] text-[13px] leading-relaxed text-bisat-black/48" suppressHydrationWarning>
               Curating the world&apos;s finest hand-woven rugs and carpets. Each piece tells a story of heritage and craftsmanship.
             </p>
 
-            <div className="flex items-center gap-3">
-              {socials.map(s => (
+            <div className="flex items-center gap-2.5">
+              {socials.map(social => (
                 <a
-                  key={s.label}
-                  href={s.href}
+                  key={social.label}
+                  href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={s.label}
-                  className="flex h-9 w-9 items-center justify-center border border-bisat-border bg-white text-bisat-black"
+                  aria-label={social.label}
+                  className="flex h-9 w-9 items-center justify-center border border-bisat-black/[0.12] text-bisat-black/40 transition-colors hover:border-bisat-black/30 hover:text-bisat-black"
                 >
-                  {s.icon}
+                  {social.icon}
                 </a>
               ))}
             </div>
           </div>
 
           <div className="col-span-1 md:col-span-2 md:col-start-6">
-            <h4 className="mb-5 text-[11px] font-medium uppercase tracking-[0.2em] text-bisat-black">Product</h4>
+            <h4 className="mb-5 text-[10px] font-medium uppercase tracking-[0.24em] text-bisat-black/40">Product</h4>
             <ul className="space-y-3">
-              {[
-                { label: 'All Products', href: '/collections/rug' },
-                { label: 'Authentic Rugs', href: '/collections/authentic-rugs' },
-                { label: 'Easy Rugs', href: '/collections/easy-rugs' },
-                { label: 'Vintage Rugs', href: '/collections/vintage-rugs' },
-                { label: 'Custom Rugs', href: '/collections/custom-rugs' },
-              ].map(link => (
-                <li key={link.label}>
-                  <Link href={link.href} className="inline-block text-[13px] text-bisat-black">
+              {collections.slice(0, 5).map(link => (
+                <li key={link.href}>
+                  <Link href={link.href} className="inline-block text-[13px] text-bisat-black/58 transition-colors hover:text-bisat-black">
                     {link.label}
                   </Link>
                 </li>
@@ -182,11 +175,11 @@ export const Footer = () => {
           </div>
 
           <div className="col-span-1 md:col-span-2">
-            <h4 className="mb-5 text-[11px] font-medium uppercase tracking-[0.2em] text-bisat-black">Service</h4>
+            <h4 className="mb-5 text-[10px] font-medium uppercase tracking-[0.24em] text-bisat-black/40">Service</h4>
             <ul className="space-y-3">
               {companyLinks.map(link => (
                 <li key={link.label}>
-                  <Link href={link.href} className="inline-block text-[13px] text-bisat-black">
+                  <Link href={link.href} className="inline-block text-[13px] text-bisat-black/58 transition-colors hover:text-bisat-black">
                     {link.label}
                   </Link>
                 </li>
@@ -195,27 +188,20 @@ export const Footer = () => {
           </div>
 
           <div className="col-span-1 md:col-span-2">
-            <h4 className="mb-5 text-[11px] font-medium uppercase tracking-[0.2em] text-bisat-black">Information</h4>
+            <h4 className="mb-5 text-[10px] font-medium uppercase tracking-[0.24em] text-bisat-black/40">Information</h4>
             <ul className="space-y-3">
               {supportLinks.map(link => (
                 <li key={link.label}>
-                  <Link href={link.href} className="inline-block text-[13px] text-bisat-black">
+                  <Link href={link.href} className="inline-block text-[13px] text-bisat-black/58 transition-colors hover:text-bisat-black">
                     {link.label}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
-
         </div>
 
-        <div className="border-t border-bisat-black/8 pt-10 pb-6 text-center">
-          <p className="font-rh text-lg font-light tracking-[0.12em] text-bisat-black/72 sm:text-xl">
-            Bisāṭim — mood and craft for the everyday home
-          </p>
-        </div>
-
-        <div className="border-t border-bisat-black/8 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="flex flex-col items-center justify-between gap-4 border-t border-bisat-black/[0.07] pt-8 sm:flex-row">
           <p className="text-[10px] font-medium uppercase tracking-[0.24em] text-bisat-black/34" suppressHydrationWarning>
             © 2026 Bisāṭim. All Rights Reserved.
           </p>

@@ -26,14 +26,14 @@ export const Blog = () => {
   }, []);
 
   return (
-    <div className="bg-bisat-ivory min-h-screen">
+    <div className="bg-white min-h-screen">
       <Meta
         title="Journal | Bisatim"
         description="Explore the world of hand-woven rugs, interior design tips, and stories from our global artisan partners."
       />
 
       {/* ── Header ───────────────────────────────────────────────── */}
-      <div className="border-b border-bisat-border">
+      <div className="border-b border-bisat-black/[0.07]">
         <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-14 sm:py-20">
           <p className="text-[9px] uppercase tracking-[0.3em] font-semibold text-bisat-black/30 mb-4">The Journal</p>
           <h1 className="text-4xl sm:text-5xl font-light text-bisat-black mb-4 leading-tight">Stories & Guides</h1>
@@ -45,7 +45,7 @@ export const Blog = () => {
 
       {/* ── Post grid ─────────────────────────────────────────────── */}
       <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-14 sm:py-20">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-bisat-border">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-bisat-black/[0.07]">
           {posts.map((post, i) => (
             <motion.article
               key={post.id}
@@ -53,7 +53,7 @@ export const Blog = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.07, duration: 0.35 }}
               viewport={{ once: true }}
-              className="group flex flex-col bg-bisat-ivory hover:bg-white transition-colors duration-300"
+              className="group flex flex-col bg-white hover:bg-white transition-colors duration-300"
             >
               <Link href={`/blog/${post.id}`} className="block aspect-[4/3] overflow-hidden relative">
                 <Image
@@ -76,14 +76,14 @@ export const Blog = () => {
                     <Calendar size={10} />
                     {post.date}
                   </div>
-                  <span className="w-1 h-1 bg-bisat-border" />
+                  <span className="w-1 h-1 bg-bisat-black/[0.07]" />
                   <div className="flex items-center gap-1.5">
                     <User size={10} />
                     {post.author}
                   </div>
                 </div>
 
-                <h2 className="text-lg font-normal text-bisat-black mb-3 leading-snug group-hover:text-bisat-gold transition-colors duration-200 line-clamp-2">
+                <h2 className="text-lg font-normal text-bisat-black mb-3 leading-snug group-hover:text-bisat-black transition-colors duration-200 line-clamp-2">
                   <Link href={`/blog/${post.id}`}>{post.title}</Link>
                 </h2>
                 <p className="text-[12px] text-bisat-black/45 leading-relaxed font-light line-clamp-3 mb-5 flex-grow">
@@ -103,7 +103,7 @@ export const Blog = () => {
         </div>
 
         {/* ── Newsletter ────────────────────────────────────────── */}
-        <div className="mt-px bg-bisat-cream border border-bisat-border p-10 md:p-16 text-center">
+        <div className="mt-px bg-[#f7f5f2] border border-bisat-black/[0.07] p-10 md:p-16 text-center">
           <p className="text-[9px] uppercase tracking-[0.3em] font-semibold text-bisat-black/30 mb-4">The Inner Circle</p>
           <h2 className="text-2xl sm:text-3xl font-light text-bisat-black mb-3">Stay in the loop</h2>
           <p className="text-bisat-black/45 text-sm font-light mb-8 max-w-md mx-auto leading-relaxed">
@@ -122,7 +122,7 @@ export const Blog = () => {
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 placeholder="Your email address"
-                className="flex-grow border border-bisat-border bg-white px-5 py-3 text-sm focus:outline-none focus:border-bisat-black/30 transition-colors placeholder:text-bisat-black/25"
+                className="flex-grow border border-bisat-black/[0.07] bg-white px-5 py-3 text-sm focus:outline-none focus:border-bisat-black/30 transition-colors placeholder:text-bisat-black/25"
               />
               <button className="bg-bisat-black text-white px-8 py-3 text-[10px] uppercase tracking-[0.2em] font-semibold hover:bg-bisat-charcoal transition-colors whitespace-nowrap">
                 Subscribe

@@ -9,7 +9,7 @@ export const Terms = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="pb-16 bg-bisat-ivory min-h-screen">
+    <div className="pb-16 bg-white min-h-screen">
       <Meta
         title="Terms & Conditions"
         description="Terms and conditions governing use of the Bisatim online store and purchase of artisanal rugs."

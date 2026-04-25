@@ -6,7 +6,7 @@ import { PageHeader } from '../components/PageHeader';
 
 export const Craftsmanship = () => {
   return (
-    <div className="pb-16 bg-bisat-cream min-h-screen">
+    <div className="pb-16 bg-[#f7f5f2] min-h-screen">
       <Meta
         title="Craftsmanship"
         description="Discover the artisanal craft behind every Bisatim rug — centuries of tradition, natural materials, and human patience woven into each piece."
@@ -47,7 +47,7 @@ export const Craftsmanship = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.15, duration: 0.7 }}
-              className="bg-white border border-bisat-border p-10"
+              className="bg-white border border-bisat-black/[0.07] p-10"
             >
               <span className="text-bisat-gold font-bold text-[10px] uppercase tracking-[0.4em] mb-6 block">{item.step}</span>
               <h3 className="text-2xl font-sans mb-4 text-bisat-black">{item.title}</h3>

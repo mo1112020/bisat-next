@@ -1,151 +1,144 @@
 'use client';
 import React from 'react';
-import Image from 'next/image';
-import { motion } from 'motion/react';
 import { Meta } from '../components/Meta';
 import { Schema, getOrganizationSchema } from '../components/Schema';
-import { ArrowRight, Globe, Heart, ShieldCheck, Users } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
-interface AboutProps {
-  artisanImage?: string;
-}
+const SHELL = 'mx-auto max-w-[1400px] px-5 sm:px-10 lg:px-16';
 
-export const About = ({ artisanImage }: AboutProps) => {
-  const artisanSrc = artisanImage || 'https://images.unsplash.com/photo-1528360983277-13d401cdc186';
-
+export const About = () => {
   return (
-    <div className="bg-bisat-ivory min-h-screen">
+    <div className="bg-white min-h-screen">
       <Meta
-        title="Our Story"
-        description="Learn about Bisatim's journey, our mission to preserve artisanal heritage, and our connection to global weavers."
+        title="Our Story | Bisatim"
+        description="Learn about Bisatim's journey, our mission to preserve artisanal heritage, and our connection to master weavers."
       />
       <Schema data={getOrganizationSchema()} />
 
-      {/* ── Header ───────────────────────────────────────────────── */}
-      <div className="border-b border-bisat-border">
-        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-14 sm:py-20">
-          <p className="text-[9px] uppercase tracking-[0.3em] font-semibold text-bisat-black/30 mb-4">Our Heritage</p>
-          <h1 className="text-4xl sm:text-5xl font-light text-bisat-black mb-5 leading-tight max-w-xl">
-            Weaving Stories Across Borders
-          </h1>
-          <p className="text-bisat-black/50 text-sm font-light leading-relaxed max-w-lg mb-10">
-            Bisatim was born from a simple realization: that a rug is more than just a floor covering. It is a canvas of history, a testament to human patience, and a bridge between cultures.
+      {/* ── Hero ─────────────────────────────────────── */}
+      <section className="bg-bisat-black px-5 py-28 text-white sm:py-40 lg:py-52">
+        <div className="mx-auto max-w-[1000px] text-center">
+          <p className="mb-8 text-[10px] font-medium uppercase tracking-[0.38em] text-white/30">
+            Our Story
           </p>
-          <div className="flex items-center gap-12 sm:gap-16 pt-8 border-t border-bisat-border">
-            {[
-              { label: 'Countries', value: '15+' },
-              { label: 'Artisans', value: '200+' },
-              { label: 'Handmade', value: '100%' },
-            ].map((stat) => (
-              <div key={stat.label}>
-                <p className="text-3xl sm:text-4xl font-light text-bisat-black mb-1">{stat.value}</p>
-                <p className="text-[9px] uppercase tracking-[0.25em] font-semibold text-bisat-black/30">{stat.label}</p>
-              </div>
-            ))}
-          </div>
+          <h1 className="font-rh text-[clamp(2.5rem,6vw,5rem)] font-light leading-[1.1] text-white">
+            Weaving heritage into contemporary rooms.
+          </h1>
+          <p className="mx-auto mt-8 max-w-[520px] text-[15px] leading-[1.9] text-white/40">
+            Bisatim was built on one belief: that a rug is not a commodity. It is a record of time, labour, and place — made to outlive every trend.
+          </p>
         </div>
-      </div>
+      </section>
 
-      {/* ── Mission ───────────────────────────────────────────────── */}
-      <section className="bg-bisat-cream border-b border-bisat-border py-14 sm:py-20">
-        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
-          <div className="max-w-2xl mb-12">
-            <p className="text-[9px] uppercase tracking-[0.3em] font-semibold text-bisat-black/30 mb-4">Our Purpose</p>
-            <h2 className="text-3xl font-light text-bisat-black mb-5 leading-tight">Preserving the Art of the Hand</h2>
-            <p className="text-bisat-black/50 text-sm font-light leading-relaxed italic">
-              "To preserve the ancient art of hand-weaving by connecting master artisans with modern homes, ensuring that heritage techniques thrive in a world of mass production."
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-bisat-border">
+      {/* ── Stats band ───────────────────────────────── */}
+      <section className="border-y border-bisat-black/[0.06] bg-[#f7f5f2]">
+        <div className={SHELL}>
+          <div className="grid grid-cols-2 divide-x divide-bisat-black/[0.07] sm:grid-cols-4">
             {[
-              { icon: Heart, title: 'Ethical Sourcing', desc: 'We work directly with weaving communities to ensure fair wages and safe working environments.' },
-              { icon: Globe, title: 'Cultural Preservation', desc: 'By supporting traditional patterns and techniques, we help keep regional histories alive.' },
-              { icon: ShieldCheck, title: 'Uncompromising Quality', desc: 'Every piece is inspected for material purity and knot density before it reaches your home.' },
-            ].map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.4 }}
-                className="bg-bisat-ivory p-8 hover:bg-white transition-colors duration-300"
+              { value: '40+',   label: 'Master weavers' },
+              { value: '4',     label: 'Source countries' },
+              { value: '100%',  label: 'Handmade' },
+              { value: '12yr',  label: 'In the trade' },
+            ].map((s, i) => (
+              <div
+                key={s.label}
+                className={`flex flex-col gap-2 px-6 py-10 sm:px-10 ${i < 2 ? 'border-b border-bisat-black/[0.07] sm:border-b-0' : ''}`}
               >
-                <item.icon size={20} className="text-bisat-black/35 mb-5" strokeWidth={1.5} />
-                <h3 className="text-base font-normal text-bisat-black mb-2">{item.title}</h3>
-                <p className="text-[12px] text-bisat-black/45 leading-relaxed font-light">{item.desc}</p>
-              </motion.div>
+                <p className="font-rh text-[2.75rem] font-light leading-none text-bisat-black sm:text-[3.5rem]">
+                  {s.value}
+                </p>
+                <p className="text-[10px] font-medium uppercase tracking-[0.24em] text-bisat-black/38">
+                  {s.label}
+                </p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── Artisans ──────────────────────────────────────────────── */}
-      <section className="py-14 sm:py-20 border-b border-bisat-border">
-        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            <div className="relative aspect-[4/5] overflow-hidden">
-              <Image
-                src={artisanSrc}
-                alt="Artisan weaving a traditional rug"
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover"
-              />
-            </div>
-            <div>
-              <p className="text-[9px] uppercase tracking-[0.3em] font-semibold text-bisat-black/30 mb-4">Global Connection</p>
-              <h2 className="text-3xl font-light text-bisat-black mb-6 leading-tight">From the Atlas to the Silk Road</h2>
-              <p className="text-bisat-black/55 text-sm leading-relaxed font-light mb-4">
-                Our journey takes us to remote villages in the Atlas Mountains of Morocco, the bustling bazaars of Tabriz, and the quiet artisan workshops of Anatolia.
-              </p>
-              <p className="text-bisat-black/45 text-sm leading-relaxed font-light italic mb-8">
-                "We don't just buy rugs; we build relationships. By understanding the climate, the sheep, and the local dyes, we ensure that every Bisatim piece is an authentic representation of its origin."
-              </p>
-              <div className="grid grid-cols-2 gap-6 pt-8 border-t border-bisat-border">
-                <div className="flex items-center gap-4">
-                  <div className="w-9 h-9 border border-bisat-border flex items-center justify-center flex-shrink-0">
-                    <Users size={16} className="text-bisat-black/40" strokeWidth={1.5} />
-                  </div>
-                  <span className="text-[10px] uppercase tracking-[0.15em] font-semibold text-bisat-black/55 leading-snug">Direct-to-Artisan Partnerships</span>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="w-9 h-9 border border-bisat-border flex items-center justify-center flex-shrink-0">
-                    <Globe size={16} className="text-bisat-black/40" strokeWidth={1.5} />
-                  </div>
-                  <span className="text-[10px] uppercase tracking-[0.15em] font-semibold text-bisat-black/55 leading-snug">Supporting 15+ Weaving Regions</span>
-                </div>
+      {/* ── Mission quote ────────────────────────────── */}
+      <section className="bg-white px-5 py-24 text-center sm:py-36">
+        <div className="mx-auto max-w-[780px]">
+          <p className="font-rh text-[clamp(1.75rem,4vw,3rem)] font-light italic leading-[1.3] text-bisat-black">
+            &ldquo;To preserve the ancient art of hand-weaving by connecting master artisans with modern homes — ensuring that heritage techniques thrive in a world of mass production.&rdquo;
+          </p>
+          <p className="mt-10 text-[10px] font-medium uppercase tracking-[0.38em] text-bisat-black/28">
+            Our mission
+          </p>
+        </div>
+      </section>
+
+      {/* ── Values ───────────────────────────────────── */}
+      <section className="bg-[#f7f5f2] py-20 sm:py-28">
+        <div className={SHELL}>
+          <h2 className="mb-14 font-rh text-[2rem] font-light text-bisat-black sm:text-[2.75rem]">
+            How we work
+          </h2>
+          <div className="grid grid-cols-1 gap-px bg-bisat-black/[0.07] sm:grid-cols-3">
+            {[
+              {
+                num: '01',
+                title: 'Ethical sourcing',
+                body: 'We work directly with weaving communities to ensure fair wages, safe conditions, and long-term relationships — not one-off transactions.',
+              },
+              {
+                num: '02',
+                title: 'Cultural preservation',
+                body: 'By supporting traditional patterns and regional dyeing techniques, we help keep centuries-old craft alive and economically viable.',
+              },
+              {
+                num: '03',
+                title: 'Uncompromising quality',
+                body: 'Every piece is assessed for material purity, knot density, and structural integrity before it ever reaches your home.',
+              },
+            ].map(item => (
+              <div key={item.num} className="bg-white px-8 py-10 sm:px-10 sm:py-12">
+                <p className="mb-6 font-rh text-[1.5rem] font-light text-bisat-black/18">{item.num}</p>
+                <h3 className="font-rh text-[1.5rem] font-light leading-snug text-bisat-black sm:text-[1.75rem]">
+                  {item.title}
+                </h3>
+                <p className="mt-4 text-[14px] leading-[1.8] text-bisat-black/50">
+                  {item.body}
+                </p>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ── Origin story ──────────────────────────────────────────── */}
-      <section className="py-14 sm:py-20 bg-bisat-cream border-b border-bisat-border">
-        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
-          <div className="max-w-2xl mx-auto text-center">
-            <p className="text-[9px] uppercase tracking-[0.3em] font-semibold text-bisat-black/30 mb-4">The Beginning</p>
-            <h2 className="text-3xl font-light text-bisat-black mb-6 leading-tight">The Origin of Bisatim</h2>
-            <p className="text-bisat-black/50 text-sm font-light leading-relaxed italic mb-8">
-              "It started with a single rug found in a small market in Isfahan. The complexity of the knots and the depth of the natural indigo told a story that mass-produced textiles simply couldn't replicate. Bisatim was founded to bring those stories to the world."
-            </p>
-            <p className="text-[9px] uppercase tracking-[0.4em] font-semibold text-bisat-black/25">Established MMXXIV</p>
-          </div>
+      {/* ── Origin story ─────────────────────────────── */}
+      <section className="bg-white px-5 py-24 sm:py-36">
+        <div className="mx-auto max-w-[680px] text-center">
+          <p className="mb-8 text-[10px] font-medium uppercase tracking-[0.34em] text-bisat-black/30">
+            The beginning
+          </p>
+          <h2 className="font-rh text-[2rem] font-light leading-[1.2] text-bisat-black sm:text-[2.75rem]">
+            It started with a single rug.
+          </h2>
+          <p className="mt-7 text-[15px] leading-[1.9] text-bisat-black/50">
+            Found in a small market in Isfahan, the complexity of the knots and the depth of its natural indigo told a story that mass-produced textiles simply couldn&apos;t replicate. Bisatim was founded to bring those stories to the world.
+          </p>
+          <p className="mt-10 text-[10px] font-medium uppercase tracking-[0.42em] text-bisat-black/22">
+            Established MMXXIV
+          </p>
         </div>
       </section>
 
-      {/* ── CTA ───────────────────────────────────────────────────── */}
-      <section className="py-12 bg-bisat-ivory">
-        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-          <div>
-            <p className="text-[9px] uppercase tracking-[0.3em] font-semibold text-bisat-black/30 mb-2">Explore the Collection</p>
-            <h2 className="text-xl font-light text-bisat-black">Every rug tells a story.</h2>
+      {/* ── CTA ──────────────────────────────────────── */}
+      <section className="bg-bisat-black py-20 sm:py-28">
+        <div className="mx-auto max-w-[560px] px-5 text-center">
+          <h2 className="font-rh text-[2.25rem] font-light leading-[1.15] text-white sm:text-[3rem]">
+            Every rug tells a story.
+          </h2>
+          <p className="mt-5 text-[15px] leading-[1.85] text-white/38">
+            Browse our full collection of handmade, vintage, and contemporary pieces.
+          </p>
+          <div className="mt-10">
+            <Link href="/collections/rug" className="inline-flex items-center gap-3 bg-white px-8 py-4 text-[11px] font-semibold uppercase tracking-[0.24em] text-bisat-black transition-colors hover:bg-white/85">
+              Shop all rugs <ArrowRight size={12} />
+            </Link>
           </div>
-          <Link href="/shop" className="inline-flex items-center gap-2 bg-bisat-black text-white px-8 py-3.5 text-[10px] uppercase tracking-widest font-semibold hover:bg-bisat-charcoal transition-colors">
-            Shop All Rugs <ArrowRight size={12} />
-          </Link>
         </div>
       </section>
     </div>

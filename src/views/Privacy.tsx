@@ -9,7 +9,7 @@ export const Privacy = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="pb-16 bg-bisat-ivory min-h-screen">
+    <div className="pb-16 bg-white min-h-screen">
       <Meta
         title="Privacy Policy"
         description="Bisatim's privacy policy outlining how we collect, use and protect your personal data."

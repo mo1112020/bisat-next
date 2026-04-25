@@ -36,10 +36,10 @@ export const StickyAtcBar = ({ product, anchorRef, onAddToCart, added }: StickyA
           animate={{ y: 0 }}
           exit={{ y: '100%' }}
           transition={{ type: 'spring', damping: 28, stiffness: 280 }}
-          className="safe-area-bottom fixed bottom-0 left-0 right-0 z-50 border-t border-bisat-border bg-white shadow-[0_-8px_30px_rgba(0,0,0,0.05)]"
+          className="safe-area-bottom fixed bottom-0 left-0 right-0 z-50 border-t border-bisat-black/[0.07] bg-white shadow-[0_-8px_30px_rgba(0,0,0,0.05)]"
         >
           <div className="mx-auto flex max-w-[1400px] items-center gap-4 px-5 py-3 sm:px-8 lg:px-12">
-            <div className="relative hidden h-12 w-12 flex-shrink-0 overflow-hidden border border-bisat-border bg-bisat-cream sm:block">
+            <div className="relative hidden h-12 w-12 flex-shrink-0 overflow-hidden border border-bisat-black/[0.07] bg-[#f7f5f2] sm:block">
               {product.images[0] && (
                 <Image src={product.images[0]} alt={product.name} fill sizes="48px" className="object-cover" />
               )}
@@ -57,8 +57,8 @@ export const StickyAtcBar = ({ product, anchorRef, onAddToCart, added }: StickyA
                 added
                   ? 'border-bisat-black bg-bisat-black text-white'
                 : product.stock === 0
-                  ? 'cursor-not-allowed border-bisat-border bg-bisat-cream text-bisat-black/30'
-                  : 'border-bisat-black bg-bisat-black text-white hover:border-bisat-gold-dark hover:bg-bisat-gold-dark'
+                  ? 'cursor-not-allowed border-bisat-black/[0.07] bg-[#f7f5f2] text-bisat-black/30'
+                  : 'border-bisat-black bg-bisat-black text-white hover:bg-bisat-black/85'
               }`}
             >
               {added ? <><Check size={15} /> Added</> : <><ShoppingBag size={15} /> Add to Bag</>}

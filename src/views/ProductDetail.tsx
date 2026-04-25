@@ -114,7 +114,7 @@ export const ProductDetail = () => {
   };
 
   return (
-    <div className="bg-bisat-ivory min-h-screen">
+    <div className="bg-white min-h-screen">
       <StickyAtcBar product={product} anchorRef={atcRef} onAddToCart={handleAddToCart} added={added} />
       <Meta title={product.name} description={product.description} image={product.images[0]} type="product" />
       <Schema data={getProductSchema(product)} />
@@ -129,11 +129,11 @@ export const ProductDetail = () => {
 
         {/* Breadcrumb */}
         <nav className="flex items-center gap-1.5 text-[11px] text-bisat-black/40 mb-6 font-medium">
-          <Link href="/" className="hover:text-bisat-gold transition-colors">Home</Link>
+          <Link href="/" className="hover:text-bisat-black transition-colors">Home</Link>
           <ChevronRight size={12} />
-          <Link href="/shop" className="hover:text-bisat-gold transition-colors">Shop</Link>
+          <Link href="/shop" className="hover:text-bisat-black transition-colors">Shop</Link>
           <ChevronRight size={12} />
-          <Link href={`/shop?category=${product.category}`} className="hover:text-bisat-gold transition-colors">{product.category}</Link>
+          <Link href={`/shop?category=${product.category}`} className="hover:text-bisat-black transition-colors">{product.category}</Link>
           <ChevronRight size={12} />
           <span className="text-bisat-black/70 truncate max-w-48">{product.name}</span>
         </nav>
@@ -221,7 +221,7 @@ export const ProductDetail = () => {
             <div className="flex items-center gap-2 mb-3">
               <Link
                 href={`/shop?category=${product.category}`}
-                className="text-[9px] uppercase tracking-[0.2em] font-medium text-bisat-black/60 bg-bisat-cream px-3 py-1 border border-bisat-border hover:bg-bisat-black hover:text-white transition-colors"
+                className="text-[9px] uppercase tracking-[0.2em] font-medium text-bisat-black/60 bg-[#f7f5f2] px-3 py-1 border border-bisat-black/[0.07] hover:bg-bisat-black hover:text-white transition-colors"
               >
                 {product.category}
               </Link>
@@ -269,7 +269,7 @@ export const ProductDetail = () => {
                 { label: 'Origin', value: product.origin },
                 { label: 'Rooms', value: product.rooms.slice(0,2).join(', ') },
               ].map(spec => (
-                <div key={spec.label} className="bg-bisat-cream/60 border border-bisat-border px-4 py-3">
+                <div key={spec.label} className="bg-[#f7f5f2]/60 border border-bisat-black/[0.07] px-4 py-3">
                   <p className="text-[9px] uppercase tracking-[0.25em] font-bold text-bisat-black/35 mb-1">{spec.label}</p>
                   <p className="text-sm font-medium text-bisat-black">{spec.value}</p>
                 </div>
@@ -291,10 +291,10 @@ export const ProductDetail = () => {
               {/* Top row: qty + wishlist */}
               <div className="flex gap-3">
                 {/* Quantity */}
-                <div className="flex items-center border border-bisat-border overflow-hidden bg-white">
+                <div className="flex items-center border border-bisat-black/[0.07] overflow-hidden bg-white">
                   <button
                     onClick={() => setQty(q => Math.max(1, q - 1))}
-                    className="px-4 py-3 text-bisat-black/40 hover:text-bisat-black hover:bg-bisat-cream/50 transition-colors"
+                    className="px-4 py-3 text-bisat-black/40 hover:text-bisat-black hover:bg-[#f7f5f2]/50 transition-colors"
                   >
                     <Minus size={14} />
                   </button>
@@ -302,7 +302,7 @@ export const ProductDetail = () => {
                   <button
                     onClick={() => setQty(q => Math.min(product.stock, q + 1))}
                     disabled={qty >= product.stock}
-                    className="px-4 py-3 text-bisat-black/40 hover:text-bisat-black hover:bg-bisat-cream/50 transition-colors disabled:opacity-25 disabled:cursor-not-allowed"
+                    className="px-4 py-3 text-bisat-black/40 hover:text-bisat-black hover:bg-[#f7f5f2]/50 transition-colors disabled:opacity-25 disabled:cursor-not-allowed"
                   >
                     <Plus size={14} />
                   </button>
@@ -314,8 +314,8 @@ export const ProductDetail = () => {
                   aria-label={isFavorite ? 'Remove from wishlist' : 'Save to wishlist'}
                   className={`flex-1 border transition-all duration-200 flex items-center justify-center gap-2 text-sm font-medium ${
                     isFavorite
-                      ? 'bg-bisat-cream border-bisat-warm-gray text-bisat-warm-gray'
-                      : 'border-bisat-border text-bisat-black/40 hover:border-bisat-black/30 hover:text-bisat-black bg-white'
+                      ? 'bg-[#f7f5f2] border-bisat-warm-gray text-bisat-warm-gray'
+                      : 'border-bisat-black/[0.07] text-bisat-black/40 hover:border-bisat-black/30 hover:text-bisat-black bg-white'
                   }`}
                 >
                   <Heart size={16} fill={isFavorite ? 'currentColor' : 'none'} />
@@ -345,13 +345,13 @@ export const ProductDetail = () => {
 
               {/* Waitlist for sold-out */}
               {product.stock === 0 && !waitlistSent && (
-                <div className="bg-bisat-cream border border-bisat-border p-4">
+                <div className="bg-[#f7f5f2] border border-bisat-black/[0.07] p-4">
                   <p className="text-[10px] font-medium text-bisat-black/50 uppercase tracking-[0.18em] mb-2.5 flex items-center gap-2">
                     <Mail size={11} /> Notify me when back in stock
                   </p>
                   <form
                     onSubmit={e => { e.preventDefault(); setWaitlistSent(true); }}
-                    className="flex gap-0 border border-bisat-border overflow-hidden"
+                    className="flex gap-0 border border-bisat-black/[0.07] overflow-hidden"
                   >
                     <input
                       type="email" required
@@ -379,7 +379,7 @@ export const ProductDetail = () => {
               <Link
                 href="/checkout"
                 onClick={() => { for (let i = 0; i < qty; i++) addToCart(product); }}
-                className="w-full border border-bisat-border text-bisat-black/60 py-3.5 text-[11px] uppercase tracking-[0.2em] font-medium text-center hover:border-bisat-black hover:text-bisat-black transition-all duration-200 mb-6"
+                className="w-full border border-bisat-black/[0.07] text-bisat-black/60 py-3.5 text-[11px] uppercase tracking-[0.2em] font-medium text-center hover:border-bisat-black hover:text-bisat-black transition-all duration-200 mb-6"
               >
                 Buy Now
               </Link>
@@ -415,7 +415,7 @@ export const ProductDetail = () => {
                   <input
                     type="text" required value={reviewName}
                     onChange={e => setReviewName(e.target.value)}
-                    className="w-full bg-white border border-bisat-border px-4 py-3 text-sm focus:outline-none transition-all"
+                    className="w-full bg-white border border-bisat-black/[0.07] px-4 py-3 text-sm focus:outline-none transition-all"
                     placeholder="Jane Smith"
                   />
                 </div>
@@ -435,7 +435,7 @@ export const ProductDetail = () => {
                     required value={reviewComment}
                     onChange={e => setReviewComment(e.target.value)}
                     rows={4}
-                    className="w-full bg-white border border-bisat-border px-4 py-3 text-sm focus:outline-none transition-all resize-none"
+                    className="w-full bg-white border border-bisat-black/[0.07] px-4 py-3 text-sm focus:outline-none transition-all resize-none"
                     placeholder="Tell us about your experience..."
                   />
                 </div>
@@ -472,7 +472,7 @@ export const ProductDetail = () => {
                       key={review.id}
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="bg-white p-5 border border-bisat-border"
+                      className="bg-white p-5 border border-bisat-black/[0.07]"
                     >
                       <div className="flex items-start justify-between mb-2">
                         <div>
@@ -488,7 +488,7 @@ export const ProductDetail = () => {
                       <p className="text-sm text-bisat-black/60 leading-relaxed mt-2">"{review.comment}"</p>
                     </motion.div>
                   )) : (
-                    <div className="bg-bisat-cream/40 py-12 text-center border border-bisat-border">
+                    <div className="bg-[#f7f5f2]/40 py-12 text-center border border-bisat-black/[0.07]">
                       <p className="text-bisat-black/30 text-sm">No reviews yet. Be the first!</p>
                     </div>
                   )}
@@ -503,7 +503,7 @@ export const ProductDetail = () => {
           <div className="border-t border-bisat-black/8 pt-12">
             <div className="flex items-center justify-between mb-8">
               <h2 className="text-xl font-sans">More {product.category} Rugs</h2>
-              <Link href={`/shop?category=${product.category}`} className="text-[11px] uppercase tracking-widest font-bold text-bisat-black/40 hover:text-bisat-gold transition-colors">
+              <Link href={`/shop?category=${product.category}`} className="text-[11px] uppercase tracking-widest font-bold text-bisat-black/40 hover:text-bisat-black transition-colors">
                 View All
               </Link>
             </div>
