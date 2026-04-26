@@ -1,8 +1,10 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
+import { createSupabaseBrowser } from '../lib/supabase-browser';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   ArrowRight, ArrowLeft, ShieldCheck, Lock, CreditCard,
@@ -26,8 +28,29 @@ const labelClass = 'block text-[10px] uppercase tracking-[0.25em] font-bold text
 export const Checkout = () => {
   const { cart, totalPrice, clearCart } = useCart();
   const router = useRouter();
+  const { user, loading: authLoading } = useAuth();
   const [step, setStep] = useState<Step>('shipping');
   const [isPlacing, setIsPlacing] = useState(false);
+
+  useEffect(() => {
+    if (!authLoading && !user) {
+      router.replace('/cart');
+    }
+  }, [user, authLoading, router]);
+
+  useEffect(() => {
+    if (!user) return;
+    const displayName: string = (user.user_metadata?.full_name as string) ?? (user.user_metadata?.name as string) ?? '';
+    const parts = displayName.trim().split(' ');
+    const firstName = parts[0] ?? '';
+    const lastName = parts.slice(1).join(' ');
+    setShipping(prev => ({
+      ...prev,
+      firstName: prev.firstName || firstName,
+      lastName: prev.lastName || lastName,
+      email: prev.email || (user.email ?? ''),
+    }));
+  }, [user]);
 
   const [shipping, setShipping] = useState({
     firstName: '', lastName: '', email: '', phone: '',
@@ -44,13 +67,22 @@ export const Checkout = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handlePaymentSubmit = (e: React.FormEvent) => {
+  const handlePaymentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!user) return;
     setIsPlacing(true);
-    setTimeout(() => {
-      clearCart();
-      router.push('/order-confirmation');
-    }, 1200);
+
+    const supabase = createSupabaseBrowser();
+    await supabase.from('orders').insert({
+      user_id: user.id,
+      items: cart,
+      shipping_address: shipping,
+      total: totalPrice,
+      status: 'processing',
+    });
+
+    clearCart();
+    router.push('/order-confirmation');
   };
 
   const formatCardNumber = (val: string) =>
@@ -61,6 +93,14 @@ export const Checkout = () => {
     if (digits.length > 2) return digits.slice(0, 2) + ' / ' + digits.slice(2);
     return digits;
   };
+
+  if (authLoading || !user) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-white">
+        <span className="h-6 w-6 animate-spin rounded-full border-2 border-bisat-black/20 border-t-bisat-black" />
+      </div>
+    );
+  }
 
   if (cart.length === 0 && !isPlacing) {
     return (
@@ -342,7 +382,7 @@ export const Checkout = () => {
                 {cart.map(item => (
                   <div key={item.id} className="flex gap-4">
                     <div className="w-16 h-16 overflow-hidden flex-shrink-0 bg-bisat-charcoal">
-                      <img src={item.images[0]} alt={item.name} className="w-full h-full object-cover" />
+                      <img src={item.images[0]} alt={item.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium leading-snug mb-1 truncate">{item.name}</p>

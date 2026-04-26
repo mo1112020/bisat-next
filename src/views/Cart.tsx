@@ -1,15 +1,21 @@
 "use client";
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useCart } from '../context/CartContext';
 import { motion } from 'motion/react';
 import { Trash2, Plus, Minus, ArrowRight, ShoppingBag } from 'lucide-react';
 import { Meta } from '../components/Meta';
 import { useLanguage } from '../context/LanguageContext';
+import { useAuth } from '../context/AuthContext';
+import { AuthModal } from '../components/AuthModal';
 
 export const Cart = () => {
   const { t } = useLanguage();
   const { cart, updateQuantity, removeFromCart, totalPrice, totalItems } = useCart();
+  const { user } = useAuth();
+  const router = useRouter();
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   if (cart.length === 0) {
     return (
@@ -132,13 +138,13 @@ export const Cart = () => {
                 <span className="text-2xl font-light text-bisat-black">${totalPrice.toLocaleString()}</span>
               </div>
 
-              <Link
-                href="/checkout"
+              <button
+                onClick={() => { user ? router.push('/checkout') : setShowAuthModal(true); }}
                 className="w-full bg-bisat-black text-white py-4 text-[11px] uppercase tracking-[0.18em] font-medium hover:bg-bisat-charcoal transition-colors flex items-center justify-center gap-2 group"
               >
                 {t('cart.checkout')}
                 <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
-              </Link>
+              </button>
 
               <p className="text-[9px] text-bisat-black/25 uppercase tracking-[0.2em] font-semibold text-center mt-4">
                 {t('cart.secure')}
@@ -147,6 +153,9 @@ export const Cart = () => {
           </div>
         </div>
       </div>
+      {showAuthModal && (
+        <AuthModal onClose={() => setShowAuthModal(false)} redirectTo="/checkout" />
+      )}
     </div>
   );
 };
