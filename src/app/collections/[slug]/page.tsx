@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import { Shop } from '@/src/views/Shop';
+import { getProducts, getCategories, getRoomTypes, getSizeCategories } from '@/src/lib/db';
+
+export const revalidate = 300;
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -23,10 +26,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function CollectionPage() {
+export default async function CollectionPage() {
+  const [products, categories, rooms, sizes] = await Promise.all([
+    getProducts(),
+    getCategories(),
+    getRoomTypes(),
+    getSizeCategories(),
+  ]);
+
+  const config = {
+    categories: categories.map(c => c.name),
+    rooms: rooms.map(r => r.name),
+    sizes: sizes.map(s => s.name),
+  };
+
   return (
     <Suspense>
-      <Shop />
+      <Shop initialProducts={products} initialConfig={config} />
     </Suspense>
   );
 }

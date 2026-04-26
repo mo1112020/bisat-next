@@ -1,19 +1,21 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { PageHeader } from '../components/PageHeader';
 import { motion, AnimatePresence } from 'motion/react';
 import { Star, Filter, ArrowRight, MessageSquare, ThumbsUp } from 'lucide-react';
 import { Meta } from '../components/Meta';
 import { getTestimonials } from '../lib/db';
 
-export const Reviews = () => {
-  const [filter, setFilter] = useState('All');
-  const [reviews, setReviews] = useState<Awaited<ReturnType<typeof getTestimonials>>>([]);
-  const categories = ['All', 'Handmade', 'Vintage', 'Modern'];
+type ReviewItem = Awaited<ReturnType<typeof getTestimonials>>[number];
 
-  useEffect(() => {
-    getTestimonials().then(setReviews);
-  }, []);
+interface ReviewsProps {
+  initialReviews?: ReviewItem[];
+}
+
+export const Reviews = ({ initialReviews = [] }: ReviewsProps) => {
+  const [filter, setFilter] = useState('All');
+  const [reviews] = useState<ReviewItem[]>(initialReviews);
+  const categories = ['All', 'Handmade', 'Vintage', 'Modern'];
 
   const filteredReviews = filter === 'All'
     ? reviews

@@ -1,40 +1,17 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Link from 'next/link';
-import { useParams } from 'next/navigation';
 import { motion } from 'motion/react';
 import { Meta } from '../components/Meta';
 import { Schema, getBlogPostingSchema, getBreadcrumbSchema } from '../components/Schema';
 import { Calendar, User, ArrowLeft, Share2, Bookmark } from 'lucide-react';
 import { BlogPostData } from '../data/blogPosts';
-import { getBlogPost } from '../lib/db';
 
-export const BlogPost = () => {
-  const { id } = useParams();
-  const [post, setPost] = useState<BlogPostData | null>(null);
-  const [loading, setLoading] = useState(true);
+interface BlogPostProps {
+  initialPost: BlogPostData;
+}
 
-  useEffect(() => {
-    if (!id) return;
-    getBlogPost(id as string).then(data => { setPost(data); setLoading(false); });
-  }, [id]);
-
-  if (loading) {
-    return (
-      <div className="pb-16 text-center pt-32">
-        <p className="text-bisat-black/30 text-lg font-sans">Loading…</p>
-      </div>
-    );
-  }
-
-  if (!post) {
-    return (
-      <div className="pb-16 text-center">
-        <h1 className="text-4xl font-sans">Story not found</h1>
-        <Link href="/blog" className="text-bisat-gold mt-4 inline-block">Return to Journal</Link>
-      </div>
-    );
-  }
+export const BlogPost = ({ initialPost: post }: BlogPostProps) => {
 
   return (
     <div className="pb-32 bg-white min-h-screen">

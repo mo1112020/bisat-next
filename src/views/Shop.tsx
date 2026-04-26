@@ -31,7 +31,12 @@ const SORT_OPTIONS = [
   { value: 'name',       label: 'Name A–Z' },
 ];
 
-export const Shop = () => {
+interface ShopProps {
+  initialProducts?: Product[];
+  initialConfig?: StoreConfig;
+}
+
+export const Shop = ({ initialProducts = [], initialConfig }: ShopProps) => {
   const searchParams = useSearchParams();
   const router       = useRouter();
   const pathname     = usePathname();
@@ -39,9 +44,9 @@ export const Shop = () => {
   const [sortBy,      setSortBy]      = useState('newest');
   const [searchTerm,  setSearchTerm]  = useState(searchParams.get('q') || '');
   const [mobileOpen,  setMobileOpen]  = useState(false);
-  const [allProducts, setAllProducts] = useState<Product[]>([]);
-  const [isLoading,   setIsLoading]   = useState(true);
-  const [config,      setConfig]      = useState<StoreConfig>({ categories: [], rooms: [], sizes: [] });
+  const [allProducts, setAllProducts] = useState<Product[]>(initialProducts);
+  const [isLoading,   setIsLoading]   = useState(initialProducts.length === 0);
+  const [config,      setConfig]      = useState<StoreConfig>(initialConfig ?? { categories: [], rooms: [], sizes: [] });
 
   const categoryFilter = searchParams.get('category');
   const roomFilter     = searchParams.get('room');
@@ -54,15 +59,12 @@ export const Shop = () => {
   const [priceRange, setPriceRange] = useState({ min: minPrice || '', max: maxPrice || '' });
 
   useEffect(() => {
+    if (initialProducts.length > 0) return;
     getProducts().then(data => { setAllProducts(data); setIsLoading(false); });
     fetch('/api/store-config')
       .then(r => r.json())
       .then(setConfig)
-      .catch(() => setConfig({
-        categories: ['Handmade','Vintage','Machine','Kilim'],
-        rooms: ['Living Room','Bedroom','Dining Room','Hallway','Office'],
-        sizes: ['Small','Medium','Large','Runner'],
-      }));
+      .catch(() => setConfig({ categories: [], rooms: [], sizes: [] }));
   }, []);
 
   useEffect(() => {

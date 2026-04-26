@@ -16,6 +16,7 @@ import { RecentlyViewed } from '../components/RecentlyViewed';
 import { ScrollReveal } from '../components/ScrollReveal';
 import { NewsletterForm } from '../components/NewsletterForm';
 import { HeroCarousel, type HeroSlide } from '../components/HeroCarousel';
+import { HomeFAQ } from '../components/HomeFAQ';
 
 const SHELL = 'mx-auto max-w-[1400px] px-5 sm:px-10 lg:px-16';
 
@@ -90,6 +91,17 @@ export const Home = async () => {
 
   const reviewCards = testimonials.length > 0 ? testimonials.slice(0, 4) : FALLBACK_TESTIMONIALS;
   const reviewCount = testimonials.length > 0 ? testimonials.length : 132;
+
+  const basePhotos = [
+    siteImgs.lifestyle_1_hero,
+    siteImgs.lifestyle_2_hero,
+    siteImgs.lifestyle_3_hero,
+    siteImgs.lifestyle_4_hero,
+    siteImgs.hero,
+    siteImgs.promo_split,
+    ...featured.slice(0, 6).map(p => p.images[0]),
+  ].filter(Boolean);
+  const instaPhotos = Array.from({ length: 12 }, (_, i) => basePhotos[i % basePhotos.length]);
 
   return (
     <div className="bg-white">
@@ -277,13 +289,61 @@ export const Home = async () => {
 
       <RecentlyViewed />
 
+      {/* ── FAQ ───────────────────────────────────────── */}
+      <section className="bg-white py-20 sm:py-28">
+        <div className={SHELL}>
+          <div className="mb-12 flex items-end justify-between">
+            <div>
+              <p className="mb-3 text-[10px] font-medium uppercase tracking-[0.3em] text-bisat-black/35">Help</p>
+              <h2 className="font-rh text-[2.25rem] font-light leading-[1.1] text-bisat-black sm:text-[3rem]">
+                Common questions
+              </h2>
+            </div>
+            <Link
+              href="/faq"
+              className="hidden items-center gap-2 border-b border-bisat-black/25 pb-px text-[11px] font-medium uppercase tracking-[0.22em] text-bisat-black/55 transition-colors hover:border-bisat-black hover:text-bisat-black sm:inline-flex"
+            >
+              View all
+            </Link>
+          </div>
+
+          <HomeFAQ />
+        </div>
+      </section>
+
       {/* ── Newsletter ────────────────────────────────── */}
-      <section className="bg-bisat-black py-24 sm:py-36">
-        <div className="mx-auto max-w-[560px] px-5 text-center">
+      <section className="relative overflow-hidden py-28 sm:py-40">
+        {/* Instagram photo mosaic background */}
+        <div
+          className="absolute inset-0 grid gap-[2px]"
+          style={{ gridTemplateColumns: 'repeat(4, 1fr)', gridTemplateRows: 'repeat(3, 1fr)' }}
+        >
+          {instaPhotos.map((src, i) => (
+            <div key={i} className="relative overflow-hidden">
+              <Image
+                src={src}
+                alt=""
+                fill
+                className="object-cover"
+                sizes="25vw"
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Dark overlay — deepest at center where text lives */}
+        <div className="absolute inset-0 bg-black/55" />
+        <div
+          className="absolute inset-0"
+          style={{ background: 'radial-gradient(ellipse 70% 80% at 50% 50%, rgba(0,0,0,0.60) 0%, rgba(0,0,0,0.20) 100%)' }}
+        />
+
+        {/* Content */}
+        <div className="relative z-10 mx-auto max-w-[560px] px-5 text-center">
           <h2 className="font-rh text-[2.5rem] font-light leading-[1.15] text-white sm:text-[3.25rem]">
             First access.<br />Always.
           </h2>
-          <p className="mt-6 text-[15px] leading-[1.85] text-white/38">
+          <p className="mt-6 text-[15px] leading-[1.85] text-white/55">
             Private drops, archive finds, and new arrivals — delivered quietly to your inbox.
           </p>
           <div className="mt-10">
@@ -293,7 +353,7 @@ export const Home = async () => {
             href={settings.social_instagram}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-10 inline-flex items-center gap-2.5 text-[10px] font-medium uppercase tracking-[0.26em] text-white/28 transition-colors hover:text-white/60"
+            className="mt-10 inline-flex items-center gap-2.5 text-[10px] font-medium uppercase tracking-[0.26em] text-white/45 transition-colors hover:text-white/80"
           >
             <Instagram size={13} />
             Follow on Instagram

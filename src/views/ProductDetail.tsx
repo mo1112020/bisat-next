@@ -152,7 +152,7 @@ export const ProductDetail = () => {
                     <button
                       key={i}
                       onClick={() => setActiveImage(i)}
-                      className={`aspect-square overflow-hidden border-2 transition-all ${
+                      className={`relative aspect-square overflow-hidden border-2 transition-all ${
                         activeImage === i ? 'border-bisat-gold' : 'border-transparent opacity-50 hover:opacity-80'
                       }`}
                     >

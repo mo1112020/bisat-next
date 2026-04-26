@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Instagram, Check, ArrowRight } from 'lucide-react';
+import { Instagram, ArrowRight } from 'lucide-react';
 
 const PinterestIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="w-[15px] h-[15px]">
@@ -19,8 +19,6 @@ const TikTokIcon = () => (
 interface CollectionLink { label: string; href: string; }
 
 export const Footer = () => {
-  const [email, setEmail] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
   const [collections, setCollections] = useState<CollectionLink[]>([
     { label: 'Handmade Rugs', href: '/collections/rug?category=Handmade' },
     { label: 'Vintage Rugs', href: '/collections/rug?category=Vintage' },
@@ -54,13 +52,6 @@ export const Footer = () => {
       .catch(() => {});
   }, []);
 
-  const handleSubscribe = (event: React.FormEvent) => {
-    event.preventDefault();
-    if (!email) return;
-    setSubscribed(true);
-    setEmail('');
-  };
-
   const socials = [
     { href: instagramUrl, label: 'Instagram', icon: <Instagram size={15} /> },
     { href: pinterestUrl, label: 'Pinterest', icon: <PinterestIcon /> },
@@ -83,57 +74,12 @@ export const Footer = () => {
     { label: 'Vintage Rugs', href: '/collections/vintage-rugs' },
     { label: 'Custom Rugs', href: '/collections/custom-rugs' },
     { label: 'Shipping and Payment', href: '/pages/shipping-and-payment' },
+    { label: 'FAQ', href: '/faq' },
     { label: 'For Business', href: '/pages/for-business' },
   ];
 
   return (
     <footer className="bg-[#f7f5f2] text-bisat-black">
-      <div className="border-b border-bisat-black/[0.07]">
-        <div className="mx-auto max-w-[1400px] px-5 py-12 sm:px-8 sm:py-16 lg:px-12">
-          <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
-            <div className="max-w-md">
-              <p className="mb-4 text-[10px] font-medium uppercase tracking-[0.28em] text-bisat-black/35">Newsletter</p>
-              <h2 className="mb-3 font-rh text-[1.75rem] font-light leading-snug text-bisat-black">
-                Receive new arrivals, styling notes, and private drops.
-              </h2>
-              <p className="text-[13px] leading-relaxed text-bisat-black/48" suppressHydrationWarning>
-                Join our list for exclusive previews and artisanal stories.
-              </p>
-            </div>
-
-            <div className="w-full lg:min-w-[380px] lg:w-auto">
-              {subscribed ? (
-                <div className="flex items-center gap-3 border-b border-bisat-black/20 py-4">
-                  <Check size={13} className="shrink-0 text-bisat-warm-gray" />
-                  <div>
-                    <p className="text-[13px] font-medium text-bisat-black">You're in.</p>
-                    <p className="text-[12px] text-bisat-black/45">Watch your inbox for something special.</p>
-                  </div>
-                </div>
-              ) : (
-                <form onSubmit={handleSubscribe} className="flex items-end gap-0 border-b border-bisat-black/25">
-                  <input
-                    type="email"
-                    required
-                    value={email}
-                    onChange={event => setEmail(event.target.value)}
-                    placeholder="Email address"
-                    suppressHydrationWarning
-                    className="min-w-0 flex-1 bg-transparent pb-3 text-[14px] text-bisat-black placeholder:text-bisat-black/30 focus:outline-none"
-                  />
-                  <button
-                    type="submit"
-                    className="flex shrink-0 items-center gap-1.5 whitespace-nowrap pb-3 text-[11px] font-medium uppercase tracking-[0.18em] text-bisat-black"
-                  >
-                    Subscribe
-                    <ArrowRight size={11} />
-                  </button>
-                </form>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
 
       <div className="mx-auto max-w-[1400px] px-5 py-14 sm:px-8 sm:py-20 lg:px-12">
         <div className="mb-14 grid grid-cols-2 gap-10 sm:gap-12 md:grid-cols-12 sm:mb-20">

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { PageHeader } from '../components/PageHeader';
 import { motion } from 'motion/react';
@@ -7,10 +7,13 @@ import { Meta } from '../components/Meta';
 import Link from 'next/link';
 import { Calendar, User, ArrowRight, Check } from 'lucide-react';
 import { BlogPostData } from '../data/blogPosts';
-import { getBlogPosts } from '../lib/db';
 
-export const Blog = () => {
-  const [posts, setPosts] = useState<BlogPostData[]>([]);
+interface BlogProps {
+  initialPosts?: BlogPostData[];
+}
+
+export const Blog = ({ initialPosts = [] }: BlogProps) => {
+  const [posts] = useState<BlogPostData[]>(initialPosts);
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
@@ -20,10 +23,6 @@ export const Blog = () => {
     setSubscribed(true);
     setEmail('');
   };
-
-  useEffect(() => {
-    getBlogPosts().then(setPosts);
-  }, []);
 
   return (
     <div className="bg-white min-h-screen">

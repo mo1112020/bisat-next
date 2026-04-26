@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
-export const dynamic = 'force-dynamic';
 import { Suspense } from 'react';
 import './globals.css';
 import { Providers } from './providers';

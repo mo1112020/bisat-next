@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { User, Package, Heart, Settings, ArrowRight, CheckCircle, LogOut } from 'lucide-react';
 import Link from 'next/link';
@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { Meta } from '../components/Meta';
 import { PageHeader } from '../components/PageHeader';
 import { useAuth } from '../context/AuthContext';
+import { AuthModal } from '../components/AuthModal';
 import { createSupabaseBrowser } from '../lib/supabase-browser';
 
 interface Order {
@@ -23,6 +24,11 @@ interface Profile {
   avatar_url: string | null;
 }
 
+interface AccountProps {
+  initialProfile: Profile | null;
+  initialOrders: Order[];
+}
+
 const STATUS_STYLES: Record<string, string> = {
   processing: 'bg-amber-50 text-amber-700 border-amber-200',
   shipped:    'bg-blue-50 text-blue-700 border-blue-200',
@@ -32,38 +38,20 @@ const STATUS_STYLES: Record<string, string> = {
 const TABS = ['Overview', 'Orders', 'Settings'] as const;
 type Tab = typeof TABS[number];
 
-export const Account = () => {
+export const Account: React.FC<AccountProps> = ({ initialProfile, initialOrders }) => {
   const [activeTab, setActiveTab] = useState<Tab>('Overview');
-  const [orders, setOrders] = useState<Order[]>([]);
-  const [profile, setProfile] = useState<Profile>({ full_name: null, phone: null, avatar_url: null });
-  const [profileForm, setProfileForm] = useState({ full_name: '', phone: '' });
+  const [orders] = useState<Order[]>(initialOrders);
+  const [profile, setProfile] = useState<Profile>(initialProfile ?? { full_name: null, phone: null, avatar_url: null });
+  const [profileForm, setProfileForm] = useState({
+    full_name: initialProfile?.full_name ?? '',
+    phone: initialProfile?.phone ?? '',
+  });
   const [saving, setSaving] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
 
   const { user, signOut, loading } = useAuth();
   const router = useRouter();
   const supabase = createSupabaseBrowser();
-
-  useEffect(() => {
-    if (!loading && !user) {
-      router.replace('/cart');
-    }
-  }, [user, loading, router]);
-
-  useEffect(() => {
-    if (!user) return;
-    supabase.from('profiles').select('full_name, phone, avatar_url').eq('id', user.id).single()
-      .then(({ data }) => {
-        if (data) {
-          setProfile(data);
-          setProfileForm({ full_name: data.full_name ?? '', phone: data.phone ?? '' });
-        }
-      });
-    supabase.from('orders').select('id, created_at, status, total, items').eq('user_id', user.id).order('created_at', { ascending: false })
-      .then(({ data }) => {
-        if (data) setOrders(data as Order[]);
-      });
-  }, [user]);
 
   const handleSignOut = async () => {
     await signOut();
@@ -84,10 +72,18 @@ export const Account = () => {
     setTimeout(() => setSaveSuccess(false), 2500);
   };
 
-  if (loading || !user) {
+  if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-white">
         <span className="h-6 w-6 animate-spin rounded-full border-2 border-bisat-black/20 border-t-bisat-black" />
+      </div>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-[#f7f5f2]">
+        <AuthModal onClose={() => router.push('/')} redirectTo="/account" />
       </div>
     );
   }
@@ -160,7 +156,6 @@ export const Account = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
             >
-              {/* Overview */}
               {activeTab === 'Overview' && (
                 <div className="space-y-6">
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -222,7 +217,6 @@ export const Account = () => {
                 </div>
               )}
 
-              {/* Orders */}
               {activeTab === 'Orders' && (
                 <div className="space-y-4">
                   {orders.length === 0 ? (
@@ -252,7 +246,6 @@ export const Account = () => {
                 </div>
               )}
 
-              {/* Settings */}
               {activeTab === 'Settings' && (
                 <div className="space-y-4">
                   <div className="bg-white border border-bisat-black/[0.07] p-8">

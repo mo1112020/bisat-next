@@ -3,220 +3,249 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import {
-  ArrowRight,
-  ChevronDown,
-  Heart,
-  Instagram,
-  Menu,
-  Search,
-  ShoppingBag,
-  User,
-  X,
-} from 'lucide-react';
+import { ArrowUpRight, Heart, Menu, Search, ShoppingBag, User, X } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
+import { useAuth } from '../context/AuthContext';
+import { AuthModal } from './AuthModal';
 
-const STATIC_FEATURED = [
-  { label: 'All Products', href: '/collections/rug', highlight: true },
-  { label: 'Authentic Rugs', href: '/collections/authentic-rugs', highlight: false },
-  { label: 'Easy Rugs', href: '/collections/easy-rugs', highlight: false },
-  { label: 'Vintage Rugs', href: '/collections/vintage-rugs', highlight: false },
-  { label: 'Custom Rugs', href: '/collections/custom-rugs', highlight: false },
+const SHOP_MENU = [
+  { label: 'All Products',   sub: 'Browse the full collection',  href: '/collections/rug' },
+  { label: 'Authentic Rugs', sub: 'Hand-knotted heritage pieces', href: '/collections/authentic-rugs' },
+  { label: 'Vintage',        sub: 'Archive & one-of-a-kind',      href: '/collections/vintage-rugs' },
+  { label: 'Easy Rugs',      sub: 'Modern & easy-care',           href: '/collections/easy-rugs' },
+  { label: 'Custom Size',    sub: 'Made-to-measure for your room', href: '/collections/custom-rugs' },
 ];
 
-interface StoreConfig {
-  categories: string[];
-  rooms: string[];
-  sizes: string[];
-}
+const NAV_LINKS = [
+  { label: 'Shop',        href: '/collections/rug',      id: 'shop', hasMega: true },
+  { label: 'Room Ideas',  href: '/pages/case-gallery',   id: 'rooms' },
+  { label: 'Craftsmanship', href: '/craftsmanship',      id: 'craft' },
+  { label: 'About',       href: '/pages/about',          id: 'about' },
+];
 
 export const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const [mobileAccordion, setMobileAccordion] = useState<string | null>(null);
+  const [scrolled, setScrolled]   = useState(false);
+  const [megaOpen, setMegaOpen]   = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [, setConfig] = useState<StoreConfig>({ categories: [], rooms: [], sizes: [] });
-  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const searchRef = useRef<HTMLInputElement>(null);
+  const megaTimer  = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const searchRef  = useRef<HTMLInputElement>(null);
 
   const { totalItems } = useCart();
-  const { wishlist } = useWishlist();
-  const pathname = usePathname();
-  const router = useRouter();
+  const { wishlist }   = useWishlist();
+  const { user }       = useAuth();
+  const pathname       = usePathname();
+  const router         = useRouter();
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
+  // Close everything on route change
   useEffect(() => {
-    fetch('/api/store-config')
-      .then(r => r.json())
-      .then(data => setConfig(data))
-      .catch(() => {});
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 10);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
-    setIsOpen(false);
-    setMobileAccordion(null);
+    setMobileOpen(false);
+    setMegaOpen(false);
     setSearchOpen(false);
-    setActiveDropdown(null);
   }, [pathname]);
 
+  // Scroll detection
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Auto-focus search
   useEffect(() => {
     if (!searchOpen) return;
-    const timer = window.setTimeout(() => searchRef.current?.focus(), 80);
-    return () => window.clearTimeout(timer);
+    const t = setTimeout(() => searchRef.current?.focus(), 60);
+    return () => clearTimeout(t);
   }, [searchOpen]);
 
-  const openDropdown = (id: string) => {
-    if (closeTimer.current) clearTimeout(closeTimer.current);
-    setActiveDropdown(id);
-  };
+  // Lock body scroll when mobile menu open
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileOpen]);
 
-  const closeDropdown = () => {
-    closeTimer.current = setTimeout(() => setActiveDropdown(null), 120);
-  };
+  const openMega  = () => { if (megaTimer.current) clearTimeout(megaTimer.current); setMegaOpen(true); };
+  const closeMega = () => { megaTimer.current = setTimeout(() => setMegaOpen(false), 110); };
 
-  const closeAll = () => {
-    setActiveDropdown(null);
-    setIsOpen(false);
-  };
-
-  const handleSearch = (event: React.FormEvent) => {
-    event.preventDefault();
-    const query = searchQuery.trim();
-    if (!query) return;
-
-    router.push(`/collections/rug?q=${encodeURIComponent(query)}`);
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    const q = searchQuery.trim();
+    if (!q) return;
+    router.push(`/collections/rug?q=${encodeURIComponent(q)}`);
     setSearchQuery('');
     setSearchOpen(false);
   };
 
-  const NAV_LINKS = [
-    { label: 'Shop', href: '/collections/rug', id: 'shop', hasDropdown: true },
-    { label: 'Room Ideas', href: '/pages/case-gallery' },
-    { label: 'About', href: '/pages/about' },
-  ];
-
   return (
     <>
+      {/* ── Main nav ─────────────────────────────────── */}
       <nav
-        className={`relative z-50 h-20 border-b border-bisat-black/[0.07] bg-white/95 backdrop-blur-sm transition-shadow duration-300 ${
-          scrolled ? 'shadow-sm' : ''
+        className={`relative z-40 transition-all duration-300 ${
+          scrolled
+            ? 'h-[60px] border-b border-bisat-black/[0.08] bg-white/96 shadow-[0_4px_24px_rgba(0,0,0,0.05)] backdrop-blur-md'
+            : 'h-20 border-b border-bisat-black/[0.06] bg-white/98'
         }`}
-        style={{ boxShadow: scrolled ? '0 10px 32px rgba(0,0,0,0.06)' : 'none' }}
       >
-        <div className="bisat-shell h-full">
-          <div className="relative flex h-full items-center">
-            <Link
-              href="/"
-              className="shrink-0 font-rh text-[1.8rem] font-light tracking-[-0.028em] text-bisat-black transition-opacity hover:opacity-80 sm:text-[2.05rem]"
+        <div className="bisat-shell flex h-full items-center">
+
+          {/* Logo */}
+          <Link
+            href="/"
+            className={`shrink-0 font-rh font-light tracking-[-0.03em] text-bisat-black transition-all duration-300 hover:opacity-70 ${
+              scrolled ? 'text-[1.65rem]' : 'text-[1.9rem]'
+            }`}
+          >
+            Bisāṭim
+          </Link>
+
+          {/* Center nav — desktop */}
+          <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 md:flex lg:gap-10">
+            {NAV_LINKS.map(link =>
+              link.hasMega ? (
+                <div
+                  key={link.id}
+                  onMouseEnter={openMega}
+                  onMouseLeave={closeMega}
+                  className="relative py-6"
+                >
+                  <button
+                    className={`group relative text-[11px] font-medium uppercase tracking-[0.18em] transition-colors duration-200 ${
+                      megaOpen ? 'text-bisat-black' : 'text-bisat-black/60 hover:text-bisat-black'
+                    }`}
+                  >
+                    {link.label}
+                    <span
+                      className={`absolute -bottom-1 left-0 h-px bg-bisat-black transition-all duration-300 ${
+                        megaOpen ? 'w-full' : 'w-0 group-hover:w-full'
+                      }`}
+                    />
+                  </button>
+
+                  {/* Shop dropdown — anchored under this button */}
+                  <AnimatePresence>
+                    {megaOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 6 }}
+                        transition={{ duration: 0.15 }}
+                        className="absolute left-0 top-full z-50 w-56 border border-bisat-black/[0.08] bg-white py-1.5 shadow-[0_8px_28px_rgba(0,0,0,0.10)]"
+                      >
+                        {SHOP_MENU.map(item => (
+                          <Link
+                            key={item.href}
+                            href={item.href}
+                            onClick={() => setMegaOpen(false)}
+                            className="group flex items-center justify-between px-4 py-3 transition-colors hover:bg-[#f7f5f2]"
+                          >
+                            <div>
+                              <p className="text-[12px] font-medium text-bisat-black">{item.label}</p>
+                              <p className="mt-0.5 text-[10px] text-bisat-black/40">{item.sub}</p>
+                            </div>
+                            <ArrowUpRight size={11} className="shrink-0 text-bisat-black/0 transition-colors group-hover:text-bisat-black/35" />
+                          </Link>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ) : (
+                <Link
+                  key={link.id}
+                  href={link.href}
+                  className="group relative text-[11px] font-medium uppercase tracking-[0.18em] text-bisat-black/60 transition-colors duration-200 hover:text-bisat-black"
+                >
+                  {link.label}
+                  <span className="absolute -bottom-1 left-0 h-px w-0 bg-bisat-black transition-all duration-300 group-hover:w-full" />
+                </Link>
+              )
+            )}
+          </nav>
+
+          {/* Right actions */}
+          <div className="ml-auto flex items-center gap-0.5">
+            {/* Search */}
+            <IconBtn
+              onClick={() => { setSearchOpen(o => !o); setMobileOpen(false); }}
+              label="Search"
             >
-              Bisāṭim
+              <Search size={17} strokeWidth={1.5} />
+            </IconBtn>
+
+            {/* Wishlist */}
+            <Link href="/wishlist" className={iconBtnCls} aria-label={`Wishlist (${wishlist.length})`}>
+              <Heart size={17} strokeWidth={1.5} />
+              {wishlist.length > 0 && <Dot />}
             </Link>
 
-            <div className="pointer-events-none absolute inset-0 hidden items-center justify-center md:flex">
-              <div className="pointer-events-auto flex items-center gap-11">
-                {NAV_LINKS.map(link => (
-                  <DesktopNavItem
-                    key={link.label}
-                    id={link.id || link.label.toLowerCase()}
-                    label={link.label}
-                    href={link.href}
-                    hasDropdown={link.hasDropdown}
-                    activeDropdown={activeDropdown}
-                    onOpen={openDropdown}
-                    onClose={closeDropdown}
-                  />
-                ))}
-              </div>
-            </div>
+            {/* Account */}
+            <button
+              onClick={() => user ? router.push('/account') : setShowAuthModal(true)}
+              className={`${iconBtnCls} relative hidden sm:flex`}
+              aria-label="Account"
+            >
+              <User size={17} strokeWidth={1.5} />
+              {user && <span className="absolute right-1.5 top-1.5 h-1.5 w-1.5 rounded-full bg-bisat-black" />}
+            </button>
 
-            <div className="ml-auto flex items-center gap-0.5 text-bisat-black">
-              <button
-                onClick={() => setSearchOpen(open => !open)}
-                className="flex h-9 w-9 items-center justify-center rounded-full text-bisat-black transition-colors hover:bg-[#f7f5f2]"
-                aria-label="Search"
-              >
-                <Search size={18} strokeWidth={1.5} />
-              </button>
+            {/* Cart */}
+            <Link href="/cart" className={`${iconBtnCls} relative`} aria-label={`Cart (${totalItems})`}>
+              <ShoppingBag size={17} strokeWidth={1.5} />
+              {totalItems > 0 && (
+                <span className="absolute -right-0.5 -top-0.5 flex h-[17px] w-[17px] items-center justify-center rounded-full bg-bisat-black text-[8px] font-semibold text-white">
+                  {totalItems}
+                </span>
+              )}
+            </Link>
 
-              <Link
-                href="/wishlist"
-                className="flex h-9 w-9 items-center justify-center rounded-full text-bisat-black transition-colors hover:bg-[#f7f5f2]"
-                aria-label={`Wishlist${wishlist.length > 0 ? ` (${wishlist.length})` : ''}`}
-              >
-                <Heart size={18} strokeWidth={1.5} />
-              </Link>
-
-              <Link
-                href="/account"
-                className="hidden h-9 w-9 items-center justify-center rounded-full text-bisat-black transition-colors hover:bg-[#f7f5f2] sm:flex"
-                aria-label="Account"
-              >
-                <User size={18} strokeWidth={1.5} />
-              </Link>
-
-              <Link
-                href="/cart"
-                className="relative flex h-9 w-9 items-center justify-center rounded-full text-bisat-black transition-colors hover:bg-[#f7f5f2]"
-                aria-label={`Cart${totalItems > 0 ? ` (${totalItems})` : ''}`}
-              >
-                <ShoppingBag size={18} strokeWidth={1.5} />
-                {totalItems > 0 && (
-                  <span className="absolute right-0.5 top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-bisat-black text-[8px] font-medium text-white">
-                    {totalItems}
-                  </span>
+            {/* Mobile hamburger */}
+            <IconBtn
+              onClick={() => { setMobileOpen(o => !o); setSearchOpen(false); }}
+              label={mobileOpen ? 'Close menu' : 'Open menu'}
+              className="md:hidden"
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                {mobileOpen ? (
+                  <motion.span key="x" initial={{ rotate: -45, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 45, opacity: 0 }} transition={{ duration: 0.18 }}>
+                    <X size={19} strokeWidth={1.5} />
+                  </motion.span>
+                ) : (
+                  <motion.span key="menu" initial={{ rotate: 45, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -45, opacity: 0 }} transition={{ duration: 0.18 }}>
+                    <Menu size={19} strokeWidth={1.5} />
+                  </motion.span>
                 )}
-              </Link>
-
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="ml-1 flex h-9 w-9 items-center justify-center rounded-full text-bisat-black transition-colors hover:bg-[#f7f5f2] md:hidden"
-                aria-label={isOpen ? 'Close menu' : 'Open menu'}
-              >
-                {isOpen ? <X size={19} strokeWidth={1.5} /> : <Menu size={19} strokeWidth={1.5} />}
-              </button>
-            </div>
+              </AnimatePresence>
+            </IconBtn>
           </div>
         </div>
 
+        {/* ── Search bar ──────────────────────────────── */}
         <AnimatePresence>
           {searchOpen && (
             <motion.div
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.18 }}
-              className="absolute left-0 right-0 z-50 overflow-hidden border-b border-bisat-black/[0.07] bg-white shadow-[0_16px_36px_rgba(0,0,0,0.05)]"
+              transition={{ duration: 0.2 }}
+              className="absolute left-0 right-0 top-full z-50 overflow-hidden border-t border-bisat-black/[0.06] bg-white shadow-[0_12px_32px_rgba(0,0,0,0.06)]"
             >
-              <form onSubmit={handleSearch} className="bisat-shell flex items-center gap-3 py-3.5">
-                <Search size={15} className="shrink-0 text-bisat-black/25" />
+              <form onSubmit={handleSearch} className="bisat-shell flex items-center gap-4 py-4">
+                <Search size={14} className="shrink-0 text-bisat-black/25" />
                 <input
                   ref={searchRef}
                   value={searchQuery}
-                  onChange={event => setSearchQuery(event.target.value)}
-                  placeholder="Search rugs by name, material, origin..."
-                  className="flex-1 bg-transparent text-[13px] text-bisat-black placeholder:text-bisat-black/25 focus:outline-none"
+                  onChange={e => setSearchQuery(e.target.value)}
+                  placeholder="Search by name, material, or origin…"
+                  className="flex-1 bg-transparent font-rh text-[1.1rem] font-light text-bisat-black placeholder:text-bisat-black/22 focus:outline-none"
                 />
-                {searchQuery && (
-                  <button
-                    type="submit"
-                  className="shrink-0 border border-bisat-black bg-bisat-black px-5 py-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-white transition-colors hover:bg-bisat-charcoal"
-                >
-                  Search
-                </button>
-                )}
                 <button
                   type="button"
                   onClick={() => setSearchOpen(false)}
-                  className="shrink-0 text-bisat-black"
+                  className="shrink-0 p-1 text-bisat-black/35 transition-colors hover:text-bisat-black"
                 >
                   <X size={15} />
                 </button>
@@ -225,218 +254,185 @@ export const Navbar = () => {
           )}
         </AnimatePresence>
 
-        <AnimatePresence>
-          {activeDropdown === 'shop' && (
-            <motion.div
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 6 }}
-              transition={{ duration: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
-              className="absolute left-1/2 z-[9999] hidden -translate-x-1/2 md:block"
-              style={{ top: '100%', marginTop: '1px' }}
-              onMouseEnter={() => openDropdown('shop')}
-              onMouseLeave={closeDropdown}
-            >
-              <div
-                className="w-[228px] bg-white py-2"
-                style={{ boxShadow: '0 12px 36px rgba(0,0,0,0.10)', border: '1px solid rgba(0,0,0,0.07)' }}
-              >
-                {STATIC_FEATURED.map(item => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={closeAll}
-                    className="flex items-center justify-between px-5 py-2.5 text-[13px] text-bisat-black transition-colors hover:bg-[#f7f5f2]"
-                  >
-                    {item.label}
-                    <ArrowRight size={11} className="shrink-0 text-bisat-black/30" />
-                  </Link>
-                ))}
-                <div className="mx-5 my-2 border-t border-bisat-black/[0.06]" />
-                <Link
-                  href="/collections/rug"
-                  onClick={closeAll}
-                  className="flex items-center gap-2 px-5 py-2 text-[10px] font-medium uppercase tracking-[0.18em] text-bisat-black/45"
-                >
-                  View all
-                  <ArrowRight size={9} />
-                </Link>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </nav>
 
+      {/* ── Mobile overlay ───────────────────────────── */}
       <AnimatePresence>
-        {isOpen && (
+        {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, x: '100%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
-            transition={{ type: 'spring', damping: 35, stiffness: 280 }}
-            className="fixed inset-0 z-[100] overflow-y-auto bg-[#f7f5f2] md:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.22 }}
+            className="fixed inset-0 z-[90] flex flex-col overflow-y-auto bg-white md:hidden"
           >
-            <div className="flex items-center justify-between border-b border-bisat-black/5 px-6 py-6">
-              <span className="font-rh text-2xl font-light tracking-tight text-bisat-black">Bisāṭim</span>
+            {/* Mobile header */}
+            <div className="flex shrink-0 items-center justify-between border-b border-bisat-black/[0.07] px-6 py-5">
+              <Link href="/" onClick={() => setMobileOpen(false)} className="font-rh text-[1.7rem] font-light tracking-tight text-bisat-black">
+                Bisāṭim
+              </Link>
               <button
-                onClick={() => setIsOpen(false)}
-                className="p-2 -mr-2 text-bisat-black"
-                aria-label="Close menu"
+                onClick={() => setMobileOpen(false)}
+                className="flex h-9 w-9 items-center justify-center text-bisat-black"
+                aria-label="Close"
               >
-                <X size={24} strokeWidth={1.5} />
+                <X size={20} strokeWidth={1.5} />
               </button>
             </div>
 
-            <div className="flex min-h-[calc(100vh-80px)] flex-col px-6 py-8">
-              <div className="flex flex-col gap-0 border-t border-bisat-black/5">
-                <MobileAccordion
-                  title="Items"
-                  id="shop"
-                  active={mobileAccordion}
-                  onToggle={id => setMobileAccordion(mobileAccordion === id ? null : id)}
-                >
-                  <div className="flex flex-col pb-6 pl-4">
-                    {STATIC_FEATURED.map(item => (
-                      <Link
-                        key={item.href}
-                        href={item.href}
-                        onClick={() => setIsOpen(false)}
-                        className="border-b border-bisat-black/[0.04] py-3.5 text-[14px] text-bisat-black last:border-0"
-                      >
-                        {item.label}
-                      </Link>
-                    ))}
-                  </div>
-                </MobileAccordion>
+            {/* Main links */}
+            <div className="flex flex-1 flex-col px-6 pt-8 pb-12">
+              <div className="flex flex-col">
+                {/* Shop accordion */}
+                <MobileShopAccordion onClose={() => setMobileOpen(false)} />
 
-                <Link
-                  href="/pages/case-gallery"
-                  onClick={() => setIsOpen(false)}
-                  className="flex items-center justify-between border-b border-bisat-black/5 py-5 text-[16px] text-bisat-black"
-                >
-                  Room Ideas
-                  <ChevronDown size={14} className="-rotate-90 text-bisat-black/20" />
-                </Link>
-
-                <MobileAccordion
-                  title="About"
-                  id="about"
-                  active={mobileAccordion}
-                  onToggle={id => setMobileAccordion(mobileAccordion === id ? null : id)}
-                >
-                  <div className="flex flex-col pb-6 pl-4">
-                    {[
-                      { label: 'Our Story', href: '/pages/about' },
-                      { label: 'Living With Rugs', href: '/pages/living-with-rugs' },
-                      { label: 'Articles', href: '/pages/articles' },
-                      { label: 'Contact', href: '/pages/contact' },
-                    ].map(item => (
-                      <Link
-                        key={item.href}
-                        href={item.href}
-                        onClick={() => setIsOpen(false)}
-                        className="border-b border-bisat-black/[0.04] py-3.5 text-[14px] text-bisat-black last:border-0"
-                      >
-                        {item.label}
-                      </Link>
-                    ))}
-                  </div>
-                </MobileAccordion>
-
+                {/* Other nav links */}
+                {NAV_LINKS.filter(l => !l.hasMega).map((link, i) => (
+                  <motion.div
+                    key={link.id}
+                    initial={{ opacity: 0, x: -12 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.08 + i * 0.06, duration: 0.28 }}
+                  >
+                    <Link
+                      href={link.href}
+                      onClick={() => setMobileOpen(false)}
+                      className="flex items-center justify-between border-b border-bisat-black/[0.06] py-5 font-rh text-[1.45rem] font-light text-bisat-black"
+                    >
+                      {link.label}
+                      <ArrowUpRight size={14} className="text-bisat-black/25" />
+                    </Link>
+                  </motion.div>
+                ))}
               </div>
 
-              <div className="mt-8 flex flex-col gap-6">
-                <Link
-                  href="/account"
-                  onClick={() => setIsOpen(false)}
-                  className="text-[14px] text-bisat-black"
-                >
-                  Account
-                </Link>
+              {/* Secondary links */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.32, duration: 0.28 }}
+                className="mt-10 flex flex-col gap-5"
+              >
+                <p className="text-[9px] font-medium uppercase tracking-[0.28em] text-bisat-black/30">Account</p>
+                {[
+                  { label: 'My Account',  href: '/account' },
+                  { label: 'Wishlist',    href: '/wishlist' },
+                  { label: 'Track Order', href: '/track-order' },
+                  { label: 'FAQ',         href: '/faq' },
+                  { label: 'Contact',     href: '/pages/contact' },
+                ].map(link => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setMobileOpen(false)}
+                    className="text-[13px] text-bisat-black/60 transition-colors hover:text-bisat-black"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </motion.div>
 
-                <div className="mt-auto flex items-center gap-8 pt-12">
-                  <a href="https://www.instagram.com/bisatim_/" target="_blank" rel="noopener noreferrer" className="text-bisat-black">
-                    <Instagram size={20} strokeWidth={1.5} />
-                  </a>
-                  <a href="https://tr.pinterest.com/bisatim_/" target="_blank" rel="noopener noreferrer" className="text-bisat-black">
-                    <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z" /></svg>
-                  </a>
-                  <a href="https://www.tiktok.com/@bisatim_" target="_blank" rel="noopener noreferrer" className="text-bisat-black">
-                    <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9.01a8.16 8.16 0 0 0 4.77 1.52V7.08a4.85 4.85 0 0 1-1-.39z" /></svg>
-                  </a>
-                </div>
-              </div>
+              {/* Cart CTA */}
+              <motion.div
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.42, duration: 0.28 }}
+                className="mt-12"
+              >
+                <Link
+                  href="/cart"
+                  onClick={() => setMobileOpen(false)}
+                  className="flex items-center justify-between border border-bisat-black bg-bisat-black px-6 py-4 text-[11px] font-medium uppercase tracking-[0.2em] text-white transition-colors hover:bg-bisat-charcoal"
+                >
+                  View Bag
+                  {totalItems > 0 && <span className="rounded-full bg-white/20 px-2 py-0.5 text-[10px]">{totalItems}</span>}
+                </Link>
+              </motion.div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
+
+      {showAuthModal && (
+        <AuthModal onClose={() => setShowAuthModal(false)} redirectTo="/account" />
+      )}
     </>
   );
 };
 
-const DesktopNavItem: React.FC<{
-  id: string;
+// ── Shared icon button ────────────────────────────────────────────────────────
+const iconBtnCls =
+  'relative flex h-9 w-9 items-center justify-center text-bisat-black/70 transition-colors duration-150 hover:text-bisat-black';
+
+const IconBtn: React.FC<{
+  onClick?: () => void;
   label: string;
-  href?: string;
-  hasDropdown?: boolean;
-  activeDropdown: string | null;
-  onOpen: (id: string) => void;
-  onClose: () => void;
-}> = ({ id, label, href, hasDropdown, activeDropdown, onOpen, onClose }) => {
-  const isDropOpen = activeDropdown === id;
-
-  if (!hasDropdown && href) {
-    return (
-      <Link href={href} className="text-[11px] font-medium uppercase tracking-[0.18em] text-bisat-black/78 transition-colors hover:text-bisat-black">
-        {label}
-      </Link>
-    );
-  }
-
-  return (
-    <div className="relative" onMouseEnter={() => onOpen(id)} onMouseLeave={onClose}>
-      <button className="flex items-center gap-1 text-[11px] font-medium uppercase tracking-[0.18em] text-bisat-black/78 transition-colors hover:text-bisat-black">
-        {label}
-        <ChevronDown size={9} strokeWidth={2} className={`mt-px transition-transform duration-200 ${isDropOpen ? 'rotate-180' : ''}`} />
-      </button>
-    </div>
-  );
-};
-
-const MobileAccordion: React.FC<{
-  title: string;
-  id: string;
-  active: string | null;
-  onToggle: (id: string) => void;
+  className?: string;
   children: React.ReactNode;
-}> = ({ title, id, active, onToggle, children }) => {
-  const isOpen = active === id;
+}> = ({ onClick, label, className = '', children }) => (
+  <button
+    onClick={onClick}
+    aria-label={label}
+    className={`${iconBtnCls} ${className}`}
+  >
+    {children}
+  </button>
+);
+
+const Dot = () => (
+  <span className="absolute right-1.5 top-1.5 h-1.5 w-1.5 rounded-full bg-bisat-terracotta" />
+);
+
+// ── Mobile shop accordion ─────────────────────────────────────────────────────
+const MobileShopAccordion: React.FC<{ onClose: () => void }> = ({ onClose }) => {
+  const [open, setOpen] = useState(false);
+
   return (
-    <div className="border-b border-bisat-black/[0.07]">
+    <motion.div
+      initial={{ opacity: 0, x: -12 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ delay: 0.05, duration: 0.28 }}
+      className="border-b border-bisat-black/[0.06]"
+    >
       <button
-        onClick={() => onToggle(id)}
-        className="flex w-full items-center justify-between py-4 text-[15px] text-bisat-black"
+        onClick={() => setOpen(o => !o)}
+        className="flex w-full items-center justify-between py-5 font-rh text-[1.45rem] font-light text-bisat-black"
       >
-        {title}
-        <ChevronDown
-          size={14}
-          strokeWidth={1.5}
-          className={`text-bisat-black/30 transition-transform duration-250 ${isOpen ? 'rotate-180' : ''}`}
-        />
+        Shop
+        <motion.span
+          animate={{ rotate: open ? 45 : 0 }}
+          transition={{ duration: 0.2 }}
+          className="text-bisat-black/25"
+        >
+          <ArrowUpRight size={14} />
+        </motion.span>
       </button>
+
       <AnimatePresence initial={false}>
-        {isOpen && (
+        {open && (
           <motion.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.22 }}
             className="overflow-hidden"
           >
-            {children}
+            <div className="flex flex-col pb-4 pl-4">
+              {SHOP_MENU.map(item => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={onClose}
+                  className="flex items-center justify-between border-b border-bisat-black/[0.04] py-3 text-[14px] text-bisat-black/70 last:border-0 hover:text-bisat-black"
+                >
+                  {item.label}
+                  <span className="text-[11px] text-bisat-black/25">{item.sub}</span>
+                </Link>
+              ))}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 };
