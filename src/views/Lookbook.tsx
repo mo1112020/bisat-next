@@ -1,73 +1,27 @@
-'use client';
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Meta } from '../components/Meta';
 import { ArrowRight } from 'lucide-react';
+import type { SiteImageKey } from '../lib/db';
 
 const SHELL = 'mx-auto max-w-[1400px] px-5 sm:px-10 lg:px-16';
 
-const ROOMS = [
-  {
-    title: 'Living Room',
-    description: 'Ground your living space with texture and warmth.',
-    image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200',
-    href: '/collections/rug?room=Living+Room',
-  },
-  {
-    title: 'Bedroom',
-    description: 'Create a restful sanctuary underfoot.',
-    image: 'https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=1200',
-    href: '/collections/rug?room=Bedroom',
-  },
-  {
-    title: 'Dining Room',
-    description: 'Define the dining area with a considered anchor piece.',
-    image: 'https://images.unsplash.com/photo-1600166898405-da9535204843?w=1200',
-    href: '/collections/rug?room=Dining+Room',
-  },
-  {
-    title: 'Hallway',
-    description: 'Make a strong first impression with the right runner.',
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200',
-    href: '/collections/rug?room=Hallway',
-  },
-  {
-    title: 'Home Office',
-    description: 'Bring calm and focus to your workspace.',
-    image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1200',
-    href: '/collections/rug?room=Office',
-  },
-  {
-    title: 'Outdoor',
-    description: 'Extend your interior style to open-air spaces.',
-    image: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=1200',
-    href: '/collections/rug',
-  },
-];
+export const Lookbook = ({ siteImages }: { siteImages: Record<SiteImageKey, string> }) => {
+  const ROOMS = [
+    { title: 'Living Room',  description: 'Ground your living space with texture and warmth.',         image: siteImages.lookbook_room_1, href: '/collections/rug?room=Living+Room' },
+    { title: 'Bedroom',      description: 'Create a restful sanctuary underfoot.',                     image: siteImages.lookbook_room_2, href: '/collections/rug?room=Bedroom' },
+    { title: 'Dining Room',  description: 'Define the dining area with a considered anchor piece.',    image: siteImages.lookbook_room_3, href: '/collections/rug?room=Dining+Room' },
+    { title: 'Hallway',      description: 'Make a strong first impression with the right runner.',     image: siteImages.lookbook_room_4, href: '/collections/rug?room=Hallway' },
+    { title: 'Home Office',  description: 'Bring calm and focus to your workspace.',                   image: siteImages.lookbook_room_5, href: '/collections/rug?room=Office' },
+    { title: 'Outdoor',      description: 'Extend your interior style to open-air spaces.',            image: siteImages.lookbook_room_6, href: '/collections/rug' },
+  ];
 
-const STYLE_GUIDES = [
-  {
-    title: 'How to Choose the Right Rug Size',
-    excerpt: 'Proportion is everything. Learn the rules — then break them intentionally.',
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800',
-    href: '/size-guide',
-  },
-  {
-    title: 'Layering Rugs: The Art of Texture',
-    excerpt: 'A flat-weave under a pile rug adds depth and warmth to any room.',
-    image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800',
-    href: '/blog',
-  },
-  {
-    title: 'Caring for Your Handmade Rug',
-    excerpt: 'Simple habits that preserve colour, pile, and character for decades.',
-    image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800',
-    href: '/blog',
-  },
-];
-
-export const Lookbook = () => {
+  const STYLE_GUIDES = [
+    { title: 'How to Choose the Right Rug Size',   excerpt: 'Proportion is everything. Learn the rules — then break them intentionally.',  image: siteImages.lookbook_guide_1, href: '/size-guide' },
+    { title: 'Layering Rugs: The Art of Texture',  excerpt: 'A flat-weave under a pile rug adds depth and warmth to any room.',            image: siteImages.lookbook_guide_2, href: '/blog' },
+    { title: 'Caring for Your Handmade Rug',       excerpt: 'Simple habits that preserve colour, pile, and character for decades.',        image: siteImages.lookbook_guide_3, href: '/blog' },
+  ];
   return (
     <div className="bg-white min-h-screen">
       <Meta

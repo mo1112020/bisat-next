@@ -1,4 +1,5 @@
 import { supabase } from './supabase';
+import { supabaseAdmin } from './supabase-admin';
 import { Product, Review } from '../data/products';
 import { BlogPostData } from '../data/blogPosts';
 
@@ -283,11 +284,10 @@ export const SITE_SETTING_DEFAULTS: Record<string, { label: string; value: strin
 
 export async function getSiteSettings(): Promise<Record<string, string>> {
   const map: Record<string, string> = {};
-  // start with defaults
   for (const [key, def] of Object.entries(SITE_SETTING_DEFAULTS)) {
     map[key] = def.value;
   }
-  const { data } = await supabase.from('site_settings').select('key, value');
+  const { data } = await supabaseAdmin.from('site_settings').select('key, value');
   for (const row of data ?? []) {
     if (row.value != null) map[row.key as string] = row.value as string;
   }
@@ -307,7 +307,16 @@ export type SiteImageKey =
   | 'lifestyle_3_hero'
   | 'lifestyle_3_thumb'
   | 'lifestyle_4_hero'
-  | 'lifestyle_4_thumb';
+  | 'lifestyle_4_thumb'
+  | 'lookbook_room_1'
+  | 'lookbook_room_2'
+  | 'lookbook_room_3'
+  | 'lookbook_room_4'
+  | 'lookbook_room_5'
+  | 'lookbook_room_6'
+  | 'lookbook_guide_1'
+  | 'lookbook_guide_2'
+  | 'lookbook_guide_3';
 
 export interface SiteImage {
   key: SiteImageKey;
@@ -327,16 +336,23 @@ export const SITE_IMAGE_DEFAULTS: Record<SiteImageKey, { label: string; fallback
   lifestyle_3_thumb: { label: 'Home — Lifestyle card 3 (thumb)', fallback: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?q=80&w=400&auto=format&fit=crop' },
   lifestyle_4_hero:  { label: 'Home — Lifestyle card 4 (hero)',  fallback: 'https://images.unsplash.com/photo-1616486338812-3dadae4ddf4c?q=85&w=1100&auto=format&fit=crop' },
   lifestyle_4_thumb: { label: 'Home — Lifestyle card 4 (thumb)', fallback: 'https://images.unsplash.com/photo-1585412727339-54e4be3f3467?q=80&w=400&auto=format&fit=crop' },
+  lookbook_room_1: { label: 'Lookbook — Room: Living Room',  fallback: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200' },
+  lookbook_room_2: { label: 'Lookbook — Room: Bedroom',      fallback: 'https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=1200' },
+  lookbook_room_3: { label: 'Lookbook — Room: Dining Room',  fallback: 'https://images.unsplash.com/photo-1600166898405-da9535204843?w=1200' },
+  lookbook_room_4: { label: 'Lookbook — Room: Hallway',      fallback: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200' },
+  lookbook_room_5: { label: 'Lookbook — Room: Home Office',  fallback: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1200' },
+  lookbook_room_6: { label: 'Lookbook — Room: Outdoor',      fallback: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=1200' },
+  lookbook_guide_1: { label: 'Lookbook — Style Guide 1',     fallback: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800' },
+  lookbook_guide_2: { label: 'Lookbook — Style Guide 2',     fallback: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800' },
+  lookbook_guide_3: { label: 'Lookbook — Style Guide 3',     fallback: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800' },
 };
 
 export async function getSiteImages(): Promise<Record<SiteImageKey, string>> {
-  const { data } = await supabase.from('site_images').select('key, url');
+  const { data } = await supabaseAdmin.from('site_images').select('key, url');
   const map = {} as Record<SiteImageKey, string>;
-  // Start with fallbacks
   for (const [key, { fallback }] of Object.entries(SITE_IMAGE_DEFAULTS)) {
     map[key as SiteImageKey] = fallback;
   }
-  // Override with stored CDN URLs
   for (const row of data ?? []) {
     if (row.url && (row.key in SITE_IMAGE_DEFAULTS)) map[row.key as SiteImageKey] = row.url;
   }
